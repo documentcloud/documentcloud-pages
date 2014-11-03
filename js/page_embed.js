@@ -25,6 +25,13 @@
   });
 
   definition.PageView = definition.PageView || Backbone.View.extend({
+    initialize: function(options) {
+      this.options = options;
+      this.listenTo(this.model, 'sync', this.render);
+    },
+    render: function() {
+      this.$el.html(JST['page']({model: this.model, pageNumber: this.options.page }));
+    }
   });
   
   data.documents = data.documents || new definition.DocumentSet();
