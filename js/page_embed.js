@@ -1,11 +1,9 @@
 (function(){
-  window.dc    = dc = window.dc || {};
-  var $        = dc.$ = window.$.noConflict();
-  var _        = dc._ = window._.noConflict();
-  var Backbone = dc.Backbone = window.Backbone.noConflict();
+  var dc       = window.dc;
+  var $        = dc.$;
+  var _        = dc._;
+  var Backbone = dc.Backbone;
 
-  dc.embed = dc.embed || { data: {}, definition: {}, views: {} };
-  
   var definition = dc.embed.definition;
   var data = dc.embed.data;
   var views = dc.embed.views;
@@ -18,7 +16,6 @@
   });
 
   definition.PageView = definition.PageView || Backbone.View.extend({
-    template: JST['page']
   });
   
   data.documents = data.documents || new definition.DocumentSet();

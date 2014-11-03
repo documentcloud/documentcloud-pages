@@ -1,4 +1,4 @@
-compress_assets: true
+compress_assets: false
 javascript_compressor: closure
 template_function: dc._.template
 embed_assets: datauri
@@ -8,7 +8,8 @@ javascripts:
     - js/vendor/underscore/underscore.js
     - js/vendor/jquery/dist/jquery.js
     - js/vendor/backbone/backbone.js
-    - js/*.js
+    - js/setup.js
+    - js/page_embed.js
     - templates/*.jst
 
 stylesheets:
