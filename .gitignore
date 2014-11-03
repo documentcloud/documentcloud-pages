@@ -1,2 +1,4 @@
 bower_components
-js/vendor
+js/vendor/backbone
+js/vendor/jquery
+js/vendor/underscore

@@ -5,6 +5,7 @@ embed_assets: datauri
 
 javascripts:
   page_embed:
+    - js/vendor/es6-promise.js
     - js/vendor/underscore/underscore.js
     - js/vendor/jquery/dist/jquery.js
     - js/vendor/backbone/backbone.js
