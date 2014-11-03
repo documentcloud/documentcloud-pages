@@ -1,0 +1,16 @@
+compress_assets: true
+javascript_compressor: closure
+template_function: dc._.template
+embed_assets: datauri
+
+javascripts:
+  page_embed:
+    - js/vendor/underscore/underscore.js
+    - js/vendor/jquery/dist/jquery.js
+    - js/vendor/backbone/backbone.js
+    - js/*.js
+    - templates/*.jst
+
+stylesheets:
+  page_embed:
+    - css/page_embed.css
