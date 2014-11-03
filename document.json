@@ -1,0 +1,240 @@
+{
+  "annotations": [
+    {
+      "access": "public",
+      "content": "",
+      "id": 79590,
+      "location": {
+        "image": "19,636,37,69"
+      },
+      "page": 2,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/79590.js",
+      "title": "Trying to obscure the page indicator"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 80993,
+      "location": {
+        "image": "292,646,616,78"
+      },
+      "page": 13,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/80993.js",
+      "title": "Test Note"
+    },
+    {
+      "access": "public",
+      "content": "Eye dialects are instances where a written author deviates from standard spellings for the purpose of emphasizing the particular pronunciation of a word or sentence.  Eye dialects are a frequently used literary device, and have a long history, notably in the works of authors like Mark Twain and Charles Dickens.",
+      "id": 42225,
+      "location": {
+        "image": "136,327,148,246"
+      },
+      "page": 14,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42225.js",
+      "title": "Eye Dialects"
+    },
+    {
+      "access": "public",
+      "content": "An observation that anyone familiar with stage action would equally make.",
+      "id": 42227,
+      "location": {
+        "image": "325,630,460,78"
+      },
+      "page": 15,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42227.js",
+      "title": "Stage Directions"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42228,
+      "location": {
+        "image": "111,649,376,68"
+      },
+      "page": 17,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42228.js",
+      "title": "Macro Selection"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42229,
+      "location": {
+        "image": "131,628,280,74"
+      },
+      "page": 18,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42229.js",
+      "title": "Category Definition"
+    },
+    {
+      "access": "public",
+      "content": "An early image macro.",
+      "id": 93323,
+      "location": {
+        "image": "285,353,485,215"
+      },
+      "page": 18,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/93323.js",
+      "title": "Happy Cat"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 50526,
+      "location": {
+        "image": "418,575,624,143"
+      },
+      "page": 27,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/50526.js",
+      "title": "Draft Note"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42273,
+      "location": {
+        "image": "271,515,297,194"
+      },
+      "page": 46,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42273.js",
+      "title": "{subject} + (can) + (has) + [noun phrase] + (?)"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42301,
+      "location": {
+        "image": "382,513,403,203"
+      },
+      "page": 47,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42301.js",
+      "title": "[noun phrase] + {subject} + (has) + {pronoun}"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42300,
+      "location": {
+        "image": "77,498,105,221"
+      },
+      "page": 47,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42300.js",
+      "title": "{subject} + (has) + (a) + [noun phrase]"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42302,
+      "location": {
+        "image": "78,603,102,111"
+      },
+      "page": 48,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42302.js",
+      "title": "(I'm) + (in) + [determiner phrase] + {verb present progressive} + [determiner phrase]"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42250,
+      "location": {
+        "image": "68,647,530,65"
+      },
+      "page": 52,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42250.js",
+      "title": "The Apostle's Creed in LOLSPEAK"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42282,
+      "location": {
+        "image": "291,624,376,74"
+      },
+      "page": 57,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42282.js",
+      "title": "Is LOLSPEAK a fad?"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42283,
+      "location": {
+        "image": "410,618,464,74"
+      },
+      "page": 57,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42283.js",
+      "title": "Citation of \"Om Nom Nom 2011\""
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 42281,
+      "location": {
+        "image": "311,562,509,149"
+      },
+      "page": 62,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/42281.js",
+      "title": "Macros escaping into the wild"
+    },
+    {
+      "access": "public",
+      "content": "Below are the image macros from which Lefler derived her analysis.  It is worth noting that her data set is quite a limited one, as it is a subset of macros posted to ICANHAZCHEEZBURGER.com, which itself was not the originator of the cat macro craze.",
+      "id": 53672,
+      "page": 76,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/53672.js",
+      "title": "Data Macros"
+    },
+    {
+      "access": "public",
+      "content": "",
+      "id": 99206,
+      "location": {
+        "image": "481,453,661,275"
+      },
+      "page": 88,
+      "resource_url": "http://www.documentcloud.org/documents/282753-lefler-thesis/annotations/99206.js",
+      "title": "Fridge Magnets"
+    }
+  ],
+  "canonical_url": "http://www.documentcloud.org/documents/282753-lefler-thesis.html",
+  "contributor": "Ted Han",
+  "contributor_organization": "DocumentCloud",
+  "created_at": "Tue, 10 Jan 2012 20:20:36 +0000",
+  "description": "A Master's Thesis on the phenomenon of \"LOLSPEAK\" and its origin in image macros.",
+  "display_language": "eng",
+  "file_hash": null,
+  "id": "282753-lefler-thesis",
+  "language": "eng",
+  "pages": 129,
+  "resources": {
+    "page": {
+      "image": "https://s3.amazonaws.com/s3.documentcloud.org/documents/282753/pages/lefler-thesis-p{page}-{size}.gif",
+      "text": "https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p{page}.txt"
+    },
+    "pdf": "https://s3.amazonaws.com/s3.documentcloud.org/documents/282753/lefler-thesis.pdf",
+    "print_annotations": "https://www.documentcloud.org/notes/print?docs[]=282753",
+    "search": "https://www.documentcloud.org/documents/282753/search.json?q={query}",
+    "text": "https://s3.amazonaws.com/s3.documentcloud.org/documents/282753/lefler-thesis.txt",
+    "thumbnail": "https://s3.amazonaws.com/s3.documentcloud.org/documents/282753/pages/lefler-thesis-p1-thumbnail.gif",
+    "translations_url": "https://www.documentcloud.org/translations/{realm}/{language}"
+  },
+  "sections": [
+    { "page": 4, "title": "Table of Contents" },
+    { "page": 7, "title": "Abstract" },
+    { "page": 8, "title": "1. Introduction" },
+    { "page": 12, "title": "2. Review of Literature" },
+    { "page": 17, "title": "3. Methodology" },
+    { "page": 22, "title": "4. Language of LOLSPEAK" },
+    { "page": 46, "title": "5. Recurring Syntax Structures" },
+    { "page": 50, "title": "6. Popularity and the Future" },
+    { "page": 65, "title": "7. Conclusion" },
+    { "page": 68, "title": "References Cited" },
+    { "page": 76, "title": "Appendix A: Pictures of Cats" },
+    { "page": 87, "title": "Appendix B: Merch" },
+    { "page": 91, "title": "Appendix C: Data Codes" },
+    { "page": 129, "title": "End of document" }
+  ],
+  "source": null,
+  "title": "Lefler Thesis",
+  "updated_at": "Thu, 31 Jul 2014 21:47:49 +0000"
+}

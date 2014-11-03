@@ -1,0 +1,23 @@
+{
+  "name": "documentcloud-pages",
+  "version": "0.0.0",
+  "authors": [
+    "Ted Han <ted@knowtheory.net>"
+  ],
+  "main": "dist/page_embed.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "jquery": "1.11.1"
+  }
+}
