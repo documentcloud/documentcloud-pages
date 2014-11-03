@@ -9,6 +9,7 @@ javascripts:
     - js/vendor/jquery/dist/jquery.js
     - js/vendor/backbone/backbone.js
     - js/setup.js
+    - js/definitions.js
     - js/page_embed.js
     - templates/*.jst
 
