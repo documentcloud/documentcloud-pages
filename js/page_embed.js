@@ -8,7 +8,16 @@
   var data = dc.embed.data;
   var views = dc.embed.views;
 
-  definition.Document = definition.Document || Backbone.Model.extend({}, {
+  definition.Document = definition.Document || Backbone.Model.extend({
+    imageUrl : function(pageNumber) {
+      if (!this._imageUrl) {
+        var resources = this.get('resources');
+        var urlTemplate = resources['page']['image'];
+        this._imageUrl = urlTemplate.replace('{size}', 'normal').replace('{page}', pageNumber);
+      }
+      return this._imageUrl;
+    },
+  }, {
     extractId: function(url){ return url.match(/(\d+[A-Za-z-]+).js(on)?$/)[1]; }
   });
   definition.DocumentSet = definition.DocumentSet || Backbone.Collection.extend({ 
