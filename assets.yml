@@ -16,4 +16,4 @@ javascripts:
 
 stylesheets:
   page_embed:
-    - css/page_embed.css
+    - css/*.css
