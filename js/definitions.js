@@ -52,7 +52,6 @@
     scaledCoordinates: function(scale) {
       var scaled = _.clone(this.coordinates());
       _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
-      debugger;
       return scaled;
     }
   });
