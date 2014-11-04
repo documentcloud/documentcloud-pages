@@ -1,3 +1,7 @@
 .DC-page { width: 100%; }
 .DC-page-image { width: 100%; }
 .DC-note-overlay { position: absolute; }
+.DC-note { 
+  position: absolute;
+  border: 3px solid #ffe325;
+}

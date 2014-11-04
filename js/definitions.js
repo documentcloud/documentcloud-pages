@@ -35,7 +35,28 @@
     model: definition.Document 
   });
   
-  definition.Note = Backbone.Model.extend({});
+  definition.Note = Backbone.Model.extend({
+    coordinates: function(force){
+      if (!this._coordinates || force) {
+        var css = _.map(this.get('location').image.split(','), function(num){ return parseInt(num, 10); });
+        this._coordinates = {
+          top:    css[0],
+          left:   css[3],
+          right:  css[1],
+          height: css[2] - css[0],
+          width:  css[1] - css[3]
+        };
+      }
+      return this._coordinates;
+    },
+    scaledCoordinates: function(scale) {
+      var scaled = _.clone(this.coordinates());
+      _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
+      debugger;
+      return scaled;
+    }
+  });
+  
   definition.NoteSet = Backbone.Collection.extend({
     model: definition.Note,
     forPage: function(number) {
@@ -68,7 +89,7 @@
       var scale = this.currentScale();
       var notes = this.model.notes.forPage(this.options.page);
       var markup = _.reduce(notes, function(memo, note){
-        return memo + JST["note"]({note:note, scale: scale});
+        return memo + JST["note"]({coordinates:note.scaledCoordinates(scale)});
       }, "");
       markup = JST['debug']({ 
         scale: scale, 
