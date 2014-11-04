@@ -1,2 +1,6 @@
 .DC-page { width: 100%; }
 .DC-page-image { width: 100%; }
+.DC-note-overlay { position: absolute; }
+.DC-debug { border: solid 1px black; position: absolute; }
+.DC-debug-vertical-center { border: solid 1px red; }
+.DC-debug-horizontal-center { border: solid 1px blue; }

@@ -37,13 +37,17 @@
   
   definition.Note = Backbone.Model.extend({});
   definition.NoteSet = Backbone.Collection.extend({
-    model: definition.Note
+    model: definition.Note,
+    forPage: function(number) {
+      return this.select(function(note){ return note.get('page') == number; });
+    }
   });
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     initialize: function(options) {
       this.options = options;
       this.listenTo(this.model, 'sync', this.render);
+      this.renderNotes = _.bind(this.renderNotes,this);
     },
 
     render: function() {
@@ -52,17 +56,31 @@
       if (this.dimensions) {
         this.renderNotes();
       } else {
-        this.cacheNaturalDimensions().then(_.bind(this.renderNotes, this));
+        // Not sold on Promises given that they swallow error messages
+        // unless you add an explicit path to catch possible errors.
+        this.cacheNaturalDimensions().then(this.renderNotes).then(
+          undefined, function(error){ console.log(error);
+        });
       }
     },
     
     renderNotes: function(){
       var scale = this.currentScale();
-      this.model.notes.each(function(n){ console.log(n.id); });
+      var notes = this.model.notes.forPage(this.options.page);
+      var markup = _.reduce(notes, function(memo, note){
+        return memo + JST["note"]({note:note, scale: scale});
+      }, "");
+      markup = JST['debug']({ 
+        scale: scale, 
+        height: this.dimensions.height, 
+        width: this.dimensions.width
+      }) + markup;
+      this.$overlay.html(markup);
     },
 
     cacheDomReferences: function() {
       this.$image = this.$('.DC-page-image');
+      this.$overlay = this.$('.DC-note-overlay');
     },
 
     cacheNaturalDimensions: function() {
