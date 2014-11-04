@@ -49,7 +49,16 @@
     render: function() {
       this.$el.html(JST['page']({model: this.model, pageNumber: this.options.page }));
       this.cacheDomReferences();
-      this.cacheNaturalDimensions();
+      if (this.dimensions) {
+        this.renderNotes();
+      } else {
+        this.cacheNaturalDimensions().then(_.bind(this.renderNotes, this));
+      }
+    },
+    
+    renderNotes: function(){
+      var scale = this.currentScale();
+      this.model.notes.each(function(n){ console.log(n.id); });
     },
 
     cacheDomReferences: function() {
@@ -57,16 +66,19 @@
     },
 
     cacheNaturalDimensions: function() {
-      var unstyledImage = $(new Image());
       var view = this;
-      unstyledImage.load(function(){
-        view.dimensions = {
-          height: this.height,
-          width: this.width,
-          aspectRatio: this.height / this.width
-        };
+      return new Promise(function(resolve, reject){
+        var unstyledImage = $(new Image());
+        unstyledImage.load(function(){
+          view.dimensions = {
+            height: this.height,
+            width: this.width,
+            aspectRatio: this.height / this.width
+          };
+          resolve();
+        });
+        unstyledImage.attr('src', view.model.imageUrl(view.options.page));
       });
-      unstyledImage.attr('src', this.model.imageUrl(this.options.page));
     },
 
     currentScale: function() {
