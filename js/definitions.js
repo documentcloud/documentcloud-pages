@@ -62,15 +62,32 @@
       return this.select(function(note){ return note.get('page') == number; });
     }
   });
+  
+  definition.NoteView = definition.NoteView || Backbone.View.extend({
+    render: function(scale){
+      scale = scale || 1;
+      this.$el.html(JST["note"]({coordinates:this.model.scaledCoordinates(scale)}));
+      return this;
+    }
+  });
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     initialize: function(options) {
       this.options = options;
+      this.noteViews = {};
+
       this.listenTo(this.model, 'sync', this.render);
       this.renderNotes = _.bind(this.renderNotes,this);
     },
+    
+    prepare: function() {
+      var notes = this.model.notes.forPage(this.options.page);
+      _.each(notes, function(note){ this.noteViews[note.id] = new definition.NoteView({model: note}); }, this);
+      this.prepared = true;
+    },
 
     render: function() {
+      if (!this.prepared){ this.prepare(); }
       this.$el.html(JST['page']({model: this.model, pageNumber: this.options.page }));
       this.cacheDomReferences();
       if (this.dimensions) {
@@ -83,19 +100,24 @@
         });
       }
     },
-    
-    renderNotes: function(){
+
+    renderNotes: function() {
       var scale = this.currentScale();
       var notes = this.model.notes.forPage(this.options.page);
-      var markup = _.reduce(notes, function(memo, note){
-        return memo + JST["note"]({coordinates:note.scaledCoordinates(scale)});
-      }, "");
-      markup = JST['debug']({ 
-        scale: scale, 
-        height: this.dimensions.height, 
-        width: this.dimensions.width
-      }) + markup;
-      this.$overlay.html(markup);
+      //markup = JST['debug']({ 
+      //  scale: scale, 
+      //  height: this.dimensions.height, 
+      //  width: this.dimensions.width
+      //}) + markup;
+      this.$overlay.html('<div></div>')
+      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale) }, this);
+      this.$overlay.append(_.map(noteViews, function(v){return v.$el}));
+    },
+    
+    resize: function() {
+      var scale = this.currentScale();
+      var notes = this.model.notes.forPage(this.options.page);
+      
     },
 
     cacheDomReferences: function() {
