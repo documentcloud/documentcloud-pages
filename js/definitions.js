@@ -64,10 +64,14 @@
   });
   
   definition.NoteView = definition.NoteView || Backbone.View.extend({
-    render: function(scale){
+    className: "DC-note",
+    render: function(scale) {
       scale = scale || 1;
       this.$el.html(JST["note"]({coordinates:this.model.scaledCoordinates(scale)}));
       return this;
+    },
+    resize: function(scale) {
+      this.$('.DC-note-region').css(this.model.scaledCoordinates(scale));
     }
   });
 
@@ -77,7 +81,7 @@
       this.noteViews = {};
 
       this.listenTo(this.model, 'sync', this.render);
-      this.renderNotes = _.bind(this.renderNotes,this);
+      this.renderOverlay = _.bind(this.renderOverlay,this);
     },
     
     prepare: function() {
@@ -95,29 +99,30 @@
       } else {
         // Not sold on Promises given that they swallow error messages
         // unless you add an explicit path to catch possible errors.
-        this.cacheNaturalDimensions().then(this.renderNotes).then(
+        this.cacheNaturalDimensions().then(this.renderOverlay).then(
           undefined, function(error){ console.log(error);
         });
       }
     },
 
-    renderNotes: function() {
-      var scale = this.currentScale();
-      var notes = this.model.notes.forPage(this.options.page);
-      //markup = JST['debug']({ 
+    renderOverlay: function() {
+      var scale  = this.currentScale();
+      var notes  = this.model.notes.forPage(this.options.page);
+      //markup   = JST['debug']({ 
       //  scale: scale, 
       //  height: this.dimensions.height, 
       //  width: this.dimensions.width
       //}) + markup;
-      this.$overlay.html('<div></div>')
+      this.$overlay.empty();
       var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale) }, this);
       this.$overlay.append(_.map(noteViews, function(v){return v.$el}));
     },
     
     resize: function() {
       var scale = this.currentScale();
-      var notes = this.model.notes.forPage(this.options.page);
-      
+      _.each(this.noteViews, function(view){
+        view.resize(scale);
+      });
     },
 
     cacheDomReferences: function() {

@@ -1,5 +1,7 @@
 (function(){
   var dc         = window.dc;
+  var $          = dc.$;
+  var _          = dc._;
   var definition = dc.embed.definition;
   var data       = dc.embed.data;
   var views      = dc.embed.views;
@@ -24,4 +26,11 @@
     views.pages[id][options.container] = view;
     doc.fetch({url: url}); // kick everything off.
   };
+  
+  var updateEmbeds = function() {
+    _.each(views.pages, function(viewsForDoc, docId){
+      _.each(viewsForDoc, function(view){ view.resize(); });
+    });
+  }
+  $(window).resize(_.throttle(updateEmbeds, 50));
 })();
