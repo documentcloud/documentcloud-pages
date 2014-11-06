@@ -1,0 +1,15 @@
+.DC-debug { border: solid 1px black; position: absolute; }
+.DC-debug-vertical-center { border: solid 1px red; }
+.DC-debug-horizontal-center { border: solid 1px blue; }
+.DC-page { width: 100%; box-sizing: content-box; border: black 1px solid; }
+.DC-page-image { width: 100%; }
+.DC-note-overlay { position: absolute; }
+.DC-note {
+  position: absolute;
+}
+.DC-note-region {
+  position: absolute;
+  border: 3px solid #ffe325;
+  background: rgba(255,227,37,0.2);
+  border-radius: 3px;
+}
