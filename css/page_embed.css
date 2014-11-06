@@ -3,10 +3,20 @@
 .DC-note-overlay { position: absolute; }
 .DC-note {
   position: absolute;
+  width: 100%;
 }
 .DC-note-region {
   position: absolute;
-  border: 3px solid #ffe325;
+  cursor: pointer;
+  border: 3px solid rgba(255,227,37,0.7);
   background: rgba(255,227,37,0.2);
   border-radius: 3px;
+}
+.DC-note-expander {
+  width: 10px;
+  height: 100%;
+  background: rgba(255,227,37,0.7);
+  border-left: 1px solid rgba(255,227,37,0.7);
+  right: 0px;
+  position: absolute;
 }

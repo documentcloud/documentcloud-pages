@@ -67,11 +67,23 @@
     className: "DC-note",
     render: function(scale) {
       scale = scale || 1;
-      this.$el.html(JST["note"]({coordinates:this.model.scaledCoordinates(scale)}));
+      var coordinates = this.model.scaledCoordinates(scale);
+      this.$el.html(JST["note"]({coordinates:{
+        height: coordinates.height,
+        left: coordinates.left,
+        width: coordinates.width
+      }}));
+      this.$el.css({top: coordinates.top});
       return this;
     },
     resize: function(scale) {
-      this.$('.DC-note-region').css(this.model.scaledCoordinates(scale));
+      var coordinates = this.model.scaledCoordinates(scale);
+      this.$el.css({top: coordinates.top});
+      this.$('.DC-note-region').css({
+        height: coordinates.height,
+        left: coordinates.left,
+        width: coordinates.width
+      });
     }
   });
 
