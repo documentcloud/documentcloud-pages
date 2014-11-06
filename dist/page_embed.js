@@ -14376,11 +14376,23 @@ return jQuery;
     className: "DC-note",
     render: function(scale) {
       scale = scale || 1;
-      this.$el.html(JST["note"]({coordinates:this.model.scaledCoordinates(scale)}));
+      var coordinates = this.model.scaledCoordinates(scale);
+      this.$el.html(JST["note"]({coordinates:{
+        height: coordinates.height,
+        left: coordinates.left,
+        width: coordinates.width
+      }}));
+      this.$el.css({top: coordinates.top});
       return this;
     },
     resize: function(scale) {
-      this.$('.DC-note-region').css(this.model.scaledCoordinates(scale));
+      var coordinates = this.model.scaledCoordinates(scale);
+      this.$el.css({top: coordinates.top});
+      this.$('.DC-note-region').css({
+        height: coordinates.height,
+        left: coordinates.left,
+        width: coordinates.width
+      });
     }
   });
 
@@ -14490,6 +14502,8 @@ return jQuery;
     doc.fetch({url: url}); // kick everything off.
   };
   
+  // probably should turn this into an event dispatcher for an event
+  // that each view can listen in to.
   var updateEmbeds = function() {
     _.each(views.pages, function(viewsForDoc, docId){
       _.each(viewsForDoc, function(view){ view.resize(); });
@@ -14501,6 +14515,6 @@ return jQuery;
 window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
-window.JST['note'] = dc._.template('<div class="DC-note-region" style="width: <%= coordinates.width %>px; height: <%= coordinates.height %>px; top: <%= coordinates.top %>px; left: <%= coordinates.left %>px;"></div>');
+window.JST['note'] = dc._.template('<div class="DC-note-region" style="width: <%= coordinates.width + 10  %>px; height: <%= coordinates.height%>px; top: <%= coordinates.top %>px; left: <%= coordinates.left %>px;">\n  <div class="DC-note-expander"></div>\n</div>\n<div class="DC-note-details">\n  \n</div>');
 window.JST['page'] = dc._.template('<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>" />\n</div>\n');
 })();
