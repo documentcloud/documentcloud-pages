@@ -1,22 +1,40 @@
+.DC-page * { margin: 0; padding: 0; box-sizing: content-box;}
 .DC-page { width: 100%; box-sizing: content-box; border: black 1px solid; }
 .DC-page-image { width: 100%; }
 .DC-note-overlay { position: absolute; }
 .DC-note {
   position: absolute;
-  width: 100%;
-}
-.DC-note-region {
-  position: absolute;
-  cursor: pointer;
   border: 3px solid rgba(255,227,37,0.7);
-  background: rgba(255,227,37,0.2);
   border-radius: 3px;
 }
-.DC-note-expander {
-  width: 10px;
-  height: 100%;
+.DC-note-region {
+  width: 100%;
+  cursor: pointer;
+  background: rgba(255,227,37,0.2);
+}
+.DC-note-handle {
+  height: 10px;
+  width: 100%;
   background: rgba(255,227,37,0.7);
   border-left: 1px solid rgba(255,227,37,0.7);
-  right: 0px;
+  bottom: 0px;
   position: absolute;
+}
+.DC-note-body {
+  display: none;
+  background: white;
+}
+.DC-note.open{
+  z-index: 1000;
+}
+.DC-note.open .DC-note-body {
+  display: block;
+  padding: 10px;
+  cursor: auto;
+}
+.DC-note-foldup {
+  height: 20px;
+  border-top: 1px solid #ccc;
+  margin: 0px 7px;
+  cursor: pointer;
 }

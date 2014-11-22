@@ -1,6 +1,9 @@
-<div class="DC-note-region" style="width: <%= coordinates.width + 10  %>px; height: <%= coordinates.height%>px; top: <%= coordinates.top %>px; left: <%= coordinates.left %>px;">
-  <div class="DC-note-expander"></div>
+<div class="DC-note-region">
+  <img  class="DC-note-image" />
+  <div class="DC-note-handle"></div>
 </div>
-<div class="DC-note-details">
-  
+<div class="DC-note-body">
+  <p class="DC-note-title"><%= title %></p>
+  <p class="DC-note-text"><%= text %></p>
+  <div class="DC-note-foldup">^^^ stand-in chevrons ^^^</div>
 </div>

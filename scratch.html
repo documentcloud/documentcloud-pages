@@ -4,17 +4,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="dist/page_embed.js"></script>
     <link type='text/css' rel='stylesheet' href="dist/page_embed.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <style>
-      #target_container { width: 50%; height: 50%;}
+      body { margin:0; padding: 0; }
+      .header {
+        width: 100%;
+        background: transparent url("data:image/png;charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAFeCAYAAABEunUfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOVJREFUeNqUVEESwjAIzPSbPsT/+JJeHN/kSFkbM1YhLGl6YBoCybJsKJfrDUvZP29Q0Pl2V++zceDBwXm/DGQhLQ7ZbsuFRRDdC4cUrED0RyGvF4TElDUgQ5qAjPCdgwZLmEOFgIj/LpBGxe2JmoKsC2D6s/eC9wOJ9EKyU57jZ4CeYlrWDMX5WzhP8QTPXkgUFdc42Yhpp5JiA4B2gcqCcRC+gHSuYWb0dR0cjrSB/up3X1csT9VHXWo1W9XB1v6GRliG8IxvsBzmZZdyxEm4QeLcoQ6fjItRW4da8/GhhuhbgAEA1s31ubjYDSMAAAAASUVORK5CYII=") repeat-x 0 0;
+      }
+      
+      .banner {
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 24pt;
+        width: 300px;
+        margin-left: 150px;
+      }
+      
+      .nav {
+      }
+      
+      .sidebar {
+      }
+      
+      .main {
+        float: right;
+      }
+      
+      #target_container { width: 700px }
     </style>
   </head>
   <body>
-    <div id="target_container"></div>
-    <script>
-      dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json",{
-        page: 57,
-        container: '#target_container'
-      });
-    </script>
+    <div class="header">
+      <div class="banner">DocumentCloud</div>
+      <div class="nav"></div>
+    </div>
+    <div class="main">
+      <div class="sidebar"></div>
+      <div class="main">
+        <div id="target_container"></div>
+        <script>
+          //dc.embed.loadPage("https://dev.dcloud.org/documents/1-uncharter.json",{
+          //  page: 4,
+          dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json",{
+            page: 57,
+            container: '#target_container'
+          });
+        </script>
+      </div>
+    </div>
   </body>
 </html>
