@@ -1,25 +1,50 @@
 .DC-debug { border: solid 1px black; position: absolute; }
 .DC-debug-vertical-center { border: solid 1px red; }
 .DC-debug-horizontal-center { border: solid 1px blue; }
+.DC-page * { margin: 0; padding: 0; box-sizing: content-box;}
 .DC-page { width: 100%; box-sizing: content-box; border: black 1px solid; }
+.DC-page-wrapper{ height: inherit; width: inherit; }
+.DC-page-mask { height: inherit; width: inherit; }
+.DC-page-mask.dim { background: rgba(0,0,0,0.75);}
 .DC-page-image { width: 100%; }
 .DC-note-overlay { position: absolute; }
 .DC-note {
   position: absolute;
-  width: 100%;
-}
-.DC-note-region {
-  position: absolute;
-  cursor: pointer;
   border: 3px solid rgba(255,227,37,0.7);
-  background: rgba(255,227,37,0.2);
   border-radius: 3px;
 }
-.DC-note-expander {
-  width: 10px;
-  height: 100%;
+.DC-note-region {
+  width: 100%;
+  cursor: pointer;
+  background: rgba(255,227,37,0.2);
+}
+.DC-note-handle {
+  height: 10px;
+  width: 100%;
   background: rgba(255,227,37,0.7);
   border-left: 1px solid rgba(255,227,37,0.7);
-  right: 0px;
+  bottom: 0px;
   position: absolute;
+}
+.DC-note-body {
+  display: none;
+  background: white;
+}
+.DC-note-title {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.DC-note.open{
+  z-index: 1000;
+}
+.DC-note.open .DC-note-body {
+  display: block;
+  padding: 10px;
+  cursor: auto;
+}
+.DC-note-foldup {
+  height: 20px;
+  border-top: 1px solid #ccc;
+  margin: 0px 7px;
+  cursor: pointer;
 }

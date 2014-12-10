@@ -61,6 +61,10 @@
   
     resize: function() {
       var scale = this.currentScale();
+      this.$el.css({
+        width: this.width * scale,
+        height: this.height * scale
+      })
       _.each(this.noteViews, function(view){ view.resize(scale); });
     },
 

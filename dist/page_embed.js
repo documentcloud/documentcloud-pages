@@ -14371,32 +14371,76 @@ return jQuery;
       return this.select(function(note){ return note.get('page') == number; });
     }
   });
-  
+})();
+
+(function(){
+  var dc       = window.dc;
+  var $        = dc.$;
+  var _        = dc._;
+  var Backbone = dc.Backbone;
+
+  var definition = dc.embed.definition;
+  var data = dc.embed.data;
+  var views = dc.embed.views;
+
   definition.NoteView = definition.NoteView || Backbone.View.extend({
     className: "DC-note",
+    events: {
+      'click .DC-note-region': 'open',
+      'click .DC-note-foldup': 'close'
+    },
+
     render: function(scale) {
       scale = scale || 1;
       var coordinates = this.model.scaledCoordinates(scale);
-      this.$el.html(JST["note"]({coordinates:{
-        height: coordinates.height,
+      this.$el.html(JST["note"]({
+        title: this.model.get('title'),
+        text: this.model.get('content')
+      }));
+      this.$el.css({
+        top: coordinates.top,
+        width: coordinates.width,
         left: coordinates.left,
-        width: coordinates.width
-      }}));
-      this.$el.css({top: coordinates.top});
+      });
+      this.$('.DC-note-region').css({height: coordinates.height});
       return this;
     },
+
     resize: function(scale) {
       var coordinates = this.model.scaledCoordinates(scale);
-      this.$el.css({top: coordinates.top});
-      this.$('.DC-note-region').css({
-        height: coordinates.height,
+      this.$el.css({
+        top: coordinates.top,
+        width: coordinates.width,
         left: coordinates.left,
-        width: coordinates.width
       });
+      this.$('.DC-note-region').css({height: coordinates.height});
+    },
+  
+    open: function() {
+      this.$el.addClass('open');
+      this.trigger('opened', this);
+    },
+  
+    close: function() {
+      this.$el.removeClass('open');
+      this.trigger('closed', this);
     }
   });
+})();
+(function(){
+  var dc       = window.dc;
+  var $        = dc.$;
+  var _        = dc._;
+  var Backbone = dc.Backbone;
 
+  var definition = dc.embed.definition;
+  var data = dc.embed.data;
+  var views = dc.embed.views;
   definition.PageView = definition.PageView || Backbone.View.extend({
+    events: {
+      'click .DC-page-image': function(){ if (this.openNote){ this.openNote.close(); }}
+    },
+  
     initialize: function(options) {
       this.options = options;
       this.noteViews = {};
@@ -14404,10 +14448,15 @@ return jQuery;
       this.listenTo(this.model, 'sync', this.render);
       this.renderOverlay = _.bind(this.renderOverlay,this);
     },
-    
+  
     prepare: function() {
       var notes = this.model.notes.forPage(this.options.page);
-      _.each(notes, function(note){ this.noteViews[note.id] = new definition.NoteView({model: note}); }, this);
+      _.each(notes, function(note){ 
+        var noteView = new definition.NoteView({model: note});
+        this.noteViews[note.id] = noteView;
+        this.listenTo(noteView, 'opened', this.updateOpenNote);
+        this.listenTo(noteView, 'closed', this.closeOpenNote);
+      }, this);
       this.prepared = true;
     },
 
@@ -14438,12 +14487,14 @@ return jQuery;
       var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale) }, this);
       this.$overlay.append(_.map(noteViews, function(v){return v.$el}));
     },
-    
+  
     resize: function() {
       var scale = this.currentScale();
-      _.each(this.noteViews, function(view){
-        view.resize(scale);
-      });
+      this.$el.css({
+        width: this.width * scale,
+        height: this.height * scale
+      })
+      _.each(this.noteViews, function(view){ view.resize(scale); });
     },
 
     cacheDomReferences: function() {
@@ -14467,9 +14518,13 @@ return jQuery;
       });
     },
 
-    currentScale: function() {
-      return this.$image.width() / this.dimensions.width;
-    }
+    currentScale: function() { return this.$image.width() / this.dimensions.width; },
+  
+    updateOpenNote: function(justOpened){
+      if (this.openNote && this.openNote != justOpened) { this.openNote.close(); }
+      this.openNote = justOpened;
+    },
+    closeOpenNote: function(){ this.openNote = undefined; }
   });
 })();
 
@@ -14515,6 +14570,6 @@ return jQuery;
 window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
-window.JST['note'] = dc._.template('<div class="DC-note-region" style="width: <%= coordinates.width + 10  %>px; height: <%= coordinates.height%>px; top: <%= coordinates.top %>px; left: <%= coordinates.left %>px;">\n  <div class="DC-note-expander"></div>\n</div>\n<div class="DC-note-details">\n  \n</div>');
-window.JST['page'] = dc._.template('<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>" />\n</div>\n');
+window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <img  class="DC-note-image" />\n  <div class="DC-note-handle"></div>\n</div>\n<div class="DC-note-body">\n  <p class="DC-note-title"><%= title %></p>\n  <p class="DC-note-text"><%= text %></p>\n  <div class="DC-note-foldup">^^^ stand-in chevrons ^^^</div>\n</div>\n');
+window.JST['page'] = dc._.template('<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <div class="DC-page-wrapper">\n    <div class="DC-page-mask dim"></div>\n    <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>" />\n  </div>\n</div>\n');
 })();

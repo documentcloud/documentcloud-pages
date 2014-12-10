@@ -1,5 +1,8 @@
 .DC-page * { margin: 0; padding: 0; box-sizing: content-box;}
 .DC-page { width: 100%; box-sizing: content-box; border: black 1px solid; }
+.DC-page-wrapper{ height: inherit; width: inherit; }
+.DC-page-mask { height: inherit; width: inherit; }
+.DC-page-mask.dim { background: rgba(0,0,0,0.75);}
 .DC-page-image { width: 100%; }
 .DC-note-overlay { position: absolute; }
 .DC-note {
@@ -23,6 +26,10 @@
 .DC-note-body {
   display: none;
   background: white;
+}
+.DC-note-title {
+  font-family: sans-serif;
+  font-weight: bold;
 }
 .DC-note.open{
   z-index: 1000;
