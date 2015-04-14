@@ -28,7 +28,7 @@
       return this._imageUrl;
     },
   }, {
-    extractId: function(url){ return url.match(/(\d+[A-Za-z-]+).js(on)?$/)[1]; }
+    extractId: function(url){ return url.match(/(\d+[A-Za-z0-9-]+).js(on)?$/)[1]; }
   });
   
   definition.DocumentSet = definition.DocumentSet || Backbone.Collection.extend({ 
