@@ -36,7 +36,7 @@
       this.$el.html(JST['page']({model: this.model, pageNumber: this.options.page }));
       this.cacheDomReferences();
       if (this.dimensions) {
-        this.renderNotes();
+        this.renderOverlay();
       } else {
         // Not sold on Promises given that they swallow error messages
         // unless you add an explicit path to catch possible errors.
@@ -55,8 +55,8 @@
       //  width: this.dimensions.width
       //}) + markup;
       this.$overlay.empty();
-      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale) }, this);
-      this.$overlay.append(_.map(noteViews, function(v){return v.$el}));
+      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale); }, this);
+      this.$overlay.append(_.map(noteViews, function(v){return v.$el;}));
     },
   
     resize: function() {
@@ -64,7 +64,7 @@
       this.$el.css({
         width: this.width * scale,
         height: this.height * scale
-      })
+      });
       _.each(this.noteViews, function(view){ view.resize(scale); });
     },
 
