@@ -15,3 +15,11 @@ A responsive, embeddable javascript library which displays pages from documents 
 # Participating
 
 You should [open an issue](https://github.com/documentcloud/documentcloud-pages/issues) for suggestions or ideas you'd like to tell us about!
+
+# Installation
+
+TOOD: explain this:
+
+    bower install
+    bundle install
+    guard
