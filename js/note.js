@@ -31,15 +31,33 @@
       return this;
     },
 
-    resize: function(scale) {
-      var coordinates = this.model.scaledCoordinates(scale);
+    renderRatio: function(dimensions) {
+      var coordinates = this.model.ratioCoordinates(dimensions);
+      console.log(coordinates);
+      this.$el.html(JST["note"]({
+        title: this.model.get('title'),
+        text: this.model.get('content')
+      }));
+
       this.$el.css({
         top: coordinates.top,
         width: coordinates.width,
+        height: coordinates.height,
         left: coordinates.left,
       });
-      this.$('.DC-note-region').css({height: coordinates.height});
+      // this.$('.DC-note-region').css({height: coordinates.height});
+      return this;
     },
+
+    // resize: function(scale) {
+    //   var coordinates = this.model.scaledCoordinates(scale);
+    //   this.$el.css({
+    //     top: coordinates.top,
+    //     width: coordinates.width,
+    //     left: coordinates.left,
+    //   });
+    //   this.$('.DC-note-region').css({height: coordinates.height});
+    // },
   
     open: function() {
       this.$el.addClass('open');
