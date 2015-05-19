@@ -81,7 +81,7 @@
           view.dimensions = {
             height: this.height,
             width: this.width,
-            aspectRatio: this.height / this.width
+            aspectRatio: this.width / this.height
           };
           resolve();
         });
