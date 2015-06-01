@@ -53,7 +53,17 @@
       var scaled = _.clone(this.coordinates());
       _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
       return scaled;
-    }
+    },
+    ratioCoordinates: function(dimensions) {
+      var coordinates = this.coordinates();
+      return {
+        top: (coordinates.top / dimensions.height * 100) + '%',
+        left: (coordinates.left / dimensions.width * 100) + '%',
+        right: (coordinates.right / dimensions.width * 100) + '%',
+        height: (coordinates.height / dimensions.height * 100) + '%',
+        width: (coordinates.width / dimensions.width * 100) + '%',
+      };
+    },
   });
   
   definition.NoteSet = Backbone.Collection.extend({

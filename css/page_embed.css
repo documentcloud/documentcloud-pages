@@ -1,17 +1,44 @@
-.DC-page * { margin: 0; padding: 0; box-sizing: content-box;}
-.DC-page { width: 100%; box-sizing: content-box; border: black 1px solid; }
-.DC-page-wrapper{ height: inherit; width: inherit; }
-.DC-page-mask { height: inherit; width: inherit; }
-.DC-page-mask.dim { background: rgba(0,0,0,0.75);}
-.DC-page-image { width: 100%; }
-.DC-note-overlay { position: absolute; }
+.DC-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+.DC-page {
+  position: relative;
+  width: 100%;
+  box-sizing: content-box;
+  border: black 1px solid;
+}
+
+.DC-page-wrapper {
+  height: inherit;
+  width: inherit;
+}
+.DC-page-mask {
+  height: inherit;
+  width: inherit;
+}
+.DC-page-mask.dim {
+  background: rgba(0,0,0,0.75);
+}
+.DC-page-image {
+  width: 100%;
+}
+
+.DC-note-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
 .DC-note {
   position: absolute;
-  border: 3px solid rgba(255,227,37,0.7);
-  border-radius: 3px;
+  border: 1px solid rgba(255,227,37,0.7);
+  z-index: 1;
 }
 .DC-note-region {
   width: 100%;
+  height: 100%;
   cursor: pointer;
   background: rgba(255,227,37,0.2);
 }
@@ -19,7 +46,6 @@
   height: 10px;
   width: 100%;
   background: rgba(255,227,37,0.7);
-  border-left: 1px solid rgba(255,227,37,0.7);
   bottom: 0px;
   position: absolute;
 }
@@ -31,7 +57,7 @@
   font-family: sans-serif;
   font-weight: bold;
 }
-.DC-note.open{
+.DC-note.open {
   z-index: 1000;
 }
 .DC-note.open .DC-note-body {

@@ -7,9 +7,12 @@
   var definition = dc.embed.definition;
   var data = dc.embed.data;
   var views = dc.embed.views;
+
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click .DC-page-image': function(){ if (this.openNote){ this.openNote.close(); }}
+      'click .DC-note-overlay': function(event) {
+        if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
+      }
     },
   
     initialize: function(options) {
@@ -55,18 +58,18 @@
       //  width: this.dimensions.width
       //}) + markup;
       this.$overlay.empty();
-      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale); }, this);
+      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].renderRatio(this.dimensions); }, this);
       this.$overlay.append(_.map(noteViews, function(v){return v.$el;}));
     },
   
-    resize: function() {
-      var scale = this.currentScale();
-      this.$el.css({
-        width: this.width * scale,
-        height: this.height * scale
-      });
-      _.each(this.noteViews, function(view){ view.resize(scale); });
-    },
+    // resize: function() {
+    //   var scale = this.currentScale();
+    //   this.$el.css({
+    //     width: this.width * scale,
+    //     height: this.height * scale
+    //   });
+    //   _.each(this.noteViews, function(view){ view.resize(scale); });
+    // },
 
     cacheDomReferences: function() {
       this.$image = this.$('.DC-page-image');

@@ -14495,7 +14495,17 @@ return jQuery;
       var scaled = _.clone(this.coordinates());
       _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
       return scaled;
-    }
+    },
+    ratioCoordinates: function(dimensions) {
+      var coordinates = this.coordinates();
+      return {
+        top: (coordinates.top / dimensions.height * 100) + '%',
+        left: (coordinates.left / dimensions.width * 100) + '%',
+        right: (coordinates.right / dimensions.width * 100) + '%',
+        height: (coordinates.height / dimensions.height * 100) + '%',
+        width: (coordinates.width / dimensions.width * 100) + '%',
+      };
+    },
   });
   
   definition.NoteSet = Backbone.Collection.extend({
@@ -14539,15 +14549,33 @@ return jQuery;
       return this;
     },
 
-    resize: function(scale) {
-      var coordinates = this.model.scaledCoordinates(scale);
+    renderRatio: function(dimensions) {
+      var coordinates = this.model.ratioCoordinates(dimensions);
+      console.log(coordinates);
+      this.$el.html(JST["note"]({
+        title: this.model.get('title'),
+        text: this.model.get('content')
+      }));
+
       this.$el.css({
         top: coordinates.top,
         width: coordinates.width,
+        height: coordinates.height,
         left: coordinates.left,
       });
-      this.$('.DC-note-region').css({height: coordinates.height});
+      // this.$('.DC-note-region').css({height: coordinates.height});
+      return this;
     },
+
+    // resize: function(scale) {
+    //   var coordinates = this.model.scaledCoordinates(scale);
+    //   this.$el.css({
+    //     top: coordinates.top,
+    //     width: coordinates.width,
+    //     left: coordinates.left,
+    //   });
+    //   this.$('.DC-note-region').css({height: coordinates.height});
+    // },
   
     open: function() {
       this.$el.addClass('open');
@@ -14569,9 +14597,12 @@ return jQuery;
   var definition = dc.embed.definition;
   var data = dc.embed.data;
   var views = dc.embed.views;
+
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click .DC-page-image': function(){ if (this.openNote){ this.openNote.close(); }}
+      'click .DC-note-overlay': function(event) {
+        if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
+      }
     },
   
     initialize: function(options) {
@@ -14617,18 +14648,18 @@ return jQuery;
       //  width: this.dimensions.width
       //}) + markup;
       this.$overlay.empty();
-      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(scale); }, this);
+      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].renderRatio(this.dimensions); }, this);
       this.$overlay.append(_.map(noteViews, function(v){return v.$el;}));
     },
   
-    resize: function() {
-      var scale = this.currentScale();
-      this.$el.css({
-        width: this.width * scale,
-        height: this.height * scale
-      });
-      _.each(this.noteViews, function(view){ view.resize(scale); });
-    },
+    // resize: function() {
+    //   var scale = this.currentScale();
+    //   this.$el.css({
+    //     width: this.width * scale,
+    //     height: this.height * scale
+    //   });
+    //   _.each(this.noteViews, function(view){ view.resize(scale); });
+    // },
 
     cacheDomReferences: function() {
       this.$image = this.$('.DC-page-image');
@@ -14692,12 +14723,12 @@ return jQuery;
   
   // probably should turn this into an event dispatcher for an event
   // that each view can listen in to.
-  var updateEmbeds = function() {
-    _.each(views.pages, function(viewsForDoc, docId){
-      _.each(viewsForDoc, function(view){ view.resize(); });
-    });
-  }
-  $(window).resize(_.throttle(updateEmbeds, 50));
+  // var updateEmbeds = function() {
+  //   _.each(views.pages, function(viewsForDoc, docId){
+  //     _.each(viewsForDoc, function(view){ view.resize(); });
+  //   });
+  // }
+  // $(window).resize(_.throttle(updateEmbeds, 50));
 })();
 (function(){
 window.JST = window.JST || {};

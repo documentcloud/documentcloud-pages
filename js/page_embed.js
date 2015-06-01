@@ -29,10 +29,10 @@
   
   // probably should turn this into an event dispatcher for an event
   // that each view can listen in to.
-  var updateEmbeds = function() {
-    _.each(views.pages, function(viewsForDoc, docId){
-      _.each(viewsForDoc, function(view){ view.resize(); });
-    });
-  }
-  $(window).resize(_.throttle(updateEmbeds, 50));
+  // var updateEmbeds = function() {
+  //   _.each(views.pages, function(viewsForDoc, docId){
+  //     _.each(viewsForDoc, function(view){ view.resize(); });
+  //   });
+  // }
+  // $(window).resize(_.throttle(updateEmbeds, 50));
 })();
