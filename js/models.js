@@ -27,6 +27,15 @@
       }
       return this._imageUrl;
     },
+
+    textUrl : function(pageNumber) {
+      if (!this._textUrl) {
+        var resources = this.get('resources');
+        var urlTemplate = resources['page']['text'];
+        this._textUrl = urlTemplate.replace('{page}', pageNumber);
+      }
+      return this._textUrl;
+    },
   }, {
     extractId: function(url){ return url.match(/(\d+[A-Za-z0-9-]+).js(on)?$/)[1]; }
   });
@@ -49,12 +58,12 @@
       }
       return this._coordinates;
     },
-    scaledCoordinates: function(scale) {
-      var scaled = _.clone(this.coordinates());
-      _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
-      return scaled;
-    },
-    ratioCoordinates: function(dimensions) {
+    // scaledCoordinates: function(scale) {
+    //   var scaled = _.clone(this.coordinates());
+    //   _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
+    //   return scaled;
+    // },
+    percentageCoordinates: function(dimensions) {
       var coordinates = this.coordinates();
       return {
         top: (coordinates.top / dimensions.height * 100) + '%',

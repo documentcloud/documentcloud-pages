@@ -14469,6 +14469,15 @@ return jQuery;
       }
       return this._imageUrl;
     },
+
+    textUrl : function(pageNumber) {
+      if (!this._textUrl) {
+        var resources = this.get('resources');
+        var urlTemplate = resources['page']['text'];
+        this._textUrl = urlTemplate.replace('{page}', pageNumber);
+      }
+      return this._textUrl;
+    },
   }, {
     extractId: function(url){ return url.match(/(\d+[A-Za-z0-9-]+).js(on)?$/)[1]; }
   });
@@ -14491,12 +14500,12 @@ return jQuery;
       }
       return this._coordinates;
     },
-    scaledCoordinates: function(scale) {
-      var scaled = _.clone(this.coordinates());
-      _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
-      return scaled;
-    },
-    ratioCoordinates: function(dimensions) {
+    // scaledCoordinates: function(scale) {
+    //   var scaled = _.clone(this.coordinates());
+    //   _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
+    //   return scaled;
+    // },
+    percentageCoordinates: function(dimensions) {
       var coordinates = this.coordinates();
       return {
         top: (coordinates.top / dimensions.height * 100) + '%',
@@ -14529,41 +14538,40 @@ return jQuery;
   definition.NoteView = definition.NoteView || Backbone.View.extend({
     className: "DC-note",
     events: {
-      'click .DC-note-region': 'open',
-      'click .DC-note-foldup': 'close'
+      'click .DC-note-region': 'toggle',
     },
 
-    render: function(scale) {
-      scale = scale || 1;
-      var coordinates = this.model.scaledCoordinates(scale);
+    // render: function(scale) {
+    //   scale = scale || 1;
+    //   var coordinates = this.model.scaledCoordinates(scale);
+    //   this.$el.html(JST["note"]({
+    //     title: this.model.get('title'),
+    //     text: this.model.get('content')
+    //   }));
+    //   this.$el.css({
+    //     top: coordinates.top,
+    //     width: coordinates.width,
+    //     left: coordinates.left,
+    //   });
+    //   this.$('.DC-note-region').css({height: coordinates.height});
+    //   return this;
+    // },
+
+    render: function(dimensions) {
+      var coordinates = this.model.percentageCoordinates(dimensions);
       this.$el.html(JST["note"]({
         title: this.model.get('title'),
-        text: this.model.get('content')
+        text: this.model.get('content'),
+        canonicalUrl: this.model.get('canonical_url'),
       }));
-      this.$el.css({
-        top: coordinates.top,
-        width: coordinates.width,
-        left: coordinates.left,
-      });
-      this.$('.DC-note-region').css({height: coordinates.height});
-      return this;
-    },
-
-    renderRatio: function(dimensions) {
-      var coordinates = this.model.ratioCoordinates(dimensions);
-      console.log(coordinates);
-      this.$el.html(JST["note"]({
-        title: this.model.get('title'),
-        text: this.model.get('content')
-      }));
-
-      this.$el.css({
+      var cssCoordinates = {
         top: coordinates.top,
         width: coordinates.width,
         height: coordinates.height,
         left: coordinates.left,
-      });
-      // this.$('.DC-note-region').css({height: coordinates.height});
+      };
+      this.$el.css(cssCoordinates);
+      // TODO: Dynamicize margin-left of DC-note-region
       return this;
     },
 
@@ -14577,15 +14585,26 @@ return jQuery;
     //   this.$('.DC-note-region').css({height: coordinates.height});
     // },
   
+    toggle: function() {
+      if (this.$el.hasClass('open')) {
+        this.close();
+      } else {
+        this.open();
+      }
+    },
+  
     open: function() {
       this.$el.addClass('open');
       this.trigger('opened', this);
+      this.$el.closest('.DC-note-overlay').addClass('open');
     },
   
     close: function() {
       this.$el.removeClass('open');
       this.trigger('closed', this);
+      this.$el.closest('.DC-note-overlay').removeClass('open');
     }
+
   });
 })();
 (function(){
@@ -14600,9 +14619,11 @@ return jQuery;
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
+      'click .DC-mode-toggle .DC-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
+      'click .DC-mode-toggle .DC-mode-text': function(event) { event.preventDefault(); this.switchToText(); },
       'click .DC-note-overlay': function(event) {
         if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
-      }
+      },
     },
   
     initialize: function(options) {
@@ -14626,7 +14647,10 @@ return jQuery;
 
     render: function() {
       if (!this.prepared){ this.prepare(); }
-      this.$el.html(JST['page']({model: this.model, pageNumber: this.options.page }));
+      this.$el.html(JST['page']({
+        model: this.model,
+        pageNumber: this.options.page
+      }));
       this.cacheDomReferences();
       if (this.dimensions) {
         this.renderOverlay();
@@ -14637,10 +14661,11 @@ return jQuery;
           undefined, function(error){ console.log(error);
         });
       }
+      this.switchToImage();
     },
 
     renderOverlay: function() {
-      var scale  = this.currentScale();
+      // var scale  = this.currentScale();
       var notes  = this.model.notes.forPage(this.options.page);
       //markup   = JST['debug']({ 
       //  scale: scale, 
@@ -14648,7 +14673,7 @@ return jQuery;
       //  width: this.dimensions.width
       //}) + markup;
       this.$overlay.empty();
-      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].renderRatio(this.dimensions); }, this);
+      var noteViews = _.map(notes, function(note){ return this.noteViews[note.id].render(this.dimensions); }, this);
       this.$overlay.append(_.map(noteViews, function(v){return v.$el;}));
     },
   
@@ -14662,8 +14687,10 @@ return jQuery;
     // },
 
     cacheDomReferences: function() {
-      this.$image = this.$('.DC-page-image');
-      this.$overlay = this.$('.DC-note-overlay');
+      this.$embed = this.$el.closest('.DC-embed');
+      this.$image = this.$el.find('.DC-page-image');
+      this.$text = this.$el.find('.DC-page-text');
+      this.$overlay = this.$el.find('.DC-note-overlay');
     },
 
     cacheNaturalDimensions: function() {
@@ -14684,11 +14711,49 @@ return jQuery;
 
     currentScale: function() { return this.$image.width() / this.dimensions.width; },
   
+    switchToImage: function() {
+      if (this.mode != 'page') {
+        this.$embed.removeClass('DC-mode-text').addClass('DC-mode-image');
+        this.mode = 'page';
+      }
+    },
+
+    switchToText: function() {
+      if (this.mode != 'text') {
+        this.fitTextToImage();
+        this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
+        this.mode = 'text';
+        if (_.isUndefined(this.cachedText)) {
+          this.$text.removeClass('error').addClass('fetching')
+                    .html('<i class="dc-icon-arrows-cw animate-spin"></i> Fetching page text…');
+          var _this = this;
+          $.get(this.model.textUrl(this.options.page), function(data) {
+            _this.cachedText = data;
+            _this.$text.text(data);
+          }).fail(function(){
+            _this.$text.addClass('error').text('Unable to fetch page text.');
+          }).always(function(){
+            _this.$text.removeClass('fetching');
+          });
+        }
+      }
+    },
+
+    fitTextToImage: function() {
+      var padding = parseInt(this.$text.css('padding').replace('px', ''), 10);
+      this.$text.css({
+        width: this.$image.width() - (padding * 2) + 'px',
+        height: this.$image.height() - (padding * 2) + 'px',
+      });
+    },
+
     updateOpenNote: function(justOpened){
       if (this.openNote && this.openNote != justOpened) { this.openNote.close(); }
       this.openNote = justOpened;
     },
-    closeOpenNote: function(){ this.openNote = undefined; }
+    closeOpenNote: function(){
+      this.openNote = undefined;
+    }
   });
 })();
 
@@ -14734,6 +14799,6 @@ return jQuery;
 window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
-window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <img class="DC-note-image" />\n  <div class="DC-note-handle"></div>\n</div>\n<div class="DC-note-body">\n  <p class="DC-note-title"><%= title %></p>\n  <p class="DC-note-text"><%= text %></p>\n  <div class="DC-note-foldup">^^^ stand-in chevrons ^^^</div>\n</div>\n');
-window.JST['page'] = dc._.template('<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <div class="DC-page-wrapper">\n    <div class="DC-page-mask dim"></div>\n    <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>" />\n  </div>\n</div>\n');
+window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <!-- <img class="DC-note-image"> -->\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%= title %></h2>\n    <!-- <div class="DC-note-text"><%= text %></div> -->\n    <div class="DC-note-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-nav">\n      <li><a href="#" class="DC-nav-index">\n        <i class="dc-icon-list"></i>\n      </a></li>\n    </ul>\n    <ul class="DC-actions">\n      <li><a href="<%= canonicalUrl %>" target="_blank" class="DC-action-link">\n        <i class="dc-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
+window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n</div>\n\n<a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud">\n  <span class="DC-resource-prefix">Open in</span>\n  <span class="DC-resource-logomark">DocumentCloud</span>\n</a>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-mode-toggle">\n    <li><a href="#" class="DC-mode-image">\n      <i class="dc-icon-doc-inv"></i> Page\n    </a></li>\n    <li><a href="#" class="DC-mode-text">\n      <i class="dc-icon-text"></i> Text\n    </a></li>\n  </ul>\n\n  <ul class="DC-nav">\n    <li><a href="#" class="DC-nav-index">\n      <i class="dc-icon-list"></i> Index\n    </a></li>\n  </ul>\n\n</div>\n');
 })();

@@ -2,3 +2,5 @@ bower_components
 js/vendor/backbone
 js/vendor/jquery
 js/vendor/underscore
+.DS_Store
+.tm_properties

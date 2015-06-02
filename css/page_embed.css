@@ -1,73 +1,204 @@
-.DC-page * {
-  margin: 0;
-  padding: 0;
-  box-sizing: content-box;
-}
-.DC-page {
-  position: relative;
-  width: 100%;
-  box-sizing: content-box;
-  border: black 1px solid;
+/*
+  Yellow: rgba(255, 247, 153, 0.5)
+  Yellow Border: rgba(255, 247, 153, 0.8)
+  Light gray: rgb(235, 235, 235)
+  Blurple: rgb(90, 118, 160)
+  Light blurple: rgb(119, 147, 189)
+  Dim: rgba(0, 0, 0, 0.55)
+*/
+
+.DC-embed {
+  font-family: Gotham, 'Avenir Next', 'Proxima Nova', 'Helvetica Neue', sans-serif;
+  font-size: 10pt;
+  line-height: 1.5em;
 }
 
-.DC-page-wrapper {
-  height: inherit;
-  width: inherit;
+.DC-mode-image .DC-page-text {
+  display: none;
 }
-.DC-page-mask {
-  height: inherit;
-  width: inherit;
+
+.DC-embed.DC-mode-text .DC-page-image,
+.DC-embed.DC-mode-text .DC-note-overlay {
+  display: none;
 }
-.DC-page-mask.dim {
-  background: rgba(0,0,0,0.75);
+
+.DC-meta {
+  
 }
+
+.DC-meta .DC-title {
+  display: inline;
+  font-weight: normal;
+  font-size: 1.2em;
+  color: black;
+}
+
+.DC-meta .DC-source {
+  color: rgb(160, 160, 160);
+  margin-left: 0.25em;
+}
+
+.DC-page {
+  position: relative;
+
+  border: 1px solid #ccc;
+}
+
 .DC-page-image {
+  display: block;
+  height: auto;
   width: 100%;
+  z-index: 0;
+}
+
+.DC-page-text {
+  padding: 10px;
+  overflow: auto;
+}
+
+.DC-page-text.error {
+  color: red;
+  text-align: center;
+  font-size: 2em;
+}
+
+.DC-page-text.fetching {
+  color: rgb(90, 118, 160);
+  text-align: center;
+  font-size: 2em;
+}
+
+.DC-actionbar {
+  position: relative;
+  background-color: rgb(90, 118, 160);
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+
+  height: 38px;
+}
+
+.DC-actionbar > ul {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  height: 38px;
+}
+
+.DC-actionbar > ul > li {
+  float: left;
+}
+
+.DC-actionbar > ul > li > a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  height: 38px;
+  line-height: 38px;
+  vertical-align: middle;
+  padding: 0 12px;
+}
+
+.DC-mode-image .DC-mode-toggle .DC-mode-image,
+.DC-mode-text .DC-mode-toggle .DC-mode-text,
+.DC-actionbar > ul > li > a:hover {
+  background-color: rgb(119, 147, 189);
+}
+
+.DC-embed-actionbar {
+  margin-top: -1px;
+}
+
+.DC-embed-actionbar > .DC-mode-toggle {
+  left: 0;
+}
+
+.DC-embed-actionbar > .DC-nav {
+  right: 0;
+}
+
+.DC-note-actionbar > .DC-nav {
+  left: 0;
+}
+
+.DC-note-actionbar > .DC-actions {
+  right: 0;
+}
+
+.DC-embed-actionbar > .DC-mode-toggle > li,
+.DC-note-actionbar > .DC-nav > li {
+  margin-right: 1px;
+}
+
+.DC-embed-actionbar > .DC-nav > li,
+.DC-note-actionbar > .DC-actions > li {
+  margin-left: 1px;
 }
 
 .DC-note-overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 0;
-}
-.DC-note {
-  position: absolute;
-  border: 1px solid rgba(255,227,37,0.7);
   z-index: 1;
 }
-.DC-note-region {
-  width: 100%;
-  height: 100%;
+
+.DC-note-overlay.open {
+  background-color: rgba(0, 0, 0, 0.55);
   cursor: pointer;
-  background: rgba(255,227,37,0.2);
 }
-.DC-note-handle {
-  height: 10px;
-  width: 100%;
-  background: rgba(255,227,37,0.7);
-  bottom: 0px;
+
+.DC-note {
   position: absolute;
-}
-.DC-note-body {
-  display: none;
-  background: white;
-}
-.DC-note-title {
-  font-family: sans-serif;
-  font-weight: bold;
+  z-index: 1;
+  overflow: visible;
 }
 .DC-note.open {
   z-index: 1000;
 }
+
+.DC-note-region {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: rgba(255, 247, 153, 0.5);
+  border: 1px solid rgba(255, 247, 153, 0.8);
+  border-left: 12px solid rgba(255, 247, 153, 0.8);
+  margin-left: -12px;
+}
+.DC-note.open .DC-note-region {
+  background-color: transparent;
+}
+
+.DC-note-body {
+  display: none;
+  width: 300px;
+  cursor: default;
+}
 .DC-note.open .DC-note-body {
   display: block;
-  padding: 10px;
-  cursor: auto;
 }
-.DC-note-foldup {
-  height: 20px;
-  border-top: 1px solid #ccc;
-  margin: 0px 7px;
-  cursor: pointer;
+
+.DC-note-content {
+  background-color: rgb(235, 235, 235);
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1em;
+}
+
+.DC-note-title {
+  font-weight: bold;
+  font-size: 1em;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
 }

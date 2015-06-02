@@ -1,7 +1,34 @@
+<div class="DC-meta">
+  <h1 class="DC-title">Lefler Thesis</h1>
+  <span class="DC-source">Department of Cats</span>
+</div>
+
+<a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud">
+  <span class="DC-resource-prefix">Open in</span>
+  <span class="DC-resource-logomark">DocumentCloud</span>
+</a>
+
 <div class="DC-page">
   <div class="DC-note-overlay"></div>
-  <div class="DC-page-wrapper">
-    <div class="DC-page-mask dim"></div>
-    <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>" />
-  </div>
+  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">
+  <div class="DC-page-text"></div>
+</div>
+
+<div class="DC-embed-actionbar DC-actionbar">
+
+  <ul class="DC-mode-toggle">
+    <li><a href="#" class="DC-mode-image">
+      <i class="dc-icon-doc-inv"></i> Page
+    </a></li>
+    <li><a href="#" class="DC-mode-text">
+      <i class="dc-icon-text"></i> Text
+    </a></li>
+  </ul>
+
+  <ul class="DC-nav">
+    <li><a href="#" class="DC-nav-index">
+      <i class="dc-icon-list"></i> Index
+    </a></li>
+  </ul>
+
 </div>

@@ -7,35 +7,38 @@
 
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <style>
-      body { margin:0; padding: 0; }
-      .header {
-        width: 100%;
-        background-color: rgb(90, 118, 160);
-      }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      width: 100%;
+      background-color: rgb(90, 118, 160);
+      font-family: 'Montserrat', sans-serif;
+    }
     
-      .banner {
-        color: white;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 24pt;
-        margin-left: 1em;
-      }
+    .banner {
+      color: white;
+      font-size: 24pt;
+      margin-left: 1em;
+    }
 
-      .main {
-        padding: 10px;
-      }
+    .main {
+      padding: 10px;
+    }
 
-      .container {
-        margin: 0 auto;
-        max-width: 960px;
-      }
+    .container {
+      margin: 0 auto;
+      max-width: 960px;
+    }
 
-      .row {
-        overflow: auto;
-      }
+    .row {
+      overflow: auto;
+    }
 
-      .col {
-        float: left;
-      }
+    .col {
+      float: left;
+    }
 
     </style>
 
@@ -50,10 +53,9 @@
 
     <div class="main">
       <div class="container">
-        <h1>The Three Little Bears</h1>
         <div class="row">
           <div class="col" style="width:50%;margin-right:2%;">
-            <div id="page_embed_1"></div>
+            <div id="page_embed_1" class="DC-embed"></div>
             <script>
               dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
                 page: 57,
@@ -62,7 +64,7 @@
             </script>
           </div>
           <div class="col" style="width:30%;margin-right:2%;">
-            <div id="page_embed_2"></div>
+            <div id="page_embed_2" class="DC-embed"></div>
             <script>
               dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
                 page: 57,
@@ -71,7 +73,7 @@
             </script>
           </div>
           <div class="col" style="width:15%;">
-            <div id="page_embed_3"></div>
+            <div id="page_embed_3" class="DC-embed"></div>
             <script>
               dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
                 page: 57,
@@ -83,14 +85,32 @@
       </div>
 
       <div class="container">
-        <h1>Full width</h1>
-        <div id="page_embed_4"></div>
+        <h1>Article title</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div style="float:right;width:50%;margin-left:5%;margin-bottom:5%">
+          <div id="page_embed_article_aside" class="DC-embed"></div>
+          <script>
+            dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
+              page: 57,
+              container: '#page_embed_article_aside'
+            });
+          </script>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div id="page_embed_4" class="DC-embed"></div>
         <script>
           dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
             page: 57,
             container: '#page_embed_4'
           });
         </script>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
       
     </div>

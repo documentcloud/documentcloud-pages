@@ -18,4 +18,6 @@ javascripts:
 
 stylesheets:
   page_embed:
+    - css/vendor/fontello/css/fontello-embedded.css
+    - css/vendor/fontello/css/animation.css
     - css/*.css
