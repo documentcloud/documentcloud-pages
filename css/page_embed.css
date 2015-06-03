@@ -8,7 +8,8 @@
 */
 
 .DC-embed {
-  font-family: Gotham, 'Avenir Next', 'Proxima Nova', 'Helvetica Neue', sans-serif;
+  position: relative;
+  font-family: sans-serif;
   font-size: 10pt;
   line-height: 1.5em;
 }
@@ -22,13 +23,19 @@
   display: none;
 }
 
+.DC-resource-url {
+  display: block;
+  float: right;
+  white-space: nowrap;
+}
+
 .DC-meta {
-  
+  float: left;
 }
 
 .DC-meta .DC-title {
   display: inline;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 1.2em;
   color: black;
 }
@@ -40,7 +47,7 @@
 
 .DC-page {
   position: relative;
-
+  clear: both;
   border: 1px solid #ccc;
 }
 
@@ -54,18 +61,21 @@
 .DC-page-text {
   padding: 10px;
   overflow: auto;
+  font-family: serif;
+}
+
+.DC-page-text.error,
+.DC-page-text.fetching {
+  text-align: center;
+  font-size: 2em;
 }
 
 .DC-page-text.error {
-  color: red;
-  text-align: center;
-  font-size: 2em;
+  color: rgb(255, 50, 50);
 }
 
 .DC-page-text.fetching {
   color: rgb(90, 118, 160);
-  text-align: center;
-  font-size: 2em;
 }
 
 .DC-actionbar {
@@ -189,7 +199,7 @@
 }
 
 .DC-note-title {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1em;
   margin-top: 0;
 }
