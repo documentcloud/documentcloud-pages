@@ -69,13 +69,13 @@
     open: function() {
       this.$el.addClass('open');
       this.trigger('opened', this);
-      this.$el.closest('.DC-note-overlay').addClass('open');
+      this.$el.closest('.DC-embed').addClass('open');
     },
   
     close: function() {
       this.$el.removeClass('open');
       this.trigger('closed', this);
-      this.$el.closest('.DC-note-overlay').removeClass('open');
+      this.$el.closest('.DC-embed').removeClass('open');
     }
 
   });

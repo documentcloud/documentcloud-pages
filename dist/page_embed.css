@@ -159,53 +159,29 @@
   Yellow: rgba(255, 247, 153, 0.5)
   Yellow Border: rgba(255, 247, 153, 0.8)
   Light gray: rgb(235, 235, 235)
+  Gray: rgb(204, 204, 204)
   Blurple: rgb(90, 118, 160)
   Light blurple: rgb(119, 147, 189)
   Dim: rgba(0, 0, 0, 0.55)
 */
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .DC-embed {
   position: relative;
-  font-family: sans-serif;
+  font-family: 'Gotham', 'Proxima Nova', 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 10pt;
   line-height: 1.5em;
 }
 
-.DC-mode-image .DC-page-text {
-  display: none;
-}
-
-.DC-embed.DC-mode-text .DC-page-image,
-.DC-embed.DC-mode-text .DC-note-overlay {
-  display: none;
-}
-
-.DC-resource-url {
-  display: block;
-  float: right;
-  white-space: nowrap;
-}
-
-.DC-meta {
-  float: left;
-}
-
-.DC-meta .DC-title {
-  display: inline;
-  font-weight: 400;
-  font-size: 1.2em;
-  color: black;
-}
-
-.DC-meta .DC-source {
-  color: rgb(160, 160, 160);
-  margin-left: 0.25em;
-}
-
 .DC-page {
-  position: relative;
-  clear: both;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(204, 204, 204);
 }
 
 .DC-page-image {
@@ -215,150 +191,237 @@
   z-index: 0;
 }
 
-.DC-page-text {
-  padding: 10px;
-  overflow: auto;
-  font-family: serif;
-}
 
-.DC-page-text.error,
-.DC-page-text.fetching {
-  text-align: center;
-  font-size: 2em;
-}
+/* Below 300px, present only the page image and a link to the full document. */
+@media (max-width: 299px) {
 
-.DC-page-text.error {
-  color: rgb(255, 50, 50);
-}
+  .DC-meta,
+  .DC-embed-actionbar,
+  .DC-page .DC-note-overlay,
+  .DC-page .DC-page-text,
+  .DC-resource-prefix,
+  .DC-resource-logomark
+  {
+    display: none;
+  }
 
-.DC-page-text.fetching {
-  color: rgb(90, 118, 160);
-}
+  .DC-resource-url {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .DC-resource-url:active {
+    background-color: rgba(90, 118, 160, 0.5);
+  }
 
-.DC-actionbar {
-  position: relative;
-  background-color: rgb(90, 118, 160);
-  color: white;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+  .DC-resource-icon {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    background-color: rgb(90, 118, 160);
+    color: white;
+    font-size: 22px;
+    line-height: 44px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .DC-resource-url:active .DC-resource-icon {
+    background-color: transparent;
+  }
+} 
 
-  height: 38px;
-}
+@media (min-width: 300px) {
 
-.DC-actionbar > ul {
-  position: absolute;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  height: 38px;
-}
+  .DC-resource-icon,
+  .DC-mode-image .DC-page-text,
+  .DC-embed.DC-mode-text .DC-page-image,
+  .DC-embed.DC-mode-text .DC-note-overlay {
+    display: none;
+  }
 
-.DC-actionbar > ul > li {
-  float: left;
-}
+  .DC-resource-url {
+    display: block;
+    float: right;
+    white-space: nowrap;
+  }
 
-.DC-actionbar > ul > li > a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  height: 38px;
-  line-height: 38px;
-  vertical-align: middle;
-  padding: 0 12px;
-}
+  .DC-meta {
+    display: block;
+    float: left;
+  }
 
-.DC-mode-image .DC-mode-toggle .DC-mode-image,
-.DC-mode-text .DC-mode-toggle .DC-mode-text,
-.DC-actionbar > ul > li > a:hover {
-  background-color: rgb(119, 147, 189);
-}
+  .DC-meta .DC-title {
+    display: inline;
+    font-weight: 400;
+    font-size: 1.2em;
+    color: black;
+  }
 
-.DC-embed-actionbar {
-  margin-top: -1px;
-}
+  .DC-meta .DC-source {
+    color: rgb(160, 160, 160);
+    margin-left: 0.25em;
+  }
 
-.DC-embed-actionbar > .DC-mode-toggle {
-  left: 0;
-}
+  .DC-page {
+    position: relative;
+    clear: both;
+    border-bottom-color: transparent;
+  }
 
-.DC-embed-actionbar > .DC-nav {
-  right: 0;
-}
+  .DC-embed.open .DC-page {
+    border-color: rgb(102, 102, 102);
+    border-bottom-color: rgb(88, 108, 135);
+  }
 
-.DC-note-actionbar > .DC-nav {
-  left: 0;
-}
+  .DC-page-text {
+    padding: 10px;
+    overflow: auto;
+    font-family: serif;
+  }
 
-.DC-note-actionbar > .DC-actions {
-  right: 0;
-}
+  .DC-page-text.error,
+  .DC-page-text.fetching {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 2em;
+  }
 
-.DC-embed-actionbar > .DC-mode-toggle > li,
-.DC-note-actionbar > .DC-nav > li {
-  margin-right: 1px;
-}
+  .DC-page-text.error {
+    color: rgb(255, 50, 50);
+  }
 
-.DC-embed-actionbar > .DC-nav > li,
-.DC-note-actionbar > .DC-actions > li {
-  margin-left: 1px;
-}
+  .DC-page-text.fetching {
+    color: rgb(90, 118, 160);
+  }
 
-.DC-note-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
+  .DC-actionbar {
+    position: relative;
+    background-color: rgb(90, 118, 160);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
 
-.DC-note-overlay.open {
-  background-color: rgba(0, 0, 0, 0.55);
-  cursor: pointer;
-}
+    height: 38px;
+  }
 
-.DC-note {
-  position: absolute;
-  z-index: 1;
-  overflow: visible;
-}
-.DC-note.open {
-  z-index: 1000;
-}
+  .DC-actionbar > ul {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: 38px;
+  }
 
-.DC-note-region {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  background-color: rgba(255, 247, 153, 0.5);
-  border: 1px solid rgba(255, 247, 153, 0.8);
-  border-left: 12px solid rgba(255, 247, 153, 0.8);
-  margin-left: -12px;
-}
-.DC-note.open .DC-note-region {
-  background-color: transparent;
-}
+  .DC-actionbar > ul > li {
+    float: left;
+  }
 
-.DC-note-body {
-  display: none;
-  width: 300px;
-  cursor: default;
-}
-.DC-note.open .DC-note-body {
-  display: block;
-}
+  .DC-actionbar > ul > li > a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    vertical-align: middle;
+    padding: 0 12px;
+  }
 
-.DC-note-content {
-  background-color: rgb(235, 235, 235);
-  max-height: 200px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 1em;
-}
+  .DC-mode-image .DC-mode-toggle .DC-mode-image,
+  .DC-mode-text .DC-mode-toggle .DC-mode-text,
+  .DC-actionbar > ul > li > a:hover {
+    background-color: rgb(119, 147, 189);
+  }
 
-.DC-note-title {
-  font-weight: 600;
-  font-size: 1em;
-  margin-top: 0;
+  .DC-embed-actionbar > .DC-mode-toggle {
+    left: 0;
+  }
+
+  .DC-embed-actionbar > .DC-nav {
+    right: 0;
+  }
+
+  .DC-note-actionbar > .DC-nav {
+    left: 0;
+  }
+
+  .DC-note-actionbar > .DC-actions {
+    right: 0;
+  }
+
+  .DC-embed-actionbar > .DC-mode-toggle > li,
+  .DC-note-actionbar > .DC-nav > li {
+    margin-right: 1px;
+  }
+
+  .DC-embed-actionbar > .DC-nav > li,
+  .DC-note-actionbar > .DC-actions > li {
+    margin-left: 1px;
+  }
+
+  .DC-note-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .DC-embed.open .DC-note-overlay {
+    background-color: rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+  }
+
+  .DC-note {
+    position: absolute;
+    z-index: 1;
+    overflow: visible;
+  }
+  .DC-note.open {
+    z-index: 1000;
+  }
+
+  .DC-note-region {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: rgba(255, 247, 153, 0.5);
+    border: 1px solid rgba(255, 247, 153, 0.8);
+    border-left: 12px solid rgba(255, 247, 153, 0.8);
+    margin-left: -12px;
+  }
+  .DC-note.open .DC-note-region {
+    background-color: transparent;
+  }
+
+  .DC-note-body {
+    display: none;
+    width: 300px;
+    cursor: default;
+  }
+  .DC-note.open .DC-note-body {
+    display: block;
+  }
+
+  .DC-note-content {
+    background-color: rgb(235, 235, 235);
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 1em;
+  }
+
+  .DC-note-title {
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: 0;
+  }
+
 }
 
 @media (min-width: 768px) {
