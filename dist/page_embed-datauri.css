@@ -156,6 +156,8 @@
 .DC-debug-vertical-center { border: solid 1px red; }
 .DC-debug-horizontal-center { border: solid 1px blue; }
 /*
+  These would love to be variables. LESS get SASSY, Jammit.
+
   Yellow: rgba(255, 247, 153, 0.5)
   Yellow Border: rgba(255, 247, 153, 0.8)
   Light gray: rgb(235, 235, 235)
@@ -165,19 +167,23 @@
   Dim: rgba(0, 0, 0, 0.55)
 */
 
+/* Styles outside of a media query apply to all manifestations. */
+
 html {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .DC-embed {
   position: relative;
-  font-family: 'Gotham', 'Proxima Nova', 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 10pt;
-  line-height: 1.5em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.9em;
+  line-height: 1.6em;
 }
 
 .DC-page {
@@ -186,20 +192,20 @@ html {
 
 .DC-page-image {
   display: block;
-  height: auto;
   width: 100%;
+  height: auto;
   z-index: 0;
 }
-
 
 /* Below 300px, present only the page image and a link to the full document. */
 @media (max-width: 299px) {
 
-  .DC-meta,
+  /* Elements unused at this size. */
+  .DC-title,
+  .DC-source,
   .DC-embed-actionbar,
   .DC-page .DC-note-overlay,
   .DC-page .DC-page-text,
-  .DC-resource-prefix,
   .DC-resource-logomark
   {
     display: none;
@@ -225,7 +231,7 @@ html {
     width: 44px;
     height: 44px;
     background-color: rgb(90, 118, 160);
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 22px;
     line-height: 44px;
     text-decoration: none;
@@ -238,76 +244,108 @@ html {
 
 @media (min-width: 300px) {
 
-  .DC-resource-icon,
-  .DC-mode-image .DC-page-text,
-  .DC-embed.DC-mode-text .DC-page-image,
-  .DC-embed.DC-mode-text .DC-note-overlay {
+  /* Elements unused at this size. */
+  .DC-resource-icon {
     display: none;
   }
 
-  .DC-resource-url {
-    display: block;
-    float: right;
-    white-space: nowrap;
+  /* Elements that default to invisible. */
+  .DC-mode-image .DC-page-text,
+  .DC-embed.DC-mode-text .DC-note-overlay {
+    display: none;
+  }
+  .DC-embed.DC-mode-text .DC-page-image {
+    visibility: hidden;
   }
 
   .DC-meta {
     display: block;
-    float: left;
+    position: relative;
+
+    
+    min-height: 32px;
+    padding: 0.5em 150px 0 0;
   }
 
-  .DC-meta .DC-title {
-    display: inline;
-    font-weight: 400;
-    font-size: 1.2em;
-    color: black;
-  }
+    .DC-title {
+      display: inline;
+      font-weight: 400;
+      font-size: 1.2em;
+      color: rgb(0, 0, 0);
+    }
 
-  .DC-meta .DC-source {
-    color: rgb(160, 160, 160);
-    margin-left: 0.25em;
-  }
+    .DC-source {
+      color: rgb(160, 160, 160);
+      margin-left: 0.25em;
+    }
+
+    .DC-resource-url {
+      display: block;
+      position: absolute;
+      right: 0;
+
+      bottom: 7px;
+      width: 136px;
+      height: 25px;
+    }
+
+      /* Logomark aspect ratio: 5.45:1 */
+      .DC-resource-logomark {
+        display: block;
+        text-indent: -10000px;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        /* TODO: PNG for IE8 */
+        background: transparent url(/images/logo.svg) right bottom no-repeat;
+        background-size: contain;
+      }
 
   .DC-page {
     position: relative;
-    clear: both;
     border-bottom-color: transparent;
   }
 
-  .DC-embed.open .DC-page {
-    border-color: rgb(102, 102, 102);
-    border-bottom-color: rgb(88, 108, 135);
-  }
+    .DC-embed.open .DC-page {
+      border-color: rgb(102, 102, 102);
+      border-bottom-color: rgb(88, 108, 135);
+    }
 
-  .DC-page-text {
-    padding: 10px;
-    overflow: auto;
-    font-family: serif;
-  }
+    .DC-page-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      z-index: 1;
+      overflow: auto;
+      font-family: serif;
+    }
 
-  .DC-page-text.error,
-  .DC-page-text.fetching {
-    font-family: sans-serif;
-    text-align: center;
-    font-size: 2em;
-  }
+    .DC-page-text.error,
+    .DC-page-text.fetching {
+      font-family: sans-serif;
+      text-align: center;
+      font-size: 2em;
+    }
 
-  .DC-page-text.error {
-    color: rgb(255, 50, 50);
-  }
+    .DC-page-text.error {
+      color: rgb(255, 50, 50);
+    }
 
-  .DC-page-text.fetching {
-    color: rgb(90, 118, 160);
-  }
+    .DC-page-text.fetching {
+      color: rgb(90, 118, 160);
+    }
 
   .DC-actionbar {
     position: relative;
-    background-color: rgb(90, 118, 160);
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-
     height: 38px;
+
+    background-color: rgb(90, 118, 160);
+    color: rgb(255, 255, 255);
+    -moz-osx-font-smoothing: grayscale;
+     -webkit-font-smoothing: antialiased;
   }
 
   .DC-actionbar > ul {
@@ -324,7 +362,7 @@ html {
   }
 
   .DC-actionbar > ul > li > a {
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     display: block;
     height: 38px;
@@ -402,6 +440,7 @@ html {
   .DC-note-body {
     display: none;
     width: 300px;
+    max-width: 100%;
     cursor: default;
   }
   .DC-note.open .DC-note-body {

@@ -111,7 +111,6 @@
 
     switchToText: function() {
       if (this.mode != 'text') {
-        this.fitTextToImage();
         this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
         this.mode = 'text';
         if (_.isUndefined(this.cachedText)) {
@@ -128,14 +127,6 @@
           });
         }
       }
-    },
-
-    fitTextToImage: function() {
-      var padding = parseInt(this.$text.css('padding').replace('px', ''), 10);
-      this.$text.css({
-        width: this.$image.width() - (padding * 2) + 'px',
-        height: this.$image.height() - (padding * 2) + 'px',
-      });
     },
 
     updateOpenNote: function(justOpened){

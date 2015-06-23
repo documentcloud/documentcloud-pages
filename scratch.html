@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="/dist/page_embed.css"/>
+    <script src="/dist/page_embed.js"></script>
     <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Gotham', 'Proxima Nova', 'Avenir Next', Helvetica, Arial, sans-serif;
+      font: 400 1em/1.6em 'Gotham', 'Proxima Nova', 'Avenir Next', Helvetica, Arial, sans-serif;
     }
     .header {
       width: 100%;
@@ -20,8 +22,9 @@
     
     .banner {
       color: white;
-      font-size: 24pt;
-      margin-left: 1em;
+      font-size: 2em;
+      line-height: 1.6em;
+      margin-left: 10px;
     }
 
     .main {
@@ -45,7 +48,7 @@
       position: relative;
       height: 0;
       overflow: hidden;
-      padding-bottom: 150%;
+      padding-bottom: 160%;
     }
     .DC-embed-iframe-wrapper > iframe {
       position: absolute;
@@ -57,9 +60,6 @@
       overflow: hidden;
     }
     </style>
-
-    <link type='text/css' rel='stylesheet' href="dist/page_embed.css"/>
-    <script src="dist/page_embed.js"></script>
   </head>
   <body>
     <div class="header">
@@ -92,9 +92,13 @@
         <h1>Article title</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <div style="float:right;width:50%;margin-left:5%;margin-bottom:5%">
-          <div class="DC-embed-iframe-wrapper">
-            <iframe src="embed.html" scrolling="no"></iframe>
-          </div>
+          <div id="page_embed" class="DC-embed"></div>
+          <script>
+            dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
+              page: 57,
+              container: '#page_embed'
+            });
+          </script>
         </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

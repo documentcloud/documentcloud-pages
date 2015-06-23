@@ -14720,7 +14720,6 @@ return jQuery;
 
     switchToText: function() {
       if (this.mode != 'text') {
-        this.fitTextToImage();
         this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
         this.mode = 'text';
         if (_.isUndefined(this.cachedText)) {
@@ -14737,14 +14736,6 @@ return jQuery;
           });
         }
       }
-    },
-
-    fitTextToImage: function() {
-      var padding = parseInt(this.$text.css('padding').replace('px', ''), 10);
-      this.$text.css({
-        width: this.$image.width() - (padding * 2) + 'px',
-        height: this.$image.height() - (padding * 2) + 'px',
-      });
     },
 
     updateOpenNote: function(justOpened){
@@ -14800,5 +14791,5 @@ window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
 window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <img class="DC-note-image">\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%- title %></h2>\n    <div class="DC-note-text"><%= text %></div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-nav">\n      <li><a href="#" class="DC-nav-index">\n        <i class="dc-icon-list"></i>\n      </a></li>\n    </ul>\n    <ul class="DC-actions">\n      <li><a href="<%= canonicalUrl %>" target="_blank" class="DC-action-link">\n        <i class="dc-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
-window.JST['page'] = dc._.template('<a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud" target="_blank">\n  <span class="DC-resource-icon"><i class="dc-icon-link"></i></span>\n  <span class="DC-resource-prefix">Open in</span>\n  <span class="DC-resource-logomark">DocumentCloud</span>\n</a>\n\n<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-mode-toggle">\n    <li><a href="#" class="DC-mode-image">\n      <i class="dc-icon-doc-inv"></i> Page\n    </a></li>\n    <li><a href="#" class="DC-mode-text">\n      <i class="dc-icon-text"></i> Text\n    </a></li>\n  </ul>\n\n  <ul class="DC-nav">\n    <li><a href="#" class="DC-nav-index">\n      <i class="dc-icon-list"></i> Index\n    </a></li>\n  </ul>\n\n</div>\n');
+window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud" target="_blank">\n    <span class="DC-resource-icon"><i class="dc-icon-link"></i></span>\n    <span class="DC-resource-logomark">DocumentCloud</span>\n  </a>\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-mode-toggle">\n    <li><a href="#" class="DC-mode-image">\n      <i class="dc-icon-doc-inv"></i> Page\n    </a></li>\n    <li><a href="#" class="DC-mode-text">\n      <i class="dc-icon-text"></i> Text\n    </a></li>\n  </ul>\n\n  <ul class="DC-nav">\n    <li><a href="#" class="DC-nav-index">\n      <i class="dc-icon-list"></i> Index\n    </a></li>\n  </ul>\n\n</div>\n');
 })();
