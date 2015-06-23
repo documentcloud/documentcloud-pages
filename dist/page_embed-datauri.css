@@ -197,6 +197,16 @@ html {
   z-index: 0;
 }
 
+/* Elements that default to invisible. */
+.DC-mode-image .DC-page-text,
+.DC-mode-text .DC-note-overlay {
+  display: none;
+}
+.DC-mode-text .DC-page-image {
+  visibility: hidden;
+}
+
+
 /* Below 300px, present only the page image and a link to the full document. */
 @media (max-width: 299px) {
 
@@ -247,15 +257,6 @@ html {
   /* Elements unused at this size. */
   .DC-resource-icon {
     display: none;
-  }
-
-  /* Elements that default to invisible. */
-  .DC-mode-image .DC-page-text,
-  .DC-embed.DC-mode-text .DC-note-overlay {
-    display: none;
-  }
-  .DC-embed.DC-mode-text .DC-page-image {
-    visibility: hidden;
   }
 
   .DC-meta {
@@ -311,16 +312,21 @@ html {
       border-bottom-color: rgb(88, 108, 135);
     }
 
+    .DC-mode-text .DC-page {
+      background: transparent url(/images/stripes.png) 0 0 repeat;
+    }
+
     .DC-page-text {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
+      right: 0;
+      width: 85%;
       height: 100%;
       padding: 20px;
       z-index: 1;
       overflow: auto;
       font-family: serif;
+      background-color: rgb(255, 255, 255);
     }
 
     .DC-page-text.error,
@@ -464,6 +470,9 @@ html {
 }
 
 @media (min-width: 768px) {
+  .DC-page-text {
+    width: 95%;
+  }
 }
 
 @media (min-width: 992px) {
