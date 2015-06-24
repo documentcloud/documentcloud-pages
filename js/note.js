@@ -30,21 +30,25 @@
     //   return this;
     // },
 
+    initialize: function(options) {
+      this.imageUrl = options.imageUrl;
+    },
+
     render: function(dimensions) {
-      var coordinates = this.model.percentageCoordinates(dimensions);
       this.$el.html(JST["note"]({
         title: this.model.get('title'),
         text: this.model.get('content'),
         canonicalUrl: this.model.get('canonical_url'),
+        imageUrl: this.imageUrl,
       }));
-      var cssCoordinates = {
-        top: coordinates.top,
-        width: coordinates.width,
-        height: coordinates.height,
-        left: coordinates.left,
-      };
+      var coordinates = this.model.percentageCoordinates(dimensions);
+      var cssCoordinates = _.pick(coordinates, 'top', 'left', 'width', 'height');
       this.$el.css(cssCoordinates);
-      // TODO: Dynamicize margin-left of DC-note-region
+
+      var imageCoordinates = this.model.imageCoordinates(dimensions);
+      var cssImageCoordinates = _.pick(imageCoordinates, 'top', 'left', 'width');
+      this.$el.find('.DC-note-image').css(cssImageCoordinates);
+
       return this;
     },
 

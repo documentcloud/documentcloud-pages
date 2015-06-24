@@ -28,7 +28,10 @@
     prepare: function() {
       var notes = this.model.notes.forPage(this.options.page);
       _.each(notes, function(note){ 
-        var noteView = new definition.NoteView({model: note});
+        var noteView = new definition.NoteView({
+          model: note,
+          imageUrl: this.model.imageUrl(this.options.page),
+        });
         this.noteViews[note.id] = noteView;
         this.listenTo(noteView, 'opened', this.updateOpenNote);
         this.listenTo(noteView, 'closed', this.closeOpenNote);

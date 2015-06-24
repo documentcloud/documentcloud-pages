@@ -45,6 +45,7 @@
   });
   
   definition.Note = Backbone.Model.extend({
+    // Parses the coordinates in pixel value and calculates pixel width/height
     coordinates: function(force){
       if (!this._coordinates || force) {
         var css = _.map(this.get('location').image.split(','), function(num){ return parseInt(num, 10); });
@@ -53,26 +54,51 @@
           left:   css[3],
           right:  css[1],
           height: css[2] - css[0],
-          width:  css[1] - css[3]
+          width:  css[1] - css[3],
         };
       }
       return this._coordinates;
     },
+
     // scaledCoordinates: function(scale) {
     //   var scaled = _.clone(this.coordinates());
     //   _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
     //   return scaled;
     // },
-    percentageCoordinates: function(dimensions) {
-      var coordinates = this.coordinates();
+
+    // Calculate the coordinates as a fraction of the parent. E.g. a 100px wide
+    // note on a 500px wide page has a width of `0.2`.
+    fractionalCoordinates: function(pageDimensions) {
+      var _coordinates = this.coordinates();
       return {
-        top: (coordinates.top / dimensions.height * 100) + '%',
-        left: (coordinates.left / dimensions.width * 100) + '%',
-        right: (coordinates.right / dimensions.width * 100) + '%',
-        height: (coordinates.height / dimensions.height * 100) + '%',
-        width: (coordinates.width / dimensions.width * 100) + '%',
+        top: (_coordinates.top / pageDimensions.height),
+        left: (_coordinates.left / pageDimensions.width),
+        right: (_coordinates.right / pageDimensions.width),
+        height: (_coordinates.height / pageDimensions.height),
+        width: (_coordinates.width / pageDimensions.width),
       };
     },
+
+    // Convert the fractional coordinates (e.g., `0.2`) into percentage strings
+    // (e.g., `'200%'`).
+    percentageCoordinates: function(pageDimensions) {
+      var _coordinates = this.fractionalCoordinates(pageDimensions);
+      return _.mapObject(_coordinates, function(coordinate) {
+        return coordinate * 100 + '%';
+      });
+    },
+
+    // Compose coordinates necessary to position the note excerpt image. Tricky 
+    // math.
+    imageCoordinates: function(pageDimensions) {
+      var _coordinates = this.fractionalCoordinates(pageDimensions);
+      return {
+        width: 1 / _coordinates.width * 100 + '%',
+        left: _coordinates.left/_coordinates.width * -100 + '%',
+        top: _coordinates.top/_coordinates.height * -100 + '%',
+      };
+    },
+
   });
   
   definition.NoteSet = Backbone.Collection.extend({

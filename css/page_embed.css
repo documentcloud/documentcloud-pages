@@ -140,9 +140,12 @@ html {
         overflow: hidden;
         width: 100%;
         height: 100%;
-        /* TODO: PNG for IE8 */
         background: transparent url('/images/logo.svg') right bottom no-repeat;
         background-size: contain;
+      }
+
+      .DC-no-svg .DC-resource-logomark {
+        background-image: url('/images/logo.png');
       }
 
   .DC-page {
@@ -155,21 +158,28 @@ html {
       border-bottom-color: rgb(88, 108, 135);
     }
 
-    .DC-mode-text .DC-page {
-      background: transparent url('/images/stripes.png') 0 0 repeat;
-    }
-
     .DC-page-text {
       position: absolute;
       top: 0;
-      right: 0;
-      width: 85%;
+      left: 0%;
+      width: 100%;
       height: 100%;
-      padding: 20px;
+      padding: 5%;
       z-index: 1;
-      overflow: auto;
       font-family: serif;
       background-color: rgb(255, 255, 255);
+      overflow-x: scroll;
+      overflow-y: scroll;
+    }
+
+    .DC-touch .DC-mode-text .DC-page {
+      background-color: rgb(235, 235, 235);
+    }
+
+    .DC-touch .DC-page-text {
+      left: 10%;
+      width: 80%;
+      -webkit-overflow-scrolling: touch;
     }
 
     .DC-page-text.error,
@@ -257,6 +267,7 @@ html {
     width: 100%;
     height: 100%;
     z-index: 1;
+    transition: background-color 0.25s;
   }
 
   .DC-embed.open .DC-note-overlay {
@@ -274,31 +285,60 @@ html {
   }
 
   .DC-note-region {
+    position: relative;
     width: 100%;
     height: 100%;
-    cursor: pointer;
     background-color: rgba(255, 247, 153, 0.5);
-    border: 1px solid rgba(255, 247, 153, 0.8);
-    border-left: 12px solid rgba(255, 247, 153, 0.8);
-    margin-left: -12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    z-index: 1;
   }
   .DC-note.open .DC-note-region {
     background-color: transparent;
   }
 
-  .DC-note-body {
+  .DC-note-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .DC-note-image {
+    position: absolute;
+    height: auto;
     display: none;
-    width: 300px;
-    max-width: 100%;
+  }
+  .DC-note.open .DC-note-image {
+    display: block;
+  }
+  
+  .DC-note-body {
+    position: relative;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    min-width: 200px;
+    width: 100%;
+    max-width: 400px;
+
     cursor: default;
+    transition: height 0.25s, opacity 0.25s;
   }
   .DC-note.open .DC-note-body {
-    display: block;
+    height: 200px;
+    opacity: 1;
   }
 
   .DC-note-content {
+    position: absolute;
+    top: 0;
+    bottom: 38px;
+    width: 100%;
     background-color: rgb(235, 235, 235);
-    max-height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 1em;
@@ -310,12 +350,15 @@ html {
     margin-top: 0;
   }
 
+  .DC-note-actionbar {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
 }
 
 @media (min-width: 768px) {
-  .DC-page-text {
-    width: 95%;
-  }
 }
 
 @media (min-width: 992px) {

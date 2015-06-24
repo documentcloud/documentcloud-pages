@@ -1,3 +1,7 @@
+/* Modernizr 2.8.3 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-svg-touch-shiv-cssclasses-teststyles-prefixes-cssclassprefix:DV!
+ */
+;window.Modernizr=function(a,b,c){function x(a){j.cssText=a}function y(a,b){return x(m.join(a+";")+(b||""))}function z(a,b){return typeof a===b}function A(a,b){return!!~(""+a).indexOf(b)}function B(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:z(f,"function")?f.bind(d||b):f}return!1}var d="2.8.3",e={},f=!0,g=b.documentElement,h="modernizr",i=b.createElement(h),j=i.style,k,l={}.toString,m=" -webkit- -moz- -o- -ms- ".split(" "),n={svg:"http://www.w3.org/2000/svg"},o={},p={},q={},r=[],s=r.slice,t,u=function(a,c,d,e){var f,i,j,k,l=b.createElement("div"),m=b.body,n=m||b.createElement("body");if(parseInt(d,10))while(d--)j=b.createElement("div"),j.id=e?e[d]:h+(d+1),l.appendChild(j);return f=["&#173;",'<style id="s',h,'">',a,"</style>"].join(""),l.id=h,(m?l:n).innerHTML+=f,n.appendChild(l),m||(n.style.background="",n.style.overflow="hidden",k=g.style.overflow,g.style.overflow="hidden",g.appendChild(n)),i=c(l,a),m?l.parentNode.removeChild(l):(n.parentNode.removeChild(n),g.style.overflow=k),!!i},v={}.hasOwnProperty,w;!z(v,"undefined")&&!z(v.call,"undefined")?w=function(a,b){return v.call(a,b)}:w=function(a,b){return b in a&&z(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=s.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(s.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(s.call(arguments)))};return e}),o.touch=function(){var c;return"ontouchstart"in a||a.DocumentTouch&&b instanceof DocumentTouch?c=!0:u(["@media (",m.join("touch-enabled),("),h,")","{#modernizr{top:9px;position:absolute}}"].join(""),function(a){c=a.offsetTop===9}),c},o.svg=function(){return!!b.createElementNS&&!!b.createElementNS(n.svg,"svg").createSVGRect};for(var C in o)w(o,C)&&(t=C.toLowerCase(),e[t]=o[C](),r.push((e[t]?"":"no-")+t));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)w(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof f!="undefined"&&f&&(g.className+=" DC-"+(b?"":"no-")+a),e[a]=b}return e},x(""),i=k=null,function(a,b){function l(a,b){var c=a.createElement("p"),d=a.getElementsByTagName("head")[0]||a.documentElement;return c.innerHTML="x<style>"+b+"</style>",d.insertBefore(c.lastChild,d.firstChild)}function m(){var a=s.elements;return typeof a=="string"?a.split(" "):a}function n(a){var b=j[a[h]];return b||(b={},i++,a[h]=i,j[i]=b),b}function o(a,c,d){c||(c=b);if(k)return c.createElement(a);d||(d=n(c));var g;return d.cache[a]?g=d.cache[a].cloneNode():f.test(a)?g=(d.cache[a]=d.createElem(a)).cloneNode():g=d.createElem(a),g.canHaveChildren&&!e.test(a)&&!g.tagUrn?d.frag.appendChild(g):g}function p(a,c){a||(a=b);if(k)return a.createDocumentFragment();c=c||n(a);var d=c.frag.cloneNode(),e=0,f=m(),g=f.length;for(;e<g;e++)d.createElement(f[e]);return d}function q(a,b){b.cache||(b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag()),a.createElement=function(c){return s.shivMethods?o(c,a,b):b.createElem(c)},a.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+m().join().replace(/[\w\-]+/g,function(a){return b.createElem(a),b.frag.createElement(a),'c("'+a+'")'})+");return n}")(s,b.frag)}function r(a){a||(a=b);var c=n(a);return s.shivCSS&&!g&&!c.hasCSS&&(c.hasCSS=!!l(a,"article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}template{display:none}")),k||q(a,c),a}var c="3.7.0",d=a.html5||{},e=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,f=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,g,h="_html5shiv",i=0,j={},k;(function(){try{var a=b.createElement("a");a.innerHTML="<xyz></xyz>",g="hidden"in a,k=a.childNodes.length==1||function(){b.createElement("a");var a=b.createDocumentFragment();return typeof a.cloneNode=="undefined"||typeof a.createDocumentFragment=="undefined"||typeof a.createElement=="undefined"}()}catch(c){g=!0,k=!0}})();var s={elements:d.elements||"abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video",version:c,shivCSS:d.shivCSS!==!1,supportsUnknownElements:k,shivMethods:d.shivMethods!==!1,type:"default",shivDocument:r,createElement:o,createDocumentFragment:p};a.html5=s,r(b)}(this,b),e._version=d,e._prefixes=m,e.testStyles=u,g.className=g.className.replace(/(^|\s)no-js(\s|$)/,"$1$2")+(f?" DC-js DC-"+r.join(" DC-"):""),e}(this,this.document);
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
@@ -14487,6 +14491,7 @@ return jQuery;
   });
   
   definition.Note = Backbone.Model.extend({
+    // Parses the coordinates in pixel value and calculates pixel width/height
     coordinates: function(force){
       if (!this._coordinates || force) {
         var css = _.map(this.get('location').image.split(','), function(num){ return parseInt(num, 10); });
@@ -14495,26 +14500,51 @@ return jQuery;
           left:   css[3],
           right:  css[1],
           height: css[2] - css[0],
-          width:  css[1] - css[3]
+          width:  css[1] - css[3],
         };
       }
       return this._coordinates;
     },
+
     // scaledCoordinates: function(scale) {
     //   var scaled = _.clone(this.coordinates());
     //   _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
     //   return scaled;
     // },
-    percentageCoordinates: function(dimensions) {
-      var coordinates = this.coordinates();
+
+    // Calculate the coordinates as a fraction of the parent. E.g. a 100px wide
+    // note on a 500px wide page has a width of `0.2`.
+    fractionalCoordinates: function(pageDimensions) {
+      var _coordinates = this.coordinates();
       return {
-        top: (coordinates.top / dimensions.height * 100) + '%',
-        left: (coordinates.left / dimensions.width * 100) + '%',
-        right: (coordinates.right / dimensions.width * 100) + '%',
-        height: (coordinates.height / dimensions.height * 100) + '%',
-        width: (coordinates.width / dimensions.width * 100) + '%',
+        top: (_coordinates.top / pageDimensions.height),
+        left: (_coordinates.left / pageDimensions.width),
+        right: (_coordinates.right / pageDimensions.width),
+        height: (_coordinates.height / pageDimensions.height),
+        width: (_coordinates.width / pageDimensions.width),
       };
     },
+
+    // Convert the fractional coordinates (e.g., `0.2`) into percentage strings
+    // (e.g., `'200%'`).
+    percentageCoordinates: function(pageDimensions) {
+      var _coordinates = this.fractionalCoordinates(pageDimensions);
+      return _.mapObject(_coordinates, function(coordinate) {
+        return coordinate * 100 + '%';
+      });
+    },
+
+    // Compose coordinates necessary to position the note excerpt image. Tricky 
+    // math.
+    imageCoordinates: function(pageDimensions) {
+      var _coordinates = this.fractionalCoordinates(pageDimensions);
+      return {
+        width: 1 / _coordinates.width * 100 + '%',
+        left: _coordinates.left/_coordinates.width * -100 + '%',
+        top: _coordinates.top/_coordinates.height * -100 + '%',
+      };
+    },
+
   });
   
   definition.NoteSet = Backbone.Collection.extend({
@@ -14557,21 +14587,25 @@ return jQuery;
     //   return this;
     // },
 
+    initialize: function(options) {
+      this.imageUrl = options.imageUrl;
+    },
+
     render: function(dimensions) {
-      var coordinates = this.model.percentageCoordinates(dimensions);
       this.$el.html(JST["note"]({
         title: this.model.get('title'),
         text: this.model.get('content'),
         canonicalUrl: this.model.get('canonical_url'),
+        imageUrl: this.imageUrl,
       }));
-      var cssCoordinates = {
-        top: coordinates.top,
-        width: coordinates.width,
-        height: coordinates.height,
-        left: coordinates.left,
-      };
+      var coordinates = this.model.percentageCoordinates(dimensions);
+      var cssCoordinates = _.pick(coordinates, 'top', 'left', 'width', 'height');
       this.$el.css(cssCoordinates);
-      // TODO: Dynamicize margin-left of DC-note-region
+
+      var imageCoordinates = this.model.imageCoordinates(dimensions);
+      var cssImageCoordinates = _.pick(imageCoordinates, 'top', 'left', 'width');
+      this.$el.find('.DC-note-image').css(cssImageCoordinates);
+
       return this;
     },
 
@@ -14637,7 +14671,10 @@ return jQuery;
     prepare: function() {
       var notes = this.model.notes.forPage(this.options.page);
       _.each(notes, function(note){ 
-        var noteView = new definition.NoteView({model: note});
+        var noteView = new definition.NoteView({
+          model: note,
+          imageUrl: this.model.imageUrl(this.options.page),
+        });
         this.noteViews[note.id] = noteView;
         this.listenTo(noteView, 'opened', this.updateOpenNote);
         this.listenTo(noteView, 'closed', this.closeOpenNote);
@@ -14790,6 +14827,6 @@ return jQuery;
 window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
-window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <img class="DC-note-image">\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%- title %></h2>\n    <div class="DC-note-text"><%= text %></div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-nav">\n      <li><a href="#" class="DC-nav-index">\n        <i class="dc-icon-list"></i>\n      </a></li>\n    </ul>\n    <ul class="DC-actions">\n      <li><a href="<%= canonicalUrl %>" target="_blank" class="DC-action-link">\n        <i class="dc-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
+window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <div class="DC-note-image-wrapper"><img class="DC-note-image" src="<%= imageUrl %>"></div>\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%- title %></h2>\n    <div class="DC-note-text"><%= text %></div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-nav">\n      <li><a href="#" class="DC-nav-index">\n        <i class="dc-icon-list"></i>\n      </a></li>\n    </ul>\n    <ul class="DC-actions">\n      <li><a href="<%= canonicalUrl %>" target="_blank" class="DC-action-link">\n        <i class="dc-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
 window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud" target="_blank">\n    <span class="DC-resource-icon"><i class="dc-icon-link"></i></span>\n    <span class="DC-resource-logomark">DocumentCloud</span>\n  </a>\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-mode-toggle">\n    <li><a href="#" class="DC-mode-image">\n      <i class="dc-icon-doc-inv"></i> Page\n    </a></li>\n    <li><a href="#" class="DC-mode-text">\n      <i class="dc-icon-text"></i> Text\n    </a></li>\n  </ul>\n\n  <ul class="DC-nav">\n    <li><a href="#" class="DC-nav-index">\n      <i class="dc-icon-list"></i> Index\n    </a></li>\n  </ul>\n\n</div>\n');
 })();
