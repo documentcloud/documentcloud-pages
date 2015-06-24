@@ -307,12 +307,11 @@ html {
 
   .DC-page {
     position: relative;
-    border-bottom-color: transparent;
+    border-bottom: none;
   }
 
     .DC-embed.open .DC-page {
-      border-color: rgb(102, 102, 102);
-      border-bottom-color: rgb(88, 108, 135);
+      border-color: rgb(115, 115, 115);
     }
 
     .DC-page-text {
