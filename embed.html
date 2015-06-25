@@ -16,8 +16,19 @@
   <body>
     <div id="page_embed" class="DC-embed"></div>
     <script>
-      dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
-        page: 57,
+      // NB: This is ONLY DURING TESTING and should be removed
+      function getParameterByName(name) {
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+              results = regex.exec(location.search);
+          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      var slug = getParameterByName('slug');
+      var page = getParameterByName('page');
+
+
+      dc.embed.loadPage("https://www.documentcloud.org/documents/" + slug + ".json", {
+        page: page,
         container: '#page_embed'
       });
     </script>
