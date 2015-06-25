@@ -444,6 +444,10 @@ html {
     margin-left: 1px;
   }
 
+  .DC-nav {
+    display: none;
+  }
+
   .DC-note-overlay {
     position: absolute;
     width: 100%;
@@ -526,7 +530,7 @@ html {
     background-color: rgb(235, 235, 235);
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 1em;
+    padding: 0 1em 1em 1em;
   }
 
   /* Gradient to softly fade out overflowed note contents. */
@@ -543,6 +547,18 @@ html {
   .DC-note-title {
     font-weight: 500;
     font-size: 1em;
+    margin: 1em 0 0 0;
+  }
+
+  .DC-note-title:empty {
+    margin-top: 0;
+  }
+
+  .DC-note-text {
+    margin: 1em 0 0 0;
+  }
+
+  .DC-note-text:empty {
     margin-top: 0;
   }
 
