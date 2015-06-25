@@ -66,8 +66,22 @@
           height: css[2] - css[0],
           width:  css[1] - css[3],
         };
+        this.transformCoordinatesToLegacy();
       }
       return this._coordinates;
+    },
+
+    // The existing note viewer transforms stored note dimensions before 
+    // rendering. Replicate those transformations here for compatibility.
+    transformCoordinatesToLegacy: function() {
+      var adjustments = {
+        top:    1,
+        left:   -2,
+        width:  -8,
+      };
+      this._coordinates = _.mapObject(this._coordinates, function(val, key) {
+        return _.has(adjustments, key) ? val + adjustments[key] : val;
+      });
     },
 
     // scaledCoordinates: function(scale) {
