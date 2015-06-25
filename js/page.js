@@ -118,7 +118,7 @@
         this.mode = 'text';
         if (_.isUndefined(this.cachedText)) {
           this.$text.removeClass('error').addClass('fetching')
-                    .html('<i class="dc-icon-arrows-cw animate-spin"></i> Fetching page text…');
+                    .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
           var _this = this;
           $.get(this.model.textUrl(this.options.page), function(data) {
             _this.cachedText = data;
