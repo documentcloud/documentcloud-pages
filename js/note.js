@@ -38,7 +38,7 @@
       this.$el.html(JST["note"]({
         title: this.model.get('title'),
         text: this.model.get('content'),
-        canonicalUrl: this.model.get('canonical_url'),
+        permalink: this.model.permalink(),
         imageUrl: this.imageUrl,
       }));
       var coordinates = this.model.percentageCoordinates(dimensions);
