@@ -354,7 +354,6 @@ html {
     min-width: 200px;
     width: 100%;
     max-width: 400px;
-    padding-bottom: 44px;
 
   	-webkit-transition: opacity 200ms, max-height 200ms ease-out;
            	transition: opacity 200ms, max-height 200ms ease-out;
@@ -367,7 +366,7 @@ html {
   }
 
   .DC-note-content {
-    max-height: 156px;
+    max-height: 156px; /* `.DC-note-body:max-height` - `.DC-actionbar:height` */
     position: relative;
     width: 100%;
     background-color: rgb(235, 235, 235);
@@ -406,9 +405,7 @@ html {
   }
 
   .DC-note-actionbar {
-    position: absolute;
     width: 100%;
-    bottom: 0;
     overflow: visible;
   }
 
