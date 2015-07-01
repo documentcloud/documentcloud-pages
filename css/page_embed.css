@@ -30,6 +30,7 @@ html {
 }
 
 .DC-page {
+  position: relative;
   border: 1px solid rgb(204, 204, 204);
 }
 
@@ -90,6 +91,7 @@ html {
     border-radius: 17px;
     text-align: center;
     color: rgb(255, 255, 255);
+    z-index: 1;
   }
 }
 
@@ -186,7 +188,8 @@ html {
     .DC-page-text.fetching {
       font-family: sans-serif;
       text-align: center;
-      font-size: 2em;
+      font-size: 1.5em;
+      line-height: 1.3em;
     }
 
     .DC-page-text.error {
@@ -198,21 +201,21 @@ html {
     }
 
     /* Gradient to softly fade out overflowed page text. */
-/*    .DC-mode-text .DC-embed-actionbar:before {
+    .DC-mode-text .DC-page:after {
       content: '';
       position: absolute;
-      top: -39px;
-      bottom: 44px;
-      left: 1px;
-      right: 1px;
-      box-shadow: inset rgb(255, 255, 255) 0 -15px 15px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3em;
+      box-shadow: inset rgb(255, 255, 255) 0 -1em 1em;
       z-index: 1;
     }
-      .DC-m-touch .DC-mode-text .DC-embed-actionbar:before {
+      .DC-m-touch .DC-mode-text .DC-page:after {
         left: 12%;
         right: 12%;
       }
-*/
+
   .DC-actionbar {
     position: relative;
     height: 44px;
@@ -297,6 +300,7 @@ html {
   }
 
   /* Page navigator */
+
   .DC-action-nav-prev[disabled],
   .DC-action-nav-next[disabled] {
     opacity: 0.2;
@@ -305,6 +309,39 @@ html {
   .DC-action-nav-prev[disabled]:hover,
   .DC-action-nav-next[disabled]:hover {
     background-color: inherit;
+  }
+
+  .DC-action-nav-prev,
+  .DC-action-nav-next {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .DC-action-nav-prev[disabled]:hover,
+  .DC-action-nav-next[disabled]:hover {
+    background-color: inherit;
+  }
+
+  .DC-action-nav-select {
+    background-color: transparent;
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    vertical-align: middle;
+    padding: 0 6px;
+    border: 0;
+    border-radius: 0;
+    text-transform: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    -moz-osx-font-smoothing: grayscale;
+     -webkit-font-smoothing: antialiased;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  }
+  .DC-action-nav-select:hover {
+    background-color: rgb(119, 147, 189);
   }
 
   .DC-note-overlay {
