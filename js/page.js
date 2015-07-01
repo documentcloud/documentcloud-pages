@@ -10,8 +10,7 @@
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      // Not putting `:not[disabled]` in original selector because we want
-      // `preventDefault()` to run regardless of disabled state.
+      'click .DC-page': function() { this.clickedPage(); },
       'click .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
       'click .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
       'change .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
@@ -51,6 +50,7 @@
         pageNumber: this.options.page
       }));
       this.cacheDomReferences();
+      this.checkIfIframed();
       if (this.dimensions) {
         this.renderOverlay();
       } else {
@@ -177,7 +177,33 @@
       var newView = new definition.PageView(newOptions);
       views.pages[this.model.id][this.options.container] = newView;
       this.$el.html(newView.render());
-    }
+    },
+
+    clickedPage: function() {
+      if (this.$el.width() < 200) {
+        var href = this.$el.find('.DC-resource-url').attr('href');
+        window.open(href);
+      }
+    },
+
+    checkIfIframed: function() {
+      if (this.inIframe()) {
+        this.$el.addClass('DC-iframed');
+        this.iframed = true;
+      } else {
+        this.$el.addClass('DC-no-iframed');
+        this.iframed = false;
+      }
+    },
+
+    // http://stackoverflow.com/q/326069/5071070
+    inIframe: function() {
+      try {
+          return window.self !== window.top;
+      } catch (e) {
+          return true;
+      }
+    },
 
   });
 })();
