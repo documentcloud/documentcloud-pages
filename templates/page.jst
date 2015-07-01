@@ -1,33 +1,58 @@
 <div class="DC-meta">
   <h1 class="DC-title">Lefler Thesis</h1>
   <span class="DC-source">Department of Cats</span>
-  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud" target="_blank">
+  <a class="DC-resource-url" href="<%= model.attributes.canonical_url %>" title="View full document at DocumentCloud" target="_blank">
     <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>
     <span class="DC-resource-logomark">DocumentCloud</span>
   </a>
+</div>
+
+<div class="DC-embed-actionbar DC-actionbar">
+
+  <ul class="DC-actions-mode">
+    <li><a href="<%= model.permalinkPage(pageNumber) %>" class="DC-action-mode-image">
+      <i class="DC-icon DC-icon-doc-inv"></i>
+      <span class="DC-action-text">Page</span>
+    </a></li>
+    <li><a href="<%= model.permalinkPageText(pageNumber) %>" class="DC-action-mode-text">
+      <i class="DC-icon DC-icon-text"></i>
+      <span class="DC-action-text">Text</span>
+    </a></li>
+  </ul>
+
+  <% if (model.attributes.pages > 1) { %>
+  <ul class="DC-actions-nav">
+    <li><a href="<%= pageNumber > 1 ? model.permalinkPage(pageNumber - 1) : '#' %>" class="DC-action-nav-prev"<% if (pageNumber == 1) { %> disabled<% } %>>
+      <i class="DC-icon DC-icon-left"></i>
+    </a></li>
+    <li>
+      <select class="DC-action-nav-select">
+        <% _(model.attributes.pages).times(function(page) { page++; %>
+          <% if (pageNumber == page) { %>
+            <option value="<%= page %>" data-suffixed="true" selected><%= page %> / <%= model.attributes.pages %></option>
+          <% } else { %>
+            <option value="<%= page %>"><%= page %></option>
+          <% } %>
+        <% }); %>
+      </select>
+    </li>
+    <li><a href="<%= pageNumber < model.attributes.pages ? model.permalinkPage(pageNumber + 1) : '#' %>" class="DC-action-nav-next"<% if (pageNumber == model.attributes.pages) { %> disabled<% } %>>
+      <i class="DC-icon DC-icon-right"></i>
+    </a></li>
+  </ul>
+  <% } %>
+
+  <ul class="DC-actions-meta">
+    <li><a href="#" class="DC-action-meta-index">
+      <i class="DC-icon DC-icon-list"></i>
+      <span class="DC-action-text">Index</span>
+    </a></li>
+  </ul>
+
 </div>
 
 <div class="DC-page">
   <div class="DC-note-overlay"></div>
   <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">
   <div class="DC-page-text"></div>
-</div>
-
-<div class="DC-embed-actionbar DC-actionbar">
-
-  <ul class="DC-mode-toggle">
-    <li><a href="#" class="DC-mode-image">
-      <i class="DC-icon DC-icon-doc-inv"></i> Page
-    </a></li>
-    <li><a href="#" class="DC-mode-text">
-      <i class="DC-icon DC-icon-text"></i> Text
-    </a></li>
-  </ul>
-
-  <ul class="DC-nav">
-    <li><a href="#" class="DC-nav-index">
-      <i class="DC-icon DC-icon-list"></i> Index
-    </a></li>
-  </ul>
-
 </div>

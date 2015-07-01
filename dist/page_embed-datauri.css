@@ -307,7 +307,7 @@ html {
 
   .DC-page {
     position: relative;
-    border-bottom: none;
+    border-top: none;
   }
 
     .DC-embed.open .DC-page {
@@ -354,7 +354,7 @@ html {
     }
 
     /* Gradient to softly fade out overflowed page text. */
-    .DC-mode-text .DC-embed-actionbar:before {
+/*    .DC-mode-text .DC-embed-actionbar:before {
       content: '';
       position: absolute;
       top: -39px;
@@ -368,7 +368,7 @@ html {
         left: 12%;
         right: 12%;
       }
-
+*/
   .DC-actionbar {
     position: relative;
     height: 44px;
@@ -395,7 +395,8 @@ html {
     float: left;
   }
 
-  .DC-actionbar > ul > li > a {
+  .DC-actionbar > ul > li > a,
+  .DC-actionbar .DC-action-linklike {
     color: rgb(255, 255, 255);
     text-decoration: none;
     display: block;
@@ -403,6 +404,9 @@ html {
     line-height: 44px;
     vertical-align: middle;
     padding: 0 12px;
+  }
+  .DC-actionbar .DC-action-nav-count {
+    padding: 0 6px;
   }
 
   .DC-actionbar .DC-icon {
@@ -412,40 +416,51 @@ html {
     top: 2px;
   }
 
-  .DC-mode-image .DC-mode-toggle .DC-mode-image,
-  .DC-mode-text .DC-mode-toggle .DC-mode-text,
+  .DC-mode-image .DC-action-mode-image,
+  .DC-mode-text .DC-action-mode-text,
   .DC-actionbar > ul > li > a:hover {
     background-color: rgb(119, 147, 189);
   }
 
-  .DC-embed-actionbar > .DC-mode-toggle {
+  .DC-embed-actionbar > .DC-actions-mode {
     left: 0;
   }
 
-  .DC-embed-actionbar > .DC-nav {
+  .DC-embed-actionbar > .DC-actions-nav {
     right: 0;
   }
 
-  .DC-note-actionbar > .DC-nav {
-    left: 0;
-  }
-
-  .DC-note-actionbar > .DC-actions {
+  .DC-embed-actionbar > .DC-actions-meta {
     right: 0;
   }
 
-  .DC-embed-actionbar > .DC-mode-toggle > li,
-  .DC-note-actionbar > .DC-nav > li {
+  .DC-note-actionbar > .DC-actions-meta {
+    right: 0;
+  }
+
+  .DC-embed-actionbar > .DC-actions-mode > li,
+  .DC-note-actionbar > .DC-actions-meta > li {
     margin-right: 1px;
   }
 
-  .DC-embed-actionbar > .DC-nav > li,
-  .DC-note-actionbar > .DC-actions > li {
+  .DC-embed-actionbar > .DC-actions-meta > li,
+  .DC-note-actionbar > .DC-actions-meta > li {
     margin-left: 1px;
   }
 
-  .DC-nav {
+  .DC-embed-actionbar .DC-actions-meta {
     display: none;
+  }
+
+  /* Page navigator */
+  .DC-action-nav-prev[disabled],
+  .DC-action-nav-next[disabled] {
+    opacity: 0.2;
+    cursor: default;
+  }
+  .DC-action-nav-prev[disabled]:hover,
+  .DC-action-nav-next[disabled]:hover {
+    background-color: inherit;
   }
 
   .DC-note-overlay {

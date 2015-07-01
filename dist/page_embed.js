@@ -14466,22 +14466,25 @@ return jQuery;
     },
     
     imageUrl : function(pageNumber) {
-      if (!this._imageUrl) {
-        var resources = this.get('resources');
-        var urlTemplate = resources['page']['image'];
-        this._imageUrl = urlTemplate.replace('{size}', 'normal').replace('{page}', pageNumber);
-      }
-      return this._imageUrl;
+      var resources = this.get('resources');
+      var urlTemplate = resources['page']['image'];
+      return urlTemplate.replace('{size}', 'normal').replace('{page}', pageNumber);
     },
 
     textUrl : function(pageNumber) {
-      if (!this._textUrl) {
-        var resources = this.get('resources');
-        var urlTemplate = resources['page']['text'];
-        this._textUrl = urlTemplate.replace('{page}', pageNumber);
-      }
-      return this._textUrl;
+      var resources = this.get('resources');
+      var urlTemplate = resources['page']['text'];
+      return urlTemplate.replace('{page}', pageNumber);
     },
+
+    permalinkPage: function(pageNumber) {
+      return this.get('canonical_url') + '#document/p' + pageNumber;
+    },
+
+    permalinkPageText: function(pageNumber) {
+      return this.get('canonical_url') + '#text/p' + pageNumber;
+    },
+
   }, {
     extractId: function(url){ return url.match(/(\d+[A-Za-z0-9-]+).js(on)?$/)[1]; }
   });
@@ -14677,9 +14680,14 @@ return jQuery;
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click .DC-mode-toggle .DC-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
-      'click .DC-mode-toggle .DC-mode-text': function(event) { event.preventDefault(); this.switchToText(); },
-      'click .DC-note-overlay': function(event) {
+      // Not putting `:not[disabled]` in original selector because we want
+      // `preventDefault()` to run regardless of disabled state.
+      'click .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
+      'click .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
+      'change .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
+      'click .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
+      'click .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
+      'click .DC-note-overlay':      function(event) {
         if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
       },
     },
@@ -14689,7 +14697,7 @@ return jQuery;
       this.noteViews = {};
 
       this.listenTo(this.model, 'sync', this.render);
-      this.renderOverlay = _.bind(this.renderOverlay,this);
+      this.renderOverlay = _.bind(this.renderOverlay, this);
     },
   
     prepare: function() {
@@ -14752,6 +14760,7 @@ return jQuery;
       this.$image = this.$el.find('.DC-page-image');
       this.$text = this.$el.find('.DC-page-text');
       this.$overlay = this.$el.find('.DC-note-overlay');
+      this.$pageSelector = this.$el.find('.DC-action-nav-select');
     },
 
     cacheNaturalDimensions: function() {
@@ -14799,13 +14808,47 @@ return jQuery;
       }
     },
 
-    updateOpenNote: function(justOpened){
+    updateOpenNote: function(justOpened) {
       if (this.openNote && this.openNote != justOpened) { this.openNote.close(); }
       this.openNote = justOpened;
     },
-    closeOpenNote: function(){
+
+    closeOpenNote: function() {
       this.openNote = undefined;
+    },
+
+    goToPrevPage: function() {
+      var $prevPage = this.$pageSelector.find('option:selected').prev('option');
+      if ($prevPage.length) {
+        this.replaceWithPage($prevPage.attr('value'));
+      }
+    },
+
+    goToNextPage: function() {
+      var $nextPage = this.$pageSelector.find('option:selected').next('option');
+      if ($nextPage.length) {
+        this.replaceWithPage($nextPage.attr('value'));
+      }
+    },
+
+    selectPage: function() {
+      var currentPage = this.options.page;
+      var newPage = this.$pageSelector.val();
+      this.$pageSelector.find('option[value="' + currentPage + '"]').text(currentPage);
+      this.$pageSelector.find('option[value="' + newPage + '"]').text( newPage + ' / ' + this.model.attributes.pages);
+      this.replaceWithPage(newPage);
+    },
+    
+    replaceWithPage: function(page) {
+      var newOptions = _.extend({}, this.options, { page: page });
+      this.options = newOptions;
+
+      this.undelegateEvents();
+      var newView = new definition.PageView(newOptions);
+      views.pages[this.model.id][this.options.container] = newView;
+      this.$el.html(newView.render());
     }
+
   });
 })();
 
@@ -14851,6 +14894,6 @@ return jQuery;
 window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
-window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <div class="DC-note-image-wrapper"><img class="DC-note-image" src="<%= imageUrl %>"></div>\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%- title %></h2>\n    <div class="DC-note-text"><%= text %></div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-nav">\n      <li><a href="#" class="DC-nav-index">\n        <i class="DC-icon DC-icon-list"></i>\n      </a></li>\n    </ul>\n    <ul class="DC-actions">\n      <li><a href="<%= permalink %>" target="_blank" class="DC-action-link">\n        <i class="DC-icon DC-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
-window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="View full document at DocumentCloud" target="_blank">\n    <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>\n    <span class="DC-resource-logomark">DocumentCloud</span>\n  </a>\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-mode-toggle">\n    <li><a href="#" class="DC-mode-image">\n      <i class="DC-icon DC-icon-doc-inv"></i> Page\n    </a></li>\n    <li><a href="#" class="DC-mode-text">\n      <i class="DC-icon DC-icon-text"></i> Text\n    </a></li>\n  </ul>\n\n  <ul class="DC-nav">\n    <li><a href="#" class="DC-nav-index">\n      <i class="DC-icon DC-icon-list"></i> Index\n    </a></li>\n  </ul>\n\n</div>\n');
+window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <div class="DC-note-image-wrapper"><img class="DC-note-image" src="<%= imageUrl %>"></div>\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%- title %></h2>\n    <div class="DC-note-text"><%= text %></div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-actions-meta">\n      <li><a href="<%= permalink %>" target="_blank">\n        <i class="DC-icon DC-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
+window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n  <a class="DC-resource-url" href="<%= model.attributes.canonical_url %>" title="View full document at DocumentCloud" target="_blank">\n    <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>\n    <span class="DC-resource-logomark">DocumentCloud</span>\n  </a>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-actions-mode">\n    <li><a href="<%= model.permalinkPage(pageNumber) %>" class="DC-action-mode-image">\n      <i class="DC-icon DC-icon-doc-inv"></i>\n      <span class="DC-action-text">Page</span>\n    </a></li>\n    <li><a href="<%= model.permalinkPageText(pageNumber) %>" class="DC-action-mode-text">\n      <i class="DC-icon DC-icon-text"></i>\n      <span class="DC-action-text">Text</span>\n    </a></li>\n  </ul>\n\n  <% if (model.attributes.pages > 1) { %>\n  <ul class="DC-actions-nav">\n    <li><a href="<%= pageNumber > 1 ? model.permalinkPage(pageNumber - 1) : \'#\' %>" class="DC-action-nav-prev"<% if (pageNumber == 1) { %> disabled<% } %>>\n      <i class="DC-icon DC-icon-left"></i>\n    </a></li>\n    <li>\n      <select class="DC-action-nav-select">\n        <% _(model.attributes.pages).times(function(page) { page++; %>\n          <% if (pageNumber == page) { %>\n            <option value="<%= page %>" data-suffixed="true" selected><%= page %> / <%= model.attributes.pages %></option>\n          <% } else { %>\n            <option value="<%= page %>"><%= page %></option>\n          <% } %>\n        <% }); %>\n      </select>\n    </li>\n    <li><a href="<%= pageNumber < model.attributes.pages ? model.permalinkPage(pageNumber + 1) : \'#\' %>" class="DC-action-nav-next"<% if (pageNumber == model.attributes.pages) { %> disabled<% } %>>\n      <i class="DC-icon DC-icon-right"></i>\n    </a></li>\n  </ul>\n  <% } %>\n\n  <ul class="DC-actions-meta">\n    <li><a href="#" class="DC-action-meta-index">\n      <i class="DC-icon DC-icon-list"></i>\n      <span class="DC-action-text">Index</span>\n    </a></li>\n  </ul>\n\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n');
 })();

@@ -10,9 +10,14 @@
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click .DC-mode-toggle .DC-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
-      'click .DC-mode-toggle .DC-mode-text': function(event) { event.preventDefault(); this.switchToText(); },
-      'click .DC-note-overlay': function(event) {
+      // Not putting `:not[disabled]` in original selector because we want
+      // `preventDefault()` to run regardless of disabled state.
+      'click .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
+      'click .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
+      'change .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
+      'click .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
+      'click .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
+      'click .DC-note-overlay':      function(event) {
         if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
       },
     },
@@ -22,7 +27,7 @@
       this.noteViews = {};
 
       this.listenTo(this.model, 'sync', this.render);
-      this.renderOverlay = _.bind(this.renderOverlay,this);
+      this.renderOverlay = _.bind(this.renderOverlay, this);
     },
   
     prepare: function() {
@@ -85,6 +90,7 @@
       this.$image = this.$el.find('.DC-page-image');
       this.$text = this.$el.find('.DC-page-text');
       this.$overlay = this.$el.find('.DC-note-overlay');
+      this.$pageSelector = this.$el.find('.DC-action-nav-select');
     },
 
     cacheNaturalDimensions: function() {
@@ -132,12 +138,46 @@
       }
     },
 
-    updateOpenNote: function(justOpened){
+    updateOpenNote: function(justOpened) {
       if (this.openNote && this.openNote != justOpened) { this.openNote.close(); }
       this.openNote = justOpened;
     },
-    closeOpenNote: function(){
+
+    closeOpenNote: function() {
       this.openNote = undefined;
+    },
+
+    goToPrevPage: function() {
+      var $prevPage = this.$pageSelector.find('option:selected').prev('option');
+      if ($prevPage.length) {
+        this.replaceWithPage($prevPage.attr('value'));
+      }
+    },
+
+    goToNextPage: function() {
+      var $nextPage = this.$pageSelector.find('option:selected').next('option');
+      if ($nextPage.length) {
+        this.replaceWithPage($nextPage.attr('value'));
+      }
+    },
+
+    selectPage: function() {
+      var currentPage = this.options.page;
+      var newPage = this.$pageSelector.val();
+      this.$pageSelector.find('option[value="' + currentPage + '"]').text(currentPage);
+      this.$pageSelector.find('option[value="' + newPage + '"]').text( newPage + ' / ' + this.model.attributes.pages);
+      this.replaceWithPage(newPage);
+    },
+    
+    replaceWithPage: function(page) {
+      var newOptions = _.extend({}, this.options, { page: page });
+      this.options = newOptions;
+
+      this.undelegateEvents();
+      var newView = new definition.PageView(newOptions);
+      views.pages[this.model.id][this.options.container] = newView;
+      this.$el.html(newView.render());
     }
+
   });
 })();

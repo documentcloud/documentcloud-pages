@@ -20,22 +20,25 @@
     },
     
     imageUrl : function(pageNumber) {
-      if (!this._imageUrl) {
-        var resources = this.get('resources');
-        var urlTemplate = resources['page']['image'];
-        this._imageUrl = urlTemplate.replace('{size}', 'normal').replace('{page}', pageNumber);
-      }
-      return this._imageUrl;
+      var resources = this.get('resources');
+      var urlTemplate = resources['page']['image'];
+      return urlTemplate.replace('{size}', 'normal').replace('{page}', pageNumber);
     },
 
     textUrl : function(pageNumber) {
-      if (!this._textUrl) {
-        var resources = this.get('resources');
-        var urlTemplate = resources['page']['text'];
-        this._textUrl = urlTemplate.replace('{page}', pageNumber);
-      }
-      return this._textUrl;
+      var resources = this.get('resources');
+      var urlTemplate = resources['page']['text'];
+      return urlTemplate.replace('{page}', pageNumber);
     },
+
+    permalinkPage: function(pageNumber) {
+      return this.get('canonical_url') + '#document/p' + pageNumber;
+    },
+
+    permalinkPageText: function(pageNumber) {
+      return this.get('canonical_url') + '#text/p' + pageNumber;
+    },
+
   }, {
     extractId: function(url){ return url.match(/(\d+[A-Za-z0-9-]+).js(on)?$/)[1]; }
   });
