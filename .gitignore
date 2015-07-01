@@ -4,3 +4,4 @@ js/vendor/jquery
 js/vendor/underscore
 .DS_Store
 .tm_properties
+.ruby-version
