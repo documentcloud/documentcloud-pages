@@ -105,12 +105,6 @@
       });
     },
 
-    // scaledCoordinates: function(scale) {
-    //   var scaled = _.clone(this.coordinates());
-    //   _.each(_.keys(scaled), function(key){ scaled[key] *= scale; });
-    //   return scaled;
-    // },
-
     // Calculate the coordinates as a fraction of the parent. E.g. a 100px wide
     // note on a 500px wide page has a width of `0.2`.
     fractionalCoordinates: function(pageDimensions) {

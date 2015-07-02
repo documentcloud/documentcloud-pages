@@ -14,22 +14,6 @@
       'click .DC-note-region': 'toggle',
     },
 
-    // render: function(scale) {
-    //   scale = scale || 1;
-    //   var coordinates = this.model.scaledCoordinates(scale);
-    //   this.$el.html(JST["note"]({
-    //     title: this.model.get('title'),
-    //     text: this.model.get('content')
-    //   }));
-    //   this.$el.css({
-    //     top: coordinates.top,
-    //     width: coordinates.width,
-    //     left: coordinates.left,
-    //   });
-    //   this.$('.DC-note-region').css({height: coordinates.height});
-    //   return this;
-    // },
-
     initialize: function(options) {
       this.imageUrl = options.imageUrl;
     },
@@ -52,16 +36,6 @@
       return this;
     },
 
-    // resize: function(scale) {
-    //   var coordinates = this.model.scaledCoordinates(scale);
-    //   this.$el.css({
-    //     top: coordinates.top,
-    //     width: coordinates.width,
-    //     left: coordinates.left,
-    //   });
-    //   this.$('.DC-note-region').css({height: coordinates.height});
-    // },
-  
     toggle: function() {
       if (this.$el.hasClass('open')) {
         this.close();
