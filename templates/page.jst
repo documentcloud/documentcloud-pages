@@ -1,7 +1,6 @@
 <div class="DC-meta">
   <h1 class="DC-title">Lefler Thesis</h1>
-  <span class="DC-source">Department of Cats</span>
-  <a class="DC-resource-url" href="<%= model.attributes.canonical_url %>" title="View full document at DocumentCloud" target="_blank">
+  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="Go to the DocumentCloud home page" target="_blank">
     <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>
     <span class="DC-resource-logomark">DocumentCloud</span>
   </a>
@@ -10,42 +9,47 @@
 <div class="DC-embed-actionbar DC-actionbar">
 
   <ul class="DC-actions-mode">
-    <li><a href="<%= model.permalinkPage(pageNumber) %>" class="DC-action-mode-image">
+    <li><a href="<%= permalinkPage %>" class="DC-action-mode-image" title="View page image">
       <i class="DC-icon DC-icon-doc-inv"></i>
       <span class="DC-action-text">Page</span>
     </a></li>
-    <li><a href="<%= model.permalinkPageText(pageNumber) %>" class="DC-action-mode-text">
+    <li><a href="<%= permalinkPageText %>" class="DC-action-mode-text" title="View page text">
       <i class="DC-icon DC-icon-text"></i>
       <span class="DC-action-text">Text</span>
     </a></li>
   </ul>
 
-  <% if (model.attributes.pages > 1) { %>
+  <% if (hasMultiplePages) { %>
   <ul class="DC-actions-nav">
-    <li><a href="<%= pageNumber > 1 ? model.permalinkPage(pageNumber - 1) : '#' %>" class="DC-action-nav-prev"<% if (pageNumber == 1) { %> disabled<% } %>>
+    <li><a href="<%= prevPageHref %>" class="DC-action-nav-prev" title="<% if (hasPrevPage) { %>Previous page"<% } else { %>No previous page" disabled<% } %>>
       <i class="DC-icon DC-icon-left"></i>
     </a></li>
     <li>
       <select class="DC-action-nav-select">
-        <% _(model.attributes.pages).times(function(page) { page++; %>
-          <% if (pageNumber == page) { %>
-            <option value="<%= page %>" data-suffixed="true" selected><%= page %> / <%= model.attributes.pages %></option>
+        <% _(pageCount).times(function(_pageNumber) { _pageNumber++; %>
+          <% if (pageNumber == _pageNumber) { %>
+            <option value="<%= _pageNumber %>" data-suffixed="true" selected><%= _pageNumber %> / <%= pageCount %></option>
           <% } else { %>
-            <option value="<%= page %>"><%= page %></option>
+            <option value="<%= _pageNumber %>"><%= _pageNumber %></option>
           <% } %>
         <% }); %>
       </select>
     </li>
-    <li><a href="<%= pageNumber < model.attributes.pages ? model.permalinkPage(pageNumber + 1) : '#' %>" class="DC-action-nav-next"<% if (pageNumber == model.attributes.pages) { %> disabled<% } %>>
+    <li><a href="<%= nextPageHref %>" class="DC-action-nav-next" title="<% if (hasNextPage) { %>Next page"<% } else { %>No next page" disabled<% } %>>
       <i class="DC-icon DC-icon-right"></i>
     </a></li>
   </ul>
   <% } %>
 
   <ul class="DC-actions-meta">
-    <li><a href="#" class="DC-action-meta-index">
+    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View details of this document">
       <i class="DC-icon DC-icon-list"></i>
-      <span class="DC-action-text">Index</span>
+      <span class="DC-action-text">Details</span>
+      
+    </a></li>
+    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View entire document in a new window">
+      <i class="DC-icon DC-icon-link"></i>
+      <span class="DC-action-text">Link</span>
     </a></li>
   </ul>
 
@@ -53,6 +57,8 @@
 
 <div class="DC-page">
   <div class="DC-note-overlay"></div>
-  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">
+  <img class="DC-page-image" src="<%= imageUrl %>">
   <div class="DC-page-text"></div>
 </div>
+
+<div class="DC-credit"><%= credit %></div>

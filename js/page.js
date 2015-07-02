@@ -44,11 +44,9 @@
     },
 
     render: function() {
-      if (!this.prepared){ this.prepare(); }
-      this.$el.html(JST['page']({
-        model: this.model,
-        pageNumber: this.options.page
-      }));
+      if (!this.prepared) { this.prepare(); }
+      this.makeTemplateOptions();
+      this.$el.html(JST['page'](this.templateOptions));
       this.cacheDomReferences();
       this.checkIfIframed();
       if (this.dimensions) {
@@ -84,6 +82,28 @@
     //   });
     //   _.each(this.noteViews, function(view){ view.resize(scale); });
     // },
+
+    makeTemplateOptions: function() {
+      var model      = this.model;
+      var pageCount  = model.get('pages');
+      var pageNumber = this.options.page;
+
+      this.templateOptions = {
+        model:             model,
+        credit:            model.credit(),
+        permalink:         model.permalink,
+        imageUrl:          model.imageUrl(pageNumber),
+        permalinkPage:     model.permalinkPage(pageNumber),
+        permalinkPageText: model.permalinkPageText(pageNumber),
+        pageCount:         pageCount,
+        hasMultiplePages:  model.hasMultiplePages(),
+        pageNumber:        pageNumber,
+        hasPrevPage:       pageNumber > 1,
+        hasNextPage:       pageNumber < pageCount,
+      };
+      this.templateOptions.prevPageHref = this.templateOptions.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
+      this.templateOptions.nextPageHref = this.templateOptions.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
+    },
 
     cacheDomReferences: function() {
       this.$embed = this.$el.closest('.DC-embed');
@@ -173,7 +193,10 @@
       var newOptions = _.extend({}, this.options, { page: page });
       this.options = newOptions;
 
+      // TODO: It'd be nice if I didn't have to reset all this stuff
       this.undelegateEvents();
+      if (this.openNote) { this.openNote.close(); };
+
       var newView = new definition.PageView(newOptions);
       views.pages[this.model.id][this.options.container] = newView;
       this.$el.html(newView.render());

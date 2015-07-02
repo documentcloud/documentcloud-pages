@@ -14477,12 +14477,30 @@ return jQuery;
       return urlTemplate.replace('{page}', pageNumber);
     },
 
+    hasMultiplePages: function() {
+      return this.get('pages') > 1;
+    },
+
+    permalink: function() {
+      return this.get('canonical_url');
+    },
+
     permalinkPage: function(pageNumber) {
       return this.get('canonical_url') + '#document/p' + pageNumber;
     },
 
     permalinkPageText: function(pageNumber) {
       return this.get('canonical_url') + '#text/p' + pageNumber;
+    },
+
+    credit: function() {
+      var contributor  = this.get('contributor');
+      var organization = this.get('contributor_organization');
+
+      var _credit = 'Contributed by ';
+      if (contributor) { _credit += contributor; }
+      if (organization && organization != contributor) { _credit += (' of ' + organization); }
+      return _credit;
     },
 
   }, {
@@ -14714,11 +14732,9 @@ return jQuery;
     },
 
     render: function() {
-      if (!this.prepared){ this.prepare(); }
-      this.$el.html(JST['page']({
-        model: this.model,
-        pageNumber: this.options.page
-      }));
+      if (!this.prepared) { this.prepare(); }
+      this.makeTemplateOptions();
+      this.$el.html(JST['page'](this.templateOptions));
       this.cacheDomReferences();
       this.checkIfIframed();
       if (this.dimensions) {
@@ -14754,6 +14770,28 @@ return jQuery;
     //   });
     //   _.each(this.noteViews, function(view){ view.resize(scale); });
     // },
+
+    makeTemplateOptions: function() {
+      var model      = this.model;
+      var pageCount  = model.get('pages');
+      var pageNumber = this.options.page;
+
+      this.templateOptions = {
+        model:             model,
+        credit:            model.credit(),
+        permalink:         model.permalink,
+        imageUrl:          model.imageUrl(pageNumber),
+        permalinkPage:     model.permalinkPage(pageNumber),
+        permalinkPageText: model.permalinkPageText(pageNumber),
+        pageCount:         pageCount,
+        hasMultiplePages:  model.hasMultiplePages(),
+        pageNumber:        pageNumber,
+        hasPrevPage:       pageNumber > 1,
+        hasNextPage:       pageNumber < pageCount,
+      };
+      this.templateOptions.prevPageHref = this.templateOptions.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
+      this.templateOptions.nextPageHref = this.templateOptions.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
+    },
 
     cacheDomReferences: function() {
       this.$embed = this.$el.closest('.DC-embed');
@@ -14843,7 +14881,10 @@ return jQuery;
       var newOptions = _.extend({}, this.options, { page: page });
       this.options = newOptions;
 
+      // TODO: It'd be nice if I didn't have to reset all this stuff
       this.undelegateEvents();
+      if (this.openNote) { this.openNote.close(); };
+
       var newView = new definition.PageView(newOptions);
       views.pages[this.model.id][this.options.container] = newView;
       this.$el.html(newView.render());
@@ -14921,5 +14962,5 @@ window.JST = window.JST || {};
 
 window.JST['debug'] = dc._.template('<div class="DC-debug DC-debug-bounds"            style="width: <%= width*scale %>px; height: <%= height*scale %>px"></div>\n<div class="DC-debug DC-debug-vertical-center"   style="width: 0px; height: <%= height*scale %>px; left: <%= width*scale/2 %>px;"></div>\n<div class="DC-debug DC-debug-horizontal-center" style="width: <%= width*scale %>px; height: 0px; top: <%= height*scale/2 %>px;"></div>');
 window.JST['note'] = dc._.template('<div class="DC-note-region">\n  <div class="DC-note-image-wrapper"><img class="DC-note-image" src="<%= imageUrl %>"></div>\n</div>\n\n<div class="DC-note-body">\n\n  <div class="DC-note-content">\n    <h2 class="DC-note-title"><%- title %></h2>\n    <div class="DC-note-text"><%= text %></div>\n  </div>\n\n  <div class="DC-note-actionbar DC-actionbar">\n    <ul class="DC-actions-meta">\n      <li><a href="<%= permalink %>" target="_blank">\n        <i class="DC-icon DC-icon-link"></i>\n      </a></li>\n    </ul>\n  </div>\n\n</div>\n');
-window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <span class="DC-source">Department of Cats</span>\n  <a class="DC-resource-url" href="<%= model.attributes.canonical_url %>" title="View full document at DocumentCloud" target="_blank">\n    <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>\n    <span class="DC-resource-logomark">DocumentCloud</span>\n  </a>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-actions-mode">\n    <li><a href="<%= model.permalinkPage(pageNumber) %>" class="DC-action-mode-image">\n      <i class="DC-icon DC-icon-doc-inv"></i>\n      <span class="DC-action-text">Page</span>\n    </a></li>\n    <li><a href="<%= model.permalinkPageText(pageNumber) %>" class="DC-action-mode-text">\n      <i class="DC-icon DC-icon-text"></i>\n      <span class="DC-action-text">Text</span>\n    </a></li>\n  </ul>\n\n  <% if (model.attributes.pages > 1) { %>\n  <ul class="DC-actions-nav">\n    <li><a href="<%= pageNumber > 1 ? model.permalinkPage(pageNumber - 1) : \'#\' %>" class="DC-action-nav-prev"<% if (pageNumber == 1) { %> disabled<% } %>>\n      <i class="DC-icon DC-icon-left"></i>\n    </a></li>\n    <li>\n      <select class="DC-action-nav-select">\n        <% _(model.attributes.pages).times(function(page) { page++; %>\n          <% if (pageNumber == page) { %>\n            <option value="<%= page %>" data-suffixed="true" selected><%= page %> / <%= model.attributes.pages %></option>\n          <% } else { %>\n            <option value="<%= page %>"><%= page %></option>\n          <% } %>\n        <% }); %>\n      </select>\n    </li>\n    <li><a href="<%= pageNumber < model.attributes.pages ? model.permalinkPage(pageNumber + 1) : \'#\' %>" class="DC-action-nav-next"<% if (pageNumber == model.attributes.pages) { %> disabled<% } %>>\n      <i class="DC-icon DC-icon-right"></i>\n    </a></li>\n  </ul>\n  <% } %>\n\n  <ul class="DC-actions-meta">\n    <li><a href="#" class="DC-action-meta-index">\n      <i class="DC-icon DC-icon-list"></i>\n      <span class="DC-action-text">Index</span>\n    </a></li>\n  </ul>\n\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= model.imageUrl(pageNumber) %>">\n  <div class="DC-page-text"></div>\n</div>\n');
+window.JST['page'] = dc._.template('<div class="DC-meta">\n  <h1 class="DC-title">Lefler Thesis</h1>\n  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="Go to the DocumentCloud home page" target="_blank">\n    <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>\n    <span class="DC-resource-logomark">DocumentCloud</span>\n  </a>\n</div>\n\n<div class="DC-embed-actionbar DC-actionbar">\n\n  <ul class="DC-actions-mode">\n    <li><a href="<%= permalinkPage %>" class="DC-action-mode-image" title="View page image">\n      <i class="DC-icon DC-icon-doc-inv"></i>\n      <span class="DC-action-text">Page</span>\n    </a></li>\n    <li><a href="<%= permalinkPageText %>" class="DC-action-mode-text" title="View page text">\n      <i class="DC-icon DC-icon-text"></i>\n      <span class="DC-action-text">Text</span>\n    </a></li>\n  </ul>\n\n  <% if (hasMultiplePages) { %>\n  <ul class="DC-actions-nav">\n    <li><a href="<%= prevPageHref %>" class="DC-action-nav-prev" title="<% if (hasPrevPage) { %>Previous page"<% } else { %>No previous page" disabled<% } %>>\n      <i class="DC-icon DC-icon-left"></i>\n    </a></li>\n    <li>\n      <select class="DC-action-nav-select">\n        <% _(pageCount).times(function(_pageNumber) { _pageNumber++; %>\n          <% if (pageNumber == _pageNumber) { %>\n            <option value="<%= _pageNumber %>" data-suffixed="true" selected><%= _pageNumber %> / <%= pageCount %></option>\n          <% } else { %>\n            <option value="<%= _pageNumber %>"><%= _pageNumber %></option>\n          <% } %>\n        <% }); %>\n      </select>\n    </li>\n    <li><a href="<%= nextPageHref %>" class="DC-action-nav-next" title="<% if (hasNextPage) { %>Next page"<% } else { %>No next page" disabled<% } %>>\n      <i class="DC-icon DC-icon-right"></i>\n    </a></li>\n  </ul>\n  <% } %>\n\n  <ul class="DC-actions-meta">\n    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View details of this document">\n      <i class="DC-icon DC-icon-list"></i>\n      <span class="DC-action-text">Details</span>\n      \n    </a></li>\n    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View entire document in a new window">\n      <i class="DC-icon DC-icon-link"></i>\n      <span class="DC-action-text">Link</span>\n    </a></li>\n  </ul>\n\n</div>\n\n<div class="DC-page">\n  <div class="DC-note-overlay"></div>\n  <img class="DC-page-image" src="<%= imageUrl %>">\n  <div class="DC-page-text"></div>\n</div>\n\n<div class="DC-credit"><%= credit %></div>');
 })();

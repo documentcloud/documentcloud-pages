@@ -209,6 +209,14 @@ html {
   color: rgb(0, 0, 0);
 }
 
+.DC-credit {
+  font-weight: 400;
+  font-size: 0.9em;
+  font-style: italic;
+  color: rgb(200, 200, 200);
+  margin: 0.5em 0 0 0.5em;
+}
+
 /* Elements that default to invisible. */
 .DC-mode-image .DC-page-text,
 .DC-mode-text .DC-note-overlay {
@@ -220,6 +228,7 @@ html {
 
 @media (max-width: 199px) {
   /* Elements unused at this size. */
+  .DC-credit,
   .DC-resource-logomark,
   .DC-embed-actionbar,
   .DC-note-overlay,

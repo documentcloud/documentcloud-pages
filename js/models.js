@@ -31,12 +31,30 @@
       return urlTemplate.replace('{page}', pageNumber);
     },
 
+    hasMultiplePages: function() {
+      return this.get('pages') > 1;
+    },
+
+    permalink: function() {
+      return this.get('canonical_url');
+    },
+
     permalinkPage: function(pageNumber) {
       return this.get('canonical_url') + '#document/p' + pageNumber;
     },
 
     permalinkPageText: function(pageNumber) {
       return this.get('canonical_url') + '#text/p' + pageNumber;
+    },
+
+    credit: function() {
+      var contributor  = this.get('contributor');
+      var organization = this.get('contributor_organization');
+
+      var _credit = 'Contributed by ';
+      if (contributor) { _credit += contributor; }
+      if (organization && organization != contributor) { _credit += (' of ' + organization); }
+      return _credit;
     },
 
   }, {
