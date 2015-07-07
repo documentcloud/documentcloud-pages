@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/documentcloud/jammit.git
+  revision: b3e17e12e57a0d639762e819d5e33f8f9395dd8d
+  specs:
+    jammit (0.6.6)
+      cssmin (>= 1.0.3)
+      jsmin (>= 1.0.1)
+
+GIT
   remote: git@github.com:documentcloud/guard-jammit.git
   revision: 48e51a0b93fb534e8ed625cb492a337d004b3d1a
   specs:
@@ -24,9 +32,6 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
-    jammit (0.6.6)
-      cssmin (>= 1.0.3)
-      jsmin (>= 1.0.1)
     jsmin (1.0.1)
     listen (3.0.1)
       rb-fsevent (>= 0.9.3)
@@ -44,6 +49,7 @@ GEM
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    sass (3.4.15)
     shellany (0.0.1)
     slop (3.6.0)
     thor (0.19.1)
@@ -53,3 +59,5 @@ PLATFORMS
 
 DEPENDENCIES
   guard-jammit!
+  jammit!
+  sass (~> 3.4)

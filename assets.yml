@@ -1,5 +1,5 @@
-compress_assets: false
 javascript_compressor: closure
+css_compressor: sass
 template_function: dc._.template
 embed_assets: datauri
 
@@ -21,3 +21,4 @@ stylesheets:
     - css/vendor/fontello/css/fontello-embedded.css
     - css/vendor/fontello/css/animation.css
     - css/*.css
+    - css/*.scss
