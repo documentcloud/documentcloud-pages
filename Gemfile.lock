@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:documentcloud/guard-jammit.git
+  revision: 48e51a0b93fb534e8ed625cb492a337d004b3d1a
+  specs:
+    guard-jammit (1.0.1)
+      guard (>= 2.1.0)
+      guard-compat (~> 1.0)
+      jammit
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -5,7 +14,7 @@ GEM
     cssmin (1.0.3)
     ffi (1.9.10)
     formatador (0.2.5)
-    guard (2.12.7)
+    guard (2.12.8)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
       lumberjack (~> 1.0)
@@ -14,9 +23,7 @@ GEM
       pry (>= 0.9.12)
       shellany (~> 0.0)
       thor (>= 0.18.1)
-    guard-jammit (1.0.1)
-      guard (>= 1.1.0)
-      jammit
+    guard-compat (1.2.1)
     jammit (0.6.6)
       cssmin (>= 1.0.3)
       jsmin (>= 1.0.1)
@@ -45,4 +52,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  guard-jammit
+  guard-jammit!
