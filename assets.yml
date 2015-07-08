@@ -4,6 +4,9 @@ template_function: dc._.template
 embed_assets: datauri
 
 javascripts:
+  pym:
+    - js/vendor/pym.js/dist/pym.js
+
   page_embed:
     - js/vendor/modernizr.js
     - js/vendor/underscore/underscore.js

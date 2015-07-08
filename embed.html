@@ -11,6 +11,7 @@
       }
     </style>
     <link type="text/css" rel="stylesheet" href="dist/page_embed.css"/>
+    <script src="dist/pym.js"></script>
     <script src="dist/page_embed.js"></script>
   </head>
   <body>
@@ -26,10 +27,16 @@
       var slug = getParameterByName('slug');
       var page = getParameterByName('page');
 
+      if (getParameterByName('childId')) {
+        var pymChild = new pym.Child();
+      }
+
       dc.embed.loadPage("https://www.documentcloud.org/documents/" + slug + ".json", {
         page: page,
-        container: '#page_embed'
+        container: '#page_embed',
+        pym: pymChild || false
       });
+
     </script>
   </body>
 </html>

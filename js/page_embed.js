@@ -13,14 +13,14 @@
   // initialization of the inner object is done in dc.embed.loadPage
   views.pages = views.pages || {};
   
-  dc.embed.loadPage = function(url, opts){
+  dc.embed.loadPage = function(url, opts) {
     var options = opts || {};
     // should throw an error here if there isn't a container.
     var id = definition.Document.extractId(url);
     
     // create the things and keep references to them in the right places.
-    var doc = new definition.Document({id: id});
-    var view = new definition.PageView({model: doc, el: options.container, page: options.page});
+    var doc  = new definition.Document({id: id});
+    var view = new definition.PageView({model: doc, el: options.container, page: options.page, pym: options.pym});
     data.documents.add(doc);
     views.pages[id] = views.pages[id] || {};
     views.pages[id][options.container] = view;

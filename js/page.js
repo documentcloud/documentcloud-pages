@@ -25,8 +25,11 @@
       this.options = options;
       this.noteViews = {};
 
+      if (this.options.pym) {
+        this.pym = this.options.pym;
+      }
+
       this.listenTo(this.model, 'sync', this.render);
-      this.renderNotesOverlay = _.bind(this.renderNotesOverlay, this);
     },
   
     prepare: function() {
@@ -105,6 +108,7 @@
             width: this.width,
             aspectRatio: this.width / this.height
           };
+          view.notifyPymParent();
           _renderOverlay();
         });
         unstyledImage.attr('src', view.model.imageUrl(view.options.page));
@@ -198,6 +202,12 @@
       } else {
         this.$el.addClass('DC-no-iframed');
         this.iframed = false;
+      }
+    },
+
+    notifyPymParent: function() {
+      if (this.pym) {
+        this.pym.sendHeight();
       }
     },
 
