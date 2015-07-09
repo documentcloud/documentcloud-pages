@@ -1,3 +1,5 @@
+//------------------------------ MIXINS/VARIABLES ------------------------------
+
 // Colors
 
 $error:            rgb(255, 50, 50);
@@ -15,18 +17,102 @@ $grayDim:          rgba(0, 0, 0, 0.55);
 $speedFast:   100ms;
 $speedNormal: 200ms;
 
+// Minimum sizes for touch/click targets
+
+$touchHeightMin: 44px;
+$touchWidthMin:  44px;
+$clickHeightMin: 30px;
+$clickWidthMin:  30px;
+
 // Mixins
+
+@mixin actionbar() {
+  position: relative;
+  height: $touchHeightMin;
+  width: 100%;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.9em;
+  background-color: $dcBrandBlue;
+  color: white;
+  @include antialiased;
+
+  > ul {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: $touchHeightMin;
+
+    > li {
+      float: left;
+    }
+  }
+
+  > ul > li > a,
+  .DC-action-linklike {
+    color: white;
+    text-decoration: none;
+    display: block;
+    height: $touchHeightMin;
+    line-height: $touchHeightMin;
+    vertical-align: middle;
+    padding: 0 12px;
+
+    &:hover {
+      background-color: $dcBrandBlueLight;
+    }
+  }
+
+  .DC-action-nav-count {
+    padding: 0 6px;
+  }
+
+  // Manual adjustment of icon to align properly with text
+  .DC-icon {
+    position: relative;
+    font-size: 1.4em;
+    line-height: 0px;
+    top: 2px;
+  }
+}
+
+@mixin actions-left() {
+  left: 0;
+
+  > li {
+    margin-right: 1px;
+  }
+}
+
+@mixin actions-right() {
+  right: 0;
+
+  > li {
+    margin-left: 1px;
+  }
+}
+
+// I can imagine this being better than just a background color
+@mixin indicate-scrollbreaker() {
+  background-color: $grayLight;
+}
 
 @mixin antialiased() {
   -moz-osx-font-smoothing: grayscale;
    -webkit-font-smoothing: antialiased;
 }
 
-@mixin appearance($appearance) {
+@mixin appearance($appearance: none) {
   -webkit-appearance: $appearance;
      -moz-appearance: $appearance;
           appearance: $appearance;
 }
+
+//---------------------------------- STYLES ------------------------------------
+
 
 /* Styles outside of a media query apply to all manifestations. */
 
@@ -179,147 +265,83 @@ $dcSizeReduced: 300px;
   .DC-page {
     position: relative;
     border-top: none;
-  }
 
-    .DC-embed.open .DC-page {
+    .DC-embed.open & {
       border-color: $grayDark;
     }
+  }
 
-    .DC-page-text {
-      position: absolute;
-      top: 0;
-      left: 0%;
-      width: 100%;
-      height: 100%;
-      padding: 5%;
-      z-index: 1;
-      font: 400 1.2em/1.6em serif;
-      background-color: white;
-      overflow-x: scroll;
-      overflow-y: scroll;
-    }
+  .DC-page-text {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    z-index: 1;
+    font: 400 1.2em/1.6em serif;
+    background-color: white;
+    overflow-x: scroll;
+    overflow-y: scroll;
 
-    .DC-m-touch .DC-mode-text .DC-page {
-      background-color: $grayLight;
-    }
-
-    .DC-m-touch .DC-page-text {
-      left: 10%;
-      width: 80%;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .DC-page-text.error,
-    .DC-page-text.fetching {
-      font-family: sans-serif;
-      text-align: center;
-      font-size: 1.5em;
-      line-height: 1.3em;
-    }
-
-    .DC-page-text.error {
-      color: $error;
-    }
-
-    .DC-page-text.fetching {
-      color: $dcBrandBlue;
-    }
-
-    /* Gradient to softly fade out overflowed page text. */
-    .DC-mode-text .DC-page:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3em;
-      box-shadow: inset white 0 -1em 1em;
-      z-index: 1;
-    }
-      .DC-m-touch .DC-mode-text .DC-page:after {
-        left: 12%;
-        right: 12%;
-      }
-
-  .DC-actionbar {
-    position: relative;
-    height: 44px;
-
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 0.9em;
-    background-color: $dcBrandBlue;
-    color: white;
-    @include antialiased();
-
-    > ul {
-      position: absolute;
-      top: 0;
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-      height: 44px;
-
-      > li {
-        float: left;
-      }
-    }
-
-    > ul > li > a,
-    .DC-action-linklike {
-      color: white;
-      text-decoration: none;
-      display: block;
-      height: 44px;
-      line-height: 44px;
-      vertical-align: middle;
-      padding: 0 12px;
-    }
-
-    .DC-action-nav-count {
-      padding: 0 6px;
-    }
-
-    .DC-icon {
-      position: relative;
-      font-size: 1.4em;
-      line-height: 0px;
-      top: 2px;
+    &.error,
+    &.fetching {
+      
     }
   }
+
+  .DC-page-text.error,
+  .DC-page-text.fetching {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 1.3em;
+  }
+
+  .DC-page-text.error {
+    color: $error;
+  }
+
+  .DC-page-text.fetching {
+    color: $dcBrandBlue;
+  }
+
+  /* Gradient to softly fade out overflowed page text. */
+  .DC-mode-text .DC-page:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3em;
+    box-shadow: inset white 0 -1em 1em;
+    z-index: 1;
+  }
+
   .DC-mode-image .DC-action-mode-image,
-  .DC-mode-text .DC-action-mode-text,
-  .DC-actionbar > ul > li > a:hover {
+  .DC-mode-text  .DC-action-mode-text {
     background-color: $dcBrandBlueLight;
   }
 
   .DC-embed-actionbar {
+    @include actionbar;
+
     > .DC-actions-mode {
-      left: 0;
+      @include actions-left;
     }
 
     > .DC-actions-nav {
-      right: 0;
+      @include actions-right;
     }
 
     > .DC-actions-meta {
-      right: 0;
+      @include actions-right;
       display: none; // TEMP
     }
   }
 
-  .DC-embed-actionbar > .DC-actions-mode > li,
-  .DC-note-actionbar > .DC-actions-meta > li {
-    margin-right: 1px;
-  }
 
-  .DC-embed-actionbar > .DC-actions-meta > li,
-  .DC-note-actionbar > .DC-actions-meta > li {
-    margin-left: 1px;
-  }
-
-  /* Page navigator */
-
+  // Page navigator
 
   .DC-action-nav-prev,
   .DC-action-nav-next {
@@ -349,13 +371,16 @@ $dcSizeReduced: 300px;
     font-size: inherit;
     font-weight: inherit;
     color: inherit;
-    @include antialiased();
-    @include appearance(none);
+    @include antialiased;
+    @include appearance;
 
     &:hover {
       background-color: $dcBrandBlueLight;
     }
   }
+
+
+  // Notes
 
   .DC-note-overlay {
     position: absolute;
@@ -415,9 +440,9 @@ $dcSizeReduced: 300px;
 
   .DC-note-body {
     position: relative;
-    opacity: 0;
     overflow: hidden;
     cursor: default;
+    opacity: 0;
 
     max-height: 0;
     min-width: 200px;
@@ -433,7 +458,7 @@ $dcSizeReduced: 300px;
   }
 
   .DC-note-content {
-    max-height: 156px; /* `.DC-note-body:max-height` - `.DC-actionbar:height` */
+    max-height: 156px; // `.DC-note-body:max-height` - `actionbar:height`
     position: relative;
     width: 100%;
     background-color: $grayLight;
@@ -443,14 +468,14 @@ $dcSizeReduced: 300px;
   }
 
   .DC-note-actionbar {
-    width: 100%;
-    overflow: visible;
+    @include actionbar;
 
     > .DC-actions-meta {
-      right: 0;
+      @include actions-right;
     }
 
-    /* Gradient to softly fade out overflowed note contents. */
+    // Gradient to softly fade out overflowed note contents.
+    overflow: visible;
     &:before {
       content: '';
       position: absolute;
@@ -476,6 +501,26 @@ $dcSizeReduced: 300px;
     margin: 1em 0 0 0;
     &:empty {
       margin-top: 0;
+    }
+  }
+
+
+  // Touch-specific modifications
+
+  .DC-m-touch {
+    // Narrow scrollable areas to create scrollbreaker margins
+    .DC-mode-text .DC-page {
+      @include indicate-scrollbreaker;
+
+      &:after {
+        left: 12%;
+        right: 12%;
+      }
+    }
+    .DC-page-text {
+      left: 10%;
+      width: 80%;
+      -webkit-overflow-scrolling: touch;
     }
   }
 
