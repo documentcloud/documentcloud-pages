@@ -86,7 +86,9 @@
   definition.NoteSet = Backbone.Collection.extend({
     model: definition.Note,
     forPage: function(number) {
-      return this.select(function(note){ return note.get('page') == number; });
+      return this.select(function(note){
+        return note.has('location') && note.get('page') == number;
+      });
     }
   });
 })();
