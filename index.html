@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DocumentCloud Page Embed Test</title>
     <link type="text/css" rel="stylesheet" href="dist/page_embed.css"/>
-    <script src="dist/page_embed.js"></script>
     <style>
     body {
       margin: 0;
@@ -39,6 +38,7 @@
       float: left;
     }
 
+/*
     .DC-embed-iframe-wrapper {
       position: relative;
       height: 0;
@@ -54,7 +54,7 @@
       border: none;
       overflow: hidden;
     }
-
+*/
     </style>
   </head>
   <body>
@@ -118,6 +118,7 @@
         <div class="width-target" style="float:right;width:50%;margin-left:5%;margin-bottom:5%">
           <h3 class="width">…</h3>
           <div id="page_embed" class="DC-embed"></div>
+          <script src="dist/page_embed.js"></script>
           <script>
             dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
               page: 57,
