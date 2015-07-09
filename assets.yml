@@ -13,9 +13,8 @@ javascripts:
     - js/vendor/jquery/dist/jquery.js
     - js/vendor/backbone/backbone.js
     - js/setup.js
-    - js/models.js
-    - js/note.js
-    - js/page.js
+    - js/models/*.js
+    - js/views/*.js
     - js/page_embed.js
     - templates/*.jst
 
