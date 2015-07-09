@@ -15,15 +15,29 @@
   
   dc.embed.loadPage = function(url, opts) {
     var options = opts || {};
-    // should throw an error here if there isn't a container.
-    var id = definition.Document.extractId(url);
-    
-    // create the things and keep references to them in the right places.
+
+    if (!options.container) {
+      if (window.console) {
+        console.error('DocumentCloud can’t be embedded without a container.');
+      }
+      return;
+    }
+
+    var id   = definition.Document.extractId(url);
     var doc  = new definition.Document({id: id});
     var view = new definition.PageView({model: doc, el: options.container, page: options.page, pym: options.pym});
     data.documents.add(doc);
-    views.pages[id] = views.pages[id] || {};
+    views.pages[id]                    = views.pages[id] || {};
     views.pages[id][options.container] = view;
-    doc.fetch({url: url}); // kick everything off.
+    doc.fetch({url: url});
+
+    var $el = $(options.container);
+    $(window).on('resize', function() {
+      var width = $el.width();
+      if (width < 200) { $el.addClass('DC-embed-linkonly').removeClass('DC-embed-reduced'); }
+      else if (width < 300) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
+      else { $el.removeClass('DC-embed-reduced DC-embed-linkonly'); }
+    });
+
   };
 })();
