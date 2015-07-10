@@ -168,10 +168,12 @@
     },
 
     selectPage: function() {
-      var currentPage = this.options.page;
       var newPage = this.$pageSelector.val();
-      this.$pageSelector.find('option[value="' + currentPage + '"]').text(currentPage);
-      this.$pageSelector.find('option[value="' + newPage + '"]').text( newPage + ' / ' + this.model.attributes.pages);
+      // var currentPage = this.options.page;
+      // if (!this.$el.hasClass('DC-embed-reduced')) {
+      //   this.$pageSelector.find('option[value="' + currentPage + '"]').text(currentPage);
+      //   this.$pageSelector.find('option[value="' + newPage + '"]').text( newPage + ' / ' + this.model.attributes.pages);
+      // }
       this.replaceWithPage(newPage);
     },
     

@@ -28,7 +28,7 @@
       <select class="DC-action-nav-select">
         <% _(pageCount).times(function(_pageNumber) { _pageNumber++; %>
           <% if (pageNumber == _pageNumber) { %>
-            <option value="<%= _pageNumber %>" data-suffixed="true" selected><%= _pageNumber %> / <%= pageCount %></option>
+            <option value="<%= _pageNumber %>" selected><%= _pageNumber %> / <%= pageCount %></option>
           <% } else { %>
             <option value="<%= _pageNumber %>"><%= _pageNumber %></option>
           <% } %>
@@ -45,7 +45,6 @@
     <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View details of this document">
       <i class="DC-icon DC-icon-list"></i>
       <span class="DC-action-text">Details</span>
-      
     </a></li>
     <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View entire document in a new window">
       <i class="DC-icon DC-icon-link"></i>

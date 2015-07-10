@@ -21,7 +21,6 @@
 
     .main {
       margin: 0 auto;
-      min-width: 320px;
       max-width: 960px;
     }
 
@@ -38,33 +37,17 @@
       float: left;
     }
 
-/*
-    .DC-embed-iframe-wrapper {
-      position: relative;
-      height: 0;
-      overflow: hidden;
-      padding-bottom: 165%;
-    }
-    .DC-embed-iframe-wrapper > iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      overflow: hidden;
-    }
-*/
     </style>
   </head>
   <body>
     <div class="main width-target">
       <header>
         <h1>DocumentCloud Page Embed Testbed</h1>
-        <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized.</p>
+        <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
       </header>
 
       <section class="row">
+        <h2>Pym-based iframe embed</h2>
         <div class="col width-target" style="width:50%;margin-right:2%;">
           <h3 class="width">…</h3>
           <div id="pym_page_embed_1"></div>
@@ -91,45 +74,41 @@
         </div>
       </section>
 
-      <!-- <section class="row">
+      <section class="row">
+        <h2>Direct embed</h2>
         <div class="col width-target" style="width:50%;margin-right:2%;">
           <h3 class="width">…</h3>
-          <div class="DC-embed-iframe-wrapper">
-            <iframe src="embed.html?slug=282753-lefler-thesis&amp;page=57" scrolling="no"></iframe>
-          </div>
-        </div>
-        <div class="col width-target" style="width:30%;margin-right:2%;">
-          <h3 class="width">…</h3>
-          <div class="DC-embed-iframe-wrapper">
-            <iframe src="embed.html?slug=282753-lefler-thesis&amp;page=57" scrolling="no"></iframe>
-          </div>
-        </div>
-        <div class="col width-target" style="width:15%;">
-          <h3 class="width">…</h3>
-          <div class="DC-embed-iframe-wrapper">
-            <iframe src="embed.html?slug=282753-lefler-thesis&amp;page=57" scrolling="no"></iframe>
-          </div>
-        </div>
-      </section> -->
-
-      <section>
-        <h2>Direct embed (no iframe)</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="width-target" style="float:right;width:50%;margin-left:5%;margin-bottom:5%">
-          <h3 class="width">…</h3>
-          <div id="page_embed" class="DC-embed"></div>
+          <div id="direct_page_embed_1" class="DC-embed"></div>
           <script src="dist/page_embed.js"></script>
           <script>
             dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
               page: 57,
-              container: '#page_embed'
+              container: '#direct_page_embed_1'
             });
           </script>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="col width-target" style="width:30%;margin-right:2%;">
+          <h3 class="width">…</h3>
+          <div id="direct_page_embed_2" class="DC-embed"></div>
+          <script src="dist/page_embed.js"></script>
+          <script>
+            dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
+              page: 57,
+              container: '#direct_page_embed_2'
+            });
+          </script>
+        </div>
+        <div class="col width-target" style="width:15%;">
+          <h3 class="width">…</h3>
+          <div id="direct_page_embed_3" class="DC-embed"></div>
+          <script src="dist/page_embed.js"></script>
+          <script>
+            dc.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
+              page: 57,
+              container: '#direct_page_embed_3'
+            });
+          </script>
+        </div>
       </section>
 
       <section>
@@ -145,18 +124,18 @@
         </div>
       </section>
 
-      <section class="width-target">
-        <h2>Full width</h2>
-        <h3 class="width">…</h3>
-          <div id="pym_page_embed_5"></div>
-          <script src="dist/pym.js"></script>
-          <script type="text/javascript">
-            var pym_page_embed_5 = new pym.Parent('pym_page_embed_5', 'embed.html?slug=282753-lefler-thesis&page=57', {});
-          </script>
-      </section>
-
     </div>
     
+    <section class="width-target">
+      <h2>Full width</h2>
+      <h3 class="width">…</h3>
+        <div id="pym_page_embed_5"></div>
+        <script src="dist/pym.js"></script>
+        <script type="text/javascript">
+          var pym_page_embed_5 = new pym.Parent('pym_page_embed_5', 'embed.html?slug=282753-lefler-thesis&page=57', {});
+        </script>
+    </section>
+
     <script type="text/javascript">
       (function(){
         var $ = dc.$;
