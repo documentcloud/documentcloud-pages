@@ -64,7 +64,7 @@
       this.templateOptions = {
         model:             model,
         credit:            model.credit(),
-        permalink:         model.permalink,
+        permalink:         model.permalink(),
         imageUrl:          model.imageUrl(pageNumber),
         permalinkPage:     model.permalinkPage(pageNumber),
         permalinkPageText: model.permalinkPageText(pageNumber),

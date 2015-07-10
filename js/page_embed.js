@@ -37,7 +37,7 @@
         var width = $el.width();
         // TODO: Move these size breakpoints/definitions to somewhere sensible
         if (width < 200) { $el.addClass('DC-embed-linkonly').removeClass('DC-embed-reduced'); }
-        else if (width < 300) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
+        else if (width < 400) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
         else { $el.removeClass('DC-embed-reduced DC-embed-linkonly'); }
       });
 
