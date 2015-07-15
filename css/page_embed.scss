@@ -240,6 +240,16 @@ html {
   .DC-embed.open & {
     border-color: $grayDark;
   }
+
+  .DC-m-touch .DC-mode-text {
+    // Narrow scrollable areas to create scrollbreaker margins
+    @include indicate-scrollbreaker;
+
+    &:after {
+      left: 12%;
+      right: 12%;
+    }
+  }
 }
 
 .DC-page-image {
@@ -264,24 +274,26 @@ html {
 
   &.error,
   &.fetching {
-    
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 1.3em;
   }
-}
 
-.DC-page-text.error,
-.DC-page-text.fetching {
-  font-family: sans-serif;
-  text-align: center;
-  font-size: 1.5em;
-  line-height: 1.3em;
-}
+  &.error {
+    color: $error;
+  }
 
-.DC-page-text.error {
-  color: $error;
-}
+  &.fetching {
+    color: $dcBrandBlue;
+  }
 
-.DC-page-text.fetching {
-  color: $dcBrandBlue;
+  .DC-m-touch & {
+    left: 10%;
+    width: 80%;
+    -webkit-overflow-scrolling: touch;
+  }
+
 }
 
 /* Gradient to softly fade out overflowed page text. */
@@ -466,11 +478,16 @@ html {
   &:before {
     content: '';
     position: absolute;
-    top: -34px;
-    bottom: 44px;
+    top: -($touchHeightMin - 10px);
+    bottom: $touchHeightMin;
     left: -10px;
     right: -10px;
     box-shadow: inset $grayLight 0 -10px 10px;
+
+    .DC-m-no-touch & {
+      top: -($clickHeightMin - 10px);
+      bottom: $clickHeightMin;
+    }
   }
 }
 
@@ -488,26 +505,6 @@ html {
   margin: 1em 0 0 0;
   &:empty {
     margin-top: 0;
-  }
-}
-
-
-// Touch-specific modifications
-
-.DC-m-touch {
-  // Narrow scrollable areas to create scrollbreaker margins
-  .DC-mode-text .DC-page {
-    @include indicate-scrollbreaker;
-
-    &:after {
-      left: 12%;
-      right: 12%;
-    }
-  }
-  .DC-page-text {
-    left: 10%;
-    width: 80%;
-    -webkit-overflow-scrolling: touch;
   }
 }
 
