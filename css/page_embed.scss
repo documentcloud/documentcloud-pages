@@ -386,7 +386,6 @@ html {
   width: 100%;
   height: 100%;
   z-index: 1;
-  transition: background-color $speedFast;
 
   .DC-embed.open & {
     background-color: $grayDim;
@@ -415,6 +414,7 @@ html {
 
   .DC-note.open & {
     background-color: transparent;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -438,7 +438,7 @@ html {
 }
 
 .DC-note-body {
-  position: relative;
+  position: absolute;
   overflow: hidden;
   cursor: default;
   opacity: 0;
@@ -447,12 +447,10 @@ html {
   min-width: 200px;
   width: 100%;
   max-width: 400px;
-  transition: opacity $speedNormal, max-height $speedNormal ease-out;
 
   .DC-note.open & {
     max-height: 200px;
     opacity: 1;
-    transition: opacity $speedNormal, max-height $speedNormal ease-in;
   }
 }
 

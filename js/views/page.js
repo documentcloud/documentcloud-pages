@@ -147,10 +147,12 @@
     updateOpenNote: function(justOpened) {
       if (this.openNote && this.openNote != justOpened) { this.openNote.close(); }
       this.openNote = justOpened;
+      this.notifyPymParent();
     },
 
     closeOpenNote: function() {
       this.openNote = undefined;
+      this.notifyPymParent(this.$el.height());
     },
 
     goToPrevPage: function() {
@@ -169,11 +171,6 @@
 
     selectPage: function() {
       var newPage = this.$pageSelector.val();
-      // var currentPage = this.options.page;
-      // if (!this.$el.hasClass('DC-embed-reduced')) {
-      //   this.$pageSelector.find('option[value="' + currentPage + '"]').text(currentPage);
-      //   this.$pageSelector.find('option[value="' + newPage + '"]').text( newPage + ' / ' + this.model.attributes.pages);
-      // }
       this.replaceWithPage(newPage);
     },
     
@@ -207,9 +204,16 @@
       }
     },
 
-    notifyPymParent: function() {
+    notifyPymParent: function(height) {
       if (this.pym) {
-        this.pym.sendHeight();
+        if (!height) {
+          var body = document.body,
+              html = document.documentElement;
+
+          height = Math.max(body.scrollHeight, body.offsetHeight,
+                            html.clientHeight, html.scrollHeight, html.offsetHeight);
+        }
+        this.pym.sendMessage('height', height.toString());
       }
     },
 
