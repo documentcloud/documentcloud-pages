@@ -482,7 +482,16 @@
             */
 
             // Get the child's height.
-            var height = document.getElementsByTagName('body')[0].offsetHeight.toString();
+            // var height = document.getElementsByTagName('body')[0].offsetHeight.toString();
+
+          // https://github.com/nprapps/pym.js/issues/64
+          var body = document.body,
+              html = document.documentElement;
+
+          var height = Math.max(body.scrollHeight, body.offsetHeight,
+                                html.clientHeight, html.scrollHeight,
+                                html.offsetHeight);
+
 
             // Send the height to the parent.
             that.sendMessage('height', height);

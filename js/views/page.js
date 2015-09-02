@@ -10,13 +10,13 @@
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click .DC-page': function() { this.clickedPage(); },
-      'click .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
-      'click .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
-      'change .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
-      'click .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
-      'click .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
-      'click .DC-note-overlay':      function(event) {
+      'click.dcPage': function() { this.clickedEmbed(); },
+      'click.dcPage  .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
+      'click.dcPage  .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
+      'change.dcPage .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
+      'click.dcPage  .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
+      'click.dcPage  .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
+      'click.dcPage  .DC-note-overlay':      function(event) {
         if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
       },
     },
@@ -187,7 +187,7 @@
       this.$el.html(newView.render());
     },
 
-    clickedPage: function() {
+    clickedEmbed: function() {
       if (this.$el.width() < 200) {
         var href = this.$el.find('.DC-resource-url').attr('href');
         window.open(href);

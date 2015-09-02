@@ -202,13 +202,13 @@ html {
     position: absolute;
     right: 0;
 
-    /* Native dimensions: 582x107. Aspect ratio: 5.4392523364:1 */
+    // Native dimensions: 582x107. Aspect ratio: 5.4392523364:1
     bottom: 5px;
     width: 109px;
     height: 20px;
   }
 
-    /* Logomark aspect ratio: 5.44:1 */
+    // Logomark aspect ratio: 5.44:1
     .DC-resource-logomark {
       display: block;
       text-indent: -10000px;
@@ -231,13 +231,17 @@ html {
   text-align: center;
 }
 
+  .DC-credit-dc {
+    display: none;
+  }
+
 .DC-page {
   position: relative;
   border-top: none;
   border: 1px solid $gray;
   border-top: none;
 
-  .DC-embed.open & {
+  .DC-embed.DC-mode-image.open & {
     border-color: $grayDark;
   }
 
@@ -511,8 +515,13 @@ html {
 
 .DC-embed-linkonly {
 
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+
   .DC-credit,
-  .DC-resource-logomark,
+  .DC-resource-url,
   .DC-embed-actionbar,
   .DC-note-overlay,
   .DC-page-text
@@ -521,13 +530,11 @@ html {
   }
 
   .DC-page {
-    cursor: pointer;
     border-top: 1px solid $gray;
   }
   
   .DC-meta {
-    padding-right: $touchWidthMin;
-    overflow: visible;
+    padding-right: 0;
     margin-bottom: 0;
   }
 
@@ -535,41 +542,25 @@ html {
       font-size: 1em;
     }
 
-  .DC-resource-url {
-    position: absolute;
-    display: block;
-    top: 0;
-    right: 0;
-    background-color: $dcBrandBlue;
-    width: $touchWidthMin;
-    line-height: $touchHeightMin;
-    height: $touchHeightMin;
-    text-align: center;
-    color: white;
-    z-index: 1;
-    @include antialiased;
-
-    .DC-m-no-touch & {
-      width: $clickWidthMin;
-      line-height: $clickHeightMin;
-      height: $clickHeightMin;
-    }
-  }
-
-    .DC-resource-icon {
-      font-size: 1.2em;
-      display: block;
-    }
-  
 }
 
 // Below 300px
 
 .DC-embed-reduced {
-  .DC-source,
+  .DC-resource-url,
   .DC-action-nav-pagecount,
   .DC-action-text
   {
     display: none;
   }
+
+  .DC-meta {
+    padding-right: 0;
+  }
+
+  .DC-credit-dc {
+    display: inline;
+    white-space: nowrap;
+  }
+
 }
