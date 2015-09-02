@@ -1,12 +1,12 @@
 (function(){
-  var dc       = window.dc;
-  var $        = dc.$;
-  var _        = dc._;
-  var Backbone = dc.Backbone;
+  var dcloud   = window.dcloud;
+  var $        = dcloud.$;
+  var _        = dcloud._;
+  var Backbone = dcloud.Backbone;
 
-  var definition = dc.embed.definition;
-  var data = dc.embed.data;
-  var views = dc.embed.views;
+  var definition = dcloud.embed.definition;
+  var data = dcloud.embed.data;
+  var views = dcloud.embed.views;
 
   definition.Document = definition.Document || Backbone.Model.extend({
     initialize: function(attributes){

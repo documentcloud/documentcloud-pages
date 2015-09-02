@@ -1,8 +1,8 @@
 (function(){
-  var dc = window.dc = window.dc || {
+  var dcloud = window.dcloud = window.dcloud || {
     $: window.$.noConflict(),
     _: window._.noConflict(),
     Backbone: window.Backbone.noConflict()
   };
-  dc.embed = dc.embed || { data: {}, definition: {}, views: {} };
+  dcloud.embed = dcloud.embed || { data: {}, definition: {}, views: {} };
 })();

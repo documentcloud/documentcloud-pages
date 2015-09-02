@@ -1,22 +1,22 @@
 (function(){
-  var dc       = window.dc;
-  var $        = dc.$;
-  var _        = dc._;
-  var Backbone = dc.Backbone;
+  var dcloud   = window.dcloud;
+  var $        = dcloud.$;
+  var _        = dcloud._;
+  var Backbone = dcloud.Backbone;
 
-  var definition = dc.embed.definition;
-  var data = dc.embed.data;
-  var views = dc.embed.views;
+  var definition = dcloud.embed.definition;
+  var data       = dcloud.embed.data;
+  var views      = dcloud.embed.views;
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click.dcPage': function() { this.clickedEmbed(); },
-      'click.dcPage  .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
-      'click.dcPage  .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
-      'change.dcPage .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
-      'click.dcPage  .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
-      'click.dcPage  .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
-      'click.dcPage  .DC-note-overlay':      function(event) {
+      'click.dcloudPage': function() { this.clickedEmbed(); },
+      'click.dcloudPage  .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
+      'click.dcloudPage  .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
+      'change.dcloudPage .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
+      'click.dcloudPage  .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
+      'click.dcloudPage  .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
+      'click.dcloudPage  .DC-note-overlay':      function(event) {
         if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
       },
     },

@@ -1,20 +1,20 @@
 (function(){
-  var dc         = window.dc;
-  var $          = dc.$;
-  var _          = dc._;
-  var definition = dc.embed.definition;
-  var data       = dc.embed.data;
-  var views      = dc.embed.views;
+  var dcloud     = window.dcloud;
+  var $          = dcloud.$;
+  var _          = dcloud._;
+  var definition = dcloud.embed.definition;
+  var data       = dcloud.embed.data;
+  var views      = dcloud.embed.views;
   
   data.documents = data.documents || new definition.DocumentSet();
   // views.pages is a nested list of page views, keyed at the top level
   // by document id, and then element selector.
   // e.g. views.pages['282753-lefler-thesis']['#target-container']
-  // initialization of the inner object is done in dc.embed.loadPage
+  // initialization of the inner object is done in dcloud.embed.loadPage
   views.pages = views.pages || {};
 
-  if (!_.isFunction(dc.embed.loadPage)) {
-    dc.embed.loadPage = function(url, opts) {
+  if (!_.isFunction(dcloud.embed.loadPage)) {
+    dcloud.embed.loadPage = function(url, opts) {
       var options = opts || {};
 
       if (!options.container) {
