@@ -10,15 +10,13 @@
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click.dcloudPage': function() { this.clickedEmbed(); },
-      'click.dcloudPage  .DC-action-nav-prev': function(event) { event.preventDefault(); this.goToPrevPage(); },
-      'click.dcloudPage  .DC-action-nav-next': function(event) { event.preventDefault(); this.goToNextPage(); },
-      'change.dcloudPage .DC-action-nav-select': function(event) { event.preventDefault(); this.selectPage(); },
-      'click.dcloudPage  .DC-action-mode-image': function(event) { event.preventDefault(); this.switchToImage(); },
-      'click.dcloudPage  .DC-action-mode-text':  function(event) { event.preventDefault(); this.switchToText(); },
-      'click.dcloudPage  .DC-note-overlay':      function(event) {
-        if ($(event.target).is('.DC-note-overlay') && this.openNote) { this.openNote.close(); }
-      },
+      'click.dcloudPage':                        'clickedEmbed',
+      'click.dcloudPage  .DC-action-nav-prev':   'goToPrevPage',
+      'click.dcloudPage  .DC-action-nav-next':   'goToNextPage',
+      'change.dcloudPage .DC-action-nav-select': 'selectPage',
+      'click.dcloudPage  .DC-action-mode-image': 'switchToImage',
+      'click.dcloudPage  .DC-action-mode-text':  'switchToText',
+      'click.dcloudPage  .DC-note-overlay':      'clickNoteOverlay',
     },
   
     initialize: function(options) {
@@ -52,7 +50,7 @@
       this.$el.html(JST['page'](this.templateOptions));
       this.cacheDomReferences();
       this.checkIfIframed();
-      this.renderNotesOverlay();
+      this.renderNoteOverlay();
       this.switchToImage();
     },
 
@@ -86,7 +84,7 @@
       this.$pageSelector = this.$el.find('.DC-action-nav-select');
     },
 
-    renderNotesOverlay: function() {
+    renderNoteOverlay: function() {
       var view = this;
 
       // Cache this function internally
@@ -115,16 +113,28 @@
       }
     },
 
+    clickNoteOverlay: function(event) {
+      if ($(event.target).is('.DC-note-overlay') && this.openNote) {
+        this.openNote.close();
+      }
+    },
+
     currentScale: function() { return this.$image.width() / this.dimensions.width; },
   
-    switchToImage: function() {
+    switchToImage: function(event) {
+      if (!_.isUndefined(event)) {
+        event.preventDefault();
+      }
       if (this.mode != 'page') {
         this.$embed.removeClass('DC-mode-text').addClass('DC-mode-image');
         this.mode = 'page';
       }
     },
 
-    switchToText: function() {
+    switchToText: function(event) {
+      if (!_.isUndefined(event)) {
+        event.preventDefault();
+      }
       if (this.mode != 'text') {
         this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
         this.mode = 'text';
@@ -155,14 +165,16 @@
       this.notifyPymParent(this.$el.height());
     },
 
-    goToPrevPage: function() {
+    goToPrevPage: function(event) {
+      event.preventDefault();
       var $prevPage = this.$pageSelector.find('option:selected').prev('option');
       if ($prevPage.length) {
         this.replaceWithPage($prevPage.attr('value'));
       }
     },
 
-    goToNextPage: function() {
+    goToNextPage: function(event) {
+      event.preventDefault();
       var $nextPage = this.$pageSelector.find('option:selected').next('option');
       if ($nextPage.length) {
         this.replaceWithPage($nextPage.attr('value'));
@@ -188,7 +200,7 @@
     },
 
     clickedEmbed: function() {
-      if (this.$el.width() < 200) {
+      if (this.$el.hasClass('DC-embed-linkonly')) {
         var href = this.$el.find('.DC-resource-url').attr('href');
         window.open(href);
       }
