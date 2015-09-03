@@ -1,12 +1,12 @@
 (function(){
-  var dcloud   = window.dcloud;
-  var $        = dcloud.$;
-  var _        = dcloud._;
-  var Backbone = dcloud.Backbone;
+  var DocumentCloud = window.DocumentCloud;
+  var $             = DocumentCloud.$;
+  var _             = DocumentCloud._;
+  var Backbone      = DocumentCloud.Backbone;
 
-  var definition = dcloud.embed.definition;
-  var data       = dcloud.embed.data;
-  var views      = dcloud.embed.views;
+  var definition = DocumentCloud.embed.definition;
+  var data       = DocumentCloud.embed.data;
+  var views      = DocumentCloud.embed.views;
 
   definition.NoteView = definition.NoteView || Backbone.View.extend({
     className: "DC-note",

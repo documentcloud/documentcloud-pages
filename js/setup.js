@@ -1,8 +1,8 @@
 (function(){
-  var dcloud = window.dcloud = window.dcloud || {
+  var DocumentCloud = window.DocumentCloud = window.DocumentCloud || {
     $: window.$.noConflict(),
     _: window._.noConflict(),
     Backbone: window.Backbone.noConflict()
   };
-  dcloud.embed = dcloud.embed || { data: {}, definition: {}, views: {} };
+  DocumentCloud.embed = DocumentCloud.embed || { data: {}, definition: {}, views: {} };
 })();

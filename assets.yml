@@ -1,6 +1,6 @@
 javascript_compressor: closure
 css_compressor: sass
-template_function: dcloud._.template
+template_function: DocumentCloud._.template
 embed_assets: datauri
 
 javascripts:

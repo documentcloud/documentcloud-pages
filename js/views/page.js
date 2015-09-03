@@ -1,22 +1,22 @@
 (function(){
-  var dcloud   = window.dcloud;
-  var $        = dcloud.$;
-  var _        = dcloud._;
-  var Backbone = dcloud.Backbone;
+  var DocumentCloud = window.DocumentCloud;
+  var $             = DocumentCloud.$;
+  var _             = DocumentCloud._;
+  var Backbone      = DocumentCloud.Backbone;
 
-  var definition = dcloud.embed.definition;
-  var data       = dcloud.embed.data;
-  var views      = dcloud.embed.views;
+  var definition = DocumentCloud.embed.definition;
+  var data       = DocumentCloud.embed.data;
+  var views      = DocumentCloud.embed.views;
 
   definition.PageView = definition.PageView || Backbone.View.extend({
     events: {
-      'click.dcloudPage':                        'clickedEmbed',
-      'click.dcloudPage  .DC-action-nav-prev':   'goToPrevPage',
-      'click.dcloudPage  .DC-action-nav-next':   'goToNextPage',
-      'change.dcloudPage .DC-action-nav-select': 'selectPage',
-      'click.dcloudPage  .DC-action-mode-image': 'switchToImage',
-      'click.dcloudPage  .DC-action-mode-text':  'switchToText',
-      'click.dcloudPage  .DC-note-overlay':      'clickNoteOverlay',
+      'click.dcPage':                        'clickedEmbed',
+      'click.dcPage  .DC-action-nav-prev':   'goToPrevPage',
+      'click.dcPage  .DC-action-nav-next':   'goToNextPage',
+      'change.dcPage .DC-action-nav-select': 'selectPage',
+      'click.dcPage  .DC-action-mode-image': 'switchToImage',
+      'click.dcPage  .DC-action-mode-text':  'switchToText',
+      'click.dcPage  .DC-note-overlay':      'clickNoteOverlay',
     },
   
     initialize: function(options) {
