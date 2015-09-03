@@ -1,7 +1,7 @@
 javascript_compressor: closure
-css_compressor: sass
-template_function: DocumentCloud._.template
-embed_assets: datauri
+css_compressor:        sass
+template_function:     DocumentCloud._.template
+embed_assets:          datauri
 
 javascripts:
   pym:
