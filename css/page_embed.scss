@@ -1,3 +1,8 @@
+//------------------------------ NOTES ------------------------------
+//
+// - Modernizr is prefixed with `DC-m-`
+//
+
 //------------------------------ MIXINS/VARIABLES ------------------------------
 
 // Colors
@@ -164,6 +169,14 @@ html {
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+a {
+  color: $dcBrandBlue;
+}
+
+a:visited {
+  color: $dcBrandBlueLight;
 }
 
 .DC-embed {
