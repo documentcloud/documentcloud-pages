@@ -40,8 +40,8 @@
         else if (width < 400) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
         else { $el.removeClass('DC-embed-reduced DC-embed-linkonly'); }
       });
-
     };
   }
+
 
 })();

@@ -18,6 +18,10 @@ javascripts:
     - js/page_embed.js
     - templates/*.jst
 
+  loader:
+    - js/penny.js
+    - js/loader.js
+
 stylesheets:
   page_embed:
     - css/vendor/fontello/css/fontello-embedded.css

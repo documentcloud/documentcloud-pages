@@ -34,6 +34,9 @@
       vertical-align: top;
       line-height: 0;
     }
+    .col * {
+      line-height: 1.6em;
+    }
 
     </style>
   </head>
@@ -45,7 +48,6 @@
       </header>
 
       <section class="row">
-        <h2>Iframe embed</h2>
         <div class="col width-target" style="width:50%;margin-right:2%;">
           <h3 class="width">…</h3>
           <div id="pym_page_embed_1"></div>
@@ -73,9 +75,9 @@
       </section>
 
       <section class="row">
-        <h2>Direct embed</h2>
-        <div class="col width-target" style="width:50%;margin-right:2%;">
-          <h3 class="width">…</h3>
+        <div class="col width-target" style="width:31%;margin-right:3%;">
+          <h3>Direct <span class="width">…</span></h3>
+
           <div id="direct_page_embed_1" class="DC-embed"></div>
           <script src="dist/page_embed.js"></script>
           <script>
@@ -84,28 +86,26 @@
               container: '#direct_page_embed_1'
             });
           </script>
+
         </div>
-        <div class="col width-target" style="width:30%;margin-right:2%;">
-          <h3 class="width">…</h3>
-          <div id="direct_page_embed_2" class="DC-embed"></div>
-          <script src="dist/page_embed.js"></script>
-          <script>
-            DocumentCloud.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
-              page: 57,
-              container: '#direct_page_embed_2'
-            });
-          </script>
+        <div class="col width-target" style="width:31%;margin-right:3%;">
+          <h3>Enhanced <span class="width">…</span></h3>
+
+          <div class="DC-embed-stub">
+            <p><a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
+            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
+          </div>
+          <script src="dist/loader.js"></script>
+
         </div>
-        <div class="col width-target" style="width:15%;">
-          <h3 class="width">…</h3>
-          <div id="direct_page_embed_3" class="DC-embed"></div>
-          <script src="dist/page_embed.js"></script>
-          <script>
-            DocumentCloud.embed.loadPage("https://www.documentcloud.org/documents/282753-lefler-thesis.json", {
-              page: 57,
-              container: '#direct_page_embed_3'
-            });
-          </script>
+        <div class="col width-target" style="width:31%;margin-right:0;">
+          <h3>Unenhanced <span class="width">…</span></h3>
+
+          <div>
+            <p><a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
+            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
+          </div>
+
         </div>
       </section>
 
@@ -114,10 +114,10 @@
         <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
         <div class="width-target" style="max-width:702px;margin:0 auto">
           <h3 class="width">…</h3>
-          <div id="pym_page_embed_4"></div>
+          <div id="pym_page_embed_5"></div>
           <script src="dist/pym.js"></script>
           <script type="text/javascript">
-            var pym_page_embed_4 = new pym.Parent('pym_page_embed_4', 'embed.html?slug=282753-lefler-thesis&page=57', {});
+            var pym_page_embed_5 = new pym.Parent('pym_page_embed_5', 'embed.html?slug=282753-lefler-thesis&page=57', {});
           </script>
         </div>
       </section>
@@ -127,10 +127,10 @@
     <section class="width-target">
       <h2>Full width</h2>
       <h3 class="width">…</h3>
-        <div id="pym_page_embed_5"></div>
+        <div id="pym_page_embed_6"></div>
         <script src="dist/pym.js"></script>
         <script type="text/javascript">
-          var pym_page_embed_5 = new pym.Parent('pym_page_embed_5', 'embed.html?slug=282753-lefler-thesis&page=57', {});
+          var pym_page_embed_6 = new pym.Parent('pym_page_embed_6', 'embed.html?slug=282753-lefler-thesis&page=57', {});
         </script>
     </section>
 
