@@ -17,20 +17,19 @@
   <body>
     <div id="page_embed" class="DC-embed"></div>
     <script>
-      // NB: This is ONLY DURING TESTING and should be removed
       function getParameterByName(name) {
           name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
           var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
               results = regex.exec(location.search);
           return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-      var slug = getParameterByName('slug');
-      var page = getParameterByName('page');
 
+      var page = getParameterByName('page');
       if (getParameterByName('childId')) {
         var pymChild = new pym.Child();
       }
 
+      var slug = getParameterByName('slug'); // NB: Slug is for testing only
       DocumentCloud.embed.loadPage("https://www.documentcloud.org/documents/" + slug + ".json", {
         page: page,
         container: '#page_embed',
