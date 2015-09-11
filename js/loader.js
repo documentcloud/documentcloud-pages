@@ -14,6 +14,9 @@
       var stubs = document.querySelectorAll('.DC-embed-stub');
       Penny.forEach(stubs, function (stub, i) {
         var href        = stub.querySelector('a').getAttribute('href');
+
+        // TODO: Recognize resource type based on URL pattern and load 
+        //       appropriate embed mechanism.
         var components  = href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
         var document_id = components[1];
         var page_number = components[2];
