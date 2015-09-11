@@ -3,9 +3,10 @@
   Penny.ready(function(){
     
     var generateUniqueElementId = function(doc, page) {
-      var id = doc + '-p' + page;
+      var i = 1;
+      var id = doc + '-p' + page + '-i' + i;
       while (document.getElementById(id)) {
-        id += '-r' + Math.floor((Math.random() * 100) + 1);
+        id = id.replace(/-i[0-9]+$/, '-i' + i++);
       }
       return id;
     };
@@ -14,7 +15,6 @@
       var stubs = document.querySelectorAll('.DC-embed-stub');
       Penny.forEach(stubs, function (stub, i) {
         var href        = stub.querySelector('a').getAttribute('href');
-
         // TODO: Recognize resource type based on URL pattern and load 
         //       appropriate embed mechanism.
         var components  = href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
