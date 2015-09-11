@@ -38,6 +38,26 @@
       line-height: 1.6em;
     }
 
+    .col-of-3 {
+      width: 31%;
+      margin-right: 3%;
+    }
+
+    .col-3.col-of-3 {
+      margin-right: 0;
+    }
+
+    @media (max-width: 400px) {
+      .hide-from-mobile {
+        display: none;
+      }
+
+      .col-of-3 {
+        display: block;
+        width: auto;
+      }
+    }
+
     </style>
   </head>
   <body>
@@ -47,7 +67,7 @@
         <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
       </header>
 
-      <section class="row">
+      <section class="row hide-from-mobile">
         <div class="col width-target" style="width:50%;margin-right:2%;">
           <h3 class="width">…</h3>
           <div id="pym_page_embed_1"></div>
@@ -75,7 +95,7 @@
       </section>
 
       <section class="row">
-        <div class="col width-target" style="width:31%;margin-right:3%;">
+        <div class="col col-1 col-of-3 width-target">
           <h3>Direct <span class="width">…</span></h3>
 
           <div id="direct_page_embed_1" class="DC-embed"></div>
@@ -88,7 +108,7 @@
           </script>
 
         </div>
-        <div class="col width-target" style="width:31%;margin-right:3%;">
+        <div class="col col-2 col-of-3  width-target">
           <h3>Enhanced <span class="width">…</span></h3>
 
           <div class="DC-embed-stub">
@@ -98,7 +118,7 @@
           <script src="dist/loader.js"></script>
 
         </div>
-        <div class="col width-target" style="width:31%;margin-right:0;">
+        <div class="col col-3 col-of-3  width-target">
           <h3>Unenhanced <span class="width">…</span></h3>
 
           <div>
@@ -109,7 +129,7 @@
         </div>
       </section>
 
-      <section>
+      <section class="hide-from-mobile">
         <h2>Pixel-match Document Viewer</h2>
         <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
         <div class="width-target" style="max-width:702px;margin:0 auto">
@@ -124,7 +144,7 @@
 
     </div>
     
-    <section class="width-target">
+    <section class="width-target hide-from-mobile">
       <h2>Full width</h2>
       <h3 class="width">…</h3>
         <div id="pym_page_embed_6"></div>
