@@ -33,7 +33,7 @@ $buttonPaddingMax: 12px;
 
 // Mixins
 
-@mixin actionbar() {
+@mixin menubar() {
   position: relative;
   height: $touchHeightMin;
   width: 100%;
@@ -330,8 +330,8 @@ a:visited {
   background-color: $dcBrandBlueLight;
 }
 
-.DC-embed-actionbar {
-  @include actionbar;
+.DC-embed-menubar {
+  @include menubar;
 
   > .DC-actions-mode {
     @include actions-left;
@@ -472,7 +472,7 @@ a:visited {
 }
 
 .DC-note-content {
-  max-height: 156px; // `.DC-note-body:max-height` - `actionbar:height`
+  max-height: 156px; // `.DC-note-body:max-height` - `menubar:height`
   position: relative;
   width: 100%;
   background-color: $grayLight;
@@ -481,8 +481,8 @@ a:visited {
   padding: 0 1em 1em 1em;
 }
 
-.DC-note-actionbar {
-  @include actionbar;
+.DC-note-menubar {
+  @include menubar;
 
   > .DC-actions-meta {
     @include actions-right;
@@ -535,7 +535,7 @@ a:visited {
 
   .DC-credit,
   .DC-resource-url,
-  .DC-embed-actionbar,
+  .DC-embed-menubar,
   .DC-note-overlay,
   .DC-page-text
   {
