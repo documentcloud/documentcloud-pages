@@ -16,10 +16,13 @@ A responsive, embeddable javascript library which displays pages from documents 
 
 You should [open an issue](https://github.com/documentcloud/documentcloud-pages/issues) for suggestions or ideas you'd like to tell us about!
 
-# Installation
+# Installing/building
 
-TODO: explain this:
+To build, we use [Guard](https://github.com/guard/guard).
 
-    bower install
-    bundle install
-    guard
+Install the dependencies with:
+
+* `bower install` (See [bower.io](https://bower.io)).
+* `bundle install` (See [bundler.io](http://bundler.io/))
+
+To watch/build the project, run `guard`. The outputs will be built to [dist/](dist/).
