@@ -320,18 +320,6 @@ a:visited {
 
 }
 
-/* Gradient to softly fade out overflowed page text. */
-.DC-mode-text .DC-page:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3em;
-  box-shadow: inset white 0 -1em 1em;
-  z-index: 1;
-}
-
 .DC-mode-image .DC-action-mode-image,
 .DC-mode-text  .DC-action-mode-text {
   background-color: $dcBrandBlueLight;
@@ -494,25 +482,10 @@ a:visited {
 .DC-note-menubar {
   @include menubar;
 
+  box-shadow: 0 -1px 3px $gray;
+
   > .DC-actions-meta {
     @include actions-right;
-  }
-
-  // Gradient to softly fade out overflowed note contents.
-  overflow: visible;
-  &:before {
-    content: '';
-    position: absolute;
-    top: -($touchHeightMin - 10px);
-    bottom: $touchHeightMin;
-    left: -10px;
-    right: -10px;
-    box-shadow: inset $grayLight 0 -10px 10px;
-
-    .DC-m-no-touch & {
-      top: -($clickHeightMin - 10px);
-      bottom: $clickHeightMin;
-    }
   }
 }
 
