@@ -17,6 +17,13 @@ $grayLight:        rgb(235, 235, 235);
 $grayDark:         rgb(115, 115, 115);
 $grayDim:          rgba(0, 0, 0, 0.55);
 
+// Font weights
+
+$fontWeightLight:    200;
+$fontWeightNormal:   400;
+$fontWeightSemiBold: 500;
+$fontWeightBold:     700;
+
 // Speeds
 
 $speedFast:   100ms;
@@ -40,7 +47,7 @@ $buttonPaddingMax: 12px;
   overflow: hidden;
 
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: $fontWeightBold;
   font-size: 0.9em;
   background-color: $dcBrandBlue;
   color: white;
@@ -205,9 +212,14 @@ a:visited {
 
   .DC-title {
     display: inline;
-    font-weight: 400;
+    font-weight: $fontWeightNormal;
     font-size: 1.2em;
     color: black;
+
+    .DC-page-counter {
+      color: $grayDark;
+      @include antialiased;
+    }
   }
 
   .DC-resource-url {
@@ -238,21 +250,16 @@ a:visited {
     }
 
 .DC-credit {
-  font-weight: 400;
+  font-weight: $fontWeightNormal;
   font-size: 0.8em;
-  color: $gray;
+  color: $grayDark;
   text-align: center;
+  @include antialiased;
 }
-
-  .DC-credit-dc {
-    display: none;
-  }
 
 .DC-page {
   position: relative;
-  border-top: none;
   border: 1px solid $gray;
-  border-top: none;
 
   .DC-embed.DC-mode-image.open & {
     border-color: $grayDark;
@@ -542,10 +549,6 @@ a:visited {
     display: none;
   }
 
-  .DC-page {
-    border-top: 1px solid $gray;
-  }
-  
   .DC-meta {
     padding-right: 0;
     margin-bottom: 0;
@@ -569,11 +572,6 @@ a:visited {
 
   .DC-meta {
     padding-right: 0;
-  }
-
-  .DC-credit-dc {
-    display: inline;
-    white-space: nowrap;
   }
 
 }

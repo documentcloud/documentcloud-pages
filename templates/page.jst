@@ -1,13 +1,20 @@
 <div class="DC-meta">
-  <h1 class="DC-title"><%- model.attributes.title %></h1>
-  <a class="DC-resource-url" href="https://www.documentcloud.org/" title="Go to the DocumentCloud home page" target="_blank">
+  <h1 class="DC-title">
+    <%- model.attributes.title %>
+    <% if (hasMultiplePages && !showPageNavigator) { %>
+    <span class="DC-page-counter">page <%= pageNumber %> of <%= pageCount %></span>
+    <% } %>
+  </h1>
+  <a class="DC-resource-url" href="<%= permalink %>" title="View entire document on DocumentCloud" target="_blank">
     <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>
     <span class="DC-resource-logomark">DocumentCloud</span>
   </a>
 </div>
 
+<% if (showPageMenuBar) { %>
 <div class="DC-embed-menubar">
 
+  <% if (showTextToggle) { %>
   <ul class="DC-actions-mode">
     <li><a href="<%= permalinkPage %>" class="DC-action-mode-image" title="View page image">
       <i class="DC-icon DC-icon-doc-text"></i>
@@ -18,8 +25,9 @@
       <span class="DC-action-text">Text</span>
     </a></li>
   </ul>
+  <% } %>
 
-  <% if (hasMultiplePages) { %>
+  <% if (hasMultiplePages && showPageNavigator) { %>
   <ul class="DC-actions-nav">
     <li><a href="<%= prevPageHref %>" class="DC-action-nav-prev" title="<% if (hasPrevPage) { %>Previous page"<% } else { %>No previous page" disabled<% } %>>
       <i class="DC-icon DC-icon-left"></i>
@@ -46,13 +54,14 @@
       <i class="DC-icon DC-icon-list"></i>
       <span class="DC-action-text">Details</span>
     </a></li> -->
-    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View entire document in a new window" target="_new">
+    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View entire document on DocumentCloud" target="_new">
       <i class="DC-icon DC-icon-link"></i>
       <span class="DC-action-text">Link</span>
     </a></li>
   </ul>
 
 </div>
+<% } %>
 
 <div class="DC-page">
   <div class="DC-note-overlay"></div>
@@ -62,5 +71,5 @@
 
 <div class="DC-credit">
   <%= credit %>
-  <span class="DC-credit-dc">| <a href="https://www.documentcloud.org/" title="Go to the DocumentCloud home page" target="_blank">DocumentCloud</a></span>
+  <span class="DC-credit-dc">| <a href="<%= permalink %>" title="View entire document on DocumentCloud" target="_blank">View entire document</a></span>
 </div>

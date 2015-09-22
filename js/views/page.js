@@ -9,6 +9,7 @@
   var views      = DocumentCloud.embed.views;
 
   definition.PageView = definition.PageView || Backbone.View.extend({
+
     events: {
       'click.dcPage':                        'clickedEmbed',
       'click.dcPage  .DC-action-nav-prev':   'goToPrevPage',
@@ -19,8 +20,14 @@
       'click.dcPage  .DC-note-overlay':      'clickNoteOverlay',
     },
   
+    defaultOptions: {
+      credit:        true,
+      pageNavigator: true,
+      text:          true,
+    },
+
     initialize: function(options) {
-      this.options = options;
+      this.options = _.extend({}, this.defaultOptions, options);
       this.noteViews = {};
 
       if (this.options.pym) {
@@ -46,34 +53,38 @@
 
     render: function() {
       if (!this.prepared) { this.prepare(); }
-      this.makeTemplateOptions();
-      this.$el.html(JST['page'](this.templateOptions));
+      this.makeTemplateData();
+      this.$el.html(JST['page'](this.templateData));
       this.cacheDomReferences();
       this.checkIfIframed();
       this.renderNoteOverlay();
       this.switchToImage();
     },
 
-    makeTemplateOptions: function() {
+    makeTemplateData: function() {
       var model      = this.model;
       var pageCount  = model.get('pages');
       var pageNumber = this.options.page;
 
-      this.templateOptions = {
-        model:             model,
-        credit:            model.credit(),
-        permalink:         model.permalink(),
-        imageUrl:          model.imageUrl(pageNumber),
-        permalinkPage:     model.permalinkPage(pageNumber),
-        permalinkPageText: model.permalinkPageText(pageNumber),
-        pageCount:         pageCount,
-        hasMultiplePages:  model.hasMultiplePages(),
-        pageNumber:        pageNumber,
-        hasPrevPage:       pageNumber > 1,
-        hasNextPage:       pageNumber < pageCount,
+      this.templateData = {
+        showCredit:          this.options.credit,
+        showTextToggle:      this.options.text,
+        showPageNavigator:   this.options.pageNavigator,
+        showPageMenuBar:     this.options.pageNavigator || this.options.text,
+        model:               model,
+        credit:              model.credit(),
+        permalink:           model.permalink(),
+        imageUrl:            model.imageUrl(pageNumber),
+        permalinkPage:       model.permalinkPage(pageNumber),
+        permalinkPageText:   model.permalinkPageText(pageNumber),
+        pageCount:           pageCount,
+        hasMultiplePages:    model.hasMultiplePages(),
+        pageNumber:          pageNumber,
+        hasPrevPage:         pageNumber > 1,
+        hasNextPage:         pageNumber < pageCount,
       };
-      this.templateOptions.prevPageHref = this.templateOptions.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
-      this.templateOptions.nextPageHref = this.templateOptions.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
+      this.templateData.prevPageHref = this.templateData.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
+      this.templateData.nextPageHref = this.templateData.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
     },
 
     cacheDomReferences: function() {
