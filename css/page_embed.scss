@@ -432,13 +432,16 @@ a:visited {
   width: 100%;
   height: 100%;
   background-color: $highlight;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   z-index: 1;
 
+  .DC-m-no-touch .DC-embed:not(.open) &:hover {
+    box-shadow: 0 1px 3px $gray;
+  }
+
   .DC-note.open & {
     background-color: transparent;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 3px $gray;
   }
 }
 
@@ -514,13 +517,13 @@ a:visited {
 }
 
 .DC-note-title {
-  font-weight: 500;
+  font-weight: $fontWeightBold;
   font-size: 1em;
   margin: 1em 0 0 0;
   &:empty {
     margin-top: 0;
   }
-  
+
 }
 
 .DC-note-text {
