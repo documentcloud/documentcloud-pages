@@ -5,7 +5,7 @@
     <span class="DC-page-counter">page <%= pageNumber %> of <%= pageCount %></span>
     <% } %>
   </h1>
-  <a class="DC-resource-url" href="<%= permalink %>" title="View entire document on DocumentCloud" target="_blank">
+  <a class="DC-resource-url" href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">
     <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>
     <span class="DC-resource-logomark">DocumentCloud</span>
   </a>
@@ -54,7 +54,7 @@
       <i class="DC-icon DC-icon-list"></i>
       <span class="DC-action-text">Details</span>
     </a></li> -->
-    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View entire document on DocumentCloud" target="_new">
+    <li><a href="<%= permalinkPage %>" class="DC-action-meta-index" title="View entire document on DocumentCloud" target="_new">
       <i class="DC-icon DC-icon-link"></i>
       <span class="DC-action-text">Link</span>
     </a></li>
@@ -71,5 +71,5 @@
 
 <div class="DC-credit">
   <%= credit %>
-  <span class="DC-credit-dc">| <a href="<%= permalink %>" title="View entire document on DocumentCloud" target="_blank">View entire document</a></span>
+  <span class="DC-credit-dc">| <a href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">View entire document</a></span>
 </div>
