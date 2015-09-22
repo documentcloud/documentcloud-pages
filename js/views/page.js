@@ -28,8 +28,9 @@
 
     initialize: function(options) {
       this.options = _.extend({}, this.defaultOptions, options);
-      this.noteViews = {};
 
+      this.currentPageNumber = this.options.page;
+      this.noteViews         = {}
       if (this.options.pym) {
         this.pym = this.options.pym;
       }
@@ -37,22 +38,25 @@
       this.listenTo(this.model, 'sync', this.render);
     },
   
-    prepare: function() {
-      var notes = this.model.notes.forPage(this.options.page);
+    prepareNotes: function() {
+      if (!_.has(this.noteViews, this.currentPageNumber)) {
+        this.noteViews[this.currentPageNumber] = {}
+      }
+      // TODO: Try to save this and not regenerate every time
+      var notes = this.model.notes.forPage(this.currentPageNumber);
       _.each(notes, function(note){ 
         var noteView = new definition.NoteView({
           model: note,
-          imageUrl: this.model.imageUrl(this.options.page),
+          imageUrl: this.model.imageUrl(this.currentPageNumber),
         });
-        this.noteViews[note.id] = noteView;
+        this.noteViews[this.currentPageNumber][note.id] = noteView;
         this.listenTo(noteView, 'opened', this.updateOpenNote);
         this.listenTo(noteView, 'closed', this.closeOpenNote);
       }, this);
-      this.prepared = true;
     },
 
     render: function() {
-      if (!this.prepared) { this.prepare(); }
+      this.prepareNotes();
       this.makeTemplateData();
       this.$el.html(JST['page'](this.templateData));
       this.cacheDomReferences();
@@ -64,7 +68,7 @@
     makeTemplateData: function() {
       var model      = this.model;
       var pageCount  = model.get('pages');
-      var pageNumber = this.options.page;
+      var pageNumber = this.currentPageNumber;
 
       this.templateData = {
         showCredit:          this.options.credit,
@@ -88,10 +92,11 @@
     },
 
     cacheDomReferences: function() {
-      this.$embed = this.$el.closest('.DC-embed');
-      this.$image = this.$el.find('.DC-page-image');
-      this.$text = this.$el.find('.DC-page-text');
-      this.$overlay = this.$el.find('.DC-note-overlay');
+      this.$embed        = this.$el.closest('.DC-embed');
+      this.$image        = this.$el.find('.DC-page-image');
+      this.$text         = this.$el.find('.DC-page-text');
+      this.$overlay      = this.$el.find('.DC-note-overlay');
+      // TODO: Chase this down and make sure the page survives no page selector
       this.$pageSelector = this.$el.find('.DC-action-nav-select');
     },
 
@@ -100,9 +105,11 @@
 
       // Cache this function internally
       var _renderOverlay = function() {
-        var notes  = view.model.notes.forPage(view.options.page);
         view.$overlay.empty();
-        var noteViews = _.map(notes, function(note) { return view.noteViews[note.id].render(view.dimensions); });
+        var noteViews = _.map(view.noteViews[view.currentPageNumber],
+                              function(noteView) {
+                                return noteView.render(view.dimensions);
+                              });
         view.$overlay.append(_.map(noteViews, function(v) { return v.$el; }));
       }
 
@@ -120,7 +127,7 @@
           view.notifyPymParent();
           _renderOverlay();
         });
-        unstyledImage.attr('src', view.model.imageUrl(view.options.page));
+        unstyledImage.attr('src', view.model.imageUrl(view.currentPageNumber));
       }
     },
 
@@ -153,7 +160,7 @@
           this.$text.removeClass('error').addClass('fetching')
                     .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
           var _this = this;
-          $.get(this.model.textUrl(this.options.page), function(data) {
+          $.get(this.model.textUrl(this.currentPageNumber), function(data) {
             _this.cachedText = data;
             _this.$text.text(data);
           }).fail(function(){
@@ -166,7 +173,9 @@
     },
 
     updateOpenNote: function(justOpened) {
-      if (this.openNote && this.openNote != justOpened) { this.openNote.close(); }
+      if (this.openNote && this.openNote != justOpened) {
+        this.openNote.close();
+      }
       this.openNote = justOpened;
       this.notifyPymParent();
     },
@@ -176,11 +185,16 @@
       this.notifyPymParent(this.$el.height());
     },
 
+    selectPage: function() {
+      var newPageNumber = this.$pageSelector.val();
+      this.goToPage(newPageNumber);
+    },
+    
     goToPrevPage: function(event) {
       event.preventDefault();
       var $prevPage = this.$pageSelector.find('option:selected').prev('option');
       if ($prevPage.length) {
-        this.replaceWithPage($prevPage.attr('value'));
+        this.goToPage($prevPage.attr('value'));
       }
     },
 
@@ -188,26 +202,20 @@
       event.preventDefault();
       var $nextPage = this.$pageSelector.find('option:selected').next('option');
       if ($nextPage.length) {
-        this.replaceWithPage($nextPage.attr('value'));
+        this.goToPage($nextPage.attr('value'));
       }
     },
 
-    selectPage: function() {
-      var newPage = this.$pageSelector.val();
-      this.replaceWithPage(newPage);
-    },
-    
-    replaceWithPage: function(page) {
-      var newOptions = _.extend({}, this.options, { page: page });
-      this.options = newOptions;
-
-      // TODO: It'd be nice if I didn't have to reset all this stuff
-      this.undelegateEvents();
-      if (this.openNote) { this.openNote.close(); };
-
-      var newView = new definition.PageView(newOptions);
-      views.pages[this.model.id][this.options.container] = newView;
-      this.$el.html(newView.render());
+    goToPage: function(pageNumber) {
+      if (pageNumber <= this.model.get('pages') && pageNumber != this.currentPageNumber) {
+        if (this.openNote) {
+          this.openNote.close();
+        };
+        this.currentPageNumber = pageNumber;
+        this.undelegateEvents();
+        this.$el.html(this.render());
+        this.delegateEvents();
+      }
     },
 
     clickedEmbed: function() {
