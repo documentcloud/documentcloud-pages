@@ -22,8 +22,8 @@
   
     defaultOptions: {
       credit:        true,
-      pageNavigator: true,
-      text:          true,
+      pageNavigator: false,
+      text:          false,
     },
 
     initialize: function(options) {
