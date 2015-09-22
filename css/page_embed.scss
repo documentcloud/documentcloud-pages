@@ -93,14 +93,14 @@ $buttonPaddingMax: 12px;
     padding: 0 $buttonPaddingMax;
     text-align: center;
 
-    &:hover {
-      background-color: $dcBrandBlueLight;
-    }
-
     .DC-m-no-touch & {
       min-width: $clickWidthMin;
       height: $clickHeightMin;
       line-height: $clickHeightMin;
+
+      &:hover {
+        background-color: $dcBrandBlueLight;
+      }
     }
 
     .DC-embed-reduced & {
@@ -369,7 +369,7 @@ a:visited {
     opacity: 0.2;
     cursor: default;
 
-    &:hover {
+    .DC-m-no-touch &:hover {
       background-color: inherit;
     }
   }
@@ -391,13 +391,13 @@ a:visited {
   @include antialiased;
   @include appearance;
 
-  &:hover {
-    background-color: $dcBrandBlueLight;
-  }
-
   .DC-m-no-touch & {
     height: $clickHeightMin;
     line-height: $clickHeightMin;
+
+    &:hover {
+      background-color: $dcBrandBlueLight;
+    }
   }
 
 }
@@ -536,7 +536,8 @@ a:visited {
 .DC-embed-linkonly {
 
   cursor: pointer;
-  &:hover {
+
+  .DC-m-no-touch &:hover {
     text-decoration: underline;
   }
 
