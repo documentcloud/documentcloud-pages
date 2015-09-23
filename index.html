@@ -206,6 +206,9 @@
           var optionVal  = $(this).prop('checked');
           _.each(DocumentCloud.embed.views.pages, function(containers, documentId) {
             _.each(containers, function(view, elementId) {
+              if (view.openNote) {
+                view.openNote.close();
+              }
               view.options[optionName] = optionVal;
               view.$el.html(view.render());
             });
