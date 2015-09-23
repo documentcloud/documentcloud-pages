@@ -54,14 +54,16 @@
     },
   
     open: function() {
-      this.$el.addClass('open').closest('.DC-embed').addClass('open');
+      this.$el.addClass('open');
       this.trigger('opened', this);
+      this.$el.closest('.DC-embed').addClass('open');
       this.repositionIfNecessary();
     },
   
     close: function() {
-      this.$el.removeClass('open').closest('.DC-embed').removeClass('open');
+      this.$el.removeClass('open');
       this.trigger('closed', this);
+      this.$el.closest('.DC-embed').removeClass('open');
     },
 
     // Note might drip off right edge; reposition in that case.
