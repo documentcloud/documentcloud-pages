@@ -40,7 +40,7 @@
 
     .col-of-3 {
       width: 31%;
-      margin-right: 3%;
+      margin-right: 2%;
     }
 
     .col-3.col-of-3 {
@@ -67,36 +67,19 @@
         <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
       </header>
 
-      <section class="row hide-from-mobile">
-        <div class="col width-target" style="width:50%;margin-right:2%;">
-          <h3 class="width">…</h3>
-          <div id="pym_page_embed_1"></div>
-          <script src="dist/pym.js"></script>
-          <script type="text/javascript">
-            var pym_page_embed_1 = new pym.Parent('pym_page_embed_1', 'embed.html?slug=282753-lefler-thesis&page=57', {});
-          </script>
-        </div>
-        <div class="col width-target" style="width:30%;margin-right:2%;">
-          <h3 class="width">…</h3>
-          <div id="pym_page_embed_2"></div>
-          <script src="dist/pym.js"></script>
-          <script type="text/javascript">
-            var pym_page_embed_2 = new pym.Parent('pym_page_embed_2', 'embed.html?slug=282753-lefler-thesis&page=57', {});
-          </script>
-        </div>
-        <div class="col width-target" style="width:15%;">
-          <h3 class="width">…</h3>
-          <div id="pym_page_embed_3"></div>
-          <script src="dist/pym.js"></script>
-          <script type="text/javascript">
-            var pym_page_embed_3 = new pym.Parent('pym_page_embed_3', 'embed.html?slug=282753-lefler-thesis&page=57', {});
-          </script>
-        </div>
+      <section>
+        <h2>Options</h2>
+        <ul style="list-style-type:none">
+          <li><label><input type="checkbox" class="option" id="option_page_navigator" data-option="pageNavigator"> Page navigator</label></li>
+          <li><label><input type="checkbox" class="option" id="option_text_mode" data-option="text"> Text mode</label></li>
+        </ul>
       </section>
 
       <section class="row">
         <div class="col col-1 col-of-3 width-target">
           <h3>Direct <span class="width">…</span></h3>
+
+          <p>How Enhanced should look.</p>
 
           <div id="direct_page_embed_1" class="DC-embed"></div>
           <script src="dist/page_embed.js"></script>
@@ -111,6 +94,8 @@
         <div class="col col-2 col-of-3  width-target">
           <h3>Enhanced <span class="width">…</span></h3>
 
+          <p>How most people will see it.</p>
+
           <div class="DC-embed-stub">
             <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
             <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
@@ -122,6 +107,8 @@
         <div class="col col-3 col-of-3  width-target">
           <h3>Unenhanced <span class="width">…</span></h3>
 
+          <p>How it looks if JS is disabled or fails.</p>
+
           <div>
             <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
             <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
@@ -131,9 +118,39 @@
         </div>
       </section>
 
+      <section class="row hide-from-mobile">
+        <div class="col width-target" style="width:50%;margin-right:2%;">
+          <h3 class="width">…</h3>
+          <div class="DC-embed-stub">
+            <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
+            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
+            <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document</a></p>
+          </div>
+          <script src="dist/loader.js"></script>
+        </div>
+        <div class="col width-target" style="width:28%;margin-right:2%;">
+          <h3 class="width">…</h3>
+          <div class="DC-embed-stub">
+            <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
+            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
+            <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document</a></p>
+          </div>
+          <script src="dist/loader.js"></script>
+        </div>
+        <div class="col width-target" style="width:15%;">
+          <h3 class="width">…</h3>
+          <div class="DC-embed-stub">
+            <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
+            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
+            <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document</a></p>
+          </div>
+          <script src="dist/loader.js"></script>
+        </div>
+      </section>
+
       <section class="hide-from-mobile">
-        <h2>Pixel-match Document Viewer</h2>
-        <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
+        <h2>Pixel-match Document Viewer, iframed</h2>
+        <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer. <b>Live options at top of page won't affect this embed.</b></p>
         <div class="width-target" style="max-width:702px;margin:0 auto">
           <h3 class="width">…</h3>
           <div id="pym_page_embed_5"></div>
@@ -149,16 +166,18 @@
     <section class="width-target hide-from-mobile">
       <h2>Full width</h2>
       <h3 class="width">…</h3>
-        <div id="pym_page_embed_6"></div>
-        <script src="dist/pym.js"></script>
-        <script type="text/javascript">
-          var pym_page_embed_6 = new pym.Parent('pym_page_embed_6', 'embed.html?slug=282753-lefler-thesis&page=57', {});
-        </script>
+      <div class="DC-embed-stub">
+        <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
+        <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
+        <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document</a></p>
+      </div>
+      <script src="dist/loader.js"></script>
     </section>
 
     <script type="text/javascript">
       (function(){
         var $ = DocumentCloud.$;
+        var _ = DocumentCloud._;
 
         // Cache width indicators and their parents so we don't have to do 
         // expensive DOM lookups during `resize`;
@@ -177,6 +196,18 @@
         $(window).on('resize', function() {
           updateColWidths();
         })
+
+        $('.option').on('change', function(){
+          var optionName = $(this).data('option');
+          var optionVal  = $(this).prop('checked');
+          _.each(DocumentCloud.embed.views.pages, function(containers, documentId) {
+            _.each(containers, function(view, elementId) {
+              view.options[optionName] = optionVal;
+              view.$el.html(view.render());
+            });
+          });
+        });
+
       })();
     </script>
   </body>
