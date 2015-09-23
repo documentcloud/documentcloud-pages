@@ -19,7 +19,7 @@
       'click.dcPage  .DC-action-mode-text':  'switchToText',
       'click.dcPage  .DC-note-overlay':      'clickNoteOverlay',
     },
-  
+
     defaultOptions: {
       credit:        true,
       pageNavigator: false,
@@ -37,14 +37,14 @@
 
       this.listenTo(this.model, 'sync', this.render);
     },
-  
+
     prepareNotes: function() {
       if (!_.has(this.noteViews, this.currentPageNumber)) {
         this.noteViews[this.currentPageNumber] = {}
       }
       // TODO: Try to save this and not regenerate every time
       var notes = this.model.notes.forPage(this.currentPageNumber);
-      _.each(notes, function(note){ 
+      _.each(notes, function(note){
         var noteView = new definition.NoteView({
           model: note,
           imageUrl: this.model.imageUrl(this.currentPageNumber),
@@ -138,7 +138,7 @@
     },
 
     currentScale: function() { return this.$image.width() / this.dimensions.width; },
-  
+
     switchToImage: function(event) {
       if (!_.isUndefined(event)) {
         event.preventDefault();
@@ -189,7 +189,7 @@
       var newPageNumber = this.$pageSelector.val();
       this.goToPage(newPageNumber);
     },
-    
+
     goToPrevPage: function(event) {
       event.preventDefault();
       var $prevPage = this.$pageSelector.find('option:selected').prev('option');

@@ -35,7 +35,7 @@
       return this._coordinates;
     },
 
-    // The existing note viewer transforms stored note dimensions before 
+    // The existing note viewer transforms stored note dimensions before
     // rendering. Replicate those transformations here for compatibility.
     transformCoordinatesToLegacy: function() {
       var adjustments = {
@@ -70,7 +70,7 @@
       });
     },
 
-    // Compose coordinates necessary to position the note excerpt image. Tricky 
+    // Compose coordinates necessary to position the note excerpt image. Tricky
     // math.
     imageCoordinates: function(pageDimensions) {
       var _coordinates = this.fractionalCoordinates(pageDimensions);
@@ -82,7 +82,7 @@
     },
 
   });
-  
+
   definition.NoteSet = Backbone.Collection.extend({
     model: definition.Note,
     forPage: function(number) {

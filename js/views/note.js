@@ -20,10 +20,10 @@
 
     render: function(dimensions) {
       this.$el.html(JST["note"]({
-        title: this.model.get('title'),
-        text: this.model.get('content'),
-        permalink: this.model.permalink(),
-        imageUrl: this.imageUrl,
+        title:           this.model.get('title'),
+        text:            this.model.get('content'),
+        permalink:       this.model.permalink(),
+        imageUrl:        this.imageUrl,
         showNoteMenuBar: false,
       }));
       this.cacheDomReferences();
@@ -44,7 +44,7 @@
       this.$noteImage  = this.$el.find('.DC-note-image');
       this.$noteBody   = this.$el.find('.DC-note-body');
     },
-  
+
     toggle: function() {
       if (this.$el.hasClass('open')) {
         this.close();
@@ -52,14 +52,14 @@
         this.open();
       }
     },
-  
+
     open: function() {
       this.$el.addClass('open');
       this.trigger('opened', this);
       this.$el.closest('.DC-embed').addClass('open');
       this.repositionIfNecessary();
     },
-  
+
     close: function() {
       this.$el.removeClass('open');
       this.trigger('closed', this);

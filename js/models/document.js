@@ -14,11 +14,11 @@
       //this.resources = new definition.ResourceSet(); // doesn't exist yet.
       this.on('sync', this.updateCollections, this);
     },
-    
+
     updateCollections: function() {
       this.notes.reset(this.get('annotations'));
     },
-    
+
     imageUrl : function(pageNumber) {
       var resources = this.get('resources');
       var urlTemplate = resources['page']['image'];
@@ -60,9 +60,9 @@
   }, {
     extractId: function(url){ return url.match(/(\d+[A-Za-z0-9-]+).js(on)?$/)[1]; }
   });
-  
-  definition.DocumentSet = definition.DocumentSet || Backbone.Collection.extend({ 
-    model: definition.Document 
+
+  definition.DocumentSet = definition.DocumentSet || Backbone.Collection.extend({
+    model: definition.Document
   });
-  
+
 })();

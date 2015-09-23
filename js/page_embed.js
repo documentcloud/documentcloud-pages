@@ -5,7 +5,7 @@
   var definition    = DocumentCloud.embed.definition;
   var data          = DocumentCloud.embed.data;
   var views         = DocumentCloud.embed.views;
-  
+
   data.documents = data.documents || new definition.DocumentSet();
   // views.pages is a nested list of page views, keyed at the top level
   // by document id, and then element selector.
