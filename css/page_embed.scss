@@ -535,6 +535,7 @@ $buttonPaddingMax: 12px;
 .DC-embed-linkonly {
   font-size: 8pt;
 
+  .DC-credit,
   .DC-logomark-permalink,
   .DC-embed-menubar,
   .DC-note-overlay,
@@ -551,11 +552,6 @@ $buttonPaddingMax: 12px;
 
   .DC-meta {
     padding-right: 0;
-  }
-
-  .DC-credit {
-    font-size: 7pt;
-    line-height: 10pt;
   }
 
 }
