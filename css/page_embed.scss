@@ -76,7 +76,6 @@ $buttonPaddingMax: 12px;
     .DC-embed-reduced & {
       position: relative;
       float: left;
-      font-size: 0.9em;
     }
 
     > li {
@@ -95,6 +94,10 @@ $buttonPaddingMax: 12px;
     vertical-align: middle;
     padding: 0 $buttonPaddingMax;
     text-align: center;
+
+    &:visited {
+      color: white;
+    }
 
     .DC-m-no-touch & {
       min-width: $clickWidthMin;
@@ -247,9 +250,10 @@ $buttonPaddingMax: 12px;
 
 .DC-credit {
   font-weight: $fontWeightNormal;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: $grayDark;
   text-align: center;
+  margin-top: 0.5em;
   @include antialiased;
 }
 
@@ -529,10 +533,8 @@ $buttonPaddingMax: 12px;
 // Below 200px
 
 .DC-embed-linkonly {
+  font-size: 8pt;
 
-  font-size: 0.6em;
-
-  .DC-credit,
   .DC-logomark-permalink,
   .DC-embed-menubar,
   .DC-note-overlay,
@@ -551,12 +553,17 @@ $buttonPaddingMax: 12px;
     padding-right: 0;
   }
 
+  .DC-credit {
+    font-size: 7pt;
+    line-height: 10pt;
+  }
+
 }
 
 // Below 300px
 
 .DC-embed-reduced {
-  font-size: 0.7em;
+  font-size: 9pt;
 
   .DC-logomark-permalink,
   .DC-action-nav-pagecount,
@@ -567,6 +574,11 @@ $buttonPaddingMax: 12px;
 
   .DC-meta {
     padding-right: 0;
+  }
+
+  .DC-credit {
+    font-size: 8pt;
+    line-height: 11pt;
   }
 
 }
