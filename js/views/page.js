@@ -220,7 +220,7 @@
 
     clickedEmbed: function() {
       if (this.$el.hasClass('DC-embed-linkonly')) {
-        var href = this.$el.find('.DC-resource-url').attr('href');
+        var href = this.$el.find('.DC-logomark-permalink').attr('href');
         window.open(href);
       }
     },

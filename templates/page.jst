@@ -1,12 +1,11 @@
 <div class="DC-meta">
   <h1 class="DC-title">
-    <%- model.attributes.title %>
-    <% if (hasMultiplePages && !showPageNavigator) { %>
-    <span class="DC-page-counter">page <%= pageNumber %> of <%= pageCount %></span>
-    <% } %>
+  <% if (hasMultiplePages && !showPageNavigator) { %>
+    <span class="DC-page-counter">Page <%= pageNumber %> of <%= pageCount %> from </span>
+  <% } %>
+    <a href="DC-title-permalink"><%- model.attributes.title %></a>
   </h1>
-  <a class="DC-resource-url" href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">
-    <span class="DC-resource-icon"><i class="DC-icon DC-icon-link"></i></span>
+  <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">
     <span class="DC-resource-logomark">DocumentCloud</span>
   </a>
 </div>
@@ -70,6 +69,5 @@
 </div>
 
 <div class="DC-credit">
-  <%= credit %>
-  <span class="DC-credit-dc">| <a href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">View entire document</a></span>
+  <%= credit %> &bull; <a href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">View entire document</a>
 </div>

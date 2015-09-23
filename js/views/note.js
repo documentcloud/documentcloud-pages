@@ -24,6 +24,7 @@
         text: this.model.get('content'),
         permalink: this.model.permalink(),
         imageUrl: this.imageUrl,
+        showNoteMenuBar: false,
       }));
       this.cacheDomReferences();
 

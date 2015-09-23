@@ -5,10 +5,15 @@
 <div class="DC-note-body">
 
   <div class="DC-note-content">
-    <h2 class="DC-note-title"><%- title %></h2>
+    <div class="DC-note-title">
+      <a href="<%= permalink %>" target="_blank">
+        <%- title %> <i class="DC-icon DC-icon-link"></i>
+      </a>
+    </div>
     <div class="DC-note-text"><%= text %></div>
   </div>
 
+<% if (showNoteMenuBar) { %>
   <div class="DC-note-menubar">
     <ul class="DC-actions-meta">
       <li><a href="<%= permalink %>" target="_blank">
@@ -16,5 +21,6 @@
       </a></li>
     </ul>
   </div>
+<% } %>
 
 </div>
