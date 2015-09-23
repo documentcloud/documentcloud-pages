@@ -11,7 +11,7 @@
   definition.PageView = definition.PageView || Backbone.View.extend({
 
     events: {
-      'click.dcPage':                        'clickedEmbed',
+      'click.dcPage  .DC-page':              'clickPage',
       'click.dcPage  .DC-action-nav-prev':   'goToPrevPage',
       'click.dcPage  .DC-action-nav-next':   'goToNextPage',
       'change.dcPage .DC-action-nav-select': 'selectPage',
@@ -218,10 +218,9 @@
       }
     },
 
-    clickedEmbed: function() {
-      if (this.$el.hasClass('DC-embed-linkonly')) {
-        var href = this.$el.find('.DC-logomark-permalink').attr('href');
-        window.open(href);
+    clickPage: function() {
+      if (this.$embed.hasClass('DC-embed-linkonly')) {
+        window.open(this.model.permalink());
       }
     },
 

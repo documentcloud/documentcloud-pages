@@ -397,7 +397,10 @@ $buttonPaddingMax: 12px;
 
   .DC-embed.open & {
     background-color: $grayDim;
-    cursor: pointer;
+
+    .DC-m-no-touch & {
+      cursor: pointer;
+    }
   }
 }
 
@@ -417,11 +420,14 @@ $buttonPaddingMax: 12px;
   width: 100%;
   height: 100%;
   background-color: $highlight;
-  cursor: pointer;
   z-index: 1;
 
-  .DC-m-no-touch &:hover {
-    box-shadow: 0 1px 3px $grayDimmer;
+  .DC-m-no-touch & {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 1px 3px $grayDimmer;
+    }
   }
 
   .DC-m-no-touch .DC-note.open & {
@@ -525,7 +531,6 @@ $buttonPaddingMax: 12px;
 .DC-embed-linkonly {
 
   font-size: 0.6em;
-  cursor: pointer;
 
   .DC-credit,
   .DC-logomark-permalink,
@@ -534,6 +539,12 @@ $buttonPaddingMax: 12px;
   .DC-page-text
   {
     display: none;
+  }
+
+  .DC-m-no-touch & {
+    .DC-page {
+      cursor: pointer;
+    }
   }
 
   .DC-meta {
