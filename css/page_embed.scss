@@ -176,9 +176,7 @@ $buttonPaddingMax: 12px;
 
 .DC-embed {
   position: relative;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 10pt;
-  line-height: 1.6em;
+  font: $fontWeightNormal 10pt/1.6em 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: $textColor;
 
   -webkit-box-sizing: border-box;
