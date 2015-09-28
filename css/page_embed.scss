@@ -379,6 +379,10 @@ $buttonPaddingMax: 12px;
   @include antialiased;
   @include appearance;
 
+  &::-ms-expand {
+    display: none;
+  }
+
   .DC-m-no-touch & {
     height: $clickHeightMin;
     line-height: $clickHeightMin;
