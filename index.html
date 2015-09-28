@@ -100,6 +100,7 @@
           <h3>Enhanced <span class="width">…</span></h3>
           <p class="desc">What readers see once the embed is fully loaded.</p>
 
+          <!-- Keep in sync with embed_code.html -->
           <div class="DC-embed-stub">
             <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
             <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
@@ -127,30 +128,15 @@
       <section class="row hide-from-mobile">
         <div class="col width-target" style="width:50%;margin-right:2%;">
           <h3 class="width">…</h3>
-          <div class="DC-embed-stub">
-            <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
-            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
-            <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document on DocumentCloud</a></p>
-          </div>
-          <script src="dist/loader.js"></script>
+          <div class="embed_via_ajax"></div>
         </div>
         <div class="col width-target" style="width:28%;margin-right:2%;">
           <h3 class="width">…</h3>
-          <div class="DC-embed-stub">
-            <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
-            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
-            <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document on DocumentCloud</a></p>
-          </div>
-          <script src="dist/loader.js"></script>
+          <div class="embed_via_ajax"></div>
         </div>
         <div class="col width-target" style="width:15%;">
           <h3 class="width">…</h3>
-          <div class="DC-embed-stub">
-            <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
-            <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
-            <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document on DocumentCloud</a></p>
-          </div>
-          <script src="dist/loader.js"></script>
+          <div class="embed_via_ajax"></div>
         </div>
       </section>
 
@@ -166,18 +152,12 @@
           </script>
         </div>
       </section>
-
     </div>
 
     <section class="width-target hide-from-mobile">
       <h2>Full width</h2>
       <h3 class="width">…</h3>
-      <div class="DC-embed-stub">
-        <p style="margin:0 0 0.5em 0">Page 57 of <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">Lefler Thesis</a></p>
-        <img src="https://assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" style="border:1px solid #ccc;box-sizing:border-box;width:100%;max-width:700px;">
-        <p style="margin:0;font-size:0.7em;text-align:center">Contributed by Ted Han of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View Lefler Thesis on DocumentCloud">View entire document on DocumentCloud</a></p>
-      </div>
-      <script src="dist/loader.js"></script>
+      <div class="embed_via_ajax"></div>
     </section>
 
     <script type="text/javascript">
@@ -191,18 +171,17 @@
         $widths.each(function(){
           $(this).data('target', $(this).closest('.width-target'));
         });
-
         var updateColWidths = function(){
           $widths.each(function(){
             $(this).text( $(this).data('target').css('width') );
           });
         };
         updateColWidths();
-
         $(window).on('resize', function() {
           updateColWidths();
         })
 
+        // Live option changing
         $('.option').on('change', function(){
           var optionName = $(this).data('option');
           var optionVal  = $(this).prop('checked');
@@ -215,6 +194,11 @@
               view.$el.html(view.render());
             });
           });
+        });
+
+        // Ajax-inserted embed code test
+        $.get('/embed_code.html', function(data) {
+          $('.embed_via_ajax').html(data);
         });
 
       })();
