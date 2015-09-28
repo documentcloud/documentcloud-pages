@@ -1,6 +1,6 @@
 {
   "name": "pym.js",
-  "version": "0.4.3",
+  "version": "0.4.5",
   "homepage": "http://blog.apps.npr.org/pym.js/",
   "authors": [
     "NPR"
@@ -18,11 +18,11 @@
     "src",
     "examples"
   ],
-  "_release": "0.4.3",
+  "_release": "0.4.5",
   "_resolution": {
     "type": "version",
-    "tag": "0.4.3",
-    "commit": "a2341d8ef28d85ca2069123aaf73ebaec00edbd5"
+    "tag": "0.4.5",
+    "commit": "d8e18c3cf2c899c868fb5e886b6b3d9b9a2c5528"
   },
   "_source": "git://github.com/nprapps/pym.js.git",
   "_target": "~0.4.3",

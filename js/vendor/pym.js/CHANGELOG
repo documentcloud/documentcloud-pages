@@ -1,6 +1,18 @@
+0.4.5
+-----
+
+* Fix packaging/release screw up.
+
+0.4.4
+-----
+
+* Add a Parent.remove() method to unbind events. (#82)
+* Verify message data is a string before parsing. (#89)
+
 0.4.3
 -----
 
+* Always pass parent url to child.
 
 0.4.2
 -----

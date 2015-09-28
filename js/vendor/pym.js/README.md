@@ -58,4 +58,4 @@ Additional contributors:
 * [Thomas Wilburn](https://github.com/thomaswilburn)
 * [Justin Dearing](https://github.com/zippy1981)
 * [Chris Amico](https://github.com/eyeseast)
-* [Ryan Murphy](https://github.com/rdmurphy))
+* [Ryan Murphy](https://github.com/rdmurphy)
