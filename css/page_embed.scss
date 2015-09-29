@@ -247,7 +247,6 @@ $buttonPaddingMax: 12px;
   }
 
 .DC-credit {
-  font-weight: $fontWeightNormal;
   font-size: 0.9em;
   color: $grayDark;
   text-align: center;
@@ -332,6 +331,11 @@ $buttonPaddingMax: 12px;
 
   > .DC-actions-nav {
     @include actions-center;
+
+    .DC-action-text
+    {
+      display: none;
+    }
   }
 
   > .DC-actions-meta {
@@ -502,7 +506,13 @@ $buttonPaddingMax: 12px;
 
   > .DC-actions-meta {
     @include actions-right;
+
+    .DC-action-text
+    {
+      display: none;
+    }
   }
+
 }
 
 .DC-note-title {

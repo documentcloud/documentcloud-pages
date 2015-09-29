@@ -1,21 +1,24 @@
 <div class="DC-note-region">
-  <div class="DC-note-image-wrapper"><img class="DC-note-image" src="<%= imageUrl %>"></div>
+  <div class="DC-note-image-wrapper">
+    <img class="DC-note-image" src="<%= imageUrl %>" alt="<%- title %>">
+  </div>
 </div>
 
 <div class="DC-note-body">
 
   <div class="DC-note-content">
-    <div class="DC-note-title">
-      <a href="<%= permalink %>" target="_blank"><%- title %></a>
-    </div>
+    <h2 class="DC-note-title">
+      <a href="<%= permalink %>" title="View note on DocumentCloud in new window or tab" target="_blank"><%- title %></a>
+    </h2>
     <div class="DC-note-text"><%= text %></div>
   </div>
 
 <% if (showNoteMenuBar) { %>
   <div class="DC-note-menubar">
     <ul class="DC-actions-meta">
-      <li><a href="<%= permalink %>" target="_blank">
+      <li><a href="<%= permalink %>" title="View note on DocumentCloud in new window or tab" target="_blank">
         <i class="DC-icon DC-icon-link"></i>
+        <span class="DC-action-text">Link</span>
       </a></li>
     </ul>
   </div>

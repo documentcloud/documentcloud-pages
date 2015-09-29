@@ -5,7 +5,7 @@
   <% } %>
     <a href="<%= permalinkPage %>" target="_blank"><%- model.attributes.title %></a>
   </h1>
-  <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud" target="_blank">
+  <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank">
     <span class="DC-resource-logomark">DocumentCloud</span>
   </a>
 </div>
@@ -30,9 +30,10 @@
   <ul class="DC-actions-nav">
     <li><a href="<%= prevPageHref %>" class="DC-action-nav-prev" title="<% if (hasPrevPage) { %>Previous page"<% } else { %>No previous page" disabled<% } %> target="_blank">
       <i class="DC-icon DC-icon-left"></i>
+      <span class="DC-action-text">Previous</span>
     </a></li>
     <li>
-      <select class="DC-action-nav-select">
+      <select class="DC-action-nav-select" title="Go to page...">
         <% _(pageCount).times(function(_pageNumber) { _pageNumber++; %>
           <% if (pageNumber == _pageNumber) { %>
             <option value="<%= _pageNumber %>" selected><%= _pageNumber %> / <%= pageCount %></option>
@@ -44,6 +45,7 @@
     </li>
     <li><a href="<%= nextPageHref %>" class="DC-action-nav-next" title="<% if (hasNextPage) { %>Next page"<% } else { %>No next page" disabled<% } %> target="_blank">
       <i class="DC-icon DC-icon-right"></i>
+      <span class="DC-action-text">Next</span>
     </a></li>
   </ul>
   <% } %>
@@ -53,7 +55,7 @@
       <i class="DC-icon DC-icon-list"></i>
       <span class="DC-action-text">Details</span>
     </a></li> -->
-    <li><a href="<%= permalinkPage %>" class="DC-action-meta-index" title="View entire document on DocumentCloud" target="_blank">
+    <li><a href="<%= permalinkPage %>" class="DC-action-meta-index" title="View entire document in new window or tab" target="_blank">
       <i class="DC-icon DC-icon-link"></i>
       <span class="DC-action-text">Link</span>
     </a></li>
@@ -64,10 +66,10 @@
 
 <div class="DC-page">
   <div class="DC-note-overlay"></div>
-  <img class="DC-page-image" src="<%= imageUrl %>">
+  <img class="DC-page-image" src="<%= imageUrl %>" alt="Page <%= pageNumber %> of <%- model.attributes.title %>">
   <div class="DC-page-text"></div>
 </div>
 
 <div class="DC-credit">
-  <%= credit %> &bull; <a href="<%= permalinkPage %>" target="_blank">View entire document on DocumentCloud</a>
+  <%= credit %> &bull; <a href="<%= permalinkPage %>" title="View entire document in new window or tab" target="_blank">View entire document on DocumentCloud</a>
 </div>
