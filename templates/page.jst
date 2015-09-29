@@ -3,7 +3,7 @@
   <% if (hasMultiplePages && !showPageNavigator) { %>
     <span class="DC-page-number">Page <%= pageNumber %> of</span>
   <% } %>
-    <a href="<%= permalinkPage %>" target="_blank"><%- model.attributes.title %></a>
+    <a href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
   </h1>
   <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank">
     <span class="DC-resource-logomark">DocumentCloud</span>
@@ -51,10 +51,12 @@
   <% } %>
 
   <ul class="DC-actions-meta">
-    <!-- <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View details of this document">
+    <!--
+    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View details of this document">
       <i class="DC-icon DC-icon-list"></i>
       <span class="DC-action-text">Details</span>
-    </a></li> -->
+    </a></li>
+    -->
     <li><a href="<%= permalinkPage %>" class="DC-action-meta-index" title="View entire document in new window or tab" target="_blank">
       <i class="DC-icon DC-icon-link"></i>
       <span class="DC-action-text">Link</span>
