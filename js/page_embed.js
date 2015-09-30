@@ -18,9 +18,7 @@
       var options = opts || {};
 
       if (!options.container) {
-        if (window.console) {
-          console.error('DocumentCloud can’t be embedded without a container.');
-        }
+        console.error('DocumentCloud can’t be embedded without specifying a container.');
         return;
       }
 

@@ -18,6 +18,7 @@
           options = JSON.parse(options);
         }
         catch(err) {
+          console.error('Inline DocumentCloud embed options must be valid JSON. See https://www.documentcloud.org/help/publishing.');
           options = {};
         }
       } else {

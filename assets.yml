@@ -13,6 +13,7 @@ javascripts:
     - js/vendor/underscore/underscore.js
     - js/vendor/jquery/dist/jquery.js
     - js/vendor/backbone/backbone.js
+    - js/logger.js
     - js/setup.js
     - js/models/*.js
     - js/views/*.js
@@ -21,6 +22,7 @@ javascripts:
 
   loader:
     - js/penny.js
+    - js/logger.js
     - js/loader.js
 
 stylesheets:
