@@ -56,6 +56,15 @@
       });
     };
 
+    if (!document.querySelector('link[href$="page_embed.css"]')) {
+      var stylesheet   = document.createElement('link');
+      stylesheet.rel   = 'stylesheet';
+      stylesheet.type  = 'text/css';
+      stylesheet.media = 'screen';
+      stylesheet.href  = 'dist/page_embed.css';
+      document.querySelector('head').appendChild(stylesheet);
+    }
+
     if (window.DocumentCloud) {
       enhanceStubs();
     } else if (!document.querySelector('script[src$="page_embed.js"]')) {
@@ -64,6 +73,7 @@
       Penny.on(page_embed_js, 'load', enhanceStubs);
       document.querySelector('body').appendChild(page_embed_js);
     }
+
   });
 
 })();
