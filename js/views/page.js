@@ -55,7 +55,7 @@
 
     verifyPageNumber: function() {
       if (this.currentPageNumber > this.model.get('pages')) {
-        console.warn('Showing the first page of the DocumentCloud document because page ' + this.currentPageNumber + ' doesn\'t exist.');
+        console.warn("Showing the first page of the DocumentCloud document because page " + this.currentPageNumber + " doesn't exist.");
         this.currentPageNumber = 1;
       }
     },

@@ -18,7 +18,7 @@
           options = JSON.parse(options);
         }
         catch(err) {
-          console.error('Inline DocumentCloud embed options must be valid JSON. See https://www.documentcloud.org/help/publishing.');
+          console.error("Inline DocumentCloud embed options must be valid JSON. See https://www.documentcloud.org/help/publishing.");
           options = {};
         }
       } else {
@@ -51,7 +51,7 @@
             embedOptions
           );
         } else {
-          console.error('The DocumentCloud URL you\'re trying to embed doesn\'t look right. Please generate a new embed code.');
+          console.error("The DocumentCloud URL you're trying to embed doesn't look right. Please generate a new embed code.");
         }
       });
     };
