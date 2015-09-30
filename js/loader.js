@@ -50,6 +50,8 @@
             'https://www.documentcloud.org/documents/' + document_id + '.json',
             embedOptions
           );
+        } else {
+          console.error('The DocumentCloud URL you\'re trying to embed doesn\'t look right. Please generate a new embed code.');
         }
       });
     };
