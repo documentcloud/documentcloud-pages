@@ -1,8 +1,12 @@
-// Penny 0.1.0
-// Simmer jQuery until reduced to just the parts we need.
-// Many, many thanks to http://youmightnotneedjquery.com.
-// (c) 2015 Justin Reese, DocumentCloud
-// Penny may be freely distributed under the MIT license.
+/*!
+ * Penny 0.1.0
+ * Simmer jQuery until reduced to just the parts we need.
+ * Many, many thanks to http://youmightnotneedjquery.com.
+ *
+ * @license (c) 2015 Justin Reese, DocumentCloud
+ * Penny may be freely distributed under the MIT license.
+ *
+ */
 
 (function(){
 

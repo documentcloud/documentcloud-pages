@@ -13,16 +13,16 @@ javascripts:
     - js/vendor/underscore/underscore.js
     - js/vendor/jquery/dist/jquery.js
     - js/vendor/backbone/backbone.js
-    - js/logger.js
-    - js/setup.js
+    - js/util/logger.js
+    - js/util/setup.js
     - js/models/*.js
     - js/views/*.js
     - js/page_embed.js
     - templates/*.jst
 
   loader:
-    - js/penny.js
-    - js/logger.js
+    - js/util/penny.js
+    - js/util/logger.js
     - js/loader.js
 
 stylesheets:
