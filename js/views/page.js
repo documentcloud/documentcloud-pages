@@ -20,10 +20,14 @@
       'click.dcPage  .DC-note-overlay':      'clickNoteOverlay',
     },
 
+    validOptionKeys: ['credit', 'page', 'pageNavigator', 'pym', 'text'],
+
     defaultOptions: {
       credit:        true,
+      page:          1,
       pageNavigator: false,
-      text:          false,
+      pym:           false,
+      text:          false
     },
 
     initialize: function(options) {
@@ -36,6 +40,16 @@
       }
 
       this.listenTo(this.model, 'sync', this.render);
+    },
+
+    render: function() {
+      this.prepareNotes();
+      this.makeTemplateData();
+      this.$el.html(JST['page'](this.templateData));
+      this.cacheDomReferences();
+      this.checkIfIframed();
+      this.renderNoteOverlay();
+      this.switchToImage();
     },
 
     prepareNotes: function() {
@@ -53,16 +67,6 @@
         this.listenTo(noteView, 'opened', this.updateOpenNote);
         this.listenTo(noteView, 'closed', this.closeOpenNote);
       }, this);
-    },
-
-    render: function() {
-      this.prepareNotes();
-      this.makeTemplateData();
-      this.$el.html(JST['page'](this.templateData));
-      this.cacheDomReferences();
-      this.checkIfIframed();
-      this.renderNoteOverlay();
-      this.switchToImage();
     },
 
     makeTemplateData: function() {

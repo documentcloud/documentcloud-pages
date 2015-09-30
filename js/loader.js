@@ -11,6 +11,21 @@
       return id;
     };
 
+    var extractOptionsFromStub = function(stub) {
+      var options = stub.getAttribute('data-options');
+      if (options) {
+        try {
+          options = JSON.parse(options);
+        }
+        catch(err) {
+          options = {};
+        }
+      } else {
+        options = {};
+      }
+      return options;
+    };
+
     var enhanceStubs = function() {
       var stubs = document.querySelectorAll('.DC-embed-stub');
       Penny.forEach(stubs, function (stub, i) {
@@ -18,18 +33,23 @@
         // TODO: Recognize resource type based on URL pattern and load
         //       appropriate embed mechanism.
         var components  = href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
-        var document_id = components[1];
-        var page_number = components[2];
-        var element_id  = generateUniqueElementId(document_id, page_number);
+        if (components) {
+          var document_id = components[1];
+          var page_number = components[2];
+          var element_id  = generateUniqueElementId(document_id, page_number);
 
-        stub.className = 'DC-embed';
-        stub.setAttribute('id', element_id);
+          stub.className = 'DC-embed';
+          stub.setAttribute('id', element_id);
 
-        DocumentCloud.embed.loadPage('https://www.documentcloud.org/documents/' + document_id + '.json', {
-          page:      page_number,
-          container: '#' + element_id
-        });
+          var embedOptions       = extractOptionsFromStub(stub);
+          embedOptions.page      = page_number;
+          embedOptions.container = '#' + element_id;
 
+          DocumentCloud.embed.loadPage(
+            'https://www.documentcloud.org/documents/' + document_id + '.json',
+            embedOptions
+          );
+        }
       });
     };
 

@@ -24,9 +24,11 @@
         return;
       }
 
-      var id   = definition.Document.extractId(url);
-      var doc  = new definition.Document({id: id});
-      var view = new definition.PageView({model: doc, el: options.container, page: options.page, pym: options.pym});
+      var id               = definition.Document.extractId(url);
+      var doc              = new definition.Document({id: id});
+      var validOptionKeys  = definition.PageView.prototype.validOptionKeys;
+      var pageEmbedOptions = _.extend({}, {model: doc, el: options.container}, _.pick(options, validOptionKeys));
+      var view             = new definition.PageView(pageEmbedOptions);
       data.documents.add(doc);
       views.pages[id]                    = views.pages[id] || {};
       views.pages[id][options.container] = view;
@@ -39,7 +41,6 @@
         else if (width < 400) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
         else { $el.removeClass('DC-embed-reduced DC-embed-linkonly'); }
       };
-
       var $el = $(options.container);
       setEmbedSizeClasses($el);
       $(window).on('resize', setEmbedSizeClasses($el));
