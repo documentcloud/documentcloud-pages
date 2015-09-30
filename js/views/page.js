@@ -43,6 +43,7 @@
     },
 
     render: function() {
+      this.verifyPageNumber();
       this.prepareNotes();
       this.makeTemplateData();
       this.$el.html(JST['page'](this.templateData));
@@ -50,6 +51,13 @@
       this.checkIfIframed();
       this.renderNoteOverlay();
       this.switchToImage();
+    },
+
+    verifyPageNumber: function() {
+      if (this.currentPageNumber > this.model.get('pages')) {
+        console.warn('Showing the first page of the DocumentCloud document because page ' + this.currentPageNumber + ' doesn\'t exist.');
+        this.currentPageNumber = 1;
+      }
     },
 
     prepareNotes: function() {
