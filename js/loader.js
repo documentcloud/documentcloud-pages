@@ -47,7 +47,7 @@
           embedOptions.container = '#' + element_id;
 
           DocumentCloud.embed.loadPage(
-            'https://www.documentcloud.org/documents/' + document_id + '.json',
+            '//www.documentcloud.org/documents/' + document_id + '.json',
             embedOptions
           );
         } else {
