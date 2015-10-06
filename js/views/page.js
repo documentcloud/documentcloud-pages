@@ -84,7 +84,7 @@
 
       this.templateData = {
         showCredit:          this.options.credit,
-        showTextToggle:      this.options.text,
+        showTextMode:        this.options.text,
         showPageNavigator:   this.options.pageNavigator,
         showPageMenuBar:     this.options.pageNavigator || this.options.text,
         model:               model,
@@ -93,6 +93,7 @@
         imageUrl:            model.imageUrl(pageNumber),
         permalinkPage:       model.permalinkPage(pageNumber),
         permalinkPageText:   model.permalinkPageText(pageNumber),
+        pageTextResourceUrl: model.pageTextResourceUrl(pageNumber),
         pageCount:           pageCount,
         hasMultiplePages:    model.hasMultiplePages(),
         pageNumber:          pageNumber,

@@ -13,7 +13,7 @@
 <% if (showPageMenuBar) { %>
 <div class="DC-embed-menubar">
 
-  <% if (showTextToggle) { %>
+  <% if (showTextMode) { %>
   <ul class="DC-actions-mode">
     <li><a href="<%= permalinkPage %>" class="DC-action-mode-image" title="View page image" target="_blank">
       <i class="DC-icon DC-icon-doc-text"></i>
@@ -73,5 +73,10 @@
 </div>
 
 <div class="DC-credit">
-  <%= credit %> &bull; <a href="<%= permalinkPage %>" title="View entire document in new window or tab" target="_blank">View entire document on DocumentCloud</a>
+  <%= credit %> &bull;
+  <a href="<%= permalinkPage %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
+  <% if (showTextMode) { %>
+  or <a href="<%= pageTextResourceUrl %>" title="View text of page <%= pageNumber %> of <%- model.attributes.title %> in a new window or tab" target="_blank">read page text</a>
+  <% } %>
+  on DocumentCloud
 </div>

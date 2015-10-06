@@ -43,8 +43,15 @@
       return this.get('canonical_url') + '#document/p' + pageNumber;
     },
 
+    // Permalink to page text within platform
     permalinkPageText: function(pageNumber) {
       return this.get('canonical_url') + '#text/p' + pageNumber;
+    },
+
+    // URL for page text file
+    pageTextResourceUrl: function(pageNumber) {
+      var resources = this.get('resources');
+      return resources['page']['text'].replace('{page}', pageNumber);
     },
 
     credit: function() {
