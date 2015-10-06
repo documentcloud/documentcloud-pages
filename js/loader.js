@@ -15,11 +15,11 @@
     };
 
     // Insert the necessary JavaScript into the body, unless it's already there.
-    var insertJavaScript = function() {
+    var insertJavaScript = function(onLoadCallback) {
       if (!document.querySelector('script[src$="page_embed.js"]')) {
         var page_embed_js = document.createElement('script');
         page_embed_js.src = "dist/page_embed.js";
-        Penny.on(page_embed_js, 'load', enhanceStubs);
+        Penny.on(page_embed_js, 'load', onLoadCallback);
         document.querySelector('body').appendChild(page_embed_js);
       }
     };
@@ -91,7 +91,7 @@
     if (window.DocumentCloud) {
       enhanceStubs();
     } else {
-      insertJavaScript();
+      insertJavaScript(enhanceStubs);
     }
 
   });
