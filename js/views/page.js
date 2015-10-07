@@ -39,6 +39,8 @@
         this.pym = this.options.pym;
       }
 
+      // FIXME: IE9 isn't rendering, seemingly because it's not properly 
+      //        listening to `sync`.
       this.listenTo(this.model, 'sync', this.render);
     },
 
