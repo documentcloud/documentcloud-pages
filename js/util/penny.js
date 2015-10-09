@@ -1,6 +1,6 @@
 /*!
  * Penny 0.1.0
- * Simmer jQuery until reduced to just the parts we need.
+ * Sometimes you only need a fraction of a $.
  * Many, many thanks to http://youmightnotneedjquery.com.
  *
  * @license (c) 2015 Justin Reese, DocumentCloud
