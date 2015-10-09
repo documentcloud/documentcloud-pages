@@ -39,8 +39,6 @@
         this.pym = this.options.pym;
       }
 
-      // FIXME: IE9 isn't rendering because it's not getting the model data 
-      //        because CORS. http://bit.ly/1cWFGqx
       this.listenTo(this.model, 'sync', this.render);
     },
 
