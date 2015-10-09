@@ -10,8 +10,10 @@ javascripts:
   page_embed:
     # Modernizr sniffs svg/touch and provides our html5shim
     - js/vendor/modernizr.custom.js
-    - js/vendor/underscore/underscore.js
     - js/vendor/jquery/dist/jquery.js
+    # jQuery.XDomainRequest is for IE8/9
+    - js/vendor/jQuery-ajaxTransport-XDomainRequest/jQuery.XDomainRequest.js
+    - js/vendor/underscore/underscore.js
     - js/vendor/backbone/backbone.js
     - js/util/logger.js
     - js/util/setup.js
