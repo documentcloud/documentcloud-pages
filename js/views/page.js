@@ -81,14 +81,21 @@
       var model      = this.model;
       var pageCount  = model.get('pages');
       var pageNumber = this.currentPageNumber;
+      var creditData = {
+        contributor:           this.model.get('contributor'),
+        contributorSearchUrl:  this.model.contributorSearchUrl(),
+        organization:          this.model.get('contributor_organization'),
+        organizationSearchUrl: this.model.organizationSearchUrl(),
+      };
+      // We need to know at least the contributor or organization name
+      var hasCreditData = creditData.contributor || creditData.organization;
 
       this.templateData = {
-        showCredit:          this.options.credit,
+        showCredit:          this.options.credit && hasCreditData,
         showTextMode:        this.options.text,
         showPageNavigator:   this.options.pageNavigator,
         showPageMenuBar:     this.options.pageNavigator || this.options.text,
         model:               model,
-        credit:              model.credit(),
         permalink:           model.permalink(),
         imageUrl:            model.imageUrl(pageNumber),
         permalinkPage:       model.permalinkPage(pageNumber),
@@ -100,8 +107,10 @@
         hasPrevPage:         pageNumber > 1,
         hasNextPage:         pageNumber < pageCount,
       };
-      this.templateData.prevPageHref = this.templateData.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
-      this.templateData.nextPageHref = this.templateData.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
+      this.templateData.prevPageHref      = this.templateData.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
+      this.templateData.nextPageHref      = this.templateData.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
+      // Don't compile template if we don't have to
+      this.templateData.contributorCredit = this.templateData.showCredit ? JST['credit'](creditData) : '';
     },
 
     cacheDomReferences: function() {

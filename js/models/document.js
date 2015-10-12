@@ -54,14 +54,20 @@
       return resources['page']['text'].replace('{page}', pageNumber);
     },
 
-    credit: function() {
-      var contributor  = this.get('contributor');
-      var organization = this.get('contributor_organization');
+    contributorSearchUrl: function() {
+      if (_.isUndefined(this._contributorSearchUrl)) {
+        var slug = this.get('contributor_slug');
+        this._contributorSearchUrl = slug ? ('//www.documentcloud.org/public/search/Account:' + slug) : false;
+      }
+      return this._contributorSearchUrl;
+    },
 
-      var _credit = 'Contributed by ';
-      if (contributor) { _credit += contributor; }
-      if (organization && organization != contributor) { _credit += (' of ' + organization); }
-      return _credit;
+    organizationSearchUrl: function() {
+      if (_.isUndefined(this._organizationSearchUrl)) {
+        var slug = this.get('contributor_organization_slug');
+        this._organizationSearchUrl = slug ? ('//www.documentcloud.org/public/search/Group:' + slug) : false;
+      }
+      return this._organizationSearchUrl;
     },
 
   }, {

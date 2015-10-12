@@ -58,10 +58,6 @@
       font-weight: 500;
     }
     
-    #sample_page_text_credit {
-      display: none;
-    }
-
     @media (max-width: 400px) {
       .hide-from-mobile {
         display: none;
@@ -95,13 +91,23 @@
           <!--
             Start with embed_code.html, but then:
             - Remove `DC-embed-stub` class
-            - Wrap credit's page text link in `span#sample_page_text_credit`
             - Remove `loader.js`
           -->
-          <div data-version="1.0" style="font-size:0.8em">
-            <p>Page 57 of <a class="DC-embed-resource" href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a></p>
+          <div class="DC-embed" data-version="1.0" style="font-size:0.8em">
+            <p>
+              Page 57 of
+              <a class="DC-embed-resource" href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
+            </p>
             <img src="//assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
-            <p>Contributed by Ted Han of DocumentCloud &bull; <a href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document in new window or tab" target="_blank">View entire document</a> <span id="sample_page_text_credit">or <a href="//assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">read page text</a></span> on DocumentCloud</p>
+            <p>
+              Contributed
+              by <a href="//www.documentcloud.org/public/search/Account:2258-ted-han" title="View documents contributed by Ted Han in a new window or tab" target="_blank">Ted Han</a>
+              of <a href="//www.documentcloud.org/public/search/Group:dcloud" title="View documents contributed by DocumentCloud in a new window or tab" target="_blank">DocumentCloud</a>
+              &bull;
+              <a href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document in new window or tab" target="_blank">View entire document</a>
+              or <a href="//assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">read page text</a>
+              on DocumentCloud
+            </p>
           </div>
 
         </div>
@@ -111,9 +117,20 @@
 
           <!-- Keep perfectly in sync with embed_code.html -->
           <div class="DC-embed-stub" data-version="1.0" style="font-size:0.8em">
-            <p>Page 57 of <a class="DC-embed-resource" href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a></p>
+            <p>
+              Page 57 of
+              <a class="DC-embed-resource" href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
+            </p>
             <img src="//assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
-            <p>Contributed by Ted Han of DocumentCloud &bull; <a href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document in new window or tab" target="_blank">View entire document</a> or <a href="//assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">read page text</a> on DocumentCloud</p>
+            <p>
+              Contributed
+              by <a href="//www.documentcloud.org/public/search/Account:2258-ted-han" title="View documents contributed by Ted Han in a new window or tab" target="_blank">Ted Han</a>
+              of <a href="//www.documentcloud.org/public/search/Group:dcloud" title="View documents contributed by DocumentCloud in a new window or tab" target="_blank">DocumentCloud</a>
+              &bull;
+              <a href="//www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire document in new window or tab" target="_blank">View entire document</a>
+              or <a href="//assets.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">read page text</a>
+              on DocumentCloud
+            </p>
           </div>
           <script src="dist/loader.js"></script>
 
@@ -205,11 +222,6 @@
               view.$el.html(view.render());
             });
           });
-
-          if (optionName == 'text') {
-            $('#sample_page_text_credit').toggle(optionVal);
-          }
-
         });
 
         // Ajax-inserted embed code test
