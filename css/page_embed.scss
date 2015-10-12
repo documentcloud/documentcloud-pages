@@ -250,7 +250,7 @@ $buttonPaddingMax: 12px;
   font-size: 0.9em;
   color: $grayDark;
   text-align: center;
-  margin-top: 0.5em;
+  margin-top: 1em;
   @include antialiased;
 }
 
@@ -584,11 +584,6 @@ $buttonPaddingMax: 12px;
 
   .DC-meta {
     padding-right: 0;
-  }
-
-  .DC-credit {
-    font-size: 8pt;
-    line-height: 11pt;
   }
 
 }

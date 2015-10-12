@@ -74,9 +74,8 @@
 
 <div class="DC-credit">
   <%= contributorCredit %>
-  <a href="<%= permalinkPage %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
+  <a href="<%= permalink %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
   <% if (showTextMode) { %>
-  or <a href="<%= pageTextResourceUrl %>" title="View text of page <%= pageNumber %> of <%- model.attributes.title %> in a new window or tab" target="_blank">read page text</a>
+  or <a href="<%= permalinkPageText %>" title="View text of page <%= pageNumber %> of <%- model.attributes.title %> on DocumentCloud in a new window or tab" target="_blank">view page as text</a>
   <% } %>
-  on DocumentCloud
 </div>
