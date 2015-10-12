@@ -114,7 +114,7 @@
     },
 
     cacheDomReferences: function() {
-      this.$embed        = this.$el.closest('.DC-embed');
+      this.$embed        = this.$el.closest('.DC-embed-enhanced');
       this.$image        = this.$el.find('.DC-page-image');
       this.$text         = this.$el.find('.DC-page-text');
       this.$overlay      = this.$el.find('.DC-note-overlay');
