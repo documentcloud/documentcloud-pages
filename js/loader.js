@@ -70,6 +70,7 @@
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
           stub.className = 'DC-embed-enhanced';
+          stub.setAttribute('data-resource-type', 'page');
           stub.setAttribute('id', elementId);
 
           var embedOptions       = extractOptionsFromStub(stub);
