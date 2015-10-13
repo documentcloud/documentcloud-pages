@@ -3,22 +3,22 @@
   Penny.ready(function(){
 
     // Insert the necessary stylesheet into the head, unless it's already there.
-    var insertStylesheet = function() {
-      if (!document.querySelector('link[href$="page_embed.css"]')) {
+    var insertStylesheet = function(href) {
+      if (!document.querySelector('link[href$="' + href + '"]')) {
         var stylesheet   = document.createElement('link');
         stylesheet.rel   = 'stylesheet';
         stylesheet.type  = 'text/css';
         stylesheet.media = 'screen';
-        stylesheet.href  = 'dist/page_embed.css';
+        stylesheet.href  = href;
         document.querySelector('head').appendChild(stylesheet);
       }
     };
 
     // Insert the necessary JavaScript into the body, unless it's already there.
-    var insertJavaScript = function(onLoadCallback) {
-      if (!document.querySelector('script[src$="page_embed.js"]')) {
+    var insertJavaScript = function(src, onLoadCallback) {
+      if (!document.querySelector('script[src$="' + src + '"]')) {
         var page_embed_js = document.createElement('script');
-        page_embed_js.src = "dist/page_embed.js";
+        page_embed_js.src = src;
         Penny.on(page_embed_js, 'load', onLoadCallback);
         document.querySelector('body').appendChild(page_embed_js);
       }
@@ -88,11 +88,11 @@
     };
 
     // Definitions are complete. Do things!
-    insertStylesheet();
+    insertStylesheet('dist/page_embed.css');
     if (window.DocumentCloud) {
       enhanceStubs();
     } else {
-      insertJavaScript(enhanceStubs);
+      insertJavaScript('dist/page_embed.js', enhanceStubs);
     }
 
   });
