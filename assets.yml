@@ -22,10 +22,10 @@ javascripts:
     - js/page_embed.js
     - templates/*.jst
 
-  loader:
+  enhance:
     - js/util/penny.js
     - js/util/logger.js
-    - js/loader.js
+    - js/enhance.js
 
 stylesheets:
   page_embed:
