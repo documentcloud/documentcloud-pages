@@ -3,7 +3,7 @@
   <% if (hasMultiplePages && !showPageNavigator) { %>
     <span class="DC-page-number">Page <%= pageNumber %> of</span>
   <% } %>
-    <a href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
+    <a class="DC-embed-resource" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
   </h1>
   <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank">
     <span class="DC-resource-logomark">DocumentCloud</span>
@@ -51,12 +51,6 @@
   <% } %>
 
   <ul class="DC-actions-meta">
-    <!--
-    <li><a href="<%= permalink %>" class="DC-action-meta-index" title="View details of this document">
-      <i class="DC-icon DC-icon-list"></i>
-      <span class="DC-action-text">Details</span>
-    </a></li>
-    -->
     <li><a href="<%= permalinkPage %>" class="DC-action-meta-index" title="View entire document in new window or tab" target="_blank">
       <i class="DC-icon DC-icon-link"></i>
       <span class="DC-action-text">Link</span>
@@ -74,7 +68,7 @@
 
 <div class="DC-credit">
   <%= contributorCredit %>
-  <a href="<%= permalink %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
+  <a href="<%= permalinkDoc %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
   <% if (showTextMode) { %>
   or <a href="<%= permalinkPageText %>" title="View text of page <%= pageNumber %> of <%- model.attributes.title %> on DocumentCloud in a new window or tab" target="_blank">view page as text</a>
   <% } %>

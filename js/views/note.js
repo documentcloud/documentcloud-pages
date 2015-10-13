@@ -22,7 +22,7 @@
       this.$el.html(JST["note"]({
         title:           this.model.get('title'),
         text:            this.model.get('content'),
-        permalink:       this.model.permalink(),
+        permalinkNote:   this.model.permalink(),
         imageUrl:        this.imageUrl,
         showNoteMenuBar: false,
       }));
