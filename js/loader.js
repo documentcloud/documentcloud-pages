@@ -24,11 +24,16 @@
       }
     };
 
-    // Generates a unique ID for a given page, checks the DOM for any existing
+    // Generates a unique ID for a resource, checks the DOM for any existing
     // element with that ID, then increments and tries again if it finds one.
-    var generateUniquePageElementId = function(documentSlug, pageNumber) {
-      var i = 1;
-      var id = documentSlug + '-p' + pageNumber + '-i' + i;
+    var generateUniqueElementId = function(resourceType, components) {
+      var i  = 1;
+      var id = '';
+      switch (resourceType) {
+        case 'page':
+          id = components.documentSlug + '-p' + components.pageNumber + '-i' + i;
+          break;
+      }
       while (document.getElementById(id)) {
         id = id.replace(/-i[0-9]+$/, '-i' + i++);
       }
@@ -65,7 +70,10 @@
         if (components) {
           var documentSlug = components[1];
           var pageNumber   = components[2];
-          var elementId    = generateUniquePageElementId(documentSlug, pageNumber);
+          var elementId    = generateUniqueElementId('page', {
+            documentSlug: documentSlug,
+            pageNumber:   pageNumber
+          });
 
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
