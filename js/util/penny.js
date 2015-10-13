@@ -39,7 +39,8 @@
     },
 
     forEach: function (array, fn) {
-      for (i = 0; i < array.length; i++) {
+      var len = array.length;
+      for (i = 0; i < len; i++) {
         fn(array[i], i);
       }
     },
