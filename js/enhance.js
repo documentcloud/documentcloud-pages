@@ -58,11 +58,44 @@
       return options;
     };
 
+    var extractResourceData = function(resource){
+      var url;
+      if (resource.nodeName === 'A') {
+        url = resource;
+      } else {
+        url = document.createElement('a');
+        url.href = resource;
+      }
+
+      var href = url.getAttribute('href');
+      // TODO: Recognize resource type based on URL pattern and load
+      //       appropriate embed mechanism.
+      var components = href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
+      var result;
+      if (components) {
+        var documentSlug = components[1];
+        var path = '/documents/' + documentSlug + '.json';
+        result = {
+          host:         url.host,
+          path:         path,
+          documentSlug: documentSlug,
+          pageNumber:   components[2],
+          resourceURL:  url.protocol + '//' + url.host + path
+        };
+      } else {
+        console.error("The DocumentCloud URL you're trying to embed doesn't look right. Please generate a new embed code.");
+      }
+      return result;
+    };
+
     // Convert embed stubs to real live embeds. If this fails, stubs remain 
     // usable as effectively `noscript` representations of the embed.
     var enhanceStubs = function() {
       var stubs = document.querySelectorAll('.DC-embed');
       Penny.forEach(stubs, function (stub, i) {
+        var resourceElement = stub.querySelector('.DC-embed-resource');
+        var resourceData = extractResourceData(resourceElement);
+        /*
         var href = stub.querySelector('.DC-embed-resource').getAttribute('href');
         // TODO: Recognize resource type based on URL pattern and load
         //       appropriate embed mechanism.
@@ -70,6 +103,11 @@
         if (components) {
           var documentSlug = components[1];
           var pageNumber   = components[2];
+        */
+        if (resourceData) {
+          var documentSlug = resourceData.documentSlug;
+          var pageNumber   = resourceData.pageNumber;
+
           var elementId    = generateUniqueElementId('page', {
             documentSlug: documentSlug,
             pageNumber:   pageNumber
@@ -86,7 +124,7 @@
           embedOptions.container = '#' + elementId;
 
           DocumentCloud.embed.loadPage(
-            '//www.documentcloud.org/documents/' + documentSlug + '.json',
+            '//'+ resourceData.host + resourceData.path,
             embedOptions
           );
         } else {
