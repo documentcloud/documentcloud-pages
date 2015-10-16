@@ -133,12 +133,20 @@
       });
     };
 
+    var stylePath = 'dist/page_embed.css';
+    var appPath   = 'dist/page_embed.js';
+    
+    if (window.ENV && ENV.config) {
+      stylePath = (ENV.config.stylePath || stylePath);
+      appPath   = (ENV.config.appPath || appPath);
+    }
+    
     // Definitions are complete. Do things!
-    insertStylesheet('dist/page_embed.css');
+    insertStylesheet(stylePath);
     if (window.DocumentCloud) {
       enhanceStubs();
     } else {
-      insertJavaScript('dist/page_embed.js', enhanceStubs);
+      insertJavaScript(appPath, enhanceStubs);
     }
 
   });
