@@ -1,7 +1,7 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 group :development, :test do
   gem 'jammit',       :github => 'documentcloud/jammit'
-  gem 'guard-jammit', :github => "documentcloud/guard-jammit"
-  gem 'sass',         "~>3.4"
+  gem 'guard-jammit', '~> 1.1'
+  gem 'sass',         '~> 3.4'
 end
