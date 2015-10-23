@@ -132,6 +132,8 @@
       });
     };
 
+    // TODO: Support more resource types; will have to scan the DOM for all
+    //       embed types before enhancing.
     var stylePath = 'dist/page_embed.css';
     var appPath   = 'dist/page_embed.js';
     
