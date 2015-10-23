@@ -26,12 +26,12 @@
 
     // Generates a unique ID for a resource, checks the DOM for any existing
     // element with that ID, then increments and tries again if it finds one.
-    var generateUniqueElementId = function(resourceType, components) {
+    var generateUniqueElementId = function(resourceData) {
       var i  = 1;
       var id = '';
-      switch (resourceType) {
+      switch (resourceData.type) {
         case 'page':
-          id = components.documentSlug + '-p' + components.pageNumber + '-i' + i;
+          id = resourceData.documentSlug + '-p' + resourceData.pageNumber + '-i' + i;
           break;
       }
       while (document.getElementById(id)) {
@@ -40,8 +40,8 @@
       return id;
     };
 
-    // Takes an embed stub (the entire DOM element) and looks for a 
-    // `data-options` attribute that contains a JSON representation of options.
+    // Takes an embed stub DOM element and looks for a `data-options` attribute 
+    // that contains a JSON representation of options.
     var extractOptionsFromStub = function(stub) {
       var options = stub.getAttribute('data-options');
       if (options) {
@@ -58,35 +58,72 @@
       return options;
     };
 
+    // Takes either an embed stub DOM element or an embeddable resource URL,
+    // returns a resource-specific hash used to enhance and embed the stub.
+    var extractResourceData = function(resource) {
+      var href, result;
+
+      if (resource.nodeName === 'A') {
+        href = resource.getAttribute('href');
+      } else {
+        href          = resource;
+        resource      = document.createElement('A');
+        resource.href = href;
+      }
+
+      // TODO: Recognize resource type based on URL pattern and load
+      //       appropriate embed mechanism.
+      var components = href && href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
+      if (components) {
+        var documentSlug = components[1];
+        var path         = '/documents/' + documentSlug + '.json';
+        result           = {
+          type:         'page',
+          host:         resource.host,
+          path:         path,
+          documentSlug: documentSlug,
+          pageNumber:   components[2],
+          resourceURL:  resource.protocol + '//' + resource.host + path,
+          embedOptions: {
+            page: components[2],
+          },
+        };
+      } else {
+        console.error("The DocumentCloud URL you're trying to embed doesn't look right. Please generate a new embed code.");
+      }
+      return result;
+    };
+
     // Convert embed stubs to real live embeds. If this fails, stubs remain 
     // usable as effectively `noscript` representations of the embed.
     var enhanceStubs = function() {
       var stubs = document.querySelectorAll('.DC-embed');
       Penny.forEach(stubs, function (stub, i) {
-        var href = stub.querySelector('.DC-embed-resource').getAttribute('href');
-        // TODO: Recognize resource type based on URL pattern and load
-        //       appropriate embed mechanism.
-        var components = href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
-        if (components) {
-          var documentSlug = components[1];
-          var pageNumber   = components[2];
-          var elementId    = generateUniqueElementId('page', {
-            documentSlug: documentSlug,
-            pageNumber:   pageNumber
-          });
+        var resourceElement = stub.querySelector('.DC-embed-resource');
+        var resourceData    = extractResourceData(resourceElement);
+        if (resourceData) {
+          var elementId = generateUniqueElementId(resourceData);
 
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
           stub.className = 'DC-embed-enhanced';
-          stub.setAttribute('data-resource-type', 'page');
+          stub.setAttribute('data-resource-type', resourceData.type);
           stub.setAttribute('id', elementId);
 
-          var embedOptions       = extractOptionsFromStub(stub);
-          embedOptions.page      = pageNumber;
-          embedOptions.container = '#' + elementId;
+          // Options come from three places:
+          // 1. JSON hash passed in via the stub's `data-options` attribute
+          // 2. Resource-specific options composed in `extractResourceData()`
+          // 3. Resource-agnostic options
+          var embedOptions = Penny.extend({},
+            extractOptionsFromStub(stub),
+            resourceData.embedOptions,
+            {
+              container: '#' + elementId,
+            }
+          );
 
           DocumentCloud.embed.loadPage(
-            '//www.documentcloud.org/documents/' + documentSlug + '.json',
+            '//' + resourceData.host + resourceData.path,
             embedOptions
           );
         } else {
@@ -95,12 +132,22 @@
       });
     };
 
+    // TODO: Support more resource types; will have to scan the DOM for all
+    //       embed types before enhancing.
+    var stylePath = 'dist/page_embed.css';
+    var appPath   = 'dist/page_embed.js';
+    
+    if (window.ENV && ENV.config) {
+      stylePath = (ENV.config.stylePath || stylePath);
+      appPath   = (ENV.config.appPath || appPath);
+    }
+    
     // Definitions are complete. Do things!
-    insertStylesheet('dist/page_embed.css');
+    insertStylesheet(stylePath);
     if (window.DocumentCloud) {
       enhanceStubs();
     } else {
-      insertJavaScript('dist/page_embed.js', enhanceStubs);
+      insertJavaScript(appPath, enhanceStubs);
     }
 
   });
