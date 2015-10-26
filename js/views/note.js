@@ -15,7 +15,8 @@
     },
 
     initialize: function(options) {
-      this.imageUrl = options.imageUrl;
+      this.imageUrl      = options.imageUrl;
+      this.imageUrlLarge = options.imageUrlLarge;
     },
 
     render: function(dimensions) {
@@ -24,6 +25,7 @@
         text:            this.model.get('content'),
         permalinkNote:   this.model.permalink(),
         imageUrl:        this.imageUrl,
+        imageUrlLarge:   this.imageUrlLarge,
         showNoteMenuBar: false,
       }));
       this.cacheDomReferences();

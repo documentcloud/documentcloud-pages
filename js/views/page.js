@@ -44,8 +44,8 @@
 
     render: function() {
       this.verifyPageNumber();
-      this.prepareNotes();
       this.makeTemplateData();
+      this.prepareNotes(); // Requires `makeTemplateData()` be run first
       this.$el.html(JST['page'](this.templateData));
       this.cacheDomReferences();
       this.checkIfIframed();
@@ -68,8 +68,9 @@
       var notes = this.model.notes.forPage(this.currentPageNumber);
       _.each(notes, function(note){
         var noteView = new definition.NoteView({
-          model: note,
-          imageUrl: this.model.imageUrl(this.currentPageNumber),
+          model:         note,
+          imageUrl:      this.templateData.imageUrl,
+          imageUrlLarge: this.templateData.imageUrlLarge
         });
         this.noteViews[this.currentPageNumber][note.id] = noteView;
         this.listenTo(noteView, 'opened', this.updateOpenNote);
@@ -97,6 +98,7 @@
         showPageMenuBar:     this.options.pageNavigator || this.options.text,
         model:               model,
         imageUrl:            model.imageUrl(pageNumber),
+        imageUrlLarge:       model.imageUrl(pageNumber, 'large'),
         permalinkDoc:        model.permalink(),
         permalinkPage:       model.permalinkPage(pageNumber),
         permalinkPageText:   model.permalinkPageText(pageNumber),

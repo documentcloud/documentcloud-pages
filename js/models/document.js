@@ -19,10 +19,11 @@
       this.notes.reset(this.get('annotations'));
     },
 
-    imageUrl : function(pageNumber) {
+    imageUrl : function(pageNumber, size) {
+      size = size || 'normal';
       var resources = this.get('resources');
       var urlTemplate = resources['page']['image'];
-      return urlTemplate.replace('{size}', 'normal').replace('{page}', pageNumber);
+      return urlTemplate.replace('{size}', size).replace('{page}', pageNumber);
     },
 
     textUrl : function(pageNumber) {
