@@ -1,15 +1,19 @@
 {
   "name": "documentcloud-pages",
-  "version": "0.1.0",
+  "description": "Responsively embed DocumentCloud pages",
+  "version": "0.2.0",
   "authors": [
     "Ted Han <ted@knowtheory.net>",
     "Justin Reese <justin@justinreese.com>"
   ],
-  "main": "dist/page_embed.js",
+  "license": "MIT",
+  "main": [
+    "dist/page_embed.js",
+    "dist/page_embed.css"
+  ],
   "moduleType": [
     "globals"
   ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
