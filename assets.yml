@@ -19,7 +19,7 @@ javascripts:
     - js/util/setup.js
     - js/models/*.js
     - js/views/*.js
-    - js/page_embed.js
+    - js/loaders/page.js
     - templates/*.jst
 
   enhance:
