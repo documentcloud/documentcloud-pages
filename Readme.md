@@ -25,4 +25,4 @@ Install the dependencies with:
 * `bower install` (See [bower.io](https://bower.io)).
 * `bundle install` (See [bundler.io](http://bundler.io/))
 
-To watch/build the project, run `guard`. The outputs will be built to [dist/](dist/).
+To watch/build the project, run `bundle exec guard`. The outputs will be built to [dist/](dist/).
