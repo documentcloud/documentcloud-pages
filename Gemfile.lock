@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/documentcloud/jammit.git
-  revision: b3e17e12e57a0d639762e819d5e33f8f9395dd8d
-  specs:
-    jammit (0.6.6)
-      cssmin (>= 1.0.3)
-      jsmin (>= 1.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,6 +19,9 @@ GEM
       guard (~> 2.12)
       guard-compat (~> 1.2)
       jammit
+    jammit (0.7.0)
+      cssmin (~> 1.0)
+      jsmin (~> 1.0)
     jsmin (1.0.1)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
@@ -54,5 +49,8 @@ PLATFORMS
 
 DEPENDENCIES
   guard-jammit (~> 1.1)
-  jammit!
+  jammit (~> 0.7.0)
   sass (~> 3.4)
+
+BUNDLED WITH
+   1.10.6
