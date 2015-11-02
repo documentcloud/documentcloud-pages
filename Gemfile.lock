@@ -51,6 +51,3 @@ DEPENDENCIES
   guard-jammit (~> 1.1)
   jammit (~> 0.7.0)
   sass (~> 3.4)
-
-BUNDLED WITH
-   1.10.6
