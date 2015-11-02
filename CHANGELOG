@@ -1,0 +1,13 @@
+0.2.0
+-----
+
+* Refactor for environment configurability and resource type independence (#27)
+* Restructure directories
+* Stop pointing to custom Jammit and Guard Jammit gems
+* Stop using Jammit for datauri compilation (#28)
+* Add support for high-res images (#25)
+
+0.1.0
+-----
+
+* Beta release to DocumentCloud
