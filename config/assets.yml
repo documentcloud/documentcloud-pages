@@ -1,8 +1,8 @@
-javascript_compressor: closure
-css_compressor:        sass
-template_function:     DocumentCloud._.template
-embed_assets:          datauri
-rewrite_relative_paths: false
+javascript_compressor:  closure
+css_compressor:         sass
+template_function:      DocumentCloud._.template
+embed_assets:           off
+rewrite_relative_paths: off
 
 javascripts:
   pym:
@@ -30,7 +30,7 @@ javascripts:
 
 stylesheets:
   page_embed:
-    - src/css/vendor/fontello/css/fontello.css
+    - src/css/vendor/fontello/css/fontello-embedded.css
     - src/css/vendor/fontello/css/animation.css
     - src/css/*.css
     - src/css/*.scss
