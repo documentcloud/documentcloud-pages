@@ -31,7 +31,7 @@ javascripts:
 
 stylesheets:
   page_embed:
-    - src/css/vendor/fontello/css/fontello-embedded.css
-    - src/css/vendor/fontello/css/animation.css
+    - src/css/vendor/fontello/fontello-embedded.css
+    - src/css/vendor/fontello/animation.css
     - src/css/*.css
     - src/css/*.scss
