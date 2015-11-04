@@ -132,22 +132,25 @@
       });
     };
 
+    var defaultAssetPaths = {
+      page: {
+        app:   "/dist/page_embed.js",
+        style: "/dist/page_embed.css"
+      }
+    };
+    try { var configAssetPaths = window.ENV.config.embed.assetPaths; }
+    catch (e) { var configAssetPaths = {}; }
+    var assetPaths = Penny.extend({}, defaultAssetPaths, configAssetPaths);
+
+    // Definitions are complete. Do things!
+
     // TODO: Support more resource types; will have to scan the DOM for all
     //       embed types before enhancing.
-    var stylePath = '../dist/page_embed.css';
-    var appPath   = '../dist/page_embed.js';
-    
-    if (window.ENV && ENV.config) {
-      stylePath = (ENV.config.stylePath || stylePath);
-      appPath   = (ENV.config.appPath || appPath);
-    }
-    
-    // Definitions are complete. Do things!
-    insertStylesheet(stylePath);
+    insertStylesheet(assetPaths.page.style);
     if (window.DocumentCloud) {
       enhanceStubs();
     } else {
-      insertJavaScript(appPath, enhanceStubs);
+      insertJavaScript(assetPaths.page.app, enhanceStubs);
     }
 
   });
