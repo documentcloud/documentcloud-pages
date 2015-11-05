@@ -174,7 +174,7 @@ $buttonPaddingMax: 12px;
 
 //---------------------------------- STYLES ------------------------------------
 
-.DC-embed-enhanced {
+.DC-embed {
   position: relative;
   font: $fontWeightNormal 10pt/1.6em 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: $textColor;
@@ -258,7 +258,7 @@ $buttonPaddingMax: 12px;
   position: relative;
   border: 1px solid $gray;
 
-  .DC-embed-enhanced.DC-mode-image.open & {
+  .DC-embed.DC-mode-image.open & {
     border-color: $grayDark;
   }
 
@@ -405,7 +405,7 @@ $buttonPaddingMax: 12px;
   height: 100%;
   z-index: 1;
 
-  .DC-embed-enhanced.open & {
+  .DC-embed.open & {
     background-color: $grayDim;
 
     .DC-m-no-touch & {
@@ -444,7 +444,7 @@ $buttonPaddingMax: 12px;
     box-shadow: 0 1px 3px $grayDimmer;
   }
 
-  .DC-embed-enhanced.open .DC-note:not(.open) & {
+  .DC-embed.open .DC-note:not(.open) & {
     background-color: $highlightLight;
   }
 
