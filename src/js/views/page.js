@@ -246,10 +246,10 @@
 
     checkIfIframed: function() {
       if (this.inIframe()) {
-        this.$el.addClass('DC-iframed');
+        this.$el.addClass('DC-embed-iframed');
         this.iframed = true;
       } else {
-        this.$el.addClass('DC-no-iframed');
+        this.$el.addClass('DC-embed-no-iframed');
         this.iframed = false;
       }
     },
