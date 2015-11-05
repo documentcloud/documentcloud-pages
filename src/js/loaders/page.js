@@ -32,16 +32,16 @@
       views.pages[id][options.container] = view;
       doc.fetch({url: url});
 
-      var setEmbedSizeClasses = function($el) {
+      var $el = $(options.container);
+      var setEmbedSizeClasses = function() {
         var width = $el.width();
         // TODO: Move these size breakpoints/definitions to somewhere sensible
         if (width < 200) { $el.addClass('DC-embed-linkonly').removeClass('DC-embed-reduced'); }
         else if (width < 400) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
         else { $el.removeClass('DC-embed-reduced DC-embed-linkonly'); }
       };
-      var $el = $(options.container);
-      setEmbedSizeClasses($el);
-      $(window).on('resize', setEmbedSizeClasses($el));
+      $(window).on('resize', setEmbedSizeClasses);
+      setEmbedSizeClasses();
     };
   }
 
