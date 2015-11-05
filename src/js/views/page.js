@@ -50,7 +50,11 @@
       this.cacheDomReferences();
       this.checkIfIframed();
       this.renderNoteOverlay();
-      this.switchToImage();
+      if (this.mode == 'text') {
+        this.switchToText();
+      } else {
+        this.switchToImage();
+      }
     },
 
     verifyPageNumber: function() {
