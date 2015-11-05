@@ -116,7 +116,7 @@
     },
 
     cacheDomReferences: function() {
-      this.$embed        = this.$el.closest('.DC-embed');
+      this.$embed        = this.$el.find('.DC-page-embed');
       this.$image        = this.$el.find('.DC-page-image');
       this.$text         = this.$el.find('.DC-page-text');
       this.$overlay      = this.$el.find('.DC-note-overlay');
@@ -167,32 +167,28 @@
       if (!_.isUndefined(event)) {
         event.preventDefault();
       }
-      if (this.mode != 'page') {
-        this.$embed.removeClass('DC-mode-text').addClass('DC-mode-image');
-        this.mode = 'page';
-      }
+      this.$embed.removeClass('DC-mode-text').addClass('DC-mode-image');
+      this.mode = 'page';
     },
 
     switchToText: function(event) {
       if (!_.isUndefined(event)) {
         event.preventDefault();
       }
-      if (this.mode != 'text') {
-        this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
-        this.mode = 'text';
-        if (_.isUndefined(this.cachedText)) {
-          this.$text.removeClass('error').addClass('fetching')
-                    .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
-          var _this = this;
-          $.get(this.model.textUrl(this.currentPageNumber), function(data) {
-            _this.cachedText = data;
-            _this.$text.text(data);
-          }).fail(function(){
-            _this.$text.addClass('error').text('Unable to fetch page text.');
-          }).always(function(){
-            _this.$text.removeClass('fetching');
-          });
-        }
+      this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
+      this.mode = 'text';
+      if (_.isUndefined(this.cachedText)) {
+        this.$text.removeClass('error').addClass('fetching')
+                  .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
+        var _this = this;
+        $.get(this.model.textUrl(this.currentPageNumber), function(data) {
+          _this.cachedText = data;
+          _this.$text.text(data);
+        }).fail(function(){
+          _this.$text.addClass('error').text('Unable to fetch page text.');
+        }).always(function(){
+          _this.$text.removeClass('fetching');
+        });
       }
     },
 
@@ -243,7 +239,7 @@
     },
 
     clickPage: function() {
-      if (this.$embed.hasClass('DC-embed-linkonly')) {
+      if (this.$el.hasClass('DC-embed-linkonly')) {
         window.open(this.model.permalink());
       }
     },

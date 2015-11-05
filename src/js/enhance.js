@@ -97,8 +97,9 @@
     // Convert embed stubs to real live embeds. If this fails, stubs remain 
     // usable as effectively `noscript` representations of the embed.
     var enhanceStubs = function() {
-      var stubs = document.querySelectorAll('.DC-embed-stub');
+      var stubs = document.querySelectorAll('.DC-embed');
       Penny.forEach(stubs, function (stub, i) {
+        if (stub.className.indexOf('DC-embed-enhanced') != -1) { return; }
         var resourceElement = stub.querySelector('.DC-embed-resource');
         var resourceData    = extractResourceData(resourceElement);
         if (resourceData) {
@@ -106,7 +107,7 @@
 
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
-          stub.className = 'DC-embed';
+          stub.className += ' DC-embed-enhanced';
           stub.setAttribute('data-resource-type', resourceData.type);
           stub.setAttribute('id', elementId);
 
