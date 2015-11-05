@@ -31,11 +31,14 @@
 
       var slug = getParameterByName('slug'); // NB: Slug is for testing only
       var host = getParameterByName('host');
-      DocumentCloud.embed.loadPage("//" + host + "/documents/" + slug + ".json", {
-        page: page,
-        container: '#page_embed',
-        pym: pymChild || false
-      });
+
+      if (slug && host) {
+        DocumentCloud.embed.loadPage("//" + host + "/documents/" + slug + ".json", {
+          page: page,
+          container: '#page_embed',
+          pym: pymChild || false
+        });
+      }
 
     </script>
   </body>
