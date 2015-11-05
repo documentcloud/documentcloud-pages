@@ -34,7 +34,8 @@
       this.options = _.extend({}, this.defaultOptions, options);
 
       this.currentPageNumber = this.options.page;
-      this.noteViews         = {}
+      this.noteViews         = {};
+      this.cachedText        = {};
       if (this.options.pym) {
         this.pym = this.options.pym;
       }
@@ -181,18 +182,20 @@
       }
       this.$embed.removeClass('DC-mode-image').addClass('DC-mode-text');
       this.mode = 'text';
-      if (_.isUndefined(this.cachedText)) {
+      if (_.isUndefined(this.cachedText[this.currentPageNumber])) {
         this.$text.removeClass('error').addClass('fetching')
                   .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
         var _this = this;
         $.get(this.model.textUrl(this.currentPageNumber), function(data) {
-          _this.cachedText = data;
+          _this.cachedText[_this.currentPageNumber] = data;
           _this.$text.text(data);
         }).fail(function(){
           _this.$text.addClass('error').text('Unable to fetch page text.');
         }).always(function(){
           _this.$text.removeClass('fetching');
         });
+      } else {
+        this.$text.text(this.cachedText[this.currentPageNumber]);
       }
     },
 
