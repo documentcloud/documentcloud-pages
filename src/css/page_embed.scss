@@ -73,7 +73,7 @@ $buttonPaddingMax: 12px;
       height: $clickHeightMin;
     }
 
-    .DC-embed-reduced & {
+    .DC-embed-size-small & {
       position: relative;
       float: left;
     }
@@ -109,7 +109,7 @@ $buttonPaddingMax: 12px;
       }
     }
 
-    .DC-embed-reduced & {
+    .DC-embed-size-small & {
       padding: 0;
     }
   }
@@ -134,7 +134,7 @@ $buttonPaddingMax: 12px;
 @mixin actions-center() {
   left: 40%;
 
-  .DC-embed-reduced & {
+  .DC-embed-size-small & {
     left: 0;
   }
 
@@ -146,7 +146,7 @@ $buttonPaddingMax: 12px;
 @mixin actions-right() {
   right: 0;
 
-  .DC-embed-reduced & {
+  .DC-embed-size-small & {
     float: right;
   }
 
@@ -546,7 +546,7 @@ $buttonPaddingMax: 12px;
 
 // Below 200px
 
-.DC-embed-linkonly {
+.DC-embed-size-tiny {
   font-size: 8pt;
 
   .DC-credit,
@@ -572,7 +572,7 @@ $buttonPaddingMax: 12px;
 
 // Below 300px
 
-.DC-embed-reduced {
+.DC-embed-size-small {
   font-size: 9pt;
 
   .DC-logomark-permalink,

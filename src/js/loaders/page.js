@@ -36,9 +36,9 @@
       var setEmbedSizeClasses = function() {
         var width = $el.width();
         // TODO: Move these size breakpoints/definitions to somewhere sensible
-        if (width < 200) { $el.addClass('DC-embed-linkonly').removeClass('DC-embed-reduced'); }
-        else if (width < 400) { $el.addClass('DC-embed-reduced').removeClass('DC-embed-linkonly'); }
-        else { $el.removeClass('DC-embed-reduced DC-embed-linkonly'); }
+        if (width < 200) { $el.addClass('DC-embed-size-tiny').removeClass('DC-embed-size-small'); }
+        else if (width < 400) { $el.addClass('DC-embed-size-small').removeClass('DC-embed-size-tiny'); }
+        else { $el.removeClass('DC-embed-size-small DC-embed-size-tiny'); }
       };
       $(window).on('resize', setEmbedSizeClasses);
       setEmbedSizeClasses();

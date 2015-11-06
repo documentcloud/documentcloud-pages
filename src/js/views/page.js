@@ -246,7 +246,7 @@
     },
 
     clickPage: function() {
-      if (this.$el.hasClass('DC-embed-linkonly')) {
+      if (this.$el.hasClass('DC-embed-size-tiny')) {
         window.open(this.model.permalink());
       }
     },
