@@ -133,29 +133,32 @@
       });
     };
 
-    // Combine local defaults with global config options
-    var chooseAssetPaths = function() {
-      var defaultAssetPaths = {
+    // Combine default config with environment-set config
+    var loadConfig = function() {
+      var defaultConfig = {
         page: {
-          app:   "/dist/page_embed.js",
-          style: "/dist/page_embed.css"
+          assetPaths: {
+            app:   "/dist/page_embed.js",
+            style: "/dist/page_embed.css"
+          }
         }
       };
-      try { var configAssetPaths = window.ENV.config.embed.assetPaths; }
-      catch (e) { var configAssetPaths = {}; }
-      return Penny.extend({}, defaultAssetPaths, configAssetPaths);
+      // Safely try to access potentially undefined config options
+      try { var envConfig = window.ENV.config.embed; }
+      catch (e) { var envConfig = {}; }
+      return Penny.extend({}, defaultConfig, envConfig);
     };
 
     // Definitions are complete. Do things!
 
     // TODO: Support more resource types; will have to scan the DOM for all
     //       embed types before enhancing.
-    var assetPaths = chooseAssetPaths();
-    insertStylesheet(assetPaths.page.style);
+    var config = loadConfig();
+    insertStylesheet(config.page.assetPaths.style);
     if (window.DocumentCloud) {
       enhanceStubs();
     } else {
-      insertJavaScript(assetPaths.page.app, enhanceStubs);
+      insertJavaScript(config.page.assetPaths.app, enhanceStubs);
     }
 
   });
