@@ -1,6 +1,7 @@
 javascript_compressor:  closure
 css_compressor:         sass
 template_function:      DocumentCloud._.template
+gzip_assets:            off
 embed_assets:           off
 rewrite_relative_paths: off
 
