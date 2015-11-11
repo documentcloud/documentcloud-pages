@@ -1,40 +1,46 @@
 (function(){
-  var DCEmbedToolbelt = window.DCEmbedToolbelt;
   var DocumentCloud   = window.DocumentCloud;
   var $               = DocumentCloud.$;
   var _               = DocumentCloud._;
   var definition      = DocumentCloud.embed.definition;
   var data            = DocumentCloud.embed.data;
   var views           = DocumentCloud.embed.views;
+  var DCEmbedToolbelt = window.DCEmbedToolbelt;
 
   data.documents = data.documents || new definition.DocumentSet();
   // views.pages is a nested list of page views, keyed at the top level
   // by document id, and then element selector.
   // e.g. views.pages['282753-lefler-thesis']['#target-container']
-  // initialization of the inner object is done in DocumentCloud.embed.loadPage
+  // initialization of the inner object is done in DocumentCloud.embed.load
   views.pages = views.pages || {};
 
-  if (!_.isFunction(DocumentCloud.embed.loadPage)) {
-    DocumentCloud.embed.loadPage = function(url, opts) {
+  if (!_.isFunction(DocumentCloud.embed.load)) {
+    DocumentCloud.embed.load = function(resource, opts) {
       var options = opts || {};
-
       if (!options.container) {
         console.error("DocumentCloud can't be embedded without specifying a container.");
         return;
       }
 
-      var id               = definition.Document.extractId(url);
-      var doc              = new definition.Document({id: id});
-      var validOptionKeys  = definition.PageView.prototype.validOptionKeys;
-      var pageEmbedOptions = _.extend({}, {model: doc, el: options.container}, _.pick(options, validOptionKeys));
-      var view             = new definition.PageView(pageEmbedOptions);
+      // If passed a URL to a resource, convert it to a recognized object
+      if (_.isString(resource)) {
+        resource = DCEmbedToolbelt.recognizeResource(resource);
+      }
+
+      var documentId      = resource.documentId;
+      var doc             = new definition.Document({id: documentId});
+      var validOptionKeys = definition.PageView.prototype.validOptionKeys;
+      var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
+                                     resource.embedOptions,
+                                     {model: doc, el: options.container});
+      var view            = new definition.PageView(embedOptions);
       data.documents.add(doc);
-      views.pages[id]                    = views.pages[id] || {};
-      views.pages[id][options.container] = view;
-      doc.fetch({url: url});
+      views.pages[documentId]                    = views.pages[documentId] || {};
+      views.pages[documentId][options.container] = view;
+      doc.fetch({url: resource.dataUrl});
 
       // Track where the embed is loaded from
-      DCEmbedToolbelt.phoneHome(url);
+      DCEmbedToolbelt.pixelPing(resource);
 
       // We tweak the interface lightly based on the width of the embed; sadly, 
       // in non-iframe contexts, this requires watching the window for resizes.

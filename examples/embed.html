@@ -24,17 +24,14 @@
           return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
 
-      var page = getParameterByName('page');
+      var url = getParameterByName('url');
+
       if (getParameterByName('childId')) {
         var pymChild = new pym.Child();
       }
 
-      var slug = getParameterByName('slug'); // NB: Slug is for testing only
-      var host = getParameterByName('host');
-
-      if (slug && host) {
-        DocumentCloud.embed.loadPage("//" + host + "/documents/" + slug + ".json", {
-          page: page,
+      if (url) {
+        DocumentCloud.embed.load(url, {
           container: '#page_embed',
           pym: pymChild || false
         });

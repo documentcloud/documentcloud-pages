@@ -106,6 +106,10 @@
       return out;
     },
 
+    isString: function(thing) {
+      return typeof thing === 'string';
+    },
+
     // http://stackoverflow.com/a/4994244/5071070
     isEmpty: function(obj) {
       // null and undefined are "empty"
