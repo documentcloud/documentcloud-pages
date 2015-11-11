@@ -1,7 +1,11 @@
 /*!
- * Penny 0.1.0
+ * Penny 0.0.0
  * Sometimes you only need a fraction of a $.
- * Many, many thanks to http://youmightnotneedjquery.com.
+ * Many thanks to http://youmightnotneedjquery.com and Stack Overflow.
+ *
+ * The version number is not a typo, it's a statement: you should not use Penny.
+ * It is not a library, it is a customized minimal set of functions for a very
+ * specific use case. You should totally make your own Penny for your own case.
  *
  * @license (c) 2015 Justin Reese, DocumentCloud
  * Penny may be freely distributed under the MIT license.
@@ -12,7 +16,7 @@
 
   var Penny = window.Penny = window.Penny || {
 
-    VERSION: '0.1.0',
+    VERSION: '0.0.0',
 
     on: function (el, eventName, handler) {
       if (el.addEventListener) {
@@ -38,11 +42,50 @@
       }
     },
 
-    forEach: function (array, fn) {
-      var len = array.length;
-      for (i = 0; i < len; i++) {
-        fn(array[i], i);
+    each: function (collection, fn) {
+      if (collection != null && typeof collection === 'object') {
+        for (var key in collection) {
+          if (Object.prototype.hasOwnProperty.call(collection, key)) {
+            fn(collection[key], key);
+          }
+        }
+      } else {
+        var len = collection.length;
+        for (i = 0; i < len; i++) {
+          fn(collection[i], i);
+        }
       }
+    },
+
+    values: function (obj) {
+      var values = [];
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          values.push(obj[key]);
+        }
+      }
+      return values;
+    },
+
+    keys: function (obj) {
+      var keys = [];
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          keys.push(obj[key]);
+        }
+      }
+      return keys;
+    },
+
+    findKey: function(obj, fn) {
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          if (fn(obj[key], key)) {
+            return key;
+          }
+        }
+      }
+      return null;
     },
 
     extend: function(out) {
@@ -61,6 +104,26 @@
       }
 
       return out;
+    },
+
+    // http://stackoverflow.com/a/4994244/5071070
+    isEmpty: function(obj) {
+      // null and undefined are "empty"
+      if (obj == null) { return true; }
+
+      // Assume if it has a length property with a non-zero value
+      // that that property is correct.
+      if (obj.length > 0)    { return false; }
+      if (obj.length === 0)  { return true; }
+
+      // Otherwise, does it have any properties of its own?
+      // Note that this doesn't handle
+      // toString and valueOf enumeration bugs in IE < 9
+      for (var key in obj) {
+        if (hasOwnProperty.call(obj, key)) { return false; }
+      }
+
+      return true;
     },
 
   };

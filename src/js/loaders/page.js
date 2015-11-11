@@ -1,10 +1,11 @@
 (function(){
-  var DocumentCloud = window.DocumentCloud;
-  var $             = DocumentCloud.$;
-  var _             = DocumentCloud._;
-  var definition    = DocumentCloud.embed.definition;
-  var data          = DocumentCloud.embed.data;
-  var views         = DocumentCloud.embed.views;
+  var DCEmbedToolbelt = window.DCEmbedToolbelt;
+  var DocumentCloud   = window.DocumentCloud;
+  var $               = DocumentCloud.$;
+  var _               = DocumentCloud._;
+  var definition      = DocumentCloud.embed.definition;
+  var data            = DocumentCloud.embed.data;
+  var views           = DocumentCloud.embed.views;
 
   data.documents = data.documents || new definition.DocumentSet();
   // views.pages is a nested list of page views, keyed at the top level
@@ -32,10 +33,14 @@
       views.pages[id][options.container] = view;
       doc.fetch({url: url});
 
+      // Track where the embed is loaded from
+      DCEmbedToolbelt.phoneHome(url);
+
+      // We tweak the interface lightly based on the width of the embed; sadly, 
+      // in non-iframe contexts, this requires watching the window for resizes.
       var $el = $(options.container);
       var setEmbedSizeClasses = function() {
         var width = $el.width();
-        // TODO: Move these size breakpoints/definitions to somewhere sensible
         if (width < 200) { $el.addClass('DC-embed-size-tiny').removeClass('DC-embed-size-small'); }
         else if (width < 400) { $el.addClass('DC-embed-size-small').removeClass('DC-embed-size-tiny'); }
         else { $el.removeClass('DC-embed-size-small DC-embed-size-tiny'); }

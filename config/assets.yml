@@ -19,14 +19,16 @@ javascripts:
     - src/js/vendor/backbone/backbone.js
     - src/js/util/logger.js
     - src/js/util/setup.js
+    - src/js/util/toolbelt.js
     - src/js/models/*.js
     - src/js/views/*.js
     - src/js/loaders/page.js
     - src/templates/*.jst
 
   enhance:
-    - src/js/util/penny.js
     - src/js/util/logger.js
+    - src/js/util/penny.js
+    - src/js/util/toolbelt.js
     - src/js/enhance.js
 
 stylesheets:

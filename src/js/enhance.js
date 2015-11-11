@@ -17,10 +17,10 @@
     // Insert the necessary JavaScript into the body, unless it's already there.
     var insertJavaScript = function(src, onLoadCallback) {
       if (!document.querySelector('script[src$="' + src + '"]')) {
-        var page_embed_js = document.createElement('script');
-        page_embed_js.src = src;
-        Penny.on(page_embed_js, 'load', onLoadCallback);
-        document.querySelector('body').appendChild(page_embed_js);
+        var script = document.createElement('script');
+        script.src = src;
+        Penny.on(script, 'load', onLoadCallback);
+        document.querySelector('body').appendChild(script);
       }
     };
 
@@ -28,10 +28,16 @@
     // element with that ID, then increments and tries again if it finds one.
     var generateUniqueElementId = function(resourceData) {
       var i  = 1;
-      var id = '';
-      switch (resourceData.type) {
+      var id = resourceData.documentSlug;
+      switch (resourceData.resourceType) {
+        case 'document':
+          id += '-i' + i;
+          break;
         case 'page':
-          id = resourceData.documentSlug + '-p' + resourceData.pageNumber + '-i' + i;
+          id += '-p' + resourceData.pageNumber + '-i' + i;
+          break;
+        case 'note':
+          id += '-a' + resourceData.noteId + '-i' + i;
           break;
       }
       while (document.getElementById(id)) {
@@ -61,44 +67,42 @@
     // Takes either an embed stub DOM element or an embeddable resource URL,
     // returns a resource-specific hash used to enhance and embed the stub.
     var extractResourceData = function(resource) {
-      var href, result;
+      var resourceUrl, resourceData;
 
       if (resource.nodeName === 'A') {
-        href = resource.getAttribute('href');
+        resourceUrl = resource.getAttribute('href');
       } else {
-        href          = resource;
+        resourceUrl   = resource;
         resource      = document.createElement('A');
-        resource.href = href;
+        resource.href = resourceUrl;
       }
 
-      // TODO: Recognize resource type based on URL pattern and load
-      //       appropriate embed mechanism.
-      var components = href && href.match(/\/documents\/([A-Za-z0-9-]+)\.html\#document\/p([0-9]+)$/);
-      if (components) {
-        var documentSlug = components[1];
-        var path         = '/documents/' + documentSlug + '.json';
-        result           = {
-          type:         'page',
-          host:         resource.host,
-          path:         path,
-          documentSlug: documentSlug,
-          pageNumber:   components[2],
-          resourceURL:  resource.protocol + '//' + resource.host + path,
-          embedOptions: {
-            page: components[2],
-          },
-        };
+      resourceData = DCEmbedToolbelt.recognizeResource(resourceUrl);
+
+      if (!Penny.isEmpty(resourceData)) {
+        switch (resourceData.resourceType) {
+          case 'document':
+            break;
+          case 'page':
+            resourceData.embedOptions = {
+              page: resourceData.pageNumber
+            };
+            break;
+          case 'note':
+            break;
+        }
       } else {
         console.error("The DocumentCloud URL you're trying to embed doesn't look right. Please generate a new embed code.");
       }
-      return result;
+
+      return resourceData;
     };
 
     // Convert embed stubs to real live embeds. If this fails, stubs remain 
     // usable as effectively `noscript` representations of the embed.
     var enhanceStubs = function() {
       var stubs = document.querySelectorAll('.DC-embed');
-      Penny.forEach(stubs, function (stub, i) {
+      Penny.each(stubs, function (stub, i) {
         if (stub.className.indexOf('DC-embed-enhanced') != -1) { return; }
         var resourceElement = stub.querySelector('.DC-embed-resource');
         var resourceData    = extractResourceData(resourceElement);
@@ -108,7 +112,7 @@
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
           stub.className += ' DC-embed-enhanced';
-          stub.setAttribute('data-resource-type', resourceData.type);
+          stub.setAttribute('data-resource-type', resourceData.resourceType);
           stub.setAttribute('id', elementId);
 
           // Options come from three places:
@@ -118,15 +122,10 @@
           var embedOptions = Penny.extend({},
             extractOptionsFromStub(stub),
             resourceData.embedOptions,
-            {
-              container: '#' + elementId,
-            }
+            { container: '#' + elementId }
           );
 
-          DocumentCloud.embed.loadPage(
-            '//' + resourceData.host + resourceData.path,
-            embedOptions
-          );
+          DocumentCloud.embed.loadPage(resourceData.resourceDataUrl, embedOptions);
         } else {
           console.error("The DocumentCloud URL you're trying to embed doesn't look right. Please generate a new embed code.");
         }
