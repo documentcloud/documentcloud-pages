@@ -8,6 +8,11 @@ A responsive, embeddable JavaScript library which displays pages from documents 
 2. There are a number of use cases where it's useful to display only a single page from a document and where the rich metadata of the full document (such as [DocumentCloud notes](https://www.documentcloud.org/help/notes) or document title/contributor information) would complement the single pages of supporting material.
 3. DocumentCloud plans to incrementally build a responsive viewer from smaller constituent components, and a full page with notes is the next step up from [our smaller individual note embeds](https://www.documentcloud.org/help/notes).
 
+# Browser Compatibility
+
+* The unenhanced markup (effectively, noscript) is compatible with everything unless being served on an HTTPS page, in which case it requires an SNI-compatible browser (aka anything besides [IE on XP](https://github.com/documentcloud/documentcloud/issues/278)).
+* Enhanced markup is compatible with IE8+ on Vista+ and all the other usual suspects.
+
 # Participating
 
 You should [open an issue](https://github.com/documentcloud/documentcloud-pages/issues) for suggestions or ideas you'd like to tell us about!
