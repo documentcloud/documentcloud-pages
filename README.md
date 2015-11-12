@@ -10,7 +10,7 @@ A responsive, embeddable JavaScript library which displays pages from documents 
 
 # Browser Compatibility
 
-* The unenhanced markup (effectively, noscript) is compatible with everything unless being served on an HTTPS page, in which case it requires an SNI-compatible browser (aka anything besides [IE on XP](https://github.com/documentcloud/documentcloud/issues/278)).
+* Unenhanced markup (effectively, noscript) is compatible with everything unless being served on an HTTPS page, in which case it requires an SNI-compatible browser (aka anything besides [IE on XP](https://github.com/documentcloud/documentcloud/issues/278)).
 * Enhanced markup is compatible with IE8+ on Vista+ and all the other usual suspects.
 
 # Participating
