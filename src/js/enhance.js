@@ -113,8 +113,8 @@
       var defaultConfig = {
         page: {
           assetPaths: {
-            app:   "/dist/page_embed.js",
-            style: "/dist/page_embed.css"
+            app:   "../dist/page_embed.js",
+            style: "../dist/page_embed.css"
           }
         }
       };
