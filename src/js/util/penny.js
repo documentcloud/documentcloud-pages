@@ -44,8 +44,9 @@
 
     each: function (collection, fn) {
       if (collection != null && typeof collection === 'object') {
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
         for (var key in collection) {
-          if (Object.prototype.hasOwnProperty.call(collection, key)) {
+          if (hasOwnProperty.call(collection, key)) {
             fn(collection[key], key);
           }
         }
@@ -59,8 +60,9 @@
 
     values: function (obj) {
       var values = [];
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (hasOwnProperty.call(obj, key)) {
           values.push(obj[key]);
         }
       }
@@ -69,8 +71,9 @@
 
     keys: function (obj) {
       var keys = [];
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (hasOwnProperty.call(obj, key)) {
           keys.push(obj[key]);
         }
       }
@@ -78,8 +81,9 @@
     },
 
     findKey: function(obj, fn) {
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (hasOwnProperty.call(obj, key)) {
           if (fn(obj[key], key)) {
             return key;
           }
@@ -123,6 +127,7 @@
       // Otherwise, does it have any properties of its own?
       // Note that this doesn't handle
       // toString and valueOf enumeration bugs in IE < 9
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
         if (hasOwnProperty.call(obj, key)) { return false; }
       }
