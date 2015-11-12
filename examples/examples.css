@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  padding: 1em;
+  font: 300 1em/1.6em 'Gotham', 'Proxima Nova', 'Avenir Next', Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+  line-height: 1.3em;
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+header,
+section {
+  margin-bottom: 3em;
+}
+
+.col {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 0;
+}
+.col * {
+  line-height: 1.6em;
+}
+
+.col-of-3 {
+  width: 31%;
+  margin-right: 2%;
+}
+
+.col-3.col-of-3 {
+  margin-right: 0;
+}
+
+.desc {
+  font-style: italic;
+  margin-top: -1em;
+}
+
+#live_options label {
+  margin-left: 1em;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+@media (max-width: 400px) {
+  .hide-from-mobile {
+    display: none;
+  }
+
+  .col-of-3 {
+    display: block;
+    width: auto;
+  }
+}
