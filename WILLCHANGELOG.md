@@ -6,14 +6,14 @@ This is a document listing priorities for the page-embed.  Think of this as the 
 
 - [ ] [undefined host names for pixel ping referrers](https://github.com/documentcloud/documentcloud-page/issues/34)
 - [ ] [Disable pixel ping on embed wizard](https://github.com/documentcloud/documentcloud-page/issues/33)
-- [ ] [afterLoad callback]()
-- [ ] [oEmbed endpoint on platform](https://github.com/documentcloud/documentcloud/issues/306)
-- [ ] [Wordpress plugin support](https://github.com/documentcloud/wordpress-documentcloud/issues/28)
-- [ ] [API documentation for the JS viewer]()
-- [ ] [Platform embed wizard configuration options](https://github.com/documentcloud/documentcloud/issues/305)
+- [ ] [Add oEmbed endpoint to platform](https://github.com/documentcloud/documentcloud/issues/306)
+- [ ] [Add page embed support to WordPress plugin](https://github.com/documentcloud/wordpress-documentcloud/issues/28)
+- [ ] [Add afterLoad callback](https://github.com/documentcloud/documentcloud-pages/issues/37)
+- [ ] [Provide a stable, documented API for the page embedder](https://github.com/documentcloud/documentcloud-pages/issues/35)
+- [ ] [Add configuration options to platform embed wizard](https://github.com/documentcloud/documentcloud/issues/305)
 
 -----------------------------------
 
-- [ ] [iframeable embeds]()
-    - [ ] [page aspect ratios stored on documents](https://github.com/documentcloud/documentcloud/issues/284)
-- [ ] [UX review of notes]()
+- [ ] [Support iframeable embeds](https://github.com/documentcloud/documentcloud-pages/issues/18)
+    - [ ] [Store page aspect ratio on documents](https://github.com/documentcloud/documentcloud/issues/284)
+- [ ] [Perform a thorough UX review of notes](https://github.com/documentcloud/documentcloud-pages/issues/36)
