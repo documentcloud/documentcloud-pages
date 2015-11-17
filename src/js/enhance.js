@@ -33,7 +33,7 @@
     // element with that ID, then increments and tries again if it finds one.
     var generateUniqueElementId = function(resource) {
       var i  = 1;
-      var id = resource.documentSlug;
+      var id = 'DC-' + resource.documentSlug;
       switch (resource.resourceType) {
         case 'document':
           id += '-i' + i;

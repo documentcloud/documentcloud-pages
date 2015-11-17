@@ -107,15 +107,15 @@
       return resource;
     },
 
-    // Given a resource or a resource URL, composes and inserts a tracking pixel
-    pixelPing: function(resource) {
+    // Given a resource or resource URL, composes and inserts a tracking pixel.
+    // Also takes a container selector string.
+    pixelPing: function(resource, container) {
       // If passed a URL to a resource, convert it to a recognized object
       if (_.isString(resource)) {
         resource = this.recognizeResource(resource);
       }
 
       var loc = window.location;
-      if (loc.protocol == 'file:') { return false; };
       // Effectively strips off any hash
       var sourceUrl = loc.origin + loc.pathname;
       // Treat `foo.com/bar/` and `foo.com/bar` as the same URL
@@ -123,12 +123,8 @@
 
       var pingUrl = '//' + resource.domain + '/pixel.gif';
       var key = encodeURIComponent(resource.resourceType + ':' + resource.trackingId + ':' + sourceUrl);
-      var image    = document.createElement('img');
-      image.width  = '1';
-      image.height = '1';
-      image.src    = pingUrl + '?key=' + key;
-      image.alt    = 'Analytics pixel for DocumentCloud';
-      document.querySelector('body').appendChild(image);
+      var image = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="">';
+      document.querySelector(container).insertAdjacentHTML('afterend', image);
     }
   };
 
