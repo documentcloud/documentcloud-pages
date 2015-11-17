@@ -5,15 +5,15 @@ This is a document listing priorities for the page-embed.  Think of this as the 
 ### Current Effort: Post Launch Cleanup
 
 - [ ] [undefined host names for pixel ping referrers](https://github.com/documentcloud/documentcloud-page/issues/34)
-- [ ] [Disable pixel ping on embed wizard](#33)
-- [ ] afterLoad callback
-- [ ] oEmbed endpoint on platform
-- [ ] Wordpress plugin
-- [ ] API documentation for the JS viewer
+- [ ] [Disable pixel ping on embed wizard](https://github.com/documentcloud/documentcloud-page/issues/33)
+- [ ] [afterLoad callback]()
+- [ ] [oEmbed endpoint on platform](https://github.com/documentcloud/documentcloud/issues/306)
+- [ ] [Wordpress plugin support](https://github.com/documentcloud/wordpress-documentcloud/issues/28)
+- [ ] [API documentation for the JS viewer]()
+- [ ] [Platform embed wizard configuration options](https://github.com/documentcloud/documentcloud/issues/305)
 
 -----------------------------------
 
-- [ ] iframeable embeds
-    - [ ] page aspect ratios stored on documents (platform)
-- [ ] UX review of notes
-- [ ] Platform embed wizard configuration options
+- [ ] [iframeable embeds]()
+    - [ ] [page aspect ratios stored on documents](https://github.com/documentcloud/documentcloud/issues/284)
+- [ ] [UX review of notes]()
