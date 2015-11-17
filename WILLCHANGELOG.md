@@ -4,8 +4,8 @@ This is a document listing priorities for the page-embed.  Think of this as the 
 
 ### Current Effort: Post Launch Cleanup
 
-- [ ] undefined host names for pixel ping referrers (documentcloud-page#34)
-- [ ] Disable pixel ping on embed wizard (documentcloud-page#33)
+- [ ] [undefined host names for pixel ping referrers](https://github.com/documentcloud/documentcloud-page/issues/34)
+- [ ] [Disable pixel ping on embed wizard](#33)
 - [ ] afterLoad callback
 - [ ] oEmbed endpoint on platform
 - [ ] Wordpress plugin
