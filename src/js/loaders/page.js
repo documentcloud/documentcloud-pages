@@ -15,16 +15,37 @@
   views.pages = views.pages || {};
 
   if (!_.isFunction(DocumentCloud.embed.load)) {
-    DocumentCloud.embed.load = function(resource, opts) {
-      var options = opts || {};
-      if (!options.container) {
+    DocumentCloud.embed.load = function(resource, options) {
+      options = options || {};
+
+      // If passed a URL to a resource, convert it to a recognized object
+      // TODO: Just pass resource straight to `recognizeResource` and have that       be smarter about being passed recognized resources.
+      if (_.isString(resource)) {
+        resource = DCEmbedToolbelt.recognizeResource(resource);
+      }
+
+      // Have we been passed a selector string, jQuery element, or DOM element?
+      var container = options.container;
+      if (_.isString(container)) {
+        container = document.querySelector(container);
+      } else if (container instanceof jQuery && _.isElement(container[0])) {
+        // Is jQuery DOM element, pluck out DOM element
+        container = container[0];
+      } else if (_.isElement(container)) {
+        // Is DOM element already, do nothing
+      }
+
+      if (!container) {
         console.error("DocumentCloud can't be embedded without specifying a container.");
         return;
       }
 
-      // If passed a URL to a resource, convert it to a recognized object
-      if (_.isString(resource)) {
-        resource = DCEmbedToolbelt.recognizeResource(resource);
+      var containerId;
+      if (container.hasAttribute('id')) {
+        containerId = container.getAttribute('id');
+      } else {
+        containerId = DCEmbedToolbelt.generateUniqueElementId(resource);
+        container.setAttribute('id', containerId);
       }
 
       var documentId      = resource.documentId;
@@ -32,19 +53,19 @@
       var validOptionKeys = definition.PageView.prototype.validOptionKeys;
       var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
                                      resource.embedOptions,
-                                     {model: doc, el: options.container});
+                                     {model: doc, el: container});
       var view            = new definition.PageView(embedOptions);
       data.documents.add(doc);
       views.pages[documentId]                    = views.pages[documentId] || {};
-      views.pages[documentId][options.container] = view;
+      views.pages[documentId][containerId] = view;
       doc.fetch({url: resource.dataUrl});
 
       // Track where the embed is loaded from
-      DCEmbedToolbelt.pixelPing(resource, options.container);
+      DCEmbedToolbelt.pixelPing(resource, '#' + containerId);
 
       // We tweak the interface lightly based on the width of the embed; sadly, 
       // in non-iframe contexts, this requires watching the window for resizes.
-      var $el = $(options.container);
+      var $el = $(container);
       var setEmbedSizeClasses = function() {
         var width = $el.width();
         if (width < 200) { $el.addClass('DC-embed-size-tiny').removeClass('DC-embed-size-small'); }

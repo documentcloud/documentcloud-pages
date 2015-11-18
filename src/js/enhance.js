@@ -29,28 +29,6 @@
       }
     };
 
-    // Generates a unique ID for a resource, checks the DOM for any existing
-    // element with that ID, then increments and tries again if it finds one.
-    var generateUniqueElementId = function(resource) {
-      var i  = 1;
-      var id = 'DC-' + resource.documentSlug;
-      switch (resource.resourceType) {
-        case 'document':
-          id += '-i' + i;
-          break;
-        case 'page':
-          id += '-p' + resource.pageNumber + '-i' + i;
-          break;
-        case 'note':
-          id += '-a' + resource.noteId + '-i' + i;
-          break;
-      }
-      while (document.getElementById(id)) {
-        id = id.replace(/-i[0-9]+$/, '-i' + i++);
-      }
-      return id;
-    };
-
     // Takes an embed stub DOM element and looks for a `data-options` attribute 
     // that contains a JSON representation of options.
     var extractOptionsFromStub = function(stub) {
@@ -83,7 +61,7 @@
         var resourceUrl     = resourceElement.getAttribute('href');
         var resource        = DCEmbedToolbelt.recognizeResource(resourceUrl);
         if (!Penny.isEmpty(resource)) {
-          var elementId = generateUniqueElementId(resource);
+          var elementId = DCEmbedToolbelt.generateUniqueElementId(resource);
 
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
@@ -98,7 +76,7 @@
           var embedOptions = Penny.extend({},
             extractOptionsFromStub(stub),
             resource.embedOptions,
-            { container: '#' + elementId }
+            { container: stub }
           );
 
           DocumentCloud.embed.load(resource, embedOptions);

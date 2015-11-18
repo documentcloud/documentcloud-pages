@@ -107,6 +107,28 @@
       return resource;
     },
 
+    // Generates a unique ID for a resource, checks the DOM for any existing
+    // element with that ID, then increments and tries again if it finds one.
+    generateUniqueElementId: function(resource) {
+      var i  = 1;
+      var id = 'DC-' + resource.documentSlug;
+      switch (resource.resourceType) {
+        case 'document':
+          id += '-i' + i;
+          break;
+        case 'page':
+          id += '-p' + resource.pageNumber + '-i' + i;
+          break;
+        case 'note':
+          id += '-a' + resource.noteId + '-i' + i;
+          break;
+      }
+      while (document.getElementById(id)) {
+        id = id.replace(/-i[0-9]+$/, '-i' + i++);
+      }
+      return id;
+    },
+
     // Given a resource or resource URL, composes and inserts a tracking pixel.
     // Also takes a container selector string.
     pixelPing: function(resource, container) {
@@ -124,6 +146,7 @@
       var pingUrl = '//' + resource.domain + '/pixel.gif';
       var key = encodeURIComponent(resource.resourceType + ':' + resource.trackingId + ':' + sourceUrl);
       var image = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="">';
+      // TODO: Allow passing in of either DOM element or ID
       document.querySelector(container).insertAdjacentHTML('afterend', image);
     }
   };
