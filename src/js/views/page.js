@@ -125,7 +125,6 @@
       this.$image        = this.$el.find('.DC-page-image');
       this.$text         = this.$el.find('.DC-page-text');
       this.$overlay      = this.$el.find('.DC-note-overlay');
-      // TODO: Chase this down and make sure the page survives no page selector
       this.$pageSelector = this.$el.find('.DC-action-nav-select');
     },
 
