@@ -162,7 +162,7 @@
 
       var loc = window.location;
       // Effectively strips off any hash
-      var sourceUrl = loc.origin + loc.pathname;
+      var sourceUrl = loc.protocol + '//' + loc.host + loc.pathname;
       // Treat `foo.com/bar/` and `foo.com/bar` as the same URL
       sourceUrl = sourceUrl.replace(/[\/]+$/, '');
 
