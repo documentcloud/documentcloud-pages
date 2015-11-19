@@ -61,13 +61,10 @@
         var resourceUrl     = resourceElement.getAttribute('href');
         var resource        = DCEmbedToolbelt.recognizeResource(resourceUrl);
         if (!Penny.isEmpty(resource)) {
-          var elementId = DCEmbedToolbelt.generateUniqueElementId(resource);
-
           // Changing the class name means subsequent runs of the loader will
           // recognize this element has already been enhanced and won't redo it.
           stub.className += ' DC-embed-enhanced';
           stub.setAttribute('data-resource-type', resource.resourceType);
-          stub.setAttribute('id', elementId);
 
           // Options come from three places:
           // 1. JSON hash passed in via the stub's `data-options` attribute

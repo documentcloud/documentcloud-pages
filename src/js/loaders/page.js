@@ -25,35 +25,30 @@
         return;
       }
 
-      // While we can pass the container around as an actual DOM element, we 
-      // still require it have an ID by which we can key `views.pages`. If it
-      // doesn't have one, generate one.
-      var containerId;
-      if (container.hasAttribute('id')) {
-        containerId = container.getAttribute('id');
-      } else {
-        containerId = DCEmbedToolbelt.generateUniqueElementId(resource);
-        container.setAttribute('id', containerId);
-      }
+      // We don't want the top-level container to be our view element, so 
+      // create one.
+      var viewElementId   = DCEmbedToolbelt.generateUniqueElementId(resource);
+      container.innerHTML = '<div id="' + viewElementId + '" class="DC-embed-view"></div>';
+      var viewElement     = document.getElementById(viewElementId);
 
       var documentId      = resource.documentId;
       var doc             = new definition.Document({id: documentId});
       var validOptionKeys = definition.PageView.prototype.validOptionKeys;
       var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
                                      resource.embedOptions,
-                                     {model: doc, el: container});
+                                     {model: doc, el: viewElement});
       var view            = new definition.PageView(embedOptions);
       data.documents.add(doc);
       views.pages[documentId]                    = views.pages[documentId] || {};
-      views.pages[documentId][containerId] = view;
+      views.pages[documentId][viewElementId] = view;
       doc.fetch({url: resource.dataUrl});
 
       // Track where the embed is loaded from
-      DCEmbedToolbelt.pixelPing(resource, '#' + containerId);
+      DCEmbedToolbelt.pixelPing(resource, '#' + viewElementId);
 
       // We tweak the interface lightly based on the width of the embed; sadly, 
       // in non-iframe contexts, this requires watching the window for resizes.
-      var $el = $(container);
+      var $el = $(viewElement);
       var setEmbedSizeClasses = function() {
         var width = $el.width();
         if (width < 200) { $el.addClass('DC-embed-size-tiny').removeClass('DC-embed-size-small'); }

@@ -174,6 +174,21 @@ $buttonPaddingMax: 12px;
 
 //---------------------------------- STYLES ------------------------------------
 
+.DC-embed-view {
+  position: relative;
+  z-index: 2;
+}
+
+// Hide pixel behind page image
+.DC-embed-pixel-ping {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 1;
+  height: 1;
+}
+
 .DC-page-embed {
   position: relative;
   font: $fontWeightNormal 10pt/1.6em 'Helvetica Neue', Helvetica, Arial, sans-serif;
