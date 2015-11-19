@@ -1,8 +1,9 @@
 (function(){
-  var DocumentCloud = window.DocumentCloud;
-  var $             = DocumentCloud.$;
-  var _             = DocumentCloud._;
-  var Backbone      = DocumentCloud.Backbone;
+  var DCEmbedToolbelt = window.DCEmbedToolbelt;
+  var DocumentCloud   = window.DocumentCloud;
+  var $               = DocumentCloud.$;
+  var _               = DocumentCloud._;
+  var Backbone        = DocumentCloud.Backbone;
 
   var definition = DocumentCloud.embed.definition;
   var data       = DocumentCloud.embed.data;
@@ -251,7 +252,7 @@
     },
 
     checkIfIframed: function() {
-      if (this.inIframe()) {
+      if (DCEmbedToolbelt.isIframed()) {
         this.$el.addClass('DC-embed-iframed');
         this.iframed = true;
       } else {
@@ -270,15 +271,6 @@
                             html.clientHeight, html.scrollHeight, html.offsetHeight);
         }
         this.pym.sendMessage('height', height.toString());
-      }
-    },
-
-    // http://stackoverflow.com/q/326069/5071070
-    inIframe: function() {
-      try {
-          return window.self !== window.top;
-      } catch (e) {
-          return true;
       }
     },
 

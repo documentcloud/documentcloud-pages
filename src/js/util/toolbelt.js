@@ -20,6 +20,7 @@
   // Underscore) or Penny.
   var DCEmbedToolbelt = window.DCEmbedToolbelt = window.DCEmbedToolbelt || {
 
+    // Sugar for making sure we've recognized a thing as a resource.
     isResource: function(thing) {
       return !!(_.has(thing, 'resourceType'));
     },
@@ -154,21 +155,63 @@
       return id;
     },
 
-    // Given a resource or resource URL, composes and inserts a tracking pixel.
-    // Also takes a container selector string.
+    // http://stackoverflow.com/a/21965342/5071070
+    isIframed: function() {
+      try {
+          return window.self !== window.top;
+      } catch (e) {
+          return true;
+      }
+    },
+
+    // We want to know where the resource is embedded in an iframe-safe way.
+    // I.e., when wrapped in an iframe, we want the parent page's URL, not the 
+    // iframe's URL. We also want to strip off any hash, query params, and 
+    // ending slash to unify the results.
+    getSourceUrl: function() {
+      var source, sourceUrl;
+
+      if (this.isIframed()) {
+        // NB: Since we can't rely on accessing the parent page's URL using 
+        // `window.top` or `window.parent` thanks to same-origin requirements, 
+        // we have to use `document.referrer`, which has two limitations:
+        // - Deep-iframed pages (grandchildren) can't access grandparents, and 
+        //   so will return the URL of their own parent
+        // - If the child page navigates away, the `referrer` is now the 
+        //   original child, not the parent
+        // Despite these limitations, it's still the most practical answer.
+        source      = document.createElement('A');
+        source.href = document.referrer;
+      } else {
+        source      = window.location;
+      }
+      sourceUrl = source.protocol + '//' + source.host;
+
+      // Use `pathname` to effectively strip off hash and query params. But! In
+      // IE, `createElement`-generated URLs won't have an absolute `pathname`,
+      // so we must prefix it manually.
+      if (source.pathname.indexOf('/') !== 0) {
+        sourceUrl += '/';
+      };
+      sourceUrl += source.pathname;
+
+      // Treat `foo.com/bar/` and `foo.com/bar` as the same URL
+      sourceUrl = sourceUrl.replace(/[\/]+$/, '');
+
+      return sourceUrl;
+    },
+
+    // Given a resource or resource URL, composes and inserts a tracking pixel 
+    // adjacent to the specified container (which can be a DOM element or 
+    // selector string).
     pixelPing: function(resource, container) {
       resource  = this.recognizeResource(resource);
       container = this.ensureElement(container);
 
-      var loc = window.location;
-      // Effectively strips off any hash
-      var sourceUrl = loc.protocol + '//' + loc.host + loc.pathname;
-      // Treat `foo.com/bar/` and `foo.com/bar` as the same URL
-      sourceUrl = sourceUrl.replace(/[\/]+$/, '');
-
-      var pingUrl = '//' + resource.domain + '/pixel.gif';
-      var key = encodeURIComponent(resource.resourceType + ':' + resource.trackingId + ':' + sourceUrl);
-      var image = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="Anonymous hit counter for DocumentCloud">';
+      var pingUrl   = '//' + resource.domain + '/pixel.gif';
+      var sourceUrl = this.getSourceUrl();
+      var key       = encodeURIComponent(resource.resourceType + ':' + resource.trackingId + ':' + sourceUrl);
+      var image     = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="Anonymous hit counter for DocumentCloud">';
       container.insertAdjacentHTML('afterend', image);
     }
   };
