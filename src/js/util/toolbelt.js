@@ -20,10 +20,18 @@
   // Underscore) or Penny.
   var DCEmbedToolbelt = window.DCEmbedToolbelt = window.DCEmbedToolbelt || {
 
+    isResource: function(thing) {
+      return !!(_.has(thing, 'resourceType'));
+    },
+
     // Given a valid URL to a DocumentCloud resource, returns an object 
     // identifying the resource's type, the environment of the resource being 
     // requested, and some resource-specific URL components.
-    recognizeResource: function(resourceUrl) {
+    recognizeResource: function(originalResource) {
+
+      if (this.isResource(originalResource)) {
+        return originalResource;
+      }
 
       var domainEnvPatterns = {
         production:  'www\.documentcloud\.org',
@@ -71,14 +79,14 @@
         if (!_.isEmpty(resource)) { return; } // `_.each` can't be broken out of
         _.each(patterns, function(pattern) {
           if (!_.isEmpty(resource)) { return; } // `_.each` can't be broken out of
-          var match = resourceUrl.match(pattern);
+          var match = originalResource.match(pattern);
           if (match) {
             // Resource-agnostic properties
             resource = {
-              resourceUrl:  resourceUrl,
+              resourceUrl:  originalResource,
               resourceType: resourceType,
               environment:  _.findKey(domainEnvPatterns, function(domain, env) {
-                return resourceUrl.match(domain);
+                return originalResource.match(domain);
               }),
               domain:       match[1],
               documentId:   match[2],
@@ -107,6 +115,23 @@
       return resource;
     },
 
+    // Many times, we want a function to be able to receive either a string 
+    // selector or a DOM element (or even a jQuery element). This function lets 
+    // you pass a parameter in and get out a DOM element.
+    ensureElement: function(thing) {
+      if (_.isElement(thing)) {
+        // Is DOM element already; return it
+        return thing;
+      } else if (_.isString(thing)) {
+        // Is a selector; find and return DOM element
+        return document.querySelector(thing);
+      } else if (thing instanceof jQuery && _.isElement(thing[0])) {
+        // Is jQuery element; pluck out and return DOM element
+        return thing[0];
+      }
+      return null;
+    },
+
     // Generates a unique ID for a resource, checks the DOM for any existing
     // element with that ID, then increments and tries again if it finds one.
     generateUniqueElementId: function(resource) {
@@ -132,10 +157,8 @@
     // Given a resource or resource URL, composes and inserts a tracking pixel.
     // Also takes a container selector string.
     pixelPing: function(resource, container) {
-      // If passed a URL to a resource, convert it to a recognized object
-      if (_.isString(resource)) {
-        resource = this.recognizeResource(resource);
-      }
+      resource  = this.recognizeResource(resource);
+      container = this.ensureElement(container);
 
       var loc = window.location;
       // Effectively strips off any hash
@@ -146,8 +169,7 @@
       var pingUrl = '//' + resource.domain + '/pixel.gif';
       var key = encodeURIComponent(resource.resourceType + ':' + resource.trackingId + ':' + sourceUrl);
       var image = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="">';
-      // TODO: Allow passing in of either DOM element or ID
-      document.querySelector(container).insertAdjacentHTML('afterend', image);
+      container.insertAdjacentHTML('afterend', image);
     }
   };
 

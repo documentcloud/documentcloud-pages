@@ -1,14 +1,14 @@
 /*!
  * Penny 0.0.0
- * Sometimes you only need a fraction of a $.
- * Many thanks to http://youmightnotneedjquery.com and Stack Overflow.
+ * Sometimes you only need a fraction of a $ or _.
+ * Thanks to http://youmightnotneedjquery.com, Underscore, and Stack Overflow.
  *
  * The version number is not a typo, it's a statement: you should not use Penny.
  * It is not a library, it is a customized minimal set of functions for a very
  * specific use case. You should totally make your own Penny for your own case.
  *
  * @license (c) 2015 Justin Reese, DocumentCloud
- * Penny may be freely distributed under the MIT license.
+ * Penny may be freely distributed under the MIT license, but why would you?
  *
  */
 
@@ -44,9 +44,8 @@
 
     each: function (collection, fn) {
       if (collection != null && typeof collection === 'object') {
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
         for (var key in collection) {
-          if (hasOwnProperty.call(collection, key)) {
+          if (Penny.has(collection, key)) {
             fn(collection[key], key);
           }
         }
@@ -58,11 +57,14 @@
       }
     },
 
+    has: function(obj, key) {
+      return obj != null && Object.prototype.hasOwnProperty.call(obj, key);
+    },
+
     values: function (obj) {
       var values = [];
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (hasOwnProperty.call(obj, key)) {
+        if (Penny.has(obj, key)) {
           values.push(obj[key]);
         }
       }
@@ -71,9 +73,8 @@
 
     keys: function (obj) {
       var keys = [];
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (hasOwnProperty.call(obj, key)) {
+        if (Penny.has(obj, key)) {
           keys.push(obj[key]);
         }
       }
@@ -81,9 +82,8 @@
     },
 
     findKey: function(obj, fn) {
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (hasOwnProperty.call(obj, key)) {
+        if (Penny.has(obj, key)) {
           if (fn(obj[key], key)) {
             return key;
           }
@@ -111,7 +111,11 @@
     },
 
     isString: function(thing) {
-      return typeof thing === 'string';
+      return !!(typeof thing === 'string');
+    },
+
+    isElement: function(thing) {
+      return !!(thing && thing.nodeType === 1);
     },
 
     // http://stackoverflow.com/a/4994244/5071070
@@ -127,9 +131,8 @@
       // Otherwise, does it have any properties of its own?
       // Note that this doesn't handle
       // toString and valueOf enumeration bugs in IE < 9
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
       for (var key in obj) {
-        if (hasOwnProperty.call(obj, key)) { return false; }
+        if (Penny.has(obj, key)) { return false; }
       }
 
       return true;

@@ -4,7 +4,7 @@
 
     if (!window.DCEmbedToolbelt) {
       console.error("DocumentCloud embed can't load because of missing components.");
-      return false;
+      return;
     }
 
     // Insert the necessary stylesheet into the head, unless it's already there.

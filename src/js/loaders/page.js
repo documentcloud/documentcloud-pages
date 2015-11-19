@@ -8,38 +8,26 @@
   var DCEmbedToolbelt = window.DCEmbedToolbelt;
 
   data.documents = data.documents || new definition.DocumentSet();
-  // views.pages is a nested list of page views, keyed at the top level
-  // by document id, and then element selector.
-  // e.g. views.pages['282753-lefler-thesis']['#target-container']
-  // initialization of the inner object is done in DocumentCloud.embed.load
+  // `views.pages` is a nested list of page views, keyed at the top level by
+  // document slug and then by element ID (sans `#`), e.g.: 
+  // `views.pages['1234-this-is-a-slug']['foo']`. You could target the element 
+  // with `document.getElementById('foo')`.
   views.pages = views.pages || {};
 
   if (!_.isFunction(DocumentCloud.embed.load)) {
     DocumentCloud.embed.load = function(resource, options) {
-      options = options || {};
+      options  = options || {};
+      resource = DCEmbedToolbelt.recognizeResource(resource);
 
-      // If passed a URL to a resource, convert it to a recognized object
-      // TODO: Just pass resource straight to `recognizeResource` and have that       be smarter about being passed recognized resources.
-      if (_.isString(resource)) {
-        resource = DCEmbedToolbelt.recognizeResource(resource);
-      }
-
-      // Have we been passed a selector string, jQuery element, or DOM element?
-      var container = options.container;
-      if (_.isString(container)) {
-        container = document.querySelector(container);
-      } else if (container instanceof jQuery && _.isElement(container[0])) {
-        // Is jQuery DOM element, pluck out DOM element
-        container = container[0];
-      } else if (_.isElement(container)) {
-        // Is DOM element already, do nothing
-      }
-
+      var container = DCEmbedToolbelt.ensureElement(options.container);
       if (!container) {
         console.error("DocumentCloud can't be embedded without specifying a container.");
         return;
       }
 
+      // While we can pass the container around as an actual DOM element, we 
+      // still require it have an ID by which we can key `views.pages`. If it
+      // doesn't have one, generate one.
       var containerId;
       if (container.hasAttribute('id')) {
         containerId = container.getAttribute('id');
