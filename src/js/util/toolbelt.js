@@ -168,7 +168,7 @@
 
       var pingUrl = '//' + resource.domain + '/pixel.gif';
       var key = encodeURIComponent(resource.resourceType + ':' + resource.trackingId + ':' + sourceUrl);
-      var image = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="Analytics pixel for DocumentCloud">';
+      var image = '<img src="' + pingUrl + '?key=' + key + '" width="1" height="1" alt="Anonymous hit counter for DocumentCloud">';
       container.insertAdjacentHTML('afterend', image);
     }
   };
