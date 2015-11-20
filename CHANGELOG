@@ -1,3 +1,14 @@
+0.3.0
+-----
+* Refactor markup so that embed container is minimally changed and isn't the Backbone view site
+* Add Pixel Ping for counting document hits
+* Allow loader to receive existing DOM element, not just element ID string, as its container (#39)
+* Increase CSS selector specificity to minimize picking up parent styles (#40)
+* Allow viewing text of more than one change (#21)
+* Maintain page mode while changing pages (#9)
+* Fix undefined host names for some Pixel Ping referrers (#34)
+* Disable Pixel Ping on embed wizard (#33)
+
 0.2.0
 -----
 

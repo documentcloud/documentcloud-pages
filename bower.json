@@ -1,7 +1,7 @@
 {
   "name": "documentcloud-pages",
   "description": "Responsively embed DocumentCloud pages",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "authors": [
     "Ted Han <ted@knowtheory.net>",
     "Justin Reese <justin@justinreese.com>"
