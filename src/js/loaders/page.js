@@ -44,7 +44,9 @@
       doc.fetch({url: resource.dataUrl});
 
       // Track where the embed is loaded from
-      DCEmbedToolbelt.pixelPing(resource, '#' + viewElementId);
+      if (options.wizard !== true) {
+        DCEmbedToolbelt.pixelPing(resource, '#' + viewElementId);
+      }
 
       // We tweak the interface lightly based on the width of the embed; sadly, 
       // in non-iframe contexts, this requires watching the window for resizes.
