@@ -21,15 +21,15 @@
       'click.dcPage  .DC-note-overlay':      'clickNoteOverlay',
     },
 
-    validOptionKeys: ['credit', 'page', 'pageNavigator', 'pym', 'text', 'wizard'],
+    validOptionKeys: ['credit', 'page', 'pageNavigator', 'pym', 'text', 'preview'],
 
     defaultOptions: {
       credit:        true,
       page:          1,
       pageNavigator: false,
+      preview:       false,
       pym:           false,
-      text:          false,
-      wizard:        false
+      text:          false
     },
 
     initialize: function(options) {

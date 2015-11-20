@@ -44,7 +44,7 @@
       doc.fetch({url: resource.dataUrl});
 
       // Track where the embed is loaded from
-      if (options.wizard !== true) {
+      if (options.preview !== true) {
         DCEmbedToolbelt.pixelPing(resource, '#' + viewElementId);
       }
 
