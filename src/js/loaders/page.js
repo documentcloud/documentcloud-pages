@@ -9,9 +9,9 @@
 
   data.documents = data.documents || new definition.DocumentSet();
   // `views.pages` is a nested list of page views, keyed at the top level by
-  // document slug and then by element ID (sans `#`), e.g.: 
-  // `views.pages['1234-this-is-a-slug']['foo']`. You could target the element 
-  // with `document.getElementById('foo')`.
+  // document ID and then by element ID (sans `#`), e.g.: 
+  // `views.pages['1234']['foo']`. You could target the element with
+  // `document.getElementById('foo')`.
   views.pages = views.pages || {};
 
   if (!_.isFunction(DocumentCloud.embed.load)) {
@@ -40,7 +40,7 @@
                                      {model: doc, el: viewElement});
       var view            = new definition.PageView(embedOptions);
       data.documents.add(doc);
-      views.pages[documentId]                    = views.pages[documentId] || {};
+      views.pages[documentId]                = views.pages[documentId] || {};
       views.pages[documentId][viewElementId] = view;
       doc.fetch({url: resource.dataUrl});
 
