@@ -32,6 +32,8 @@
       text:          false
     },
 
+    sizeBreakpoints: [200, 400],
+
     initialize: function(options) {
       this.options = _.extend({}, this.defaultOptions, options);
 
@@ -247,7 +249,7 @@
     },
 
     clickPage: function() {
-      if (this.$el.hasClass('DC-embed-size-tiny')) {
+      if (this.$el.hasClass('DC-embed-size-0')) {
         window.open(this.model.permalink());
       }
     },

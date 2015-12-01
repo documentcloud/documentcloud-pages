@@ -33,7 +33,8 @@
 
       var documentId      = resource.documentId;
       var doc             = new definition.Document({id: documentId});
-      var validOptionKeys = definition.PageView.prototype.validOptionKeys;
+      var pagePrototype   = definition.PageView.prototype;
+      var validOptionKeys = pagePrototype.validOptionKeys;
       var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
                                      resource.embedOptions,
                                      {model: doc, el: viewElement});
@@ -51,11 +52,12 @@
       // We tweak the interface lightly based on the width of the embed; sadly, 
       // in non-iframe contexts, this requires watching the window for resizes.
       var $el = $(viewElement);
+      var sizeBreakpoints = pagePrototype.sizeBreakpoints;
       var setEmbedSizeClasses = function() {
         var width = $el.width();
-        if (width < 200) { $el.addClass('DC-embed-size-tiny').removeClass('DC-embed-size-small'); }
-        else if (width < 400) { $el.addClass('DC-embed-size-small').removeClass('DC-embed-size-tiny'); }
-        else { $el.removeClass('DC-embed-size-small DC-embed-size-tiny'); }
+        _.each(sizeBreakpoints, function(breakpoint, i) {
+          $el.toggleClass('DC-embed-size-' + i, (width < breakpoint));
+        });
       };
       $(window).on('resize', setEmbedSizeClasses);
       setEmbedSizeClasses();

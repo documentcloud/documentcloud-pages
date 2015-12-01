@@ -1,8 +1,8 @@
 //------------------------------ NOTES -----------------------------------------
 //
 // - Modernizr classes are prefixed with `DC-m-`
-// - For styling breakpoints, we use classes like `.DC-embed-size-tiny` and
-//   `.DC-embed-size-small` instead of media queries, since the latter would
+// - For styling breakpoints, we use classes like `.DC-embed-size-0` and
+//   `.DC-embed-size-1` instead of media queries, since the latter would
 //   only work on iframed pages. These are applied to the Backbone view element.
 //
 
@@ -76,7 +76,7 @@ $buttonPaddingMax: 12px;
       height: $clickHeightMin;
     }
 
-    .DC-embed-size-small & {
+    .DC-embed-size-1 & {
       position: relative;
       float: left;
     }
@@ -112,7 +112,7 @@ $buttonPaddingMax: 12px;
       }
     }
 
-    .DC-embed-size-small & {
+    .DC-embed-size-1 & {
       padding: 0;
     }
   }
@@ -137,7 +137,7 @@ $buttonPaddingMax: 12px;
 @mixin actions-center() {
   left: 40%;
 
-  .DC-embed-size-small & {
+  .DC-embed-size-1 & {
     left: 0;
   }
 
@@ -149,7 +149,7 @@ $buttonPaddingMax: 12px;
 @mixin actions-right() {
   right: 0;
 
-  .DC-embed-size-small & {
+  .DC-embed-size-1 & {
     float: right;
   }
 
@@ -558,7 +558,7 @@ $buttonPaddingMax: 12px;
 
 // Below 200px
 
-.DC-embed-size-tiny .DC-page-embed {
+.DC-embed-size-0 .DC-page-embed {
   font-size: 8pt;
 
   .DC-credit,
@@ -584,7 +584,7 @@ $buttonPaddingMax: 12px;
 
 // Below 300px
 
-.DC-embed-size-small .DC-page-embed {
+.DC-embed-size-1 .DC-page-embed {
   font-size: 9pt;
 
   .DC-logomark-permalink,
