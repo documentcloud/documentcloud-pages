@@ -46,7 +46,7 @@
 
       // Track where the embed is loaded from
       if (options.preview !== true) {
-        DCEmbedToolbelt.pixelPing(resource, '#' + viewElementId);
+        DCEmbedToolbelt.pixelPing(resource, viewElement);
       }
 
       // We tweak the interface lightly based on the width of the embed; sadly, 
