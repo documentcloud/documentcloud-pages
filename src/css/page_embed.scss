@@ -214,6 +214,10 @@ $buttonPaddingMax: 12px;
     color: $dcBrandBlueLight;
   }
 
+  img {
+    max-width: none; /* Override WordPress's `img` rules. */
+  }
+
   // Elements that default to invisible.
   &.DC-mode-image .DC-page-text,
   &.DC-mode-text .DC-note-overlay {
