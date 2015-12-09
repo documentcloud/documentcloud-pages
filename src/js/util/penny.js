@@ -50,8 +50,7 @@
           }
         }
       } else {
-        var len = collection.length;
-        for (i = 0; i < len; i++) {
+        for (var i = 0, len = collection.length; i < len; i++) {
           fn(collection[i], i);
         }
       }
@@ -95,7 +94,7 @@
     extend: function(out) {
       out = out || {};
 
-      for (var i = 1; i < arguments.length; i++) {
+      for (var i = 1, len = arguments.length; i < len; i++) {
         if (!arguments[i]) {
           continue;
         }
