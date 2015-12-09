@@ -43,7 +43,7 @@
     },
 
     each: function (collection, fn) {
-      if (collection != null && typeof collection === 'object') {
+      if (collection != null && typeof collection === 'object' && !Penny.isArrayLike(collection)) {
         for (var key in collection) {
           if (Penny.has(collection, key)) {
             fn(collection[key], key);
@@ -116,6 +116,20 @@
 
     isElement: function(thing) {
       return !!(thing && thing.nodeType === 1);
+    },
+
+    // Exists to work around a bug in Safari whereby some lists, notably 
+    // `querySelectorAll` NodeLists, treat `length` as an own property.
+    isArrayLike: function(collection) {
+      var property = function(key) {
+        return function(obj) {
+          return obj == null ? void 0 : obj[key];
+        };
+      };
+      var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+      var getLength = property('length');
+      var length = getLength(collection);
+      return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
     },
 
     // http://stackoverflow.com/a/4994244/5071070
