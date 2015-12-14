@@ -40,7 +40,7 @@
         development: 'dev\.dcloud\.org'
       };
       var domains = _.values(domainEnvPatterns).join('|');
-      var docBase = '(' + domains + ')\/documents\/([0-9]+)-([a-z0-9-]+)';
+      var docBase = '(' + domains + ')\/documents\/([0-9]+)-([A-Za-z0-9-]+)';
       var resourceTypePatterns = {
         'document': [
           docBase + '\.(?:html|js|json)$'
