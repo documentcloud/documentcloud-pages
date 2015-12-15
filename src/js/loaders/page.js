@@ -25,42 +25,49 @@
         return;
       }
 
-      // We don't want the top-level container to be our view element, so 
-      // create one.
-      var viewElementId   = DCEmbedToolbelt.generateUniqueElementId(resource);
-      container.innerHTML = '<div id="' + viewElementId + '" class="DC-embed-view"></div>';
-      var viewElement     = document.getElementById(viewElementId);
-
       var documentId      = resource.documentId;
       var doc             = new definition.Document({id: documentId});
-      var pagePrototype   = definition.PageView.prototype;
-      var validOptionKeys = pagePrototype.validOptionKeys;
-      var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
-                                     resource.embedOptions,
-                                     {model: doc, el: viewElement});
-      var view            = new definition.PageView(embedOptions);
-      data.documents.add(doc);
-      views.pages[documentId]                = views.pages[documentId] || {};
-      views.pages[documentId][viewElementId] = view;
-      doc.fetch({url: resource.dataUrl});
+      doc.fetch({
+        url: resource.dataUrl,
+        success: function(model, response, options) {
+          // We don't want the top-level container to be our view element, so 
+          // create one.
+          var viewElementId   = DCEmbedToolbelt.generateUniqueElementId(resource);
+          container.innerHTML = '<div id="' + viewElementId + '" class="DC-embed-view"></div>';
+          var viewElement     = document.getElementById(viewElementId);
 
-      // Track where the embed is loaded from
-      if (options.preview !== true) {
-        DCEmbedToolbelt.pixelPing(resource, viewElement);
-      }
 
-      // We tweak the interface lightly based on the width of the embed; sadly, 
-      // in non-iframe contexts, this requires watching the window for resizes.
-      var $el = $(viewElement);
-      var sizeBreakpoints = pagePrototype.sizeBreakpoints;
-      var setEmbedSizeClasses = function() {
-        var width = $el.width();
-        _.each(sizeBreakpoints, function(breakpoint, i) {
-          $el.toggleClass('DC-embed-size-' + i, (width < breakpoint));
-        });
-      };
-      $(window).on('resize', setEmbedSizeClasses);
-      setEmbedSizeClasses();
+          var pagePrototype   = definition.PageView.prototype;
+          var validOptionKeys = pagePrototype.validOptionKeys;
+          var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
+                                         resource.embedOptions,
+                                         {model: doc, el: viewElement});
+          var view            = new definition.PageView(embedOptions);
+          data.documents.add(doc);
+          views.pages[documentId]                = views.pages[documentId] || {};
+          views.pages[documentId][viewElementId] = view;
+
+          // Track where the embed is loaded from
+          if (options.preview !== true) {
+            DCEmbedToolbelt.pixelPing(resource, viewElement);
+          }
+
+          // We tweak the interface lightly based on the width of the embed; 
+          // sadly, in non-iframe contexts, this requires watching the window 
+          // for resizes.
+          var $el = $(viewElement);
+          var sizeBreakpoints = pagePrototype.sizeBreakpoints;
+          var setEmbedSizeClasses = function() {
+            var width = $el.width();
+            _.each(sizeBreakpoints, function(breakpoint, i) {
+              $el.toggleClass('DC-embed-size-' + i, (width < breakpoint));
+            });
+          };
+          $(window).on('resize', setEmbedSizeClasses);
+          setEmbedSizeClasses();
+        },
+        error: function(model, response, options) {}
+      });
     };
   }
 
