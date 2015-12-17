@@ -25,8 +25,8 @@
         return;
       }
 
-      var documentId      = resource.documentId;
-      var doc             = new definition.Document({id: documentId});
+      var documentId = resource.documentId;
+      var doc        = new definition.Document({id: documentId});
       doc.fetch({
         url: resource.dataUrl,
         success: function(model, response, options) {
