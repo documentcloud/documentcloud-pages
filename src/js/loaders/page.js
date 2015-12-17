@@ -29,7 +29,7 @@
       var doc        = new definition.Document({id: documentId});
       doc.fetch({
         url: resource.dataUrl,
-        success: function(model, response, options) {
+        success: function() {
           // We don't want the top-level container to be our view element, so 
           // create one.
           var viewElementId   = DCEmbedToolbelt.generateUniqueElementId(resource);
@@ -68,7 +68,7 @@
           $(window).on('resize', setEmbedSizeClasses);
           setEmbedSizeClasses();
         },
-        error: function(model, response, options) {
+        error: function(model, response) {
           var icon, message;
           switch (response.status) {
             case 403:
