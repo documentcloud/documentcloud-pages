@@ -434,7 +434,7 @@ $buttonPaddingMax: 12px;
     }
   }
 
-  .DC-note {
+  .DC-note-wrapper {
     position: absolute;
     z-index: 1;
     overflow: visible;
@@ -460,13 +460,13 @@ $buttonPaddingMax: 12px;
       }
     }
   }
-  .DC-m-no-touch & .DC-note.open .DC-note-region {
+  .DC-m-no-touch & .DC-note-wrapper.open .DC-note-region {
     box-shadow: 0 1px 3px $grayDimmer;
   }
-  &.open .DC-note:not(.open) .DC-note-region {
+  &.open .DC-note-wrapper:not(.open) .DC-note-region {
     background-color: $highlightLight;
   }
-  .DC-note.open .DC-note-region {
+  .DC-note-wrapper.open .DC-note-region {
     background-color: transparent;
   }
 
@@ -484,7 +484,7 @@ $buttonPaddingMax: 12px;
     height: auto;
     display: none;
   }
-  .DC-note.open .DC-note-image {
+  .DC-note-wrapper.open .DC-note-image {
     display: block;
   }
 
@@ -499,7 +499,7 @@ $buttonPaddingMax: 12px;
     width: 100%;
     max-width: 400px;
   }
-  .DC-note.open .DC-note-body {
+  .DC-note-wrapper.open .DC-note-body {
     max-height: 200px;
     opacity: 1;
   }

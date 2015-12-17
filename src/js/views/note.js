@@ -9,7 +9,9 @@
   var views      = DocumentCloud.embed.views;
 
   definition.NoteView = definition.NoteView || Backbone.View.extend({
-    className: "DC-note",
+    // Appending `-wrapper` to avoid conflict with note embed
+    className: "DC-note-wrapper",
+
     events: {
       'click .DC-note-region': 'toggle',
     },
