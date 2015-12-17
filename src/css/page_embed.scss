@@ -193,6 +193,23 @@ $buttonPaddingMax: 12px;
   height: 1;
 }
 
+.DC-embed-unloadable {
+  background-color: $grayLight;
+  color: $grayDark;
+  padding: 10%;
+  text-align: center;
+  font-weight: $fontWeightSemiBold;
+  font-size: 1.4em;
+  overflow: hidden;
+
+  .DC-icon {
+    display: block;
+    font-size: 2em;
+    line-height: inherit;
+    margin-bottom: 0.25em;
+  }
+}
+
 .DC-page-embed {
   position: relative;
   font: $fontWeightNormal 10pt/1.6em 'Helvetica Neue', Helvetica, Arial, sans-serif;

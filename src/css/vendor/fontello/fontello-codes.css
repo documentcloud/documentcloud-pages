@@ -13,3 +13,8 @@
 .DC-icon-left:before { content: '\e80b'; } /* '' */
 .DC-icon-right:before { content: '\e80c'; } /* '' */
 .DC-icon-arrows-cw:before { content: '\e80d'; } /* '' */
+.DC-icon-lock:before { content: '\e80e'; } /* '' */
+.DC-icon-unlink:before { content: '\e80f'; } /* '' */
+.DC-icon-help:before { content: '\e810'; } /* '' */
+.DC-icon-cancel:before { content: '\e812'; } /* '' */
+.DC-icon-attention:before { content: '\e813'; } /* '' */

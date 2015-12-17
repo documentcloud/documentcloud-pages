@@ -36,13 +36,15 @@
           container.innerHTML = '<div id="' + viewElementId + '" class="DC-embed-view"></div>';
           var viewElement     = document.getElementById(viewElementId);
 
-
+          // Create page view
           var pagePrototype   = definition.PageView.prototype;
           var validOptionKeys = pagePrototype.validOptionKeys;
           var embedOptions    = _.extend({}, _.pick(options, validOptionKeys),
                                          resource.embedOptions,
                                          {model: doc, el: viewElement});
           var view            = new definition.PageView(embedOptions);
+
+          // Store doc model and page view on globals
           data.documents.add(doc);
           views.pages[documentId]                = views.pages[documentId] || {};
           views.pages[documentId][viewElementId] = view;
@@ -66,7 +68,24 @@
           $(window).on('resize', setEmbedSizeClasses);
           setEmbedSizeClasses();
         },
-        error: function(model, response, options) {}
+        error: function(model, response, options) {
+          var icon, message;
+          switch (response.status) {
+            case 403:
+              icon    = 'lock';
+              message = 'That DocumentCloud document is private and can only be viewed by its owner.';
+              break;
+            case 404:
+              icon    = 'help';
+              message = 'DocumentCloud can’t find that document.';
+              break;
+            default:
+              icon    = 'cancel';
+              message = 'DocumentCloud can’t load that document.';
+              break;
+          }
+          container.innerHTML = '<div class="DC-embed-unloadable"><i class="DC-icon DC-icon-' + icon + '"></i> ' + message + '</div>';
+        }
       });
     };
   }
