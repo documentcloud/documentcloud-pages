@@ -73,15 +73,15 @@
           switch (response.status) {
             case 403:
               icon    = 'lock';
-              message = 'That DocumentCloud document is private and can only be viewed by its owner.';
+              message = 'This DocumentCloud document is private and can only be viewed by its owner.';
               break;
             case 404:
               icon    = 'help';
-              message = 'DocumentCloud can’t find that document.';
+              message = 'DocumentCloud can’t find this document.';
               break;
             default:
               icon    = 'cancel';
-              message = 'DocumentCloud can’t load that document.';
+              message = 'DocumentCloud can’t load this document.';
               break;
           }
           container.innerHTML = '<div class="DC-embed-unloadable"><i class="DC-icon DC-icon-' + icon + '"></i> ' + message + '</div>';
