@@ -85,6 +85,7 @@
               break;
           }
           container.innerHTML = '<div class="DC-embed-unloadable"><i class="DC-icon DC-icon-' + icon + '"></i> ' + message + '</div>';
+          // TODO: Notify us of the load error via pixel ping or something [JR]
         }
       });
     };
