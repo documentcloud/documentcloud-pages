@@ -11,7 +11,6 @@
     <div class="main width-target">
       <header>
         <h1>DocumentCloud Page Embed Testbed</h1>
-        <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
         <p id="live_options">
           <b>Live options:</b>
           <label><input type="checkbox" class="option" id="option_page_navigator" data-option="pageNavigator" autocomplete="off"> Page navigator</label>
@@ -19,9 +18,21 @@
         </p>
       </header>
 
-      <section class="row">
-        <div class="col col-1 col-of-3 width-target">
-          <h3>Unenhanced <span class="width">…</span></h3>
+      <nav id="nav">
+        <ul>
+          <li><a href="#mechanism">Embed mechanism</a></li>
+          <li><a href="#unicode">Unicode support</a></li>
+          <li><a href="#errors">Error messages</a></li>
+          <li><a href="#breakpoints">Size breakpoints</a></li>
+        </ul>
+      </nav>
+
+      <section id="mechanism" class="row">
+
+        <h2>Embed mechanism <a class="top" href="#">top</a></h2>
+
+        <div class="col col-1 col-of-3">
+          <h3>Unenhanced</h3>
           <p class="desc">What readers see if loading fails or JavaScript is disabled.</p>
 
           <!--
@@ -38,8 +49,8 @@
             </p>
           </div>
         </div>
-        <div class="col col-2 col-of-3 width-target">
-          <h3>Enhanced <span class="width">…</span></h3>
+        <div class="col col-2 col-of-3">
+          <h3>Enhanced</h3>
           <p class="desc">What readers see once the embed is fully loaded.</p>
 
           <!-- Keep perfectly in sync with embed_code.html -->
@@ -54,8 +65,8 @@
           <script src="../dist/enhance.js"></script>
 
         </div>
-        <div class="col col-3 col-of-3 width-target">
-          <h3>Direct <span class="width">…</span></h3>
+        <div class="col col-3 col-of-3">
+          <h3>Direct</h3>
           <p class="desc">Load directly from the API without using the enhancer.</p>
 
           <div id="direct_page_embed_1"></div>
@@ -67,46 +78,37 @@
           </script>
 
         </div>
+
       </section>
 
-      <section class="row hide-from-mobile">
-        <div class="col width-target" style="width:50%;margin-right:2%;">
-          <h3 class="width">…</h3>
-          <div class="embed_via_ajax"></div>
-        </div>
-        <div class="col width-target" style="width:28%;margin-right:2%;">
-          <h3 class="width">…</h3>
-          <div class="embed_via_ajax"></div>
-        </div>
-        <div class="col width-target" style="width:15%;">
-          <h3 class="width">…</h3>
-          <div class="embed_via_ajax"></div>
-        </div>
-      </section>
+      <section id="unicode" class="row">
 
-      <section class="row">
+        <h2>Unicode support <a class="top" href="#">top</a></h2>
+
         <div class="col col-1 col-of-3">
           <h3>Korean</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
-            <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2660396-오염배출비용-수취-관련-문제에-대한-통지.html#document/p1" title="View page 1 of 오염배출비용-수취-관련-문제에-대한-통지 on DocumentCloud in new window or tab" target="_blank">Page 1 of 오염배출비용-수취-관련-문제에-대한-통지</a></p>
-            <img src="https://assets.documentcloud.org/documents/2660396/pages/오염배출비용-수취-관련-문제에-대한-통지-p1-normal.gif?1451433384" alt="Page 1 of 오염배출비용-수취-관련-문제에-대한-통지" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
-            <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2660396/pages/오염배출비용-수취-관련-문제에-대한-통지-p1.txt" title="View text of page 1 of 오염배출비용-수취-관련-문제에-대한-통지 in a new window or tab" target="_blank">View page as text</a></p>
+            <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662326-한국어.html#document/p1" title="View page 1 of 한국어 on DocumentCloud in new window or tab" target="_blank">Page 1 of 한국어</a></p>
+            <img src="https://assets.documentcloud.org/documents/2662326/pages/한국어-p1-normal.gif?1451518004" alt="Page 1 of 한국어" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
+            <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662326/pages/한국어-p1.txt" title="View text of page 1 of 한국어 in a new window or tab" target="_blank">View page as text</a></p>
           </div>
-          <script src="../dist/enhance.js"></script>
         </div>
         <div class="col col-2 col-of-3">
           <h3>Russian</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
-            <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2660397-крамського-10-земля.html#document/p1" title="View page 1 of крамського-10-земля on DocumentCloud in new window or tab" target="_blank">Page 1 of крамського-10-земля</a></p>
-            <img src="https://assets.documentcloud.org/documents/2660397/pages/крамського-10-земля-p1-normal.gif?1451433357" alt="Page 1 of крамського-10-земля" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
-            <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2660397/pages/крамського-10-земля-p1.txt" title="View text of page 1 of крамського-10-земля in a new window or tab" target="_blank">View page as text</a></p>
+            <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662269-россияне.html#document/p1" title="View page 1 of россияне on DocumentCloud in new window or tab" target="_blank">Page 1 of россияне</a></p>
+            <img src="https://assets.documentcloud.org/documents/2662269/pages/россияне-p1-normal.gif?1451517700" alt="Page 1 of россияне" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
+            <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662269/pages/россияне-p1.txt" title="View text of page 1 of россияне in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
-        <div class="col col-3 col-of-3 width-target">
-        </div>
+        <!-- <div class="col col-3 col-of-3 width-target">
+          <h3>French</h3>
+          <p>This space intentionally left blank.</p>
+        </div> -->
       </section>
 
-      <section class="row">
+      <section id="errors" class="row">
+        <h2>Error messages <a class="top" href="#">top</a></h2>
         <div class="col col-1 col-of-3 width-target">
           <h3>Forbidden (403)</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
@@ -135,29 +137,50 @@
         </div>
       </section>
 
-      <section class="hide-from-mobile">
-        <h2>Pixel-match Document Viewer</h2>
-        <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
-        <div class="width-target" style="max-width:702px;margin:0 auto">
-          <h3 class="width">…</h3>
-          <div class="DC-embed" data-version="1.0" style="font-size:10pt">
-            <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
-            <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
-            <p>
-              Contributed to DocumentCloud by Ted Han of DocumentCloud &bull;
-              <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">View page as text</a>
-            </p>
-          </div>
-          <script src="../dist/enhance.js"></script>
-        </div>
-      </section>
-    </div>
+      <div id="breakpoints">
 
-    <section class="width-target hide-from-mobile">
-      <h2>Full width</h2>
-      <h3 class="width">…</h3>
-      <div class="embed_via_ajax"></div>
-    </section>
+        <h2>Size breakpoints <a class="top" href="#">top</a></h2>
+        <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
+
+        <section class="row hide-from-mobile">
+          <div class="col width-target" style="width:50%;margin-right:2%;">
+            <h3 class="width">…</h3>
+            <div class="embed_via_ajax"></div>
+          </div>
+          <div class="col width-target" style="width:28%;margin-right:2%;">
+            <h3 class="width">…</h3>
+            <div class="embed_via_ajax"></div>
+          </div>
+          <div class="col width-target" style="width:15%;">
+            <h3 class="width">…</h3>
+            <div class="embed_via_ajax"></div>
+          </div>
+        </section>
+
+        <section class="hide-from-mobile width-target">
+          <h3>Full width <span class="width">…</span></h3>
+          <div class="embed_via_ajax"></div>
+        </section>
+
+        <section class="hide-from-mobile">
+          <div class="width-target" style="max-width:702px;">
+            <h3>Pixel-match Document Viewer <span class="width">…</span></h3>
+            <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
+            <div class="DC-embed" data-version="1.0" style="font-size:10pt">
+              <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
+              <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
+              <p>
+                Contributed to DocumentCloud by Ted Han of DocumentCloud &bull;
+                <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">View page as text</a>
+              </p>
+            </div>
+            <script src="../dist/enhance.js"></script>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
 
     <script src="examples.js"></script>
 

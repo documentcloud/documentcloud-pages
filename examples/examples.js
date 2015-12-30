@@ -38,5 +38,6 @@
     $.get('embed_code.html', function(data) {
       $('.embed_via_ajax').html(data);
     });
+
   }
 })();
