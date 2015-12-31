@@ -11,7 +11,6 @@
       }
     </style>
     <link type="text/css" rel="stylesheet" href="../dist/page_embed.css"/>
-    <script src="../dist/pym.js"></script>
     <script src="../dist/page_embed.js"></script>
   </head>
   <body>
@@ -25,15 +24,9 @@
       }
 
       var url = getParameterByName('url');
-
-      if (getParameterByName('childId')) {
-        var pymChild = new pym.Child();
-      }
-
       if (url) {
         DocumentCloud.embed.load(url, {
-          container: '#page_embed',
-          pym: pymChild || false
+          container: '#page_embed'
         });
       }
 

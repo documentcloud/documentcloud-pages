@@ -21,14 +21,13 @@
       'click.dcPage  .DC-note-overlay':      'clickNoteOverlay',
     },
 
-    validOptionKeys: ['credit', 'page', 'pageNavigator', 'pym', 'text', 'preview'],
+    validOptionKeys: ['credit', 'page', 'pageNavigator', 'text', 'preview'],
 
     defaultOptions: {
       credit:        true,
       page:          1,
       pageNavigator: false,
       preview:       false,
-      pym:           false,
       text:          false
     },
 
@@ -40,9 +39,6 @@
       this.currentPageNumber = this.options.page;
       this.noteViews         = {};
       this.cachedText        = {};
-      if (this.options.pym) {
-        this.pym = this.options.pym;
-      }
 
       this.listenTo(this.model, 'sync', this.render);
     },
@@ -156,7 +152,6 @@
             width: this.width,
             aspectRatio: this.width / this.height
           };
-          view.notifyPymParent();
           _renderOverlay();
         });
         unstyledImage.attr('src', view.model.imageUrl(view.currentPageNumber));
@@ -207,12 +202,10 @@
         this.openNote.close();
       }
       this.openNote = justOpened;
-      this.notifyPymParent();
     },
 
     closeOpenNote: function() {
       this.openNote = undefined;
-      this.notifyPymParent(this.$el.height());
     },
 
     selectPage: function() {
@@ -261,19 +254,6 @@
       } else {
         this.$el.addClass('DC-embed-no-iframed');
         this.iframed = false;
-      }
-    },
-
-    notifyPymParent: function(height) {
-      if (this.pym) {
-        if (!height) {
-          var body = document.body,
-              html = document.documentElement;
-
-          height = Math.max(body.scrollHeight, body.offsetHeight,
-                            html.clientHeight, html.scrollHeight, html.offsetHeight);
-        }
-        this.pym.sendMessage('height', height.toString());
       }
     },
 

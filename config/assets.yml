@@ -6,9 +6,6 @@ embed_assets:           off
 rewrite_relative_paths: off
 
 javascripts:
-  pym:
-    - src/js/vendor/pym.js/dist/pym.js
-
   page_embed:
     # Modernizr sniffs svg/touch and provides our html5shim
     - src/js/vendor/modernizr.custom.js
