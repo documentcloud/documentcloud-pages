@@ -67,6 +67,11 @@ nav > ul > li:first-child > a {
   vertical-align: top;
   line-height: 0;
 }
+
+.col:last-child {
+  margin-right: 0;
+}
+
 .col * {
   line-height: 1.6em;
 }
@@ -76,13 +81,18 @@ nav > ul > li:first-child > a {
   margin-right: 2%;
 }
 
-.col-3.col-of-3 {
-  margin-right: 0;
+.col-of-5 {
+  width: 19%;
+  margin-right: 0.5%;
 }
 
 .desc {
   font-style: italic;
   margin-top: -1em;
+}
+
+.error {
+  color: #f33;
 }
 
 #live_options label {
@@ -97,7 +107,7 @@ nav > ul > li:first-child > a {
     display: none;
   }
 
-  .col-of-3 {
+  .col {
     display: block;
     width: auto;
   }
