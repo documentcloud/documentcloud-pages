@@ -62,10 +62,12 @@
   </div>
   <% } %>
 
+  <div class="DC-page-wrapper">
   <div class="DC-page">
     <div class="DC-note-overlay"></div>
     <img class="DC-page-image" src="<%= imageUrl %>" srcset="<%= imageUrlLarge %> 1000w" alt="Page <%= pageNumber %> of <%- model.attributes.title %>">
     <div class="DC-page-text"></div>
+  </div>
   </div>
 
   <div class="DC-credit">

@@ -249,10 +249,10 @@
 
     checkIfIframed: function() {
       if (DCEmbedToolbelt.isIframed()) {
-        this.$el.addClass('DC-embed-iframed');
+        this.$embed.addClass('DC-embed-iframed');
         this.iframed = true;
       } else {
-        this.$el.addClass('DC-embed-no-iframed');
+        this.$embed.addClass('DC-embed-no-iframed');
         this.iframed = false;
       }
     },
