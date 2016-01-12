@@ -57,16 +57,18 @@
           // We tweak the interface lightly based on the width of the embed; 
           // sadly, in non-iframe contexts, this requires watching the window 
           // for resizes.
-          var $el = $(viewElement);
-          var sizeBreakpoints = pagePrototype.sizeBreakpoints;
-          var setEmbedSizeClasses = function() {
-            var width = $el.width();
-            _.each(sizeBreakpoints, function(breakpoints, i) {
-              $el.toggleClass('DC-embed-size-' + i, (width >= breakpoints[0] && width <= breakpoints[1]));
-            });
-          };
-          $(window).on('resize', setEmbedSizeClasses);
-          setEmbedSizeClasses();
+          if (!DCEmbedToolbelt.isIframed()) {
+            var $el = $(viewElement);
+            var sizeBreakpoints = pagePrototype.sizeBreakpoints;
+            var setEmbedSizeClasses = function() {
+              var width = $el.width();
+              _.each(sizeBreakpoints, function(breakpoints, i) {
+                $el.toggleClass('DC-embed-size-' + i, (width >= breakpoints[0] && width <= breakpoints[1]));
+              });
+            };
+            $(window).on('resize', setEmbedSizeClasses);
+            setEmbedSizeClasses();
+          }
         },
         error: function(model, response) {
           var icon, message;

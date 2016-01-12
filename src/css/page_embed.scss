@@ -242,6 +242,7 @@ $buttonPaddingMax: 12px;
     min-height: 27px;
     padding-right: 120px;
     margin-bottom: 0.5em;
+  }
 
     .DC-title {
       display: inline;
@@ -275,8 +276,6 @@ $buttonPaddingMax: 12px;
       }
 
     }
-
-  }
 
   .DC-credit {
     font-size: 0.9em;
@@ -570,76 +569,99 @@ $buttonPaddingMax: 12px;
 
 }
 
-// Below 200px
+// Size breakpoints:
+// For iframes, we use media queries. This is preferable, but we have to
+// hard-code the breakpoints into CSS instead of describing on the Page view.
+// For inline, we observe window resizing and set a class. This degrades
+// performance, but doesn't require hard-coding the breakpoints here in CSS.
 
-.DC-embed-size-0 .DC-page-embed {
-  $margin: 0.5em;
-  $fontSize: 8pt;
-  $lineHeight: 10pt;
+@mixin embedSize0() {
+  .DC-page-embed {
+    $margin: 0.5em;
+    $fontSize: 8pt;
+    $lineHeight: 10pt;
 
-  font-size: $fontSize;
-  line-height: $lineHeight;
+    font-size: $fontSize;
+    line-height: $lineHeight;
 
-  .DC-page-number,
-  .DC-credit,
-  .DC-logomark-permalink,
-  .DC-embed-menubar,
-  .DC-note-overlay,
-  .DC-page-text
-  {
-    display: none;
-  }
+    .DC-page-number,
+    .DC-credit,
+    .DC-logomark-permalink,
+    .DC-embed-menubar,
+    .DC-note-overlay,
+    .DC-page-text
+    {
+      display: none;
+    }
 
-  .DC-m-no-touch & {
-    .DC-page {
-      cursor: pointer;
+    .DC-m-no-touch & {
+      .DC-page {
+        cursor: pointer;
+      }
+    }
+
+    .DC-meta {
+      padding-right: 0;
+      margin-bottom: $margin;
+      min-height: auto;
+    }
+
+    .DC-title {
+      font-size: $fontSize;
+      line-height: $lineHeight;
     }
   }
-
-  .DC-meta {
-    padding-right: 0;
-    margin-bottom: $margin;
-    min-height: auto;
-  }
-
-  .DC-title {
-    font-size: $fontSize;
-    line-height: $lineHeight;
-  }
-
 }
 
-// Below 300px
+@mixin embedSize1() {
+  .DC-page-embed {
+    $margin: 0.5em;
+    $fontSize: 9pt;
+    $lineHeight: 11pt;
 
-.DC-embed-size-1 .DC-page-embed {
-  $margin: 0.5em;
-  $fontSize: 9pt;
-  $lineHeight: 11pt;
-
-  font-size: $fontSize;
-  line-height: $lineHeight;
-
-  .DC-logomark-permalink,
-  .DC-action-nav-pagecount,
-  .DC-action-text
-  {
-    display: none;
-  }
-
-  .DC-meta {
-    padding-right: 0;
-    margin-bottom: $margin;
-    min-height: auto;
-  }
-
-  .DC-title {
     font-size: $fontSize;
     line-height: $lineHeight;
+
+    .DC-logomark-permalink,
+    .DC-action-nav-pagecount,
+    .DC-action-text
+    {
+      display: none;
+    }
+
+    .DC-meta {
+      padding-right: 0;
+      margin-bottom: $margin;
+      min-height: auto;
+    }
+
+    .DC-title {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+    }
+
+    .DC-credit {
+      margin-top: $margin;
+    }
+  }
+}
+
+.DC-embed-inline {
+  &.DC-embed-size-0 {
+    @include embedSize0;
   }
 
-  .DC-credit {
-    margin-top: $margin;
+  &.DC-embed-size-1 {
+    @include embedSize1;
   }
+}
+
+@media (max-width: 199px) {
+  @include embedSize0;
+}
+
+@media (min-width: 200px) and (max-width: 399px) {
+  @include embedSize1;
 }
 
 // In an iframe
