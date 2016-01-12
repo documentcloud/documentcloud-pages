@@ -31,7 +31,10 @@
       text:          false
     },
 
-    sizeBreakpoints: [200, 400],
+    sizeBreakpoints: [
+      [0,   199],
+      [200, 399]
+    ],
 
     initialize: function(options) {
       this.options = _.extend({}, this.defaultOptions, options);

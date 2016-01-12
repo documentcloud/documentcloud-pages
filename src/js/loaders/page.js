@@ -61,8 +61,8 @@
           var sizeBreakpoints = pagePrototype.sizeBreakpoints;
           var setEmbedSizeClasses = function() {
             var width = $el.width();
-            _.each(sizeBreakpoints, function(breakpoint, i) {
-              $el.toggleClass('DC-embed-size-' + i, (width < breakpoint));
+            _.each(sizeBreakpoints, function(breakpoints, i) {
+              $el.toggleClass('DC-embed-size-' + i, (width >= breakpoints[0] && width <= breakpoints[1]));
             });
           };
           $(window).on('resize', setEmbedSizeClasses);
