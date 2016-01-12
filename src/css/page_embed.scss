@@ -573,8 +573,14 @@ $buttonPaddingMax: 12px;
 // Below 200px
 
 .DC-embed-size-0 .DC-page-embed {
-  font-size: 8pt;
+  $margin: 0.5em;
+  $fontSize: 8pt;
+  $lineHeight: 10pt;
 
+  font-size: $fontSize;
+  line-height: $lineHeight;
+
+  .DC-page-number,
   .DC-credit,
   .DC-logomark-permalink,
   .DC-embed-menubar,
@@ -592,6 +598,13 @@ $buttonPaddingMax: 12px;
 
   .DC-meta {
     padding-right: 0;
+    margin-bottom: $margin;
+    min-height: auto;
+  }
+
+  .DC-title {
+    font-size: $fontSize;
+    line-height: $lineHeight;
   }
 
 }
@@ -599,7 +612,12 @@ $buttonPaddingMax: 12px;
 // Below 300px
 
 .DC-embed-size-1 .DC-page-embed {
-  font-size: 9pt;
+  $margin: 0.5em;
+  $fontSize: 9pt;
+  $lineHeight: 11pt;
+
+  font-size: $fontSize;
+  line-height: $lineHeight;
 
   .DC-logomark-permalink,
   .DC-action-nav-pagecount,
@@ -610,6 +628,17 @@ $buttonPaddingMax: 12px;
 
   .DC-meta {
     padding-right: 0;
+    margin-bottom: $margin;
+    min-height: auto;
+  }
+
+  .DC-title {
+    font-size: $fontSize;
+    line-height: $lineHeight;
+  }
+
+  .DC-credit {
+    margin-top: $margin;
   }
 }
 
