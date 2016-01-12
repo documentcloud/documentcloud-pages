@@ -225,7 +225,7 @@ $buttonPaddingMax: 12px;
   }
 
   img {
-    max-width: none; /* Override WordPress's `img` rules. */
+    max-width: none; /* WHACKAMOLE: Override WordPress's `img` rules. */
   }
 
   // Elements that default to invisible.
