@@ -30,6 +30,21 @@ $fontWeightNormal:   400;
 $fontWeightSemiBold: 500;
 $fontWeightBold:     700;
 
+// Font sizes
+
+$fontSizeXSmall:    8pt;
+$fontSizeSmall:     9pt;
+$fontSizeNormal:    10pt;
+$fontSizeLarge:     11pt;
+$fontSizeXLarge:    14pt;
+$fontSizeXXLarge:   20pt;
+$lineHeightXSmall:  11pt;
+$lineHeightSmall:   12pt;
+$lineHeightNormal:  14pt;
+$lineHeightLarge:   16pt;
+$lineHeightXLarge:  21pt;
+$lineHeightXXLarge: 28pt;
+
 // Speeds
 
 $speedFast:   100ms;
@@ -54,7 +69,7 @@ $buttonPaddingMax: 12px;
 
   text-transform: uppercase;
   font-weight: $fontWeightBold;
-  font-size: 0.9em;
+  font-size: $fontSizeXSmall;
   background-color: $dcBrandBlue;
   color: white;
   @include antialiased;
@@ -120,8 +135,8 @@ $buttonPaddingMax: 12px;
   // Manual adjustment of icon to align properly with text
   .DC-icon {
     position: relative;
-    font-size: 1.4em;
-    line-height: 0px;
+    font-size: $fontSizeXLarge;
+    line-height: 0;
     top: 2px;
   }
 }
@@ -192,12 +207,12 @@ $buttonPaddingMax: 12px;
   padding: 10%;
   text-align: center;
   font-weight: $fontWeightSemiBold;
-  font-size: 1.4em;
+  font-size: $fontSizeXLarge;
   overflow: hidden;
 
   .DC-icon {
     display: block;
-    font-size: 2em;
+    font-size: $fontSizeXXLarge;
     line-height: inherit;
     margin-bottom: 0.25em;
   }
@@ -205,7 +220,7 @@ $buttonPaddingMax: 12px;
 
 .DC-page-embed {
   position: relative;
-  font: $fontWeightNormal 10pt/1.6em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: $fontWeightNormal #{$fontSizeNormal}/#{$lineHeightNormal} 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: $textColor;
 
   -webkit-box-sizing: border-box;
@@ -237,9 +252,11 @@ $buttonPaddingMax: 12px;
     visibility: hidden;
   }
 
+  $logoHeight: 27px;
+
   .DC-meta {
     position: relative;
-    min-height: 27px;
+    min-height: $logoHeight;
     padding-right: 120px;
     margin-bottom: 0.5em;
   }
@@ -247,7 +264,8 @@ $buttonPaddingMax: 12px;
     .DC-title {
       display: inline;
       font-weight: $fontWeightNormal;
-      font-size: 1.2em;
+      font-size: $fontSizeLarge;
+      line-height: $logoHeight;
       color: black;
 
       .DC-page-number {
@@ -278,7 +296,7 @@ $buttonPaddingMax: 12px;
     }
 
   .DC-credit {
-    font-size: 0.9em;
+    font-size: $fontSizeSmall;
     color: $grayDark;
     text-align: center;
     margin-top: 1em;
@@ -321,7 +339,7 @@ $buttonPaddingMax: 12px;
     height: 100%;
     padding: 5%;
     z-index: 1;
-    font: 400 1.2em/1.6em serif;
+    font: 400 #{$fontSizeNormal}/#{$lineHeightNormal} serif;
     background-color: white;
     overflow-x: scroll;
     overflow-y: scroll;
@@ -330,8 +348,8 @@ $buttonPaddingMax: 12px;
     &.fetching {
       font-family: sans-serif;
       text-align: center;
-      font-size: 1.5em;
-      line-height: 1.3em;
+      font-size: $fontSizeXLarge;
+      line-height: $lineHeightXLarge;
     }
 
     &.error {
@@ -546,7 +564,7 @@ $buttonPaddingMax: 12px;
 
     font-weight: $fontWeightBold;
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-size: $fontSizeXSmall;
     margin: 1.1em 0 0 0;
 
     > a {
@@ -581,11 +599,9 @@ $buttonPaddingMax: 12px;
 @mixin embedSize0() {
   .DC-page-embed {
     $margin: 0.5em;
-    $fontSize: 8pt;
-    $lineHeight: 10pt;
 
-    font-size: $fontSize;
-    line-height: $lineHeight;
+    font-size: $fontSizeXSmall;
+    line-height: $lineHeightXSmall;
 
     .DC-page-number,
     .DC-credit,
@@ -610,8 +626,8 @@ $buttonPaddingMax: 12px;
     }
 
     .DC-title {
-      font-size: $fontSize;
-      line-height: $lineHeight;
+      font-size: $fontSizeXSmall;
+      line-height: $lineHeightXSmall;
     }
   }
 }
@@ -619,11 +635,9 @@ $buttonPaddingMax: 12px;
 @mixin embedSize1() {
   .DC-page-embed {
     $margin: 0.5em;
-    $fontSize: 9pt;
-    $lineHeight: 11pt;
 
-    font-size: $fontSize;
-    line-height: $lineHeight;
+    font-size: $fontSizeSmall;
+    line-height: $lineHeightSmall;
 
     .DC-logomark-permalink,
     .DC-action-nav-pagecount,
@@ -639,11 +653,13 @@ $buttonPaddingMax: 12px;
     }
 
     .DC-title {
-      font-size: $fontSize;
-      line-height: $lineHeight;
+      font-size: $fontSizeSmall;
+      line-height: $lineHeightSmall;
     }
 
     .DC-credit {
+      font-size: $fontSizeXSmall;
+      line-height: $lineHeightXSmall;
       margin-top: $margin;
     }
   }

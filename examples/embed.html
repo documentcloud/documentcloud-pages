@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="../dist/page_embed.css">
   </head>
   <body>
-    <div id="page_embed"></div>
+    <div id="DC-embed-container"></div>
 
     <script src="../dist/page_embed.js"></script>
     <script>
@@ -21,7 +21,7 @@
       var url = getParameterByName('url');
       if (url) {
         DocumentCloud.embed.load(url, {
-          container: '#page_embed',
+          container: '#DC-embed-container',
           // pageNavigator: true,
           // text: true,
         });

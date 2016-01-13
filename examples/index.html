@@ -31,9 +31,9 @@
 
         <h2>Embed mechanism <a class="top" href="#">top</a></h2>
 
-        <div class="col col-1 col-of-3">
+        <div class="col col-1 col-of-4">
           <h3>Unenhanced</h3>
-          <p class="desc">What readers see if loading fails or JavaScript is disabled.</p>
+          <p class="desc">If loading fails or JavaScript is disabled.</p>
 
           <!--
             Start with embed_code.html, but then:
@@ -49,9 +49,9 @@
             </p>
           </div>
         </div>
-        <div class="col col-2 col-of-3">
+        <div class="col col-2 col-of-4">
           <h3>Enhanced</h3>
-          <p class="desc">What readers see once the embed is fully loaded.</p>
+          <p class="desc">Once the embed is fully loaded.</p>
 
           <!-- Keep perfectly in sync with embed_code.html -->
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
@@ -65,9 +65,9 @@
           <script src="../dist/enhance.js"></script>
 
         </div>
-        <div class="col col-3 col-of-3">
+        <div class="col col-3 col-of-4">
           <h3>Direct</h3>
-          <p class="desc">Load directly from the API without using the enhancer.</p>
+          <p class="desc">Load directly from the API sans enhancer.</p>
 
           <div id="direct_page_embed_1"></div>
           <script src="../dist/page_embed.js"></script>
@@ -77,6 +77,12 @@
             });
           </script>
 
+        </div>
+        <div class="col col-4 col-of-4">
+          <h3>iframe</h3>
+          <p class="desc">Default from embed wizard and oEmbed.</p>
+          <style>.embed-container { position: relative; padding-bottom: 129.4285714%; height: 0; overflow: hidden; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+          <div class='embed-container'><iframe src='embed.html?url=https%3A%2F%2Fwww.documentcloud.org%2Fdocuments%2F282753-lefler-thesis.html%23document%2Fp57' frameborder='0' allowfullscreen></iframe></div>
         </div>
 
       </section>

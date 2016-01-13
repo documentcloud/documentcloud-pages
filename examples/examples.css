@@ -65,19 +65,19 @@ nav > ul > li:first-child > a {
 .col {
   display: inline-block;
   vertical-align: top;
-  line-height: 0;
 }
 
 .col:last-child {
   margin-right: 0;
 }
 
-.col * {
-  line-height: 1.6em;
-}
-
 .col-of-3 {
   width: 31%;
+  margin-right: 2%;
+}
+
+.col-of-4 {
+  width: 22.5%;
   margin-right: 2%;
 }
 
@@ -100,6 +100,13 @@ nav > ul > li:first-child > a {
   text-transform: uppercase;
   font-size: 0.8em;
   font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .col-of-4,
+  .col-of-5 {
+    width: 47%;
+  }
 }
 
 @media (max-width: 400px) {
