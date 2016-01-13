@@ -21,10 +21,11 @@
       var url = getParameterByName('url');
       if (url) {
         DocumentCloud.embed.load(url, {
-          container: '#page_embed'
+          container: '#page_embed',
+          // pageNavigator: true,
+          // text: true,
         });
       }
-
     </script>
   </body>
 </html>
