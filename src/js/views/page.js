@@ -173,13 +173,13 @@
       }
     },
 
-    repositionNoteOverlay: function() {
+    repositionNoteOverlay: _.debounce(function(e) {
       this.$overlay.css({
         width:  this.$image.css('width'),
         height: this.$image.css('height'),
         left:   this.$image.css('marginLeft')
       });
-    },
+    }, 100),
 
     currentScale: function() { return this.$image.width() / this.dimensions.width; },
 

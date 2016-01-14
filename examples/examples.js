@@ -9,15 +9,13 @@
     $widths.each(function(){
       $(this).data('target', $(this).closest('.width-target'));
     });
-    var updateColWidths = function(){
+    var updateColWidths = _.debounce(function(){
       $widths.each(function(){
         $(this).text( $(this).data('target').css('width') );
       });
-    };
+    }, 100);
+    $(window).on('resize', updateColWidths);
     updateColWidths();
-    $(window).on('resize', function() {
-      updateColWidths();
-    })
 
     // Live option changing
     $('.option').on('change', function(){

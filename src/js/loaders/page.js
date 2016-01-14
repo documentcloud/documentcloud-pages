@@ -60,12 +60,12 @@
           if (!DCEmbedToolbelt.isIframed()) {
             var $el = $(viewElement);
             var sizeBreakpoints = pagePrototype.sizeBreakpoints;
-            var setEmbedSizeClasses = function() {
+            var setEmbedSizeClasses = _.debounce(function(e) {
               var width = $el.width();
               _.each(sizeBreakpoints, function(breakpoints, i) {
                 $el.toggleClass('DC-embed-size-' + i, (width >= breakpoints[0] && width <= breakpoints[1]));
               });
-            };
+            }, 250);
             $(window).on('resize', setEmbedSizeClasses);
             setEmbedSizeClasses();
           }
