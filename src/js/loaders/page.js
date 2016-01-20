@@ -54,10 +54,11 @@
             DCEmbedToolbelt.pixelPing(resource, viewElement);
           }
 
-          // We tweak the interface lightly based on the width of the embed; 
-          // sadly, in non-iframe contexts, this requires watching the window 
-          // for resizes.
-          if (!DCEmbedToolbelt.isIframed()) {
+          if (DCEmbedToolbelt.isIframed()) {
+            $('html').addClass('DC-embed-iframe');
+          } else {
+            // We tweak the interface lightly based on the width of the embed; 
+            // in non-iframe contexts, this requires observing window resizes.
             var $el = $(viewElement);
             var sizeBreakpoints = pagePrototype.sizeBreakpoints;
             var setEmbedSizeClasses = _.debounce(function(e) {

@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html class="DC-embed-iframe" lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="../dist/page_embed.css">
-  </head>
-  <body>
-    <div id="DC-embed-container"></div>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DocumentCloud</title>
+  <link rel="alternate" type="application/json+oembed" href="https://www.documentcloud.org/api/oembed.json?url=https%3A%2F%2Fwww.documentcloud.org%2Fdocuments%2F282753-lefler-thesis%2Fpages%2F57.html" title="Page 57 of Lefler Thesis">
+  <link type="text/css" rel="stylesheet" href="../dist/page_embed.css">
+</head>
+<body>
 
-    <script src="../dist/page_embed.js"></script>
-    <script>
-      function getParameterByName(name) {
-          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-              results = regex.exec(location.search);
-          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-      }
+  <div id="DC-embed-container">
+    <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="position:absolute;width:100%;height:auto">
+  </div>
 
-      var url = getParameterByName('url');
-      if (url) {
-        DocumentCloud.embed.load(url, {
-          container: '#DC-embed-container',
-          // pageNavigator: true,
-          // text: true,
-        });
-      }
-    </script>
-  </body>
+<script src="../dist/page_embed.js"></script>
+<script>
+  function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  var unenhanced = !!getParameterByName('unenhanced');
+  if (!unenhanced) {
+    var url = getParameterByName('url');
+    if (url) {
+      DocumentCloud.embed.load(url, {
+        container: '#DC-embed-container',
+        // pageNavigator: true,
+        // text: true,
+      });
+    } else {
+      DocumentCloud.embed.load('https://www.documentcloud.org/documents/282753-lefler-thesis/pages/57.html', {
+        container: '#DC-embed-container',
+        // pageNavigator: true,
+        // text: true,
+      });
+    }
+  }
+</script>
+</body>
 </html>

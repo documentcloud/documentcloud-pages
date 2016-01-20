@@ -142,12 +142,6 @@
                                 return noteView.render(view.dimensions);
                               });
         view.$overlay.append(_.map(noteViews, function(v) { return v.$el; }));
-        view.repositionNoteOverlay();
-
-        if (!view.observingNoteOverlay && DCEmbedToolbelt.isIframed()) {
-          $(window).on('resize', _.bind(view.repositionNoteOverlay, view));
-          view.observingNoteOverlay = true;
-        }
       }
 
       // If dimensions are already cached, just straight re-render
@@ -172,14 +166,6 @@
         this.openNote.close();
       }
     },
-
-    repositionNoteOverlay: _.debounce(function(e) {
-      this.$overlay.css({
-        width:  this.$image.css('width'),
-        height: this.$image.css('height'),
-        left:   this.$image.css('marginLeft')
-      });
-    }, 100),
 
     currentScale: function() { return this.$image.width() / this.dimensions.width; },
 
