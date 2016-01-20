@@ -34,7 +34,7 @@
     sizeBreakpoints: [
       [0,   199],
       [200, 399]
-    ],
+    ], // Keep in sync with media queries in `page_embed.scss`
 
     initialize: function(options) {
       this.options = _.extend({}, this.defaultOptions, options);
@@ -245,7 +245,8 @@
     },
 
     clickPage: function() {
-      if (this.$el.hasClass('DC-embed-size-0')) {
+      var weAreTiny = this.iframed ? (this.$el.width() <= this.sizeBreakpoints[0][1]) : this.$el.hasClass('DC-embed-size-0');
+      if (weAreTiny) {
         window.open(this.model.permalink());
       }
     },
