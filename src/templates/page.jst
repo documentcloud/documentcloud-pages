@@ -1,5 +1,6 @@
 <div class="DC-page-embed">
   
+  <% if (showMeta) { %>
   <div class="DC-meta">
     <div class="DC-title">
     <% if (hasMultiplePages && !showPageNavigator) { %>
@@ -11,6 +12,7 @@
       <span class="DC-resource-logomark">DocumentCloud</span>
     </a>
   </div>
+  <% } %>
 
   <% if (showPageMenuBar) { %>
   <div class="DC-embed-menubar">
@@ -68,6 +70,7 @@
     <div class="DC-page-text"></div>
   </div>
 
+  <% if (showCredit) { %>
   <div class="DC-credit">
     <%= contributorCredit %>
     <a href="<%= permalinkDoc %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
@@ -75,5 +78,6 @@
     or <a href="<%= permalinkPageText %>" title="View text of page <%= pageNumber %> of <%- model.attributes.title %> on DocumentCloud in a new window or tab" target="_blank">view page as text</a>
     <% } %>
   </div>
+  <% } %>
 
 </div>

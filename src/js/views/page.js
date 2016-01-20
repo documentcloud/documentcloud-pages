@@ -42,6 +42,7 @@
       this.currentPageNumber = this.options.page;
       this.noteViews         = {};
       this.cachedText        = {};
+      this.iframed           = DCEmbedToolbelt.isIframed()
 
       this.listenTo(this.model, 'sync', this.render);
     },
@@ -52,7 +53,7 @@
       this.prepareNotes(); // Requires `makeTemplateData()` be run first
       this.$el.html(JST['page'](this.templateData));
       this.cacheDomReferences();
-      this.checkIfIframed();
+      this.classifyEmbedContext();
       this.renderNoteOverlay();
       if (this.mode == 'text') {
         this.switchToText();
@@ -100,7 +101,8 @@
       var hasCreditData = creditData.contributor || creditData.organization;
 
       this.templateData = {
-        showCredit:          this.options.credit && hasCreditData,
+        showMeta:            !this.iframed,
+        showCredit:          !this.iframed && this.options.credit && hasCreditData,
         showTextMode:        this.options.text,
         showPageNavigator:   this.options.pageNavigator,
         showPageMenuBar:     this.options.pageNavigator || this.options.text,
@@ -251,14 +253,8 @@
       }
     },
 
-    checkIfIframed: function() {
-      if (DCEmbedToolbelt.isIframed()) {
-        this.$el.addClass('DC-embed-iframed');
-        this.iframed = true;
-      } else {
-        this.$el.addClass('DC-embed-inline');
-        this.iframed = false;
-      }
+    classifyEmbedContext: function() {
+      this.$el.addClass('DC-embed-' + (this.iframed ? 'iframed' : 'inline'));
     },
 
   });
