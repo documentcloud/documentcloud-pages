@@ -536,7 +536,7 @@ $buttonPaddingMax: 12px;
     max-width: 400px;
   }
   .DC-note-wrapper.open .DC-note-body {
-    max-height: 200px;
+    max-height: 200px; // Keep in sync with `NoteView.NOTE_MAX_HEIGHT`
     opacity: 1;
   }
 
@@ -695,7 +695,6 @@ $buttonPaddingMax: 12px;
   margin: 0;
   padding: 0;
   overflow: hidden;
-
   > body {
     margin: 0;
     padding: 0;
@@ -719,8 +718,5 @@ $buttonPaddingMax: 12px;
   .DC-page {
     @include full-size();
     border: 0;
-
-    .DC-page-image {
-    }
   }
 }

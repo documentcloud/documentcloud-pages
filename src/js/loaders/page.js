@@ -1,11 +1,12 @@
 (function(){
+  var DCEmbedToolbelt = window.DCEmbedToolbelt;
   var DocumentCloud   = window.DocumentCloud;
   var $               = DocumentCloud.$;
   var _               = DocumentCloud._;
+
   var definition      = DocumentCloud.embed.definition;
   var data            = DocumentCloud.embed.data;
   var views           = DocumentCloud.embed.views;
-  var DCEmbedToolbelt = window.DCEmbedToolbelt;
 
   data.documents = data.documents || new definition.DocumentSet();
   // `views.pages` is a nested list of page views, keyed at the top level by
