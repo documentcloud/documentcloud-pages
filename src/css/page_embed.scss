@@ -713,6 +713,7 @@ $buttonPaddingMax: 12px;
 
   .DC-embed-menubar {
     @include full-width();
+    z-index: 10;
   }
 
   .DC-page {
