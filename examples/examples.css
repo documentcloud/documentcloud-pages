@@ -71,10 +71,6 @@ nav > ul > li:first-child > a {
   vertical-align: top;
 }
 
-.col:last-child {
-  margin-right: 0;
-}
-
 .col-of-3 {
   width: 31%;
   margin-right: 2%;
@@ -88,6 +84,14 @@ nav > ul > li:first-child > a {
 .col-of-5 {
   width: 19%;
   margin-right: 0.5%;
+}
+
+.col-of-2:nth-child(2),
+.col-of-3:nth-child(3),
+.col-of-4:nth-child(4),
+.col-of-5:nth-child(5)
+ {
+  margin-right: 0;
 }
 
 .desc {
