@@ -238,7 +238,7 @@ $buttonPaddingMax: 12px;
 
 .DC-page-embed {
   position: relative;
-  font: $fontWeightNormal #{$fontSizeNormal}/#{$lineHeightNormal} 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: $fontWeightNormal #{$fontSizeNormal}/#{$lineHeightNormal} Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: $textColor;
 
   -webkit-box-sizing: border-box;
@@ -255,6 +255,13 @@ $buttonPaddingMax: 12px;
 
   a:visited {
     color: $dcBrandBlueLight;
+  }
+
+  .DC-logotype-link {
+    font-family: Gotham, inherit;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
   }
 
   img {

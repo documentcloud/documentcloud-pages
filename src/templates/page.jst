@@ -6,9 +6,9 @@
     <% if (hasMultiplePages && !showPageNavigator) { %>
       <span class="DC-page-number">Page <%= pageNumber %> of</span>
     <% } %>
-      <a class="DC-embed-resource" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
+      <a class="DC-embed-resource" href="<%= permalinkPage %>" title="View entire <%- model.attributes.title %> on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
     </div>
-    <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank">
+    <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire <%- model.attributes.title %> on DocumentCloud in new window or tab" target="_blank">
       <span class="DC-resource-logomark">DocumentCloud</span>
     </a>
   </div>
