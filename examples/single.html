@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DocumentCloud Page Embed Test</title>
+    <link rel="stylesheet" href="examples.css" type="text/css" media="screen">
+  </head>
+  <body>
+    <div class="main">
+
+      <section style="max-width:960px;margin:0 auto">
+        <link rel="stylesheet" href="../dist/page_embed.css" type="text/css" media="screen">
+        <div id="DC-embed-container"></div>
+        <script src="../dist/page_embed.js"></script>
+        <script>
+          DocumentCloud.embed.load("https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57", {
+            container: '#DC-embed-container'
+          });
+        </script>
+      </section>
+
+    </div>
+
+  </body>
+</html>
