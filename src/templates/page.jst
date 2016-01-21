@@ -1,16 +1,18 @@
 <div class="DC-page-embed">
   
+  <% if (showMeta) { %>
   <div class="DC-meta">
     <div class="DC-title">
     <% if (hasMultiplePages && !showPageNavigator) { %>
       <span class="DC-page-number">Page <%= pageNumber %> of</span>
     <% } %>
-      <a class="DC-embed-resource" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
+      <a class="DC-embed-resource" href="<%= permalinkPage %>" title="View entire <%- model.attributes.title %> on DocumentCloud in new window or tab" target="_blank"><%- model.attributes.title %></a>
     </div>
-    <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire document on DocumentCloud in new window or tab" target="_blank">
+    <a class="DC-logomark-permalink" href="<%= permalinkPage %>" title="View entire <%- model.attributes.title %> on DocumentCloud in new window or tab" target="_blank">
       <span class="DC-resource-logomark">DocumentCloud</span>
     </a>
   </div>
+  <% } %>
 
   <% if (showPageMenuBar) { %>
   <div class="DC-embed-menubar">
@@ -62,20 +64,20 @@
   </div>
   <% } %>
 
-  <div class="DC-page-wrapper">
   <div class="DC-page">
     <div class="DC-note-overlay"></div>
     <img class="DC-page-image" src="<%= imageUrl %>" srcset="<%= imageUrlLarge %> 1000w" alt="Page <%= pageNumber %> of <%- model.attributes.title %>">
     <div class="DC-page-text"></div>
   </div>
-  </div>
 
+  <% if (showCredit) { %>
   <div class="DC-credit">
     <%= contributorCredit %>
-    <a href="<%= permalinkDoc %>" title="View entire document in new window or tab" target="_blank">View entire document</a>
+    <a href="<%= permalinkDoc %>" title="View entire <%- model.attributes.title %> in new window or tab" target="_blank">View entire document</a>
     <% if (showTextMode) { %>
-    or <a href="<%= permalinkPageText %>" title="View text of page <%= pageNumber %> of <%- model.attributes.title %> on DocumentCloud in a new window or tab" target="_blank">view page as text</a>
+    or <a href="<%= permalinkPageText %>" title="Read text of page <%= pageNumber %> of <%- model.attributes.title %> on DocumentCloud in a new window or tab" target="_blank">read the text</a>
     <% } %>
   </div>
+  <% } %>
 
 </div>

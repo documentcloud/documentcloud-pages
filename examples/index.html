@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DocumentCloud Page Embed Test</title>
-    <link rel="stylesheet" href="examples.css" type="text/css" media="screen">
   </head>
   <body>
     <div class="main width-target">
@@ -31,44 +30,103 @@
 
         <h2>Embed mechanism <a class="top" href="#">top</a></h2>
 
-        <div class="col col-1 col-of-3">
-          <h3>Unenhanced</h3>
-          <p class="desc">What readers see if loading fails or JavaScript is disabled.</p>
+        <div class="cols">
 
-          <!--
-            Start with embed_code.html, but then:
-            - Remove `DC-embed` class
-            - Remove `enhance.js`
-          -->
+        <div class="col col-of-4">
+          <h3>1.0/IMG Unenhanced</h3>
           <div data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
-            <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
+            <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" srcset="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-large.gif 1000w" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
             <p>
               Contributed to DocumentCloud by Ted Han of DocumentCloud &bull;
               <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">View page as text</a>
             </p>
           </div>
         </div>
-        <div class="col col-2 col-of-3">
-          <h3>Enhanced</h3>
-          <p class="desc">What readers see once the embed is fully loaded.</p>
 
-          <!-- Keep perfectly in sync with embed_code.html -->
+        <div class="col col-of-4">
+          <h3>1.0/IMG Enhanced</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
-            <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
+            <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" srcset="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-large.gif 1000w" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
             <p>
               Contributed to DocumentCloud by Ted Han of DocumentCloud &bull;
               <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">View page as text</a>
             </p>
           </div>
-          <script src="../dist/enhance.js"></script>
+        </div>
+
+        <div class="col col-of-4">
+          <h3>1.1/IMG Unenhanced</h3>
+          <div data-version="1.1" style="color:#999">
+            <div style="font-size:10pt;line-height:14pt;">
+              Page 57 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
+            </div>
+            <div style="position:relative;padding-bottom:129.428571428571428571%;height:0;overflow:hidden;max-width:100%;margin:0.5em 0;border:1px solid #ccc;-webkit-box-sizing:border-box;clear:both">
+              <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" srcset="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-large.gif 1000w" alt="Page 57 of Lefler Thesis" style="position:absolute;top:0;left:0;width:100%;height:100%">
+            </div>
+            <div style="font-size:8pt;line-height:12pt;text-align:center">
+              Contributed to
+              <a href="https://www.documentcloud.org/" title="Go to DocumentCloud in new window or tab" target="_blank" style="font-weight:500;font-family:Gotham,inherit;color:black;text-decoration:none">DocumentCloud</a> by
+              <a href="https://www.documentcloud.org/public/search/Account:2258-ted-han" title="View documents contributed to DocumentCloud by Ted Han in new window or tab" target="_blank">Ted Han</a> of
+              <a href="https://www.documentcloud.org/public/search/Group:dcloud" title="View documents contributed to DocumentCloud by DocumentCloud in new window or tab" target="_blank">DocumentCloud</a> &bull;
+              <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire Lefler Thesis on DocumentCloud in new window or tab" target="_blank">View entire document</a> or
+              <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="Read the text of page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">read the text</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-of-4">
+          <h3>1.1/IMG Enhanced</h3>
+          <div class="DC-embed" data-version="1.1" style="color:#999">
+            <div style="font-size:10pt;line-height:14pt;">
+              Page 57 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
+            </div>
+            <div style="position:relative;padding-bottom:129.428571428571428571%;height:0;overflow:hidden;max-width:100%;margin:0.5em 0;border:1px solid #ccc;-webkit-box-sizing:border-box;clear:both">
+              <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" srcset="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-large.gif 1000w" alt="Page 57 of Lefler Thesis" style="position:absolute;top:0;left:0;width:100%;height:100%">
+            </div>
+            <div style="font-size:8pt;line-height:12pt;text-align:center">
+              Contributed to
+              <a href="https://www.documentcloud.org/" title="Go to DocumentCloud in new window or tab" target="_blank" style="font-weight:500;font-family:Gotham,inherit;color:black;text-decoration:none">DocumentCloud</a> by
+              <a href="https://www.documentcloud.org/public/search/Account:2258-ted-han" title="View documents contributed to DocumentCloud by Ted Han in new window or tab" target="_blank">Ted Han</a> of
+              <a href="https://www.documentcloud.org/public/search/Group:dcloud" title="View documents contributed to DocumentCloud by DocumentCloud in new window or tab" target="_blank">DocumentCloud</a> &bull;
+              <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire Lefler Thesis on DocumentCloud in new window or tab" target="_blank">View entire document</a> or
+              <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="Read the text of page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">read the text</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-of-4">
+          <h3>1.1/IFRAME Unenhanced</h3>
+
+          <div data-version="1.1" style="color:#999">
+            <div style="font-size:10pt;line-height:14pt;">
+              Page 57 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
+            </div>
+            <div style="position:relative;padding-bottom:129.428571428571428571%;height:0;overflow:hidden;max-width:100%;margin:0.5em 0;border:1px solid #ccc;-webkit-box-sizing:border-box;clear:both">
+              <iframe src="embed.html?unenhanced=1" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+            </div>
+            <div style="font-size:8pt;line-height:12pt;text-align:center">
+              Contributed to
+              <a href="https://www.documentcloud.org/" title="Go to DocumentCloud in new window or tab" target="_blank" style="font-weight:500;font-family:Gotham,inherit;color:black;text-decoration:none">DocumentCloud</a> by
+              <a href="https://www.documentcloud.org/public/search/Account:2258-ted-han" title="View all documents contributed to DocumentCloud by Ted Han in new window or tab" target="_blank">Ted Han</a> of
+              <a href="https://www.documentcloud.org/public/search/Group:dcloud" title="View all documents contributed to DocumentCloud by DocumentCloud in new window or tab" target="_blank">DocumentCloud</a> &bull;
+              <a href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">View entire document</a> or
+              <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">read the text</a>
+            </div>
+          </div>
 
         </div>
-        <div class="col col-3 col-of-3">
-          <h3>Direct</h3>
-          <p class="desc">Load directly from the API without using the enhancer.</p>
 
+        <div class="col col-of-4">
+          <h3>1.1/IFRAME Enhanced</h3>
+          <div class="embed_via_ajax"></div>
+        </div>
+
+        <div class="col col-of-4">
+          <h3>Direct API Load</h3>
+
+          <link rel="stylesheet" href="examples.css" type="text/css" media="screen">
           <div id="direct_page_embed_1"></div>
           <script src="../dist/page_embed.js"></script>
           <script>
@@ -79,13 +137,16 @@
 
         </div>
 
+      </div>
+
       </section>
 
       <section id="unicode" class="row">
 
         <h2>Unicode support <a class="top" href="#">top</a></h2>
 
-        <div class="col col-1 col-of-5">
+        <div class="cols">
+        <div class="col col-of-5">
           <h3>Arabic</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662407-الع-ر-ب-ية.html#document/p1" title="View page 1 of الع-ر-ب-ية on DocumentCloud in new window or tab" target="_blank">Page 1 of الع-ر-ب-ية</a></p>
@@ -93,7 +154,7 @@
             <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662407/pages/الع-ر-ب-ية-p1.txt" title="View text of page 1 of الع-ر-ب-ية in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
-        <div class="col col-2 col-of-5">
+        <div class="col col-of-5">
           <h3>French</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662462-Français.html#document/p1" title="View page 1 of Français on DocumentCloud in new window or tab" target="_blank">Page 1 of Français</a></p>
@@ -101,7 +162,7 @@
             <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662462/pages/Français-p1.txt" title="View text of page 1 of Français in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
-        <div class="col col-3 col-of-5">
+        <div class="col col-of-5">
           <h3>Hebrew</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662406-עברית.html#document/p1" title="View page 1 of עברית on DocumentCloud in new window or tab" target="_blank">Page 1 of עברית</a></p>
@@ -109,7 +170,7 @@
             <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662406/pages/עברית-p1.txt" title="View text of page 1 of עברית in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
-        <div class="col col-4 col-of-5">
+        <div class="col col-of-5">
           <h3>Korean</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662326-한국어.html#document/p1" title="View page 1 of 한국어 on DocumentCloud in new window or tab" target="_blank">Page 1 of 한국어</a></p>
@@ -117,7 +178,7 @@
             <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662326/pages/한국어-p1.txt" title="View text of page 1 of 한국어 in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
-        <div class="col col-5 col-of-5">
+        <div class="col col-of-5">
           <h3>Russian</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2662269-россияне.html#document/p1" title="View page 1 of россияне on DocumentCloud in new window or tab" target="_blank">Page 1 of россияне</a></p>
@@ -125,11 +186,13 @@
             <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2662269/pages/россияне-p1.txt" title="View text of page 1 of россияне in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
+        </div>
       </section>
 
       <section id="errors" class="row">
         <h2>Error messages <a class="top" href="#">top</a></h2>
-        <div class="col col-1 col-of-3 width-target">
+        <div class="cols">
+        <div class="col col-of-3 width-target">
           <h3>Forbidden (403)</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="http://www.documentcloud.org/documents/2686376-Private-Doc-for-Page-Embed-Testing.html#document/p1" title="View page 1 of Private-Doc-for-Page-Embed-Testing on DocumentCloud in new window or tab" target="_blank">Page 1 of Private-Doc-for-Page-Embed-Testing</a></p>
@@ -137,7 +200,7 @@
             <p>Contributed to DocumentCloud by Justin Reese of DocumentCloud &bull; <a href="https://www.documentcloud.org/documents/2686376/pages/Private-Doc-for-Page-Embed-Testing-p1.txt" title="View text of page 1 of Private-Doc-for-Page-Embed-Testing in a new window or tab" target="_blank">View page as text</a></p>
           </div>
         </div>
-        <div class="col col-2 col-of-3 width-target">
+        <div class="col col-of-3 width-target">
           <h3>Not Found (404)</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/28200753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
@@ -146,7 +209,7 @@
             </p>
           </div>
         </div>
-        <div class="col col-3 col-of-3 width-target">
+        <div class="col col-of-3 width-target">
           <h3>Generic Load Error</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/999999999999-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
@@ -155,14 +218,16 @@
             </p>
           </div>
         </div>
+        </div>
       </section>
 
       <div id="breakpoints">
 
         <h2>Size breakpoints <a class="top" href="#">top</a></h2>
-        <p>This page is flexible with a min-width of 320px and a max-width of 960px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
+        <p>This page is flexible with a min-width of 320px and a max-width of 1280px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
 
         <section class="row hide-from-mobile">
+          <div class="cols">
           <div class="col width-target" style="width:50%;margin-right:2%;">
             <h3 class="width">…</h3>
             <div class="embed_via_ajax"></div>
@@ -175,6 +240,7 @@
             <h3 class="width">…</h3>
             <div class="embed_via_ajax"></div>
           </div>
+          </div>
         </section>
 
         <section class="hide-from-mobile width-target">
@@ -186,15 +252,7 @@
           <div class="width-target" style="max-width:702px;">
             <h3>Pixel-match Document Viewer <span class="width">…</span></h3>
             <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
-            <div class="DC-embed" data-version="1.0" style="font-size:10pt">
-              <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis on DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
-              <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
-              <p>
-                Contributed to DocumentCloud by Ted Han of DocumentCloud &bull;
-                <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="View text of page 57 of Lefler Thesis in a new window or tab" target="_blank">View page as text</a>
-              </p>
-            </div>
-            <script src="../dist/enhance.js"></script>
+            <div class="embed_via_ajax"></div>
           </div>
         </section>
 
@@ -202,6 +260,7 @@
 
     </div>
 
+    <script src="../dist/enhance.js"></script>
     <script src="examples.js"></script>
 
     <script>

@@ -34,7 +34,7 @@
     sizeBreakpoints: [
       [0,   199],
       [200, 399]
-    ],
+    ], // Keep in sync with media queries in `page_embed.scss`
 
     initialize: function(options) {
       this.options = _.extend({}, this.defaultOptions, options);
@@ -42,6 +42,7 @@
       this.currentPageNumber = this.options.page;
       this.noteViews         = {};
       this.cachedText        = {};
+      this.iframed           = DCEmbedToolbelt.isIframed()
 
       this.listenTo(this.model, 'sync', this.render);
     },
@@ -52,7 +53,7 @@
       this.prepareNotes(); // Requires `makeTemplateData()` be run first
       this.$el.html(JST['page'](this.templateData));
       this.cacheDomReferences();
-      this.checkIfIframed();
+      this.classifyEmbedContext();
       this.renderNoteOverlay();
       if (this.mode == 'text') {
         this.switchToText();
@@ -100,7 +101,8 @@
       var hasCreditData = creditData.contributor || creditData.organization;
 
       this.templateData = {
-        showCredit:          this.options.credit && hasCreditData,
+        showMeta:            !this.iframed,
+        showCredit:          !this.iframed && this.options.credit && hasCreditData,
         showTextMode:        this.options.text,
         showPageNavigator:   this.options.pageNavigator,
         showPageMenuBar:     this.options.pageNavigator || this.options.text,
@@ -245,19 +247,14 @@
     },
 
     clickPage: function() {
-      if (this.$el.hasClass('DC-embed-size-0')) {
+      var weAreTiny = this.iframed ? (this.$el.width() <= this.sizeBreakpoints[0][1]) : this.$el.hasClass('DC-embed-size-0');
+      if (weAreTiny) {
         window.open(this.model.permalink());
       }
     },
 
-    checkIfIframed: function() {
-      if (DCEmbedToolbelt.isIframed()) {
-        this.$embed.addClass('DC-embed-iframed');
-        this.iframed = true;
-      } else {
-        this.$embed.addClass('DC-embed-no-iframed');
-        this.iframed = false;
-      }
+    classifyEmbedContext: function() {
+      this.$el.addClass('DC-embed-' + (this.iframed ? 'iframed' : 'inline'));
     },
 
   });

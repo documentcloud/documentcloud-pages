@@ -30,6 +30,21 @@ $fontWeightNormal:   400;
 $fontWeightSemiBold: 500;
 $fontWeightBold:     700;
 
+// Font sizes
+
+$fontSizeXSmall:    8pt;
+$fontSizeSmall:     9pt;
+$fontSizeNormal:    10pt;
+$fontSizeLarge:     11pt;
+$fontSizeXLarge:    14pt;
+$fontSizeXXLarge:   20pt;
+$lineHeightXSmall:  11pt;
+$lineHeightSmall:   12pt;
+$lineHeightNormal:  14pt;
+$lineHeightLarge:   16pt;
+$lineHeightXLarge:  21pt;
+$lineHeightXXLarge: 28pt;
+
 // Speeds
 
 $speedFast:   100ms;
@@ -46,6 +61,24 @@ $buttonPaddingMax: 12px;
 
 // Mixins
 
+@mixin full-size() {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin full-width() {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 @mixin menubar() {
   position: relative;
   height: $touchHeightMin;
@@ -54,7 +87,7 @@ $buttonPaddingMax: 12px;
 
   text-transform: uppercase;
   font-weight: $fontWeightBold;
-  font-size: 0.9em;
+  font-size: $fontSizeXSmall;
   background-color: $dcBrandBlue;
   color: white;
   @include antialiased;
@@ -120,8 +153,8 @@ $buttonPaddingMax: 12px;
   // Manual adjustment of icon to align properly with text
   .DC-icon {
     position: relative;
-    font-size: 1.4em;
-    line-height: 0px;
+    font-size: $fontSizeXLarge;
+    line-height: 0;
     top: 2px;
   }
 }
@@ -192,12 +225,12 @@ $buttonPaddingMax: 12px;
   padding: 10%;
   text-align: center;
   font-weight: $fontWeightSemiBold;
-  font-size: 1.4em;
+  font-size: $fontSizeXLarge;
   overflow: hidden;
 
   .DC-icon {
     display: block;
-    font-size: 2em;
+    font-size: $fontSizeXXLarge;
     line-height: inherit;
     margin-bottom: 0.25em;
   }
@@ -205,7 +238,7 @@ $buttonPaddingMax: 12px;
 
 .DC-page-embed {
   position: relative;
-  font: $fontWeightNormal 10pt/1.6em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: $fontWeightNormal #{$fontSizeNormal}/#{$lineHeightNormal} Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: $textColor;
 
   -webkit-box-sizing: border-box;
@@ -224,6 +257,13 @@ $buttonPaddingMax: 12px;
     color: $dcBrandBlueLight;
   }
 
+  .DC-logotype-link {
+    font-family: Gotham, inherit;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+  }
+
   img {
     max-width: none; /* WHACKAMOLE: Override WordPress's `img` rules. */
   }
@@ -237,16 +277,20 @@ $buttonPaddingMax: 12px;
     visibility: hidden;
   }
 
+  $logoHeight: 27px;
+
   .DC-meta {
     position: relative;
-    min-height: 27px;
+    min-height: $logoHeight;
     padding-right: 120px;
     margin-bottom: 0.5em;
+  }
 
     .DC-title {
       display: inline;
       font-weight: $fontWeightNormal;
-      font-size: 1.2em;
+      font-size: $fontSizeLarge;
+      line-height: $logoHeight;
       color: black;
 
       .DC-page-number {
@@ -276,10 +320,8 @@ $buttonPaddingMax: 12px;
 
     }
 
-  }
-
   .DC-credit {
-    font-size: 0.9em;
+    font-size: $fontSizeSmall;
     color: $grayDark;
     text-align: center;
     margin-top: 1em;
@@ -312,14 +354,10 @@ $buttonPaddingMax: 12px;
   }
 
   .DC-page-text {
-    position: absolute;
-    top: 0;
-    left: 0%;
-    width: 100%;
-    height: 100%;
+    @include full-size();
     padding: 5%;
     z-index: 1;
-    font: 400 1.2em/1.6em serif;
+    font: 400 #{$fontSizeNormal}/#{$lineHeightNormal} serif;
     background-color: white;
     overflow-x: scroll;
     overflow-y: scroll;
@@ -328,8 +366,8 @@ $buttonPaddingMax: 12px;
     &.fetching {
       font-family: sans-serif;
       text-align: center;
-      font-size: 1.5em;
-      line-height: 1.3em;
+      font-size: $fontSizeXLarge;
+      line-height: $lineHeightXLarge;
     }
 
     &.error {
@@ -342,6 +380,7 @@ $buttonPaddingMax: 12px;
 
     .DC-m-touch & {
       left: 10%;
+      right: 10%;
       width: 80%;
       -webkit-overflow-scrolling: touch;
     }
@@ -431,9 +470,7 @@ $buttonPaddingMax: 12px;
   // Notes
 
   .DC-note-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    @include full-size();
     z-index: 1;
   }
   &.open .DC-note-overlay {
@@ -481,11 +518,7 @@ $buttonPaddingMax: 12px;
   }
 
   .DC-note-image-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    @include full-size();
     overflow: hidden;
   }
 
@@ -510,7 +543,7 @@ $buttonPaddingMax: 12px;
     max-width: 400px;
   }
   .DC-note-wrapper.open .DC-note-body {
-    max-height: 200px;
+    max-height: 200px; // Keep in sync with `NoteView.NOTE_MAX_HEIGHT`
     opacity: 1;
   }
 
@@ -544,7 +577,7 @@ $buttonPaddingMax: 12px;
 
     font-weight: $fontWeightBold;
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-size: $fontSizeXSmall;
     margin: 1.1em 0 0 0;
 
     > a {
@@ -570,76 +603,97 @@ $buttonPaddingMax: 12px;
 
 }
 
-// Below 200px
+// Size breakpoints:
+// For iframes, we use media queries. This is preferable, but we have to
+// hard-code the breakpoints into CSS instead of describing on the Page view.
+// For inline, we observe window resizing and set a class. This degrades
+// performance, but doesn't require hard-coding the breakpoints here in CSS.
 
-.DC-embed-size-0 .DC-page-embed {
-  $margin: 0.5em;
-  $fontSize: 8pt;
-  $lineHeight: 10pt;
+@mixin embedSize0() {
+  .DC-page-embed {
+    $margin: 0.5em;
 
-  font-size: $fontSize;
-  line-height: $lineHeight;
+    font-size: $fontSizeXSmall;
+    line-height: $lineHeightXSmall;
 
-  .DC-page-number,
-  .DC-credit,
-  .DC-logomark-permalink,
-  .DC-embed-menubar,
-  .DC-note-overlay,
-  .DC-page-text
-  {
-    display: none;
-  }
+    .DC-page-number,
+    .DC-credit,
+    .DC-logomark-permalink,
+    .DC-embed-menubar,
+    .DC-note-overlay,
+    .DC-page-text
+    {
+      display: none;
+    }
 
-  .DC-m-no-touch & {
-    .DC-page {
-      cursor: pointer;
+    .DC-m-no-touch & {
+      .DC-page {
+        cursor: pointer;
+      }
+    }
+
+    .DC-meta {
+      padding-right: 0;
+      margin-bottom: $margin;
+      min-height: auto;
+    }
+
+    .DC-title {
+      font-size: $fontSizeXSmall;
+      line-height: $lineHeightXSmall;
     }
   }
-
-  .DC-meta {
-    padding-right: 0;
-    margin-bottom: $margin;
-    min-height: auto;
-  }
-
-  .DC-title {
-    font-size: $fontSize;
-    line-height: $lineHeight;
-  }
-
 }
 
-// Below 300px
+@mixin embedSize1() {
+  .DC-page-embed {
+    $margin: 0.5em;
 
-.DC-embed-size-1 .DC-page-embed {
-  $margin: 0.5em;
-  $fontSize: 9pt;
-  $lineHeight: 11pt;
+    font-size: $fontSizeSmall;
+    line-height: $lineHeightSmall;
 
-  font-size: $fontSize;
-  line-height: $lineHeight;
+    .DC-logomark-permalink,
+    .DC-action-nav-pagecount,
+    .DC-action-text
+    {
+      display: none;
+    }
 
-  .DC-logomark-permalink,
-  .DC-action-nav-pagecount,
-  .DC-action-text
-  {
-    display: none;
+    .DC-meta {
+      padding-right: 0;
+      margin-bottom: $margin;
+      min-height: auto;
+    }
+
+    .DC-title {
+      font-size: $fontSizeSmall;
+      line-height: $lineHeightSmall;
+    }
+
+    .DC-credit {
+      font-size: $fontSizeXSmall;
+      line-height: $lineHeightXSmall;
+      margin-top: $margin;
+    }
+  }
+}
+
+.DC-embed-inline {
+  &.DC-embed-size-0 {
+    @include embedSize0;
   }
 
-  .DC-meta {
-    padding-right: 0;
-    margin-bottom: $margin;
-    min-height: auto;
+  &.DC-embed-size-1 {
+    @include embedSize1;
   }
+}
 
-  .DC-title {
-    font-size: $fontSize;
-    line-height: $lineHeight;
-  }
+@media (max-width: 199px) {
+  @include embedSize0;
+}
 
-  .DC-credit {
-    margin-top: $margin;
-  }
+@media (min-width: 200px) and (max-width: 399px) {
+  @include embedSize1;
 }
 
 // In an iframe
@@ -648,7 +702,6 @@ $buttonPaddingMax: 12px;
   margin: 0;
   padding: 0;
   overflow: hidden;
-
   > body {
     margin: 0;
     padding: 0;
@@ -656,35 +709,22 @@ $buttonPaddingMax: 12px;
   }
 
   .DC-page-embed {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    
-    display: flex;
-    flex-direction: column;
+    @include full-size();
+    overflow: hidden;
   }
 
-  .DC-meta {
-    background: white;
-    flex-basis: auto;
+  .DC-meta,
+  .DC-credit {
+    display: none;
   }
 
   .DC-embed-menubar {
-    flex-basis: auto;
+    @include full-width();
+    z-index: 10;
   }
 
-  .DC-page-wrapper {
-    flex: 1;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .DC-credit {
-    flex-basis: auto;
+  .DC-page {
+    @include full-size();
+    border: 0;
   }
 }
