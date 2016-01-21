@@ -257,7 +257,8 @@ $buttonPaddingMax: 12px;
     color: $dcBrandBlueLight;
   }
 
-  .DC-logotype-link {
+  .DC-logotype-link,
+  .DC-logotype-link:visited {
     font-family: Gotham, inherit;
     font-weight: 500;
     color: black;
