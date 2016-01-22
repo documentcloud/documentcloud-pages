@@ -54,7 +54,7 @@
       this.$el.html(JST['page'](this.templateData));
       this.cacheDomReferences();
       this.classifyEmbedContext();
-      this.renderNoteOverlay();
+      this.$image.on('load', _.bind(this.renderNoteOverlay, this));
       if (this.mode == 'text') {
         this.switchToText();
       } else {
@@ -134,6 +134,10 @@
     },
 
     renderNoteOverlay: function() {
+      if (this.notesLoaded) {
+        return false;
+      }
+
       var view = this;
 
       // Cache this function internally
@@ -144,22 +148,22 @@
                                 return noteView.render(view.dimensions);
                               });
         view.$overlay.append(_.map(noteViews, function(v) { return v.$el; }));
+        view.notesLoaded = true;
       }
 
       // If dimensions are already cached, just straight re-render
       if (view.dimensions) {
         _renderOverlay();
       } else {
-        var unstyledImage = $(new Image());
-        unstyledImage.load(function() {
-          view.dimensions = {
-            height: this.height,
-            width: this.width,
-            aspectRatio: this.width / this.height
-          };
-          _renderOverlay();
-        });
-        unstyledImage.attr('src', view.model.imageUrl(view.currentPageNumber));
+        view.dimensions = {
+          width: 700,
+          // TODO: If the document JSON returns page aspect ratio, we won't 
+          // have to do this calculation, and in fact won't have to observe 
+          // image loading at all
+          aspectRatio: view.$image.width() / view.$image.height()
+        };
+        view.dimensions.height = view.dimensions.width / view.dimensions.aspectRatio;
+        _renderOverlay();
       }
     },
 
@@ -240,6 +244,7 @@
           this.openNote.close();
         };
         this.currentPageNumber = pageNumber;
+        this.notesLoaded       = false;
         this.undelegateEvents();
         this.$el.html(this.render());
         this.delegateEvents();
