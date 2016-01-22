@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'fontello';
+  font-family: 'DC-fontello';
   src: url('font/fontello.eot?31427133');
   src: url('font/fontello.eot?31427133#iefix') format('embedded-opentype'),
        url('font/fontello.woff?31427133') format('woff'),
@@ -13,14 +13,14 @@
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
-    font-family: 'fontello';
+    font-family: 'DC-fontello';
     src: url('font/fontello.svg?31427133#fontello') format('svg');
   }
 }
 */
  
  [class^="DC-icon-"]:before, [class*=" DC-icon-"]:before {
-  font-family: "fontello";
+  font-family: "DC-fontello";
   font-style: normal;
   font-weight: normal;
   speak: none;
