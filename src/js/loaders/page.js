@@ -73,22 +73,34 @@
           }
         },
         error: function(model, response) {
-          var icon, message;
+          var icon, message, replace;
           switch (response.status) {
             case 403:
               icon    = 'lock';
               message = 'This DocumentCloud document is private and can only be viewed by its owner.';
+              replace = 'all';
               break;
             case 404:
               icon    = 'help';
               message = 'DocumentCloud can’t find this document.';
+              replace = 'image';
               break;
             default:
               icon    = 'cancel';
               message = 'DocumentCloud can’t load this document.';
+              replace = 'image';
               break;
           }
-          container.innerHTML = '<div class="DC-embed-unloadable"><i class="DC-icon DC-icon-' + icon + '"></i> ' + message + '</div>';
+          message = '<div class="DC-embed-unloadable"><i class="DC-icon DC-icon-' + icon + '"></i> ' + message + '</div>';
+
+          switch (replace) {
+            case 'all':
+              container.innerHTML = message;
+              break;
+            default:
+              container.querySelector('img').outerHTML = message;
+              break;
+          }
           // TODO: Notify us of the load error via pixel ping or something [JR]
         }
       });
