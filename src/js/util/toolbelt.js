@@ -51,8 +51,8 @@
           docBase + '\.(?:html|js|json)$'
         ],
         page: [
-          docBase + '\.html#document\/p([0-9]+)$',         // Current
-          docBase + '\/pages\/([0-9]+)\.(?:html|js|json)$' // Future?
+          docBase + '\.html#document\/p([0-9]+)$',
+          docBase + '\/pages\/([0-9]+)\.(?:html|js|json)$'
         ],
         note: [
           docBase + '\/annotations\/([0-9]+)\.(?:html|js|json)$',
