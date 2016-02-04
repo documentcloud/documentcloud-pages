@@ -44,7 +44,7 @@
         development: 'dev\.dcloud\.org'
       };
       var domains = _.values(domainEnvPatterns).join('|');
-      var unicodeSlug    = this.unicodeLetter + this.unicodeNumber + '-';
+      var unicodeSlug = this.unicodeLetter + this.unicodeNumber + '\-';
       var docBase = '(' + domains + ')\/documents\/([0-9]+)-([' + unicodeSlug + ']+)';
       var resourceTypePatterns = {
         'document': [
