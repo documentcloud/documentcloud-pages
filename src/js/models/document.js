@@ -55,14 +55,6 @@
       return resources['page']['text'].replace('{page}', pageNumber);
     },
 
-    contributorSearchUrl: function() {
-      return this.get('account_search_url');
-    },
-
-    organizationSearchUrl: function() {
-      return this.get('organization_search_url');
-    },
-
   });
 
   definition.DocumentSet = definition.DocumentSet || Backbone.Collection.extend({

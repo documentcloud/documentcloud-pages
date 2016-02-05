@@ -93,9 +93,9 @@
       var pageNumber = this.currentPageNumber;
       var creditData = {
         contributor:           this.model.get('contributor'),
-        contributorSearchUrl:  this.model.contributorSearchUrl(),
+        contributorDocumentsUrl: this.model.get('contributor_documents_url'),
         organization:          this.model.get('contributor_organization'),
-        organizationSearchUrl: this.model.organizationSearchUrl(),
+        organizationDocumentsUrl: this.model.get('contributor_organization_documents_url'),
       };
       // We need to know at least the contributor or organization name
       var hasCreditData = creditData.contributor || creditData.organization;
