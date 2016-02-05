@@ -56,21 +56,11 @@
     },
 
     contributorSearchUrl: function() {
-      if (_.isUndefined(this._contributorSearchUrl)) {
-        var slug = this.get('contributor_slug');
-        var host = 'www.documentcloud.org'; // hard coded for the moment
-        this._contributorSearchUrl = slug ? ('//'+host+'/public/search/Account:' + slug) : false;
-      }
-      return this._contributorSearchUrl;
+      return this.get('account_search_url');
     },
 
     organizationSearchUrl: function() {
-      if (_.isUndefined(this._organizationSearchUrl)) {
-        var slug = this.get('contributor_organization_slug');
-        var host = 'www.documentcloud.org'; // hard coded for the moment
-        this._organizationSearchUrl = slug ? ('//'+host+'/public/search/Group:' + slug) : false;
-      }
-      return this._organizationSearchUrl;
+      return this.get('organization_search_url');
     },
 
   }, {
