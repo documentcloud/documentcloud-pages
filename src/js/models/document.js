@@ -23,7 +23,7 @@
       size = size || 'normal';
       var resources = this.get('resources');
       var urlTemplate = resources['page']['image'];
-      return urlTemplate.replace('{size}', size).replace('{page}', pageNumber);
+      return urlTemplate.replace('{size}', size).replace('{page}', pageNumber).replace(/^https?:/, '');
     },
 
     textUrl : function(pageNumber) {
