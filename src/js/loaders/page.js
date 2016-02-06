@@ -26,6 +26,11 @@
         return;
       }
 
+      var isIframed = DCEmbedToolbelt.isIframed();
+      if (isIframed) {
+        $('html').addClass('DC-embed-iframe');
+      }
+
       var documentId = resource.documentId;
       var doc        = new definition.Document({id: documentId});
       doc.fetch({
@@ -55,9 +60,7 @@
             DCEmbedToolbelt.pixelPing(resource, viewElement);
           }
 
-          if (DCEmbedToolbelt.isIframed()) {
-            $('html').addClass('DC-embed-iframe');
-          } else {
+          if (!isIframed) {
             // We tweak the interface lightly based on the width of the embed; 
             // in non-iframe contexts, this requires observing window resizes.
             var $el = $(viewElement);
