@@ -1,7 +1,8 @@
 bower_components
-js/vendor/backbone
-js/vendor/jquery
-js/vendor/underscore
+src/js/vendor/backbone
+src/js/vendor/jquery
+src/js/vendor/underscore
+src/js/vendor/jQuery-ajaxTransport-XDomainRequest
 .DS_Store
 .tm_properties
 .ruby-version
