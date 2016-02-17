@@ -6,6 +6,11 @@
     "Ted Han <ted@knowtheory.net>",
     "Justin Reese <justin@justinreese.com>"
   ],
+  "keywords": [
+    "documentcloud",
+    "embedded",
+    "3rdparty"
+  ],
   "license": "MIT",
   "main": [
     "dist/page_embed.js",
