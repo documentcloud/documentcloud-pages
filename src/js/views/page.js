@@ -92,35 +92,34 @@
       var pageCount  = model.get('pages');
       var pageNumber = this.currentPageNumber;
       var creditData = {
-        contributor:           this.model.get('contributor'),
-        contributorDocumentsUrl: this.model.get('contributor_documents_url'),
-        organization:          this.model.get('contributor_organization'),
+        contributor:              this.model.get('contributor'),
+        contributorDocumentsUrl:  this.model.get('contributor_documents_url'),
+        organization:             this.model.get('contributor_organization'),
         organizationDocumentsUrl: this.model.get('contributor_organization_documents_url'),
       };
       // We need to know at least the contributor or organization name
       var hasCreditData = creditData.contributor || creditData.organization;
 
       this.templateData = {
-        showMeta:            !this.iframed,
-        showCredit:          !this.iframed && this.options.credit && hasCreditData,
-        showTextMode:        this.options.text,
-        showPageNavigator:   this.options.pageNavigator,
-        showPageMenuBar:     this.options.pageNavigator || this.options.text,
-        model:               model,
-        imageUrl:            model.imageUrl(pageNumber),
-        imageUrlLarge:       model.imageUrl(pageNumber, 'large'),
-        permalinkDoc:        model.permalink(),
-        permalinkPage:       model.permalinkPage(pageNumber),
-        permalinkPageText:   model.permalinkPageText(pageNumber),
-        pageTextResourceUrl: model.pageTextResourceUrl(pageNumber),
-        pageCount:           pageCount,
-        hasMultiplePages:    model.hasMultiplePages(),
-        pageNumber:          pageNumber,
-        hasPrevPage:         pageNumber > 1,
-        hasNextPage:         pageNumber < pageCount,
+        showMeta:          !this.iframed,
+        showCredit:        !this.iframed && this.options.credit && hasCreditData,
+        showTextMode:      this.options.text,
+        showPageNavigator: this.options.pageNavigator,
+        showPageMenuBar:   this.options.pageNavigator || this.options.text,
+        model:             model,
+        imageUrl:          model.imageUrl(pageNumber),
+        imageUrlLarge:     model.imageUrl(pageNumber, 'large'),
+        publishedUrlPage:  model.publishedUrlPage(pageNumber),
+        pageTextUrl:       model.pageTextUrl(pageNumber),
+        pageTextFileUrl:   model.pageTextFileUrl(pageNumber),
+        pageCount:         pageCount,
+        hasMultiplePages:  model.hasMultiplePages(),
+        pageNumber:        pageNumber,
+        hasPrevPage:       pageNumber > 1,
+        hasNextPage:       pageNumber < pageCount,
       };
-      this.templateData.prevPageHref      = this.templateData.hasPrevPage ? model.permalinkPage(pageNumber - 1) : '#';
-      this.templateData.nextPageHref      = this.templateData.hasNextPage ? model.permalinkPage(pageNumber + 1) : '#';
+      this.templateData.prevPageHref      = this.templateData.hasPrevPage ? model.publishedUrlPage(pageNumber - 1) : '#';
+      this.templateData.nextPageHref      = this.templateData.hasNextPage ? model.publishedUrlPage(pageNumber + 1) : '#';
       // Don't compile template if we don't have to
       this.templateData.contributorCredit = this.templateData.showCredit ? JST['credit'](creditData) : '';
     },
@@ -145,7 +144,7 @@
         view.$overlay.empty();
         var noteViews = _.map(view.noteViews[view.currentPageNumber],
                               function(noteView) {
-                                return noteView.render(view.dimensions);
+                                return noteView.render(view.dimensions, view.model.publishedUrl());
                               });
         view.$overlay.append(_.map(noteViews, function(v) { return v.$el; }));
         view.notesLoaded = true;
@@ -193,7 +192,7 @@
         this.$text.removeClass('error').addClass('fetching')
                   .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
         var _this = this;
-        $.get(this.model.textUrl(this.currentPageNumber), function(data) {
+        $.get(this.model.pageTextUrl(this.currentPageNumber), function(data) {
           _this.cachedText[_this.currentPageNumber] = data;
           _this.$text.text(data);
         }).fail(function(){
@@ -254,7 +253,7 @@
     clickPage: function() {
       var weAreTiny = this.iframed ? (this.$el.width() <= this.sizeBreakpoints[0][1]) : this.$el.hasClass('DC-embed-size-0');
       if (weAreTiny) {
-        window.open(this.model.permalink());
+        window.open(this.model.publishedUrl());
       }
     },
 

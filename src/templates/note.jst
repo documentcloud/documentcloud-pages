@@ -8,7 +8,7 @@
 
   <div class="DC-note-content">
     <div class="DC-note-title">
-      <a href="<%= permalinkNote %>" title="View note on DocumentCloud in new window or tab" target="_blank"><%- title %></a>
+      <a href="<%= publishedUrlNote %>" title="View note with DocumentCloud in new window or tab" target="_blank"><%- title %></a>
     </div>
     <div class="DC-note-text"><%= text %></div>
   </div>
@@ -16,7 +16,7 @@
 <% if (showNoteMenuBar) { %>
   <div class="DC-note-menubar">
     <ul class="DC-actions-meta">
-      <li><a href="<%= permalinkNote %>" title="View note on DocumentCloud in new window or tab" target="_blank">
+      <li><a href="<%= publishedUrlNote %>" title="View note with DocumentCloud in new window or tab" target="_blank">
         <i class="DC-icon DC-icon-link"></i>
         <span class="DC-action-text">Link</span>
       </a></li>

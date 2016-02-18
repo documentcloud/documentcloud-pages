@@ -293,7 +293,7 @@ $buttonPaddingMax: 12px;
       line-height: $logoHeight;
     }
 
-    .DC-logomark-permalink {
+    .DC-resource-logomark-link {
       display: block;
       position: absolute;
       right: 0;
@@ -612,7 +612,7 @@ $buttonPaddingMax: 12px;
 
     .DC-page-number,
     .DC-credit,
-    .DC-logomark-permalink,
+    .DC-resource-logomark-link,
     .DC-embed-menubar,
     .DC-note-overlay,
     .DC-page-text
@@ -646,7 +646,7 @@ $buttonPaddingMax: 12px;
     font-size: $fontSizeSmall;
     line-height: $lineHeightSmall;
 
-    .DC-logomark-permalink,
+    .DC-resource-logomark-link,
     .DC-action-nav-pagecount,
     .DC-action-text
     {

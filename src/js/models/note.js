@@ -10,13 +10,10 @@
 
   definition.Note = Backbone.Model.extend({
 
-    permalink: function() {
+    pageAnchor: function() {
       var id    = this.get('id');
       var page  = this.get('page');
-      var url   = this.get('canonical_url');
-      var start = url.indexOf('/annotations/');
-
-      return url.substring(0, start) + '.html#document/p' + page + '/a' + id;
+      return '#document/p' + page + '/a' + id;
     },
 
     // Parses the coordinates in pixel value and calculates pixel width/height

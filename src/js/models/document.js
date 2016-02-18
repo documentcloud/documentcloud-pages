@@ -28,29 +28,31 @@
 
     textUrl : function(pageNumber) {
       var resources = this.get('resources');
-      var urlTemplate = resources['page']['text'];
-      return urlTemplate.replace('{page}', pageNumber);
+      return resources['text'];
     },
 
     hasMultiplePages: function() {
       return this.get('pages') > 1;
     },
 
-    permalink: function() {
-      return this.get('canonical_url');
+    publishedUrl: function() {
+      var resources = this.get('resources');
+      return resources['published_url'] || this.get('canonical_url');
     },
 
-    permalinkPage: function(pageNumber) {
-      return this.get('canonical_url') + '#document/p' + pageNumber;
+    publishedUrlPage: function(pageNumber) {
+      return this.publishedUrl() + '#document/p' + pageNumber;
     },
 
-    // Permalink to page text within platform
-    permalinkPageText: function(pageNumber) {
+    // Link to page text within platform. Composed with `canonical_url`, not
+    // `published_url`, because `published_url` might land us on remote page 
+    // where text mode is disabled.
+    pageTextUrl: function(pageNumber) {
       return this.get('canonical_url') + '#text/p' + pageNumber;
     },
 
     // URL for page text file
-    pageTextResourceUrl: function(pageNumber) {
+    pageTextFileUrl: function(pageNumber) {
       var resources = this.get('resources');
       return resources['page']['text'].replace('{page}', pageNumber);
     },
