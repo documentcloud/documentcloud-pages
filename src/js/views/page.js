@@ -192,7 +192,7 @@
         this.$text.removeClass('error').addClass('fetching')
                   .html('<i class="DC-icon DC-icon-arrows-cw animate-spin"></i> Fetching page text…');
         var _this = this;
-        $.get(this.model.pageTextUrl(this.currentPageNumber), function(data) {
+        $.get(this.model.pageTextFileUrl(this.currentPageNumber), function(data) {
           _this.cachedText[_this.currentPageNumber] = data;
           _this.$text.text(data);
         }).fail(function(){
