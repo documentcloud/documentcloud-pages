@@ -1,4 +1,26 @@
+/*!
+ * DCEmbedToolbelt
+ * A small library of components shared between DocumentCloud embed loaders and
+ * enhancers. It should remain very small.
+ *
+ * Depends on either `setup.js` (for Underscore) or Penny.
+ *
+ * @license (c) 2015 Justin Reese, DocumentCloud
+ * DCEmbedToolbelt may be freely distributed under the MIT license.
+ *
+ */
+
 (function(){
+
+  // For browsers that don't support `console`, swallow calls.
+  if (!window.console) {
+    window.console = {
+      log:   function(){},
+      info:  function(){},
+      warn:  function(){},
+      error: function(){},
+    };
+  }
 
   var DocumentCloud = window.DocumentCloud;
   var Penny         = window.Penny;
@@ -14,10 +36,6 @@
     return false;
   }
 
-  // DCEmbedToolbelt is a small library of components shared between both 
-  // the enhance.js embed loader and actual embed libraries. It should remain 
-  // very small. It depends on `logger.js` and either `setup.js` (for 
-  // Underscore) or Penny.
   var DCEmbedToolbelt = window.DCEmbedToolbelt = window.DCEmbedToolbelt || {
 
     // Equivalent to `\p{Letter}` and `\p{Number}`

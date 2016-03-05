@@ -14,7 +14,6 @@ javascripts:
     - src/js/vendor/jQuery-ajaxTransport-XDomainRequest/jQuery.XDomainRequest.js
     - src/js/vendor/underscore/underscore.js
     - src/js/vendor/backbone/backbone.js
-    - src/js/util/logger.js
     - src/js/util/setup.js
     - src/js/util/toolbelt.js
     - src/js/models/*.js
@@ -23,7 +22,6 @@ javascripts:
     - src/templates/*.jst
 
   enhance:
-    - src/js/util/logger.js
     - src/js/util/penny.js
     - src/js/util/toolbelt.js
     - src/js/enhance.js

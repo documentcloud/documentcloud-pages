@@ -1,3 +1,15 @@
+/*!
+ * Enhance
+ * A small library of components shared between both the enhance.js embed loader
+ * and actual embed libraries. It should remain very small.
+ *
+ * Depends on either `setup.js` (for Underscore) or Penny.
+ *
+ * @license (c) 2015 Justin Reese, DocumentCloud
+ * Enhance may be freely distributed under the MIT license.
+ *
+ */
+
 (function(){
 
   Penny.ready(function(){
