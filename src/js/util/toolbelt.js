@@ -142,7 +142,7 @@
     // Many times, we want a function to be able to receive either a string 
     // selector or a DOM element (or even a jQuery element). This function lets 
     // you pass a parameter in and get out a DOM element.
-    ensureElement: function(thing) {
+    toDomElement: function(thing) {
       if (_.isElement(thing)) {
         // Is DOM element already; return it
         return thing;
@@ -229,7 +229,7 @@
     // selector string).
     pixelPing: function(resource, container) {
       resource  = this.recognizeResource(resource);
-      container = this.ensureElement(container);
+      container = this.toDomElement(container);
 
       var pingUrl   = '//' + resource.domain + '/pixel.gif';
       var sourceUrl = this.getSourceUrl();

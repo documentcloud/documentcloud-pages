@@ -20,7 +20,7 @@
       options  = options || {};
       resource = DCEmbedToolbelt.recognizeResource(resource);
 
-      var container = DCEmbedToolbelt.ensureElement(options.container);
+      var container = DCEmbedToolbelt.toDomElement(options.container);
       if (!container) {
         console.error("DocumentCloud can't be embedded without specifying a container.");
         return;
