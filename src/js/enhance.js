@@ -66,7 +66,7 @@
       // confirmed available.
       var DocumentCloud = window.DocumentCloud;
 
-      var stubs = document.querySelectorAll('.DC-embed');
+      var stubs = document.querySelectorAll('.DC-embed[data-version^="1."]');
       Penny.each(stubs, function (stub, i) {
         if (stub.className.indexOf('DC-embed-enhanced') != -1) { return; }
         var resourceElement = stub.querySelector('.DC-embed-resource');
