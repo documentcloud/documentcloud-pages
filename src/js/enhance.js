@@ -36,6 +36,7 @@
       if (!document.querySelector('script[src$="' + src + '"]')) {
         var script = document.createElement('script');
             script.src   = src;
+            script.async = true;
         Penny.on(script, 'load', onLoadCallback);
         document.querySelector('body').appendChild(script);
       }
