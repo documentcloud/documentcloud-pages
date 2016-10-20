@@ -5,10 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DocumentCloud Page Embed Test</title>
-    <link rel="stylesheet" href="examples.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="//assets.documentcloud.org/css/platform.css" type="text/css" media="screen">
+    <style type="text/css" media="screen">
+    section {
+      margin: 3rem 0
+    }
+      
+    </style>
   </head>
   <body>
-    <div class="main width-target">
+    <div class="container">
       <header>
         <h1>DocumentCloud Page Embed Testbed</h1>
         <p id="live_options">
@@ -18,25 +24,19 @@
         </p>
       </header>
 
-      <nav id="nav">
-        <ul>
-          <li><a href="#mechanism">Embed mechanism</a></li>
-          <li><a href="#history">History</a></li>
-          <li><a href="#unicode">Unicode support</a></li>
-          <li><a href="#errors">Error messages</a></li>
-          <li><a href="#breakpoints">Size breakpoints</a></li>
-        </ul>
-      </nav>
+      <ul class="nav nav-pills nav-inline">
+        <li class="nav-item"><a class="nav-link" href="#mechanism">Embed mechanism</a></li>
+        <li class="nav-item"><a class="nav-link" href="#history">History</a></li>
+        <li class="nav-item"><a class="nav-link" href="#unicode">Unicode support</a></li>
+        <li class="nav-item"><a class="nav-link" href="#errors">Error messages</a></li>
+        <li class="nav-item"><a class="nav-link" href="#breakpoints">Size breakpoints</a></li>
+      </ul>
 
-      <section id="mechanism" class="row">
-
-        <h2>Embed mechanism <a class="top" href="#">top</a></h2>
-
-        <div class="cols">
-
-
-        <div class="col col-of-3">
-          <h3>Direct API Load</h3>
+      <section id="mechanism">
+        <h2 class="h4">Embed mechanism <small><a class="btn btn-link" href="#">&uarr; top</a></small></h2>
+        <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <h3 class="h5">Direct API Load</h3>
 
           <link rel="stylesheet" href="../dist/page_embed.css" type="text/css" media="screen">
           <div id="direct_page_embed_1"></div>
@@ -49,9 +49,8 @@
           </script>
 
         </div>
-
-        <div class="col col-of-3">
-          <h3>2.0/IFRAME Enhanced</h3>
+        <div class="col-xs-12 col-sm-4">
+          <h3 class="h5">2.0/IFRAME (with meta)</h3>
 
           <div class="DC-embed" data-version="2.0">
             <div style="font-size:10pt;line-height:14pt;">
@@ -69,33 +68,29 @@
               <a href="https://www.documentcloud.org/documents/282753/pages/lefler-thesis-p57.txt" title="Read the text of page 57 of Lefler Thesis with DocumentCloud in new window or tab" target="_blank">read text</a>
             </div>
           </div>
-          <script src="../dist/enhance.js"></script>
 
         </div>
+        <div class="col-xs-12 col-sm-4">
+          <h3 class="h5">2.0/IFRAME Minimal</h3>
 
-        <div class="col col-of-3">
-          <h3>2.0/IFRAME Minimal</h3>
           <div data-version="2.0">
             <div style="position:relative;padding-bottom:129.428571428571428571%;height:0;overflow:hidden;max-width:100%;margin:0.5em 0;border:1px solid #ccc;-webkit-box-sizing:border-box;clear:both">
               <iframe src="embed.html" title="Page 57 of Lefler Thesis" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
             </div>
           </div>
+
         </div>
-
-      </div>
-
+        </div>
       </section>
 
-      <section id="history" class="row">
-
-        <h2>History <a class="top" href="#">top</a></h2>
-
+      <section id="history">
+        <h2 class="h4">History <small><a class="btn btn-link" href="#">&uarr; top</a></small></h2>
         <p>Old embed codes that we need to continue supporting.</p>
 
-        <div class="cols">
+        <div class="row">
 
-        <div class="col col-of-4">
-          <h3>1.0/IMG Unenhanced</h3>
+        <div class="col-sm-12 col-md-3">
+          <h3 class="h5">1.0/IMG Unenhanced</h3>
           <div data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis with DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
             <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" srcset="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif 700w, //www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-large.gif 1000w" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
@@ -106,8 +101,8 @@
           </div>
         </div>
 
-        <div class="col col-of-4">
-          <h3>1.0/IMG Enhanced</h3>
+        <div class="col-sm-12 col-md-3">
+          <h3 class="h5">1.0/IMG Enhanced</h3>
           <div class="DC-embed" data-version="1.0" style="font-size:10pt">
             <p><a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View page 57 of Lefler Thesis with DocumentCloud in new window or tab" target="_blank">Page 57 of Lefler Thesis</a></p>
             <img src="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif" srcset="//www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-normal.gif 700w, //www.documentcloud.org/documents/282753/pages/lefler-thesis-p57-large.gif 1000w" alt="Page 57 of Lefler Thesis" style="border:1px solid #ccc;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;max-width:700px;">
@@ -118,8 +113,8 @@
           </div>
         </div>
 
-        <div class="col col-of-4">
-          <h3>1.1/IMG Unenhanced</h3>
+        <div class="col-sm-12 col-md-3">
+          <h3 class="h5">1.1/IMG Unenhanced</h3>
           <div data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 57 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire Lefler Thesis with DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
@@ -136,8 +131,8 @@
           </div>
         </div>
 
-        <div class="col col-of-4">
-          <h3>1.1/IMG Enhanced</h3>
+        <div class="col-sm-12 col-md-3">
+          <h3 class="h5">1.1/IMG Enhanced</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 57 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/282753-lefler-thesis.html#document/p57" title="View entire Lefler Thesis with DocumentCloud in new window or tab" target="_blank">Lefler Thesis</a>
@@ -154,17 +149,17 @@
           </div>
         </div>
 
-      </div>
+        </div>
 
       </section>
 
-      <section id="unicode" class="row">
+      <section id="unicode">
 
-        <h2>Unicode support <a class="top" href="#">top</a></h2>
+        <h2 class="h4">Unicode support <small><a class="btn btn-link" href="#">&uarr; top</a></small></h2>
 
-        <div class="cols">
-        <div class="col col-of-5">
-          <h3>Arabic</h3>
+        <div class="row">
+        <div class="col-xs-12 col-sm-2">
+          <h3 class="h5">Arabic</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/2662407-الع-ر-ب-ية.html#document/p1" title="View entire الع-ر-ب-ية with DocumentCloud in new window or tab" target="_blank">الع-ر-ب-ية</a>
@@ -180,8 +175,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-of-5">
-          <h3>French</h3>
+        <div class="col-xs-12 col-sm-2">
+          <h3 class="h5">French</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/2662462-Français.html#document/p1" title="View entire Français with DocumentCloud in new window or tab" target="_blank">Français</a>
@@ -197,8 +192,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-of-5">
-          <h3>Hebrew</h3>
+        <div class="col-xs-12 col-sm-2">
+          <h3 class="h5">Hebrew</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/2662406-עברית.html#document/p1" title="View entire עברית with DocumentCloud in new window or tab" target="_blank">עברית</a>
@@ -214,8 +209,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-of-5">
-          <h3>Korean</h3>
+        <div class="col-xs-12 col-sm-2">
+          <h3 class="h5">Korean</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/2662326-한국어.html#document/p1" title="View entire 한국어 with DocumentCloud in new window or tab" target="_blank">한국어</a>
@@ -231,8 +226,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-of-5">
-          <h3>Russian</h3>
+        <div class="col-xs-12 col-sm-2">
+          <h3 class="h5">Russian</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/2662269-россияне.html#document/p1" title="View entire россияне with DocumentCloud in new window or tab" target="_blank">россияне</a>
@@ -251,11 +246,11 @@
         </div>
       </section>
 
-      <section id="errors" class="row">
-        <h2>Error messages <a class="top" href="#">top</a></h2>
-        <div class="cols">
-        <div class="col col-of-3 width-target">
-          <h3>Forbidden (403)</h3>
+      <section id="errors">
+        <h2 class="h4">Error messages <small><a class="btn btn-link" href="#">&uarr; top</a></small></h2>
+        <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <h3 class="h5">Forbidden (403)</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/2686376-Private-Doc-for-Page-Embed-Testing.html#document/p1" title="View entire Private Doc for Page Embed Testing with DocumentCloud in new window or tab" target="_blank">Private Doc for Page Embed Testing</a>
@@ -271,8 +266,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-of-3 width-target">
-          <h3>Not Found (404)</h3>
+        <div class="col-xs-12 col-sm-4">
+          <h3 class="h5">Not Found (404)</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/28200753-Not-Found-Doc-for-Page-Embed-Testing.html#document/p1" title="View entire Not Found Doc for Page Embed Testing with DocumentCloud in new window or tab" target="_blank">Not Found Doc for Page Embed Testing</a>
@@ -288,8 +283,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-of-3 width-target">
-          <h3>Generic Load Error</h3>
+        <div class="col-xs-12 col-sm-4">
+          <h3 class="h5">Generic Load Error</h3>
           <div class="DC-embed" data-version="1.1">
             <div style="font-size:10pt;line-height:14pt;">
               Page 1 of <a class="DC-embed-resource" href="https://www.documentcloud.org/documents/999999999999-Load-Error-for-Page-Embed-Testing.html#document/p1" title="View entire Load Error for Page Embed Testing with DocumentCloud in new window or tab" target="_blank">Load Error for Page Embed Testing</a>
@@ -308,46 +303,46 @@
         </div>
       </section>
 
-      <div id="breakpoints">
+      <section id="breakpoints">
 
-        <h2>Size breakpoints <a class="top" href="#">top</a></h2>
-        <p>This page is flexible with a min-width of 320px and a max-width of 1280px. The current width is <b class="width">…</b>. Bold pixel counts will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
+        <h2 class="h4">Size breakpoints <small><a class="btn btn-link" href="#">&uarr; top</a></small></h2>
+        <p>Pixel counts below will update as the window is resized. Below 200px, we show a thumbnail and link. From 200-399px, we show a reduced interface. 400px and above gets the complete experience.</p>
 
-        <section class="row hide-from-mobile">
-          <div class="cols">
-          <div class="col width-target" style="width:50%;margin-right:2%;">
-            <h3 class="width">…</h3>
+        <section class="hide-from-mobile">
+          <div class="row">
+          <div class="col-xs-6 width-target">
+            <h3 class="h5 width">…</h3>
             <div class="embed_via_ajax"></div>
           </div>
-          <div class="col width-target" style="width:28%;margin-right:2%;">
-            <h3 class="width">…</h3>
+          <div class="col-xs-4 width-target">
+            <h3 class="h5 width">…</h3>
             <div class="embed_via_ajax"></div>
           </div>
-          <div class="col width-target" style="width:15%;">
-            <h3 class="width">…</h3>
+          <div class="col-xs-2 width-target">
+            <h3 class="h5 width">…</h3>
             <div class="embed_via_ajax"></div>
           </div>
           </div>
         </section>
 
         <section class="hide-from-mobile width-target">
-          <h3>Full width <span class="width">…</span></h3>
+          <h3 class="h5">Full width <span class="width">…</span></h3>
           <div class="embed_via_ajax"></div>
         </section>
 
         <section class="hide-from-mobile">
           <div class="width-target" style="max-width:702px;">
-            <h3>Pixel-match Document Viewer <span class="width">…</span></h3>
+            <h3 class="h5">Pixel-match Document Viewer <span class="width">…</span></h3>
             <p>When the viewport is wide enough, this will display at 702px, which means the page image will be rendered at its native 700px width. Useful for doing pixel-level comparisons with the workspace and Document Viewer.</p>
             <div class="embed_via_ajax"></div>
           </div>
         </section>
 
-      </div>
+      </section>
 
     </div>
 
-    <script src="../dist/enhance.js"></script>
+    <script src="../dist/enhance.js" async></script>
     <script src="examples.js"></script>
 
     <script>
