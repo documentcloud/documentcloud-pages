@@ -22,11 +22,11 @@
     // Insert the necessary stylesheet into the head, unless it's already there.
     var insertStylesheet = function(href) {
       if (!document.querySelector('link[href$="' + href + '"]')) {
-        var stylesheet   = document.createElement('link');
-        stylesheet.rel   = 'stylesheet';
-        stylesheet.type  = 'text/css';
-        stylesheet.media = 'screen';
-        stylesheet.href  = href;
+        var stylesheet       = document.createElement('link');
+            stylesheet.rel   = 'stylesheet';
+            stylesheet.type  = 'text/css';
+            stylesheet.media = 'screen';
+            stylesheet.href  = href;
         document.querySelector('head').appendChild(stylesheet);
       }
     };
@@ -35,7 +35,7 @@
     var insertJavaScript = function(src, onLoadCallback) {
       if (!document.querySelector('script[src$="' + src + '"]')) {
         var script = document.createElement('script');
-        script.src = src;
+            script.src   = src;
         Penny.on(script, 'load', onLoadCallback);
         document.querySelector('body').appendChild(script);
       }
