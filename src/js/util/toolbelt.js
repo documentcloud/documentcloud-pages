@@ -22,10 +22,10 @@
     };
   }
 
-  var DocumentCloud = window.DocumentCloud;
+  var DocumentCloud = window.DocumentCloud || {};
   var Penny         = window.Penny;
 
-  if (DocumentCloud && DocumentCloud._) {
+  if (DocumentCloud._) {
     // Use Underscore if it's available...
     var _ = DocumentCloud._;
   } else if (Penny) {
