@@ -109,7 +109,7 @@
         model:             model,
         imageUrl:          model.imageUrl(pageNumber),
         imageUrlLarge:     model.imageUrl(pageNumber, 'large'),
-        publishedUrlPage:  model.publishedUrlPage(pageNumber),
+        pageContextualUrl: model.pageContextualUrl(pageNumber),
         pageTextUrl:       model.pageTextUrl(pageNumber),
         pageTextFileUrl:   model.pageTextFileUrl(pageNumber),
         pageCount:         pageCount,
@@ -118,8 +118,8 @@
         hasPrevPage:       pageNumber > 1,
         hasNextPage:       pageNumber < pageCount,
       };
-      this.templateData.prevPageHref      = this.templateData.hasPrevPage ? model.publishedUrlPage(pageNumber - 1) : '#';
-      this.templateData.nextPageHref      = this.templateData.hasNextPage ? model.publishedUrlPage(pageNumber + 1) : '#';
+      this.templateData.prevPageHref      = this.templateData.hasPrevPage ? model.pageContextualUrl(pageNumber - 1) : '#';
+      this.templateData.nextPageHref      = this.templateData.hasNextPage ? model.pageContextualUrl(pageNumber + 1) : '#';
       // Don't compile template if we don't have to
       this.templateData.contributorCredit = this.templateData.showCredit ? JST['credit'](creditData) : '';
     },
@@ -144,7 +144,7 @@
         view.$overlay.empty();
         var noteViews = _.map(view.noteViews[view.currentPageNumber],
                               function(noteView) {
-                                return noteView.render(view.dimensions, view.model.publishedUrl());
+                                return noteView.render(view.dimensions, view.model.get('canonical_url'));
                               });
         view.$overlay.append(_.map(noteViews, function(v) { return v.$el; }));
         view.notesLoaded = true;
@@ -253,7 +253,7 @@
     clickPage: function() {
       var weAreTiny = this.iframed ? (this.$el.width() <= this.sizeBreakpoints[0][1]) : this.$el.hasClass('DC-embed-size-0');
       if (weAreTiny) {
-        window.open(this.model.publishedUrl());
+        window.open(this.model.pageContextualUrl(this.currentPageNumber));
       }
     },
 

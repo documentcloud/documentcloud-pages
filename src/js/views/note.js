@@ -24,16 +24,16 @@
       this.imageUrlLarge = options.imageUrlLarge;
     },
 
-    // FIXME: It is immensely gross that I'm passing `publishedUrl` in here; I 
-    // hope to work around that ASAP.
-    render: function(dimensions, publishedUrl) {
+    // FIXME: It is immensely gross that I'm passing `documentCanonicalUrl` in 
+    // here; I hope to work around that ASAP.
+    render: function(dimensions, documentCanonicalUrl) {
       this.$el.html(JST["note"]({
-        title:            this.model.get('title'),
-        text:             this.model.get('content'),
-        publishedUrlNote: publishedUrl + this.model.pageAnchor(),
-        imageUrl:         this.imageUrl,
-        imageUrlLarge:    this.imageUrlLarge,
-        showNoteMenuBar:  false,
+        title:             this.model.get('title'),
+        text:              this.model.get('content'),
+        noteContextualUrl: documentCanonicalUrl + this.model.pageAnchor(),
+        imageUrl:          this.imageUrl,
+        imageUrlLarge:     this.imageUrlLarge,
+        showNoteMenuBar:   false,
       }));
       this.cacheDomReferences();
 

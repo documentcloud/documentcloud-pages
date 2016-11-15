@@ -40,8 +40,12 @@
       return resources['published_url'] || this.get('canonical_url');
     },
 
-    publishedUrlPage: function(pageNumber) {
+    pagePublishedUrl: function(pageNumber) {
       return this.publishedUrl() + '#document/p' + pageNumber;
+    },
+
+    pageContextualUrl: function(pageNumber) {
+      return this.get('canonical_url') + '#document/p' + pageNumber;
     },
 
     // Link to page text within platform. Composed with `canonical_url`, not
