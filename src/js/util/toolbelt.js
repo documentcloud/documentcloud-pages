@@ -95,7 +95,7 @@
             break;
         }
 
-        return '//' + urlComponents.join('/') + '.json';
+        return 'https://' + urlComponents.join('/') + '.json';
       };
 
       var resource = {};
