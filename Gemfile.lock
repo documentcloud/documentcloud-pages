@@ -53,6 +53,3 @@ DEPENDENCIES
   jammit (~> 0.7.0)
   rb-readline
   sass (~> 3.4)
-
-BUNDLED WITH
-   1.13.6
