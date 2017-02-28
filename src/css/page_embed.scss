@@ -238,7 +238,7 @@ $buttonPaddingMax: 12px;
 
 .DC-page-embed {
   position: relative;
-  font: $fontWeightNormal #{$fontSizeNormal}/#{$lineHeightNormal} Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: $fontWeightNormal #{$fontSizeNormal}/#{$lineHeightNormal} -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
