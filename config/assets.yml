@@ -8,7 +8,7 @@ rewrite_relative_paths: off
 javascripts:
   page_embed:
     # Modernizr sniffs svg/touch and provides our html5shim
-    - src/js/vendor/modernizr.custom.js
+    - src/js/legacy/modernizr.custom.js
     - src/js/vendor/jquery/dist/jquery.js
     # jQuery.XDomainRequest is for IE8/9
     - src/js/vendor/jQuery-ajaxTransport-XDomainRequest/jQuery.XDomainRequest.js

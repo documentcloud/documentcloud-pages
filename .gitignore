@@ -6,3 +6,4 @@ src/js/vendor/jQuery-ajaxTransport-XDomainRequest
 .DS_Store
 .tm_properties
 .ruby-version
+node_modules
